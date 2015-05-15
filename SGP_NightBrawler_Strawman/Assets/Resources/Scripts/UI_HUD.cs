@@ -4,7 +4,7 @@ using System.Collections;
 public class UI_HUD : MonoBehaviour {
 
 	public Canvas theCanvas;
-	public GameObject Cube;
+	public GameObject Party;
 	public GameObject character_GUI_1, 
 					character_GUI_2,
 					character_GUI_3;
@@ -20,7 +20,7 @@ public class UI_HUD : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			Cube.SetActive(false);
+			Party.SetActive(false);
 			theCanvas.transform.GetChild(3).gameObject.SetActive(true);
 			Cursor.visible = true;
 		}
@@ -28,7 +28,7 @@ public class UI_HUD : MonoBehaviour {
 
 	public void ResumeGame()
 	{
-		Cube.SetActive(true);
+		Party.SetActive(true);
 		theCanvas.transform.GetChild(3).gameObject.SetActive(false);
 		Cursor.visible = false;
 	}
