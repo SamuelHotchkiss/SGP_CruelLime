@@ -30,6 +30,7 @@ public class MNGR_GameData
         theCharacters[8] = new CHAR_Spellslinger();
     }
 
+    // Reads in GameManager's values so they can be saved out to a file
     public void CopyGameManager()
     {
         theCharacters = MNGR_Game.theCharacters;
@@ -38,6 +39,7 @@ public class MNGR_GameData
         playerPosition = MNGR_Game.playerPosition;
     }
 
+    // Assigns GameManager's values to this GameData's values so they can be loaded in
     public void AssignGameManager()
     {
         MNGR_Game.theCharacters = theCharacters;
