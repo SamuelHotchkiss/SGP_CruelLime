@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class ACT_Base {
 
     public int Act_baseHP;          //The base HP of the current Actor

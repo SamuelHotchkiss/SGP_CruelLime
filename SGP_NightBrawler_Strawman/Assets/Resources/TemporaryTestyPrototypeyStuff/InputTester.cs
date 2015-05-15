@@ -9,6 +9,20 @@ public class InputTester : MonoBehaviour {
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            MNGR_Save.Save();
+            Debug.Log(MNGR_Save.saveFiles[0].theCharacters[0].Act_currHP);
+
+            MNGR_Save.saveFiles[0].AssignGameManager();
+            Debug.Log(MNGR_Game.theCharacters[0].Act_currHP);
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            MNGR_Save.Load();
+            //Debug.Log()
+        }
+
         // testing for keyboard input
         if (keyboard)
         {
