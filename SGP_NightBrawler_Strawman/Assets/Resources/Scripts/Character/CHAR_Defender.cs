@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
+
 public class CHAR_Defender : ACT_CHAR_Base
 {
 

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
+
 public class CHAR_ForceMage : ACT_CHAR_Base
 {
 
