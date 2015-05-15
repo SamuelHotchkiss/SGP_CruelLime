@@ -1,15 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ACT_Base : MonoBehaviour {
+public class ACT_Base {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public int Act_baseHP;          //The base HP of the current Actor
+    public int Act_basePower;       //The base Power of the current Actor
+    public int Act_baseSpeed;       //The base Speed of the current Actor
+    public int Act_currHP;          //The current HP of the Actor, can be modifie and change in play
+    public int Act_currPower;       //The current Power of the Actor, can be modifie and change in play
+    public int Act_currSpeed;       //The current Speed of the Actor, can be modifie and change in play
+
+    public bool Act_facingRight;    //The direction the Actor is facing, use fro back attacks and shilds
+    public bool Act_HasMod;         //Does the Actor has a Modification acting on it
+
+    //Mutators
+    public void SetCurrHP(int n_hp)
+    {
+        Act_currHP = n_hp;
+    }
+    public void SetCurrPower(int n_pwr)
+    {
+        Act_currPower = n_pwr;
+    }
+    public void SetCurrSpeed(int n_spd)
+    {
+        Act_currSpeed = n_spd;
+    }
+
+    //Interface
+    public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
+    {                                   //Damage needs to be negative.
+        Act_currHP += Dmg;              
+    }
+    public void RestoreToBaseHP()       //Restores current HP to its base value
+    {
+        Act_currHP = Act_baseHP;
+    }
+    public void RestoreToBasePower()    //Restores current Power to its base value
+    {
+        Act_currPower = Act_basePower;
+    }
+    public void RestoreToBaseSpeed()    //Restores current Speed to its base value
+    {
+        Act_currSpeed = Act_baseSpeed;
+    }
 }
