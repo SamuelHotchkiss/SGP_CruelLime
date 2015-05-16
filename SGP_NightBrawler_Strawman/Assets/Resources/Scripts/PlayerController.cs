@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 		leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
 		GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
+
+        GetComponent<MNGR_Animation_Player>().Initialize();
 	}
 
 	void Update()
