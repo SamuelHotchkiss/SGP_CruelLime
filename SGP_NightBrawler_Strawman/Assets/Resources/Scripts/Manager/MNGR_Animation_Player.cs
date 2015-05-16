@@ -73,7 +73,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
         {
             case ACT_CHAR_Base.STATES.IDLE:
 
-                tmrIndex = (int)ACT_CHAR_Base.STATES.IDLE;
                 if (curTmr > maxTmr[tmrIndex] * 0.6f)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
                 else if (curTmr > maxTmr[tmrIndex] * 0.5f)
@@ -85,7 +84,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 break;
             case ACT_CHAR_Base.STATES.WALKING:
 
-                tmrIndex = (int)ACT_CHAR_Base.STATES.WALKING;
                 if (curTmr > maxTmr[tmrIndex] * 0.8f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[0]];
                 else if (curTmr > maxTmr[tmrIndex] * 0.6f)
@@ -99,7 +97,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
 
-                tmrIndex = (int)ACT_CHAR_Base.STATES.DASHING;
                 if (currentCharacter.Act_facingRight)
                     transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                 else
@@ -118,7 +115,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_1:
 
-                tmrIndex = (int)ACT_CHAR_Base.STATES.ATTACK_1;
                 if (curTmr > maxTmr[tmrIndex] * 0.75f)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[0]];
                 else if (curTmr > maxTmr[tmrIndex] * 0.5f)
@@ -130,7 +126,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_2:
 
-                tmrIndex = (int)ACT_CHAR_Base.STATES.ATTACK_2;
                 if (curTmr > maxTmr[tmrIndex] * 0.66f)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[0]];
                 else if (curTmr > maxTmr[tmrIndex] * 0.66f)
@@ -140,7 +135,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_3:
 
-                tmrIndex = (int)ACT_CHAR_Base.STATES.ATTACK_3;
                 if (curTmr > maxTmr[tmrIndex] * 0.75f)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[0]];
                 else if (curTmr > maxTmr[tmrIndex] * 0.5f)
@@ -152,15 +146,19 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
 
-                tmrIndex = (int)ACT_CHAR_Base.STATES.SPECIAL;
+                // Works for swordsman...
+                if (curTmr > maxTmr[tmrIndex] * 0.75f)
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[0]];
+                else if (curTmr > maxTmr[tmrIndex] * 0.5f)
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[1]];
                 break;
             case ACT_CHAR_Base.STATES.HURT:
-
-                tmrIndex = (int)ACT_CHAR_Base.STATES.HURT;
                 break;
             case ACT_CHAR_Base.STATES.DYING:
-
-                tmrIndex = (int)ACT_CHAR_Base.STATES.DYING;
+                if (curTmr > maxTmr[tmrIndex] * 0.5f)
+                    GetComponent<SpriteRenderer>().sprite = sprites[deadSprites[0]];
+                else if (curTmr >= 0)
+                    GetComponent<SpriteRenderer>().sprite = sprites[deadSprites[1]];
                 break;
             case ACT_CHAR_Base.STATES.USE:
                 // Special FX because I didn't actually animate these
@@ -173,7 +171,9 @@ public class MNGR_Animation_Player : MonoBehaviour {
 
     void ChangeState(ACT_CHAR_Base.STATES _newstate)
     {
-       plyState = _newstate;
+        plyState = _newstate;
+        tmrIndex = (int)_newstate;
+        curTmr = maxTmr[tmrIndex];
 
     }
 
