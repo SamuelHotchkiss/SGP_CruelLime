@@ -8,12 +8,13 @@ public class MNGR_GameData
 {
     public ACT_CHAR_Base[] theCharacters;
 
-    public bool isNight;
+    public bool isNew, isNight;
     public int hordePosition, playerPosition;
 
     // Initializes GameData's value when new is called
     public MNGR_GameData()
     {
+        isNew = true;
         isNight = false;
         hordePosition = playerPosition = 0;
 
