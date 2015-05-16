@@ -22,7 +22,7 @@ public class PROJ_Base : MonoBehaviour
     {
 	}
 
-    void OnCollisonEnter2D(Collider2D other)
+    virtual void OnCollisonEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")
         {
