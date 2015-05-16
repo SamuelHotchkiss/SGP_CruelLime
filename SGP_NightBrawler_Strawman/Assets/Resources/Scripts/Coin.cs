@@ -18,7 +18,6 @@ public class Coin : Item {
         {
             AudioSource.PlayClipAtPoint(Coin_PickUp, new Vector3(0, 0, 0), 1.0f);
             MNGR_Game.wallet += Coin_Amount;
-            MNGR_Save.OverwriteCurrentSave();
             base.OnTriggerEnter2D(Col);
         }
 
