@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 		leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
 		GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
+
+        GetComponent<MNGR_Animation_Player>().Initialize();
 	}
 
 	void Update()
@@ -64,14 +66,18 @@ public class PlayerController : MonoBehaviour
 			float vert = Input.GetAxis("Vertical");
 
 			if (horz > 0)
+			{
 				party[currChar].Act_facingRight = true;
+				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+			}
 			else if (horz < 0)
+			{
 				party[currChar].Act_facingRight = false;
+				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+			}
 
 			// Move the object
 			GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-
-			party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
 
 			if (Input.GetButton("Attack/Confirm"))
 			{
