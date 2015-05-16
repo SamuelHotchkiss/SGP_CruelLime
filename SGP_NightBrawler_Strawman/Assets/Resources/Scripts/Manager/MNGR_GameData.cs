@@ -14,7 +14,7 @@ public class MNGR_GameData
     // Initializes GameData's value when new is called
     public MNGR_GameData()
     {
-        isNew = false;
+        isNew = true;
         isNight = false;
         hordePosition = playerPosition = wallet = 0;
 
