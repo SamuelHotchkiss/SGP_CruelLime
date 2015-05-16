@@ -130,7 +130,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
 
                 if (currentController.curTmr > currentController.maxTmr[(int)currentCharacter.state] * 0.66f)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)currentCharacter.state] * 0.66f)
+                else if (currentController.curTmr > currentController.maxTmr[(int)currentCharacter.state] * 0.33f)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[1]];
                 else if (currentController.curTmr >= 0)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[2]];

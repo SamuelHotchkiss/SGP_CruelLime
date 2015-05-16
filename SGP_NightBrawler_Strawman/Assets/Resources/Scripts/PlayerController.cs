@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	public float[] maxTmr;
 	public float curTmr;
 	bool loop;
+    public ACT_CHAR_Base.STATES nextState;
 
 	// Use this for initialization
 	void Start()
@@ -31,10 +32,13 @@ public class PlayerController : MonoBehaviour
 		rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
 		leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
-		maxTmr = new float[] { 2.0f, 0.75f, 0.5f, 1.0f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f };
+                            // IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED
+		maxTmr = new float[] { 2.0f, 0.75f, 0.5f, 0.3f, 0.2f, 0.5f, 1.0f, 1.0f, 1.0f };
 
 		curTmr = maxTmr[(int)party[currChar].state];
 		loop = true;
+        //current error value.  will not change states if set to this.
+        nextState = ACT_CHAR_Base.STATES.IDLE;
 
 		// Initialize other components
 		GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
@@ -52,8 +56,18 @@ public class PlayerController : MonoBehaviour
 				//EndOfAnim(); // Engage things to do when the animation loops/ ends.
 				curTmr = loop ? maxTmr[(int)party[currChar].state] : 0; // reset to maxTmr if looping, otherwise set to 0 and stop updating timer.
 				if (curTmr == 0)
-				{
-					party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+                {
+                    if (nextState == ACT_CHAR_Base.STATES.IDLE)
+                    {
+                        party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+                    }
+                    else
+                    {
+                        party[currChar].state = nextState;
+                        nextState = ACT_CHAR_Base.STATES.IDLE;
+                    }
+
+                    curTmr = maxTmr[(int)party[currChar].state];
 				}
 			}
 		}
@@ -86,16 +100,22 @@ public class PlayerController : MonoBehaviour
 			if (horz > 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
 			{
 				party[currChar].Act_facingRight = true;
-				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-				curTmr = maxTmr[(int)party[currChar].state];
+                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
+                {
+                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+                    curTmr = maxTmr[(int)party[currChar].state];
+                }
 				loop = true;
 				GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
 			}
 			else if (horz < 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
 			{
 				party[currChar].Act_facingRight = false;
-				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-				curTmr = maxTmr[(int)party[currChar].state];
+                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
+                {
+                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+                    curTmr = maxTmr[(int)party[currChar].state];
+                }
 				loop = true;
 				GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
 			}
@@ -107,10 +127,23 @@ public class PlayerController : MonoBehaviour
 			}
 			
 
-			if (Input.GetButton("Attack/Confirm"))
+			if (Input.GetButtonDown("Attack/Confirm"))
 			{
-				party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
-				curTmr = maxTmr[(int)party[currChar].state];
+                if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
+                    && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
+                    && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)
+                {
+                    party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
+                    curTmr = maxTmr[(int)party[currChar].state];
+                }
+                else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_1)
+                {
+                    nextState = ACT_CHAR_Base.STATES.ATTACK_2;
+                }
+                else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_2)
+                {
+                    nextState = ACT_CHAR_Base.STATES.ATTACK_3;
+                }
 				loop = false;
 			}
 			else if (Input.GetButton("Special/Cancel"))
