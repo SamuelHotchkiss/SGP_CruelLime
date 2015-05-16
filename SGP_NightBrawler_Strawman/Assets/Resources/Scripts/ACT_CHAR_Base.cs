@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ACT_CHAR_Base : ACT_Base {
+[System.Serializable]
+public class ACT_CHAR_Base : ACT_Base 
+{
 
 	// Use this for initialization
 	void Start () {

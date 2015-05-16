@@ -1,7 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CHAR_Spellslinger : ACT_CHAR_Base {
+[System.Serializable]
+
+public class CHAR_Spellslinger : ACT_CHAR_Base 
+{
+	public CHAR_Spellslinger()
+	{
+		Act_baseHP = 100;
+		Act_basePower = 100;
+		Act_baseSpeed = 100;
+		Act_currHP = 100;
+		Act_currPower = 100;
+		Act_currSpeed = 100;
+	}
 
 	// Use this for initialization
 	void Start () {
