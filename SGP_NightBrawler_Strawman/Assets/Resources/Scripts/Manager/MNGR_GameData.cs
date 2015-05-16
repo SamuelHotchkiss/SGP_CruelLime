@@ -9,14 +9,14 @@ public class MNGR_GameData
     public ACT_CHAR_Base[] theCharacters;
 
     public bool isNew, isNight;
-    public int hordePosition, playerPosition;
+    public int hordePosition, playerPosition, wallet;
 
     // Initializes GameData's value when new is called
     public MNGR_GameData()
     {
         isNew = true;
         isNight = false;
-        hordePosition = playerPosition = 0;
+        hordePosition = playerPosition = wallet = 0;
 
         theCharacters = new ACT_CHAR_Base[9];
 
@@ -38,6 +38,7 @@ public class MNGR_GameData
         isNight = MNGR_Game.isNight;
         hordePosition = MNGR_Game.hordePosition;
         playerPosition = MNGR_Game.playerPosition;
+        wallet = MNGR_Game.wallet;
     }
 
     // Assigns GameManager's values to this GameData's values so they can be loaded in
@@ -47,6 +48,7 @@ public class MNGR_GameData
         MNGR_Game.isNight = isNight;
         MNGR_Game.hordePosition = hordePosition;
         MNGR_Game.playerPosition = playerPosition;
+        MNGR_Game.wallet = wallet;
     }
 }
 
