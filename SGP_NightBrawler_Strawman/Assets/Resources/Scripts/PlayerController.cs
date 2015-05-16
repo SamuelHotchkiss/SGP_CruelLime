@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
-	public bool keyboard = true;
+	public bool keyboard = false;
 
 	public ACT_CHAR_Base[] party;
 	public int currChar = 0;
@@ -191,7 +191,6 @@ public class PlayerController : MonoBehaviour
 		}
 		// Testing for gamepad input
 		// NOT TESTED YET PLZ FIX ERF PRBLMS OKAI BAI.
-#if false
 		else
 		{
 			// get axis movement
@@ -277,7 +276,6 @@ public class PlayerController : MonoBehaviour
 			}
 
 		}
-#endif
 
 		switch (currChar)
 		{
