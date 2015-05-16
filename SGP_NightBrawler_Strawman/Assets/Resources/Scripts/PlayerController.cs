@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 		party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
 
 		// Remove later
-		GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
+		//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
 		//
 
 		// Are we using the keyboard?
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 				party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
 
 				// Remove later
-				GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[5];
+				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[5];
 				//
 			}
 			else if (Input.GetButton("Special/Cancel"))
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 				party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
 
 				// Remove later
-				GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[4];
+				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[4];
 				//
 			}
 			else if (Input.GetButtonDown("SwitchRight"))
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
 					currChar = 0;
 
 				// Remove later
-				GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
+				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
 				//
 			}
 			else if (Input.GetButtonDown("SwitchLeft"))
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 					currChar = 2;
 
 				// Remove later
-				GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
+				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
 				//
 			}
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 				party[currChar].state = ACT_CHAR_Base.STATES.USE;
 
 				// Remove later
-				GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[2];
+				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[2];
 				//
 			}
 			// Dodge button rotates the object based upon current movement
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 				party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
 
 				// Remove later
-				GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[1];
+				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[1];
 				//
 			}
 			// reset stuff when it goes bad
