@@ -139,7 +139,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 3
-  m_FillAmount: .958999991
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &100969272
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 3
-  m_FillAmount: .545000017
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &125372606
@@ -425,10 +425,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theCanvas: {fileID: 811408536}
-  Party: {fileID: 0}
-  character_GUI_1: {fileID: 0}
-  character_GUI_2: {fileID: 0}
-  character_GUI_3: {fileID: 0}
+  party: {fileID: 1913975515}
+  fighterHealth: {fileID: 125372605}
+  fighterCooldown: {fileID: 2143359679}
+  rangerHealth: {fileID: 100969271}
+  rangerCooldown: {fileID: 1992295411}
+  mageHealth: {fileID: 1976806936}
+  mageCooldown: {fileID: 850930218}
 --- !u!4 &472392504
 Transform:
   m_ObjectHideFlags: 0
@@ -475,7 +478,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 150, y: -100}
-  m_SizeDelta: {x: 100, y: 101}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &673045572
 GameObject:
@@ -1251,6 +1254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyboard: 1
   currChar: 0
+  warrior_GUI: {fileID: 656411512}
+  ranger_GUI: {fileID: 2043865788}
+  mage_GUI: {fileID: 771156583}
 --- !u!212 &1913975518
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1324,7 +1330,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 3
-  m_FillAmount: .337000012
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &1976806937
@@ -1499,7 +1505,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 3
-  m_FillAmount: .630999982
+  m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 2
 --- !u!222 &2143359680
