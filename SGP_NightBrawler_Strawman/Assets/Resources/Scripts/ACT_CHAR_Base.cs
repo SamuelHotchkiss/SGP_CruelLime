@@ -8,7 +8,9 @@ public class ACT_CHAR_Base : ACT_Base
 	//public Sprite[] sprites;
 	// 
 
+                        //      0,      1,      2,
 	public enum STATES { IDLE = 0, WALKING, DASHING, 
+        /*  3,          4,      5,      6,      7,      8,   9*/
 		ATTACK_1, ATTACK_2, ATTACK_3, SPECIAL, HURT, DYING, USE };
 	public STATES state;
 
