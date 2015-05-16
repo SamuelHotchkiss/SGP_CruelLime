@@ -24,6 +24,9 @@ public class MENU_Load : MonoBehaviour
     {
         MNGR_Save.currSave = saveIndex;
         MNGR_Save.LoadCurrentSave();
+        MNGR_Save.SaveProfiles();
+
+        Application.LoadLevel("ForestLevel0");
     }
 
     // Clears the selected profile

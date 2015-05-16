@@ -150,10 +150,16 @@ public class PlayerController : MonoBehaviour
 				if (party[currChar].Act_currHP < 0)
 					party[currChar].Act_currHP = 0;
 			}
-			if (Input.GetKey(KeyCode.L))
+			if (Input.GetKeyDown(KeyCode.L))
 			{
-				coins++;
+				MNGR_Game.wallet += 10;
+                MNGR_Save.OverwriteCurrentSave();
 			}
+            if(Input.GetKeyDown(KeyCode.M))
+            {
+                Debug.Log("Saving Game");
+                MNGR_Save.SaveProfiles();
+            }
 
 			// reset stuff when it goes bad
 			if (roty >= 360)
