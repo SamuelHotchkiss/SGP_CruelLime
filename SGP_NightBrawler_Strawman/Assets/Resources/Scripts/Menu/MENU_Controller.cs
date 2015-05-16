@@ -74,6 +74,8 @@ public class MENU_Controller : MonoBehaviour {
                 Menu_CurrButton--;
                 if (Menu_CurrButton < 0)
                     Menu_CurrButton = 0;
+
+
             }
             //Go down with joystick
             else if (Input.GetAxis("Pad_Vertical") < -0.07f)
@@ -83,7 +85,7 @@ public class MENU_Controller : MonoBehaviour {
                     Menu_CurrButton = Menu_UIButtons.Length - 1;
             }
 
-            Menu_JoyTimer = 0.2f; 
+            Menu_JoyTimer = 0.1f; 
         }
 
         if (OldCurrbutton != Menu_CurrButton)
