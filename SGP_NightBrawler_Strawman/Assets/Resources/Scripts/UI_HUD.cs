@@ -28,7 +28,7 @@ public class UI_HUD : MonoBehaviour {
 	// Use this for initialization
 	public void Initialize () 
 	{
-		Cursor.visible = false;
+		Cursor.visible = true;
 
 		fighter = party.GetComponent<PlayerController>().party[0];
 		ranger = party.GetComponent<PlayerController>().party[1];

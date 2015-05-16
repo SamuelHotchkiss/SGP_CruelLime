@@ -19,7 +19,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
 	}
 
 	// Use this for initialization
-	public void Start()
+	public override void Start()
 	{
 		base.Start();
 	}

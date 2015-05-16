@@ -20,13 +20,13 @@ public class CHAR_Wizard : ACT_CHAR_Base
 	}
 
 	// Use this for initialization
-	public void Start()
+	public override void Start()
 	{
 		base.Start();
 	}
 
 	// Update is called once per frame
-	public void Update()
+	public override void Update()
 	{
 		base.Update();
 	}

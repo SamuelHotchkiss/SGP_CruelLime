@@ -3,26 +3,7 @@ using System.Collections;
 
 public class ACT_Enemy : MonoBehaviour
 {
-	public enum STATES
-	{
-		IDLE, WALKING, RUNNING,
-		ATTACKING, HURT, DEAD
-	}
-
-	public STATES state;
-
-	public bool nightThresh;
-	public int hpThresh;
-	public float speedThresh;
-	public float distThresh;
-	public float coolThresh;
-
-	BHR_Base[] behaviors;
-	BHR_Base currBehavior;
-
-	GameObject target;
-
-	PROJ_Base projectile;
+	
 
 	public int Act_baseHP;          //The base HP of the current Actor
 	public int Act_basePower;       //The base Power of the current Actor
@@ -34,6 +15,29 @@ public class ACT_Enemy : MonoBehaviour
 
 	public bool Act_facingRight;    //The direction the Actor is facing, use fro back attacks and shilds
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
+
+	public enum STATES
+	{
+		IDLE, WALKING, RUNNING,
+		ATTACKING, HURT, DEAD
+	}
+
+	public STATES state;
+	public int randomState;
+
+
+	public bool nightThresh;
+	public int hpThresh;
+	public float speedThresh;
+	public float distThresh;
+	public float coolThresh;
+
+	public BHR_Base[] behaviors;
+	public BHR_Base currBehavior;
+
+	public GameObject target;
+
+	public PROJ_Base projectile;
 
 	//Mutators
 	public void SetCurrHP(int n_hp)

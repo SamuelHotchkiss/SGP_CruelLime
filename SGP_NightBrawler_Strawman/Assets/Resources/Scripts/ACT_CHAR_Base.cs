@@ -17,14 +17,14 @@ public class ACT_CHAR_Base : ACT_Base
 	public int characterIndex;
 
 	// Use this for initialization
-	public void Start () 
+	public virtual void Start () 
 	{
 		cooldownTmrBase = 3;
 		cooldownTmr = 0;
 	}
 	
 	// Update is called once per frame
-	public void Update () 
+	public virtual void Update () 
 	{
 		cooldownTmr -= Time.deltaTime;
 		if (cooldownTmr < 0)

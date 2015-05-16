@@ -8,6 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 420226}
+  - 212: {fileID: 21219372}
+  - 114: {fileID: 11456318}
   m_Layer: 0
   m_Name: ENY_GloblinWarrior
   m_TagString: Untagged
@@ -27,6 +29,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11456318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Act_baseHP: 100
+  Act_basePower: 100
+  Act_baseSpeed: 100
+  Act_currHP: 100
+  Act_currPower: 100
+  Act_currSpeed: 100
+  Act_facingRight: 0
+  Act_HasMod: 0
+  state: 0
+  randomState: 0
+  nightThresh: 0
+  hpThresh: 0
+  speedThresh: 0
+  distThresh: 0
+  coolThresh: 0
+  behaviors: []
+  currBehavior: {fileID: 0}
+  target: {fileID: 0}
+  projectile: {fileID: 0}
+--- !u!212 &21219372
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107682}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 3e84dfab56873bc48ae8ea078034e81d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
 
 	public int coins;
 
+	public float[] maxTmr;
+	public float curTmr;
+	bool loop;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -27,12 +31,32 @@ public class PlayerController : MonoBehaviour
 		rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
 		leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
+		maxTmr = new float[] { 2.0f, 0.75f, 0.5f, 1.0f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f };
+
+		curTmr = maxTmr[(int)party[currChar].state];
+		loop = true;
+
+		// Initialize other components
 		GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
+        GetComponent<MNGR_Animation_Player>().Initialize();
 	}
 
 	void Update()
 	{
-		party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+
+		if (curTmr > 0)
+		{
+			curTmr -= Time.deltaTime;
+			if (curTmr < 0)
+			{
+				//EndOfAnim(); // Engage things to do when the animation loops/ ends.
+				curTmr = loop ? maxTmr[(int)party[currChar].state] : 0; // reset to maxTmr if looping, otherwise set to 0 and stop updating timer.
+				if (curTmr == 0)
+				{
+					party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+				}
+			}
+		}
 
 		if (party[currChar].Act_currHP <= 0)
 		{
@@ -52,10 +76,6 @@ public class PlayerController : MonoBehaviour
 		if (party[currChar].Act_currHP <= 0)
 			Application.LoadLevel(Application.loadedLevel);
 
-		// Remove later
-		//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
-		//
-
 		// Are we using the keyboard?
 		if (keyboard)
 		{
@@ -63,33 +83,43 @@ public class PlayerController : MonoBehaviour
 			float horz = Input.GetAxis("Horizontal");
 			float vert = Input.GetAxis("Vertical");
 
-			if (horz > 0)
+			if (horz > 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+			{
 				party[currChar].Act_facingRight = true;
-			else if (horz < 0)
+				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+				curTmr = maxTmr[(int)party[currChar].state];
+				loop = true;
+				GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+			}
+			else if (horz < 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+			{
 				party[currChar].Act_facingRight = false;
-
-			// Move the object
-			GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-
-			party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+				curTmr = maxTmr[(int)party[currChar].state];
+				loop = true;
+				GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+			}
+			else if (party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
+			{
+				party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+				GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+				curTmr = maxTmr[(int)party[currChar].state];
+			}
+			
 
 			if (Input.GetButton("Attack/Confirm"))
 			{
 				party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
-
-				// Remove later
-				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[5];
-				//
+				curTmr = maxTmr[(int)party[currChar].state];
+				loop = false;
 			}
 			else if (Input.GetButton("Special/Cancel"))
 			{
 				party[currChar].state = ACT_CHAR_Base.STATES.SPECIAL;
+				curTmr = maxTmr[(int)party[currChar].state];
+				loop = false;
 
 				party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
-
-				// Remove later
-				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[4];
-				//
 			}
 			else if (Input.GetButtonDown("SwitchRight"))
 			{
@@ -106,10 +136,6 @@ public class PlayerController : MonoBehaviour
 						currChar = 0;
 
 				}
-
-				// Remove later
-				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
-				//
 			}
 			else if (Input.GetButtonDown("SwitchLeft"))
 			{
@@ -125,80 +151,43 @@ public class PlayerController : MonoBehaviour
 						if (currChar < 0)
 							currChar = 2;
 				}
-				
-				// Remove later
-				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
-				//
 			}
 
-			float rotx = transform.localEulerAngles.x;
-			float roty = transform.localEulerAngles.y;
 			// Use button rotates the object
-			if (Input.GetButton("Use"))
+			else if (Input.GetButton("Use"))
 			{
 				party[currChar].state = ACT_CHAR_Base.STATES.USE;
-
-				// Remove later
-				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[2];
-				//
+				curTmr = maxTmr[(int)party[currChar].state];
+				loop = false;
 			}
 			// Dodge button rotates the object based upon current movement
-			if (Input.GetButton("Dodge"))
+			else if (Input.GetButton("Dodge"))
 			{
 				party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
-
-				// Remove later
-				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[1];
-				//
+				curTmr = maxTmr[(int)party[currChar].state];
+				loop = false;
 			}
-			if (Input.GetKey(KeyCode.K))
+			else if (Input.GetKey(KeyCode.K))
 			{
 				party[currChar].Act_currHP -= 1;
 				if (party[currChar].Act_currHP < 0)
 					party[currChar].Act_currHP = 0;
 			}
-			if (Input.GetKeyDown(KeyCode.L))
+			else if (Input.GetKeyDown(KeyCode.L))
 			{
 				MNGR_Game.wallet += 10;
                 MNGR_Save.OverwriteCurrentSave();
 			}
-            if(Input.GetKeyDown(KeyCode.M))
+			else if (Input.GetKeyDown(KeyCode.M))
             {
                 Debug.Log("Saving Game");
                 MNGR_Save.SaveProfiles();
             }
-
-			// reset stuff when it goes bad
-			if (roty >= 360)
-				roty -= 360;
-			else if (roty < 0)
-				roty += 360;
-			// gimbal locking grrr
-			if (rotx > 90)
-				rotx -= 90;
-			else if (rotx < 0)
-				rotx += 85;
-
-			transform.localEulerAngles = new Vector3(rotx, roty, 0);
-
-			// Pause button makes the object invisible and resets everything
-			if (Input.GetButton("Pause"))
+			else if (curTmr <= 0)
 			{
-				if (GetComponent<MeshRenderer>() != null)
-					GetComponent<MeshRenderer>().enabled = false;
-				else if (GetComponent<SpriteRenderer>() != null)
-					GetComponent<SpriteRenderer>().enabled = false;
-
-				transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-				transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-				transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-			}
-			else
-			{
-				if (GetComponent<MeshRenderer>() != null)
-					GetComponent<MeshRenderer>().enabled = true;
-				else if (GetComponent<SpriteRenderer>() != null)
-					GetComponent<SpriteRenderer>().enabled = true;
+				party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+				curTmr = maxTmr[(int)party[currChar].state];
+				loop = true;
 			}
 
 		}
