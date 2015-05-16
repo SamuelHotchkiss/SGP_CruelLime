@@ -2,7 +2,7 @@
 using System.Collections;
 
 [System.Serializable]
-public class ACT_Base {
+public class ACT_Base : MonoBehaviour {
 
     public int Act_baseHP;          //The base HP of the current Actor
     public int Act_basePower;       //The base Power of the current Actor
