@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
 	Vector3 currentChar_GUI, rightChar_GUI, leftChar_GUI;
 
+	public int coins;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -31,6 +33,24 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 		party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+
+		if (party[currChar].Act_currHP <= 0)
+		{
+			currChar--;
+				if (currChar < 0)
+					currChar = 2;
+				for (int i = 0; i < 2; i++)
+				{
+					if (party[currChar].Act_currHP > 0)
+						break;
+					else
+						currChar--;
+						if (currChar < 0)
+							currChar = 2;
+				}
+		}
+		if (party[currChar].Act_currHP <= 0)
+			Application.LoadLevel(Application.loadedLevel);
 
 		// Remove later
 		//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
@@ -69,6 +89,16 @@ public class PlayerController : MonoBehaviour
 				currChar++;
 				if (currChar > 2)
 					currChar = 0;
+				for (int i = 0; i < 2; i++)
+				{
+					if (party[currChar].Act_currHP > 0)
+						break;
+					else
+						currChar++;
+					if (currChar > 2)
+						currChar = 0;
+
+				}
 
 				// Remove later
 				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
@@ -79,7 +109,16 @@ public class PlayerController : MonoBehaviour
 				currChar--;
 				if (currChar < 0)
 					currChar = 2;
-
+				for (int i = 0; i < 2; i++)
+				{
+					if (party[currChar].Act_currHP > 0)
+						break;
+					else
+						currChar--;
+						if (currChar < 0)
+							currChar = 2;
+				}
+				
 				// Remove later
 				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[0];
 				//
@@ -105,6 +144,17 @@ public class PlayerController : MonoBehaviour
 				//GetComponent<SpriteRenderer>().sprite = party[currChar].sprites[1];
 				//
 			}
+			if (Input.GetKey(KeyCode.K))
+			{
+				party[currChar].Act_currHP -= 1;
+				if (party[currChar].Act_currHP < 0)
+					party[currChar].Act_currHP = 0;
+			}
+			if (Input.GetKey(KeyCode.L))
+			{
+				coins++;
+			}
+
 			// reset stuff when it goes bad
 			if (roty >= 360)
 				roty -= 360;
