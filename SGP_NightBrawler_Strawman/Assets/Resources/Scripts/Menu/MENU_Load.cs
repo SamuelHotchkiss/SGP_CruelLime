@@ -32,4 +32,10 @@ public class MENU_Load : MonoBehaviour
         MNGR_Save.DeleteCurrentSave(saveIndex); // clears GameData of the profile
         Application.LoadLevel(Application.loadedLevelName); // reloads the LoadMenu scene
     }
+
+    // Go back to Main Menu
+    public void Return()
+    {
+        Application.LoadLevel("MainMenu");
+    }
 }

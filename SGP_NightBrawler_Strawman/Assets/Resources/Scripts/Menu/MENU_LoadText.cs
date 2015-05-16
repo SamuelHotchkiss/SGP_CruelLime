@@ -11,11 +11,7 @@ public class MENU_LoadText : MonoBehaviour
     public void WriteText()
     {
         if (!MNGR_Save.saveFiles[profileNum].isNew)
-        {
-            GetComponent<Text>().text = MNGR_Save.saveFiles[profileNum].theCharacters[0].Act_currHP.ToString()
-                + " " + MNGR_Save.saveFiles[profileNum].theCharacters[3].Act_currHP.ToString()
-                + " " + MNGR_Save.saveFiles[profileNum].theCharacters[6].Act_currHP.ToString();
-        }
+            GetComponent<Text>().text = MNGR_Save.saveFiles[profileNum].wallet.ToString();
         else
             GetComponent<Text>().text = "Start New Game";
     }

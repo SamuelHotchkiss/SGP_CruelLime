@@ -9,5 +9,5 @@ public static class MNGR_Game
 
 
     public static bool isNight;
-    public static int hordePosition, playerPosition;
+    public static int hordePosition, playerPosition, wallet;
 }
