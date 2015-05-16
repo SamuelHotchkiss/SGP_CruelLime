@@ -181,6 +181,7 @@ public class PlayerController : MonoBehaviour
 			else if (Input.GetKeyDown(KeyCode.M))
             {
                 Debug.Log("Saving Game");
+                MNGR_Save.OverwriteCurrentSave();
                 MNGR_Save.SaveProfiles();
             }
 			else if (curTmr <= 0)
