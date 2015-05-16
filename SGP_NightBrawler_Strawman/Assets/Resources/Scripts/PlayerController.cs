@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
 			}
 			if (Input.GetKey(KeyCode.L))
 			{
-				coins++;
+				MNGR_Game.wallet += 10;
 			}
 
 			// reset stuff when it goes bad
