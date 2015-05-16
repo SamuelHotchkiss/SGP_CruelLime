@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class ACT_CHAR_Base : ACT_Base 
 {
 	// Remove later
