@@ -16,6 +16,16 @@ public class MENU_Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        for (int i = 0; i < Menu_UIButtons.Length; i++)
+        {
+            if (i != Menu_CurrButton)
+            {
+                Menu_UIButtons[i].interactable = false;
+                Menu_UIButtons[i].interactable = true;
+            }
+        }
+
+
         if (Input.anyKeyDown)
         {
             if (Input.GetAxis("Vertical") > 0.0f)       
