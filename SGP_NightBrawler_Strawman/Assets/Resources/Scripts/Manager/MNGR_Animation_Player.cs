@@ -3,7 +3,8 @@ using System.Collections;
 
 public class MNGR_Animation_Player : MonoBehaviour {
 
-    //Sprite Sprites[];
+    string[] filepaths;
+    Sprite[] sprites;
     ACT_CHAR_Base currentCharacter;
     ACT_CHAR_Base.STATES plyState;
     float maxTmr;
@@ -18,11 +19,16 @@ public class MNGR_Animation_Player : MonoBehaviour {
     int[] hurtSprites;
     int[] deadSprites;
 
-	void Start () {
+	public void Initialize () {
 
+        filepaths = new string[] { "Sprites/Player/Swordsman", "Sprites/Player/Lancer",
+            "Sprites/Player/Defender", "Sprites/Player/Archer", "Sprites/Player/Ninja",
+            "Sprites/Player/Poisoner", "Sprites/Player/Wizard", "Sprites/Player/ForceMage",
+            "Sprites/Player/Spellslinger", };
         currentCharacter = GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar];
         plyState = currentCharacter.state;
         //plyState = ACT_CHAR_Base.STATES.IDLE;
+        sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
 
         maxTmr = 2.0f;
         curTmr = maxTmr;
@@ -43,8 +49,8 @@ public class MNGR_Animation_Player : MonoBehaviour {
 
         if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
             currentCharacter = GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar];
-        if (plyState != currentCharacter.state)
-            ChangeState(currentCharacter.state);
+        //if (plyState != currentCharacter.state)
+            //ChangeState(currentCharacter.state);
 
         if (curTmr > 0)
         {
@@ -56,34 +62,35 @@ public class MNGR_Animation_Player : MonoBehaviour {
             }
         }
 
+        if (currentCharacter.Act_facingRight)
+            transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+        else
+            transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+
         switch(plyState)
         {
             case ACT_CHAR_Base.STATES.IDLE:
                 if (curTmr > maxTmr * 0.6f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[idleSprites[0]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
                 else if (curTmr > maxTmr * 0.5f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[idleSprites[1]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
                 else if (curTmr > maxTmr * 0.1f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[idleSprites[2]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[2]];
                 else if (curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[idleSprites[1]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
                 break;
             case ACT_CHAR_Base.STATES.WALKING:
-                if (currentCharacter.Act_facingRight)
-                    transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                else
-                    transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
                 if (curTmr > maxTmr * 0.8f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[0]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[0]];
                 else if (curTmr > maxTmr * 0.6f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[1]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
                 else if (curTmr > maxTmr * 0.4f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[2]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[2]];
                 else if (curTmr > maxTmr * 0.2f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[3]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[3]];
                 else if (curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[4]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[4]];
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
                 if (currentCharacter.Act_facingRight)
@@ -92,43 +99,43 @@ public class MNGR_Animation_Player : MonoBehaviour {
                     transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
                 if (curTmr > maxTmr * 0.8f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[0]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[0]];
                 else if (curTmr > maxTmr * 0.6f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[1]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
                 else if (curTmr > maxTmr * 0.4f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[2]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[2]];
                 else if (curTmr > maxTmr * 0.2f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[3]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[3]];
                 else if (curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[walkSprites[4]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[4]];
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_1:
                 if (curTmr > maxTmr * 0.75f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack1Sprites[0]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[0]];
                 else if (curTmr > maxTmr * 0.5f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack1Sprites[1]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[1]];
                 else if (curTmr > maxTmr * 0.25f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack1Sprites[2]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[2]];
                 else if (curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack1Sprites[3]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[3]];
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_2:
                 if (curTmr > maxTmr * 0.66f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack2Sprites[0]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[0]];
                 else if (curTmr > maxTmr * 0.66f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack2Sprites[1]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[1]];
                 else if (curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack2Sprites[2]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[2]];
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_3:
                 if (curTmr > maxTmr * 0.75f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack3Sprites[0]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[0]];
                 else if (curTmr > maxTmr * 0.5f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack3Sprites[1]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[1]];
                 else if (curTmr > maxTmr * 0.25f)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack3Sprites[2]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[2]];
                 else if (curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[attack3Sprites[3]];
+                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[3]];
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
                 break;
@@ -140,7 +147,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 // Special FX because I didn't actually animate these
                 break;
             default:
-                GetComponent<SpriteRenderer>().sprite = currentCharacter.sprites[idleSprites[0]];
+                GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
                 break;
         }
 	}

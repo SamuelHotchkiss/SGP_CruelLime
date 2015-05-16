@@ -19,7 +19,7 @@ public class CHAR_ForceMage : ACT_CHAR_Base
 	}
 
 	// Use this for initialization
-	void Start()
+	public void Start()
 	{
 		base.Start();
 	}

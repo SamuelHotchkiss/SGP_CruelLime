@@ -16,12 +16,11 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 		Act_currPower = 100;
 		Act_currSpeed = 100;
 
-        // Sorry Dakota!
-		sprites = Resources.LoadAll<Sprite>("Sprites/Player/Swordsman");
+		//sprites = Resources.LoadAll<Sprite>("Sprites/Player/Warrior");
 	}
 
 	// Use this for initialization
-	void Start()
+	public void Start()
 	{
 		base.Start();
 	}

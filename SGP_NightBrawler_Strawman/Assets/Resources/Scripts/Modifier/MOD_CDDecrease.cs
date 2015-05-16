@@ -12,5 +12,6 @@ public class MOD_CDDecrease : MOD_Base
 	// Update is called once per frame
 	void Update () {
 	
+
 	}
 }
