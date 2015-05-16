@@ -5,7 +5,7 @@ using System.Collections;
 public class ACT_CHAR_Base : ACT_Base 
 {
 	// Remove later
-	public Sprite[] sprites;
+	//public Sprite[] sprites;
 	// 
 
 	public enum STATES { IDLE = 0, WALKING, DASHING, 

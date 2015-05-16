@@ -16,7 +16,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
 		Act_currPower = 100;
 		Act_currSpeed = 100;
 
-		sprites = Resources.LoadAll<Sprite>("Sprites/Player/Mage");
+		//sprites = Resources.LoadAll<Sprite>("Sprites/Player/Mage");
 	}
 
 	// Use this for initialization
