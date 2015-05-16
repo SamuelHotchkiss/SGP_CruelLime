@@ -10,19 +10,15 @@ public class Coin : Item {
 	void Start () {
         Coin_Amount = 1;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public override void OnTriggerEnter2D(Collider2D Col)
     {
-       
-        if (Col.name == "Party")
+
+        if (Col.name == "PLY_PlayerObject")
         {
             AudioSource.PlayClipAtPoint(Coin_PickUp, new Vector3(0, 0, 0), 1.0f);
             MNGR_Game.wallet += Coin_Amount;
+            MNGR_Save.OverwriteCurrentSave();
             base.OnTriggerEnter2D(Col);
         }
 

@@ -91,6 +91,19 @@ NavMeshSettings:
 GameObject:
   m_PrefabParentObject: {fileID: 120378, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
   m_PrefabInternal: {fileID: 94067033}
+--- !u!61 &59692587
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 59692581}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 1, y: 1.79999924}
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4}
 --- !u!1001 &94067033
 Prefab:
   m_ObjectHideFlags: 0
@@ -1202,11 +1215,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 402488, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.01497602
+      value: 5.73000002
       objectReference: {fileID: 0}
     - target: {fileID: 402488, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.363851279
+      value: .469999999
       objectReference: {fileID: 0}
     - target: {fileID: 402488, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
       propertyPath: m_LocalPosition.z
