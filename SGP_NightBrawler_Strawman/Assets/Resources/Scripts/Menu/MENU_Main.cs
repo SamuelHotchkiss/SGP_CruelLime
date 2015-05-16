@@ -26,6 +26,7 @@ public class MENU_Main : MonoBehaviour {
         }
 
 
+
         if (Input.anyKeyDown)
         {
             if (Input.GetAxis("Vertical") > 0.0f)       
@@ -40,6 +41,20 @@ public class MENU_Main : MonoBehaviour {
                 if (Menu_CurrButton >= Menu_UIButtons.Length)
                     Menu_CurrButton = Menu_UIButtons.Length - 1;
             }
+        }
+
+        
+        if (Input.GetAxisRaw("Pad_Vertical") > 0.0f)
+        {
+            Menu_CurrButton--;
+            if (Menu_CurrButton < 0)
+                Menu_CurrButton = 0;
+        }
+        else if (Input.GetAxisRaw("Pad_Vertical") < 0.0f)
+        {
+            Menu_CurrButton++;
+            if (Menu_CurrButton >= Menu_UIButtons.Length)
+                Menu_CurrButton = Menu_UIButtons.Length - 1;
         }
 
         Menu_UIButtons[Menu_CurrButton].Select();
