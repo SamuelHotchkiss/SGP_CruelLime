@@ -66,14 +66,18 @@ public class PlayerController : MonoBehaviour
 			float vert = Input.GetAxis("Vertical");
 
 			if (horz > 0)
+			{
 				party[currChar].Act_facingRight = true;
+				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+			}
 			else if (horz < 0)
+			{
 				party[currChar].Act_facingRight = false;
+				party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+			}
 
 			// Move the object
 			GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-
-			party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
 
 			if (Input.GetButton("Attack/Confirm"))
 			{
