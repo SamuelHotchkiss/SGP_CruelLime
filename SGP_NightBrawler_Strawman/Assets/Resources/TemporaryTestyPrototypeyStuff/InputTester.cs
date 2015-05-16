@@ -11,7 +11,7 @@ public class InputTester : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            MNGR_Save.Save();
+            MNGR_Save.SaveProfiles();
             Debug.Log(MNGR_Save.saveFiles[0].theCharacters[0].Act_currHP);
 
             MNGR_Save.saveFiles[0].AssignGameManager();

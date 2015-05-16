@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class MENU_Load : MonoBehaviour 
 {
-    public Button[] profiles;
+    public MENU_LoadText[] profiles;
 
 	// Use this for initialization
 	void Start () 
     {
         MNGR_Save.Load();
+
+        for (int i = 0; i < 3; i++)
+        {
+            profiles[i].WriteText();
+        }
 	}
 	
-	// Update is called once per frame
-	void Update () 
-    {
-	
-	}
 
     // Loads the selected profile
     public void LoadProfile(int saveIndex)
