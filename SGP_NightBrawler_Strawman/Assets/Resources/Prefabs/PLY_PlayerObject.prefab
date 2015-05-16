@@ -12,6 +12,7 @@ GameObject:
   - 212: {fileID: 21296406}
   - 114: {fileID: 11496764}
   - 114: {fileID: 11487402}
+  - 61: {fileID: 6183574}
   m_Layer: 0
   m_Name: PLY_PlayerObject
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.97999954}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,6 +47,19 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!61 &6183574
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120378}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 1, y: 1.79999924}
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4}
 --- !u!114 &11487402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,6 +88,9 @@ MonoBehaviour:
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
+  coins: 0
+  maxTmr: []
+  curTmr: 0
 --- !u!212 &21296406
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -98,7 +115,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 94e086d2bfb50a24fbf9fd7f029f0ee0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a6a0aefdca942d49981d52435ad2dcd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
