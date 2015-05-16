@@ -25,4 +25,11 @@ public class MENU_Load : MonoBehaviour
         MNGR_Save.currSave = saveIndex;
         MNGR_Save.LoadCurrentSave();
     }
+
+    // Clears the selected profile
+    public void DeleteProfile(int saveIndex)
+    {
+        MNGR_Save.DeleteCurrentSave(saveIndex); // clears GameData of the profile
+        Application.LoadLevel(Application.loadedLevelName); // reloads the LoadMenu scene
+    }
 }

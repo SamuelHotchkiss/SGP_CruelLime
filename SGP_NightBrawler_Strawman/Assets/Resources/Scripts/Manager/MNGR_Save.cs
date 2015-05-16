@@ -54,5 +54,12 @@ public static class MNGR_Save
     {
         saveFiles[currSave].AssignGameManager();
     }
+
+    // Resets a current save profile
+    public static void DeleteCurrentSave(int saveIndex)
+    {
+        saveFiles[saveIndex] = new MNGR_GameData();
+        Save();
+    }
 }
 
