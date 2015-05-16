@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
-	public bool keyboard = false;
+	public bool keyboard = true;
 
 	public ACT_CHAR_Base[] party;
 	public int currChar = 0;
