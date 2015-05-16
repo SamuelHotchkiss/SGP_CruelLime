@@ -3,9 +3,6 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 
-    public PlayerController Itm_Victim;
-    public int Itm_ModNum;
-
 	// Use this for initialization
 	void Start () {
 	
@@ -15,8 +12,8 @@ public class Item : MonoBehaviour {
 	
 	}
 
-    void OnTriggerEnter2D()
+    public virtual void OnTriggerEnter2D(Collider2D Col)
     {
-
+        Destroy(gameObject);
     }
 }
