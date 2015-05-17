@@ -143,6 +143,16 @@ public class PlayerController : MonoBehaviour
                     loop = true;
                     GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
                 }
+				else if (vert != 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+				{
+					if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
+					{
+						party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+						curTmr = maxTmr[(int)party[currChar].state];
+					}
+					loop = true;
+					GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+				}
                 else if (party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
                 {
                     party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
