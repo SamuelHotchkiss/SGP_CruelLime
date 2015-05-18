@@ -88,18 +88,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        currChar--;
-                        if (currChar < 0)
-                            currChar = 2;
-                        for (int i = 0; i < 2; i++)
-                        {
-                            if (party[currChar].Act_currHP > 0)
-                                break;
-                            else
-                                currChar--;
-                            if (currChar < 0)
-                                currChar = 2;
-                        }
+                        SwitchNextPartyMember(true);
                         if (party[currChar].Act_currHP <= 0)
                             Application.LoadLevel(Application.loadedLevel);
                     }
@@ -142,10 +131,24 @@ public class PlayerController : MonoBehaviour
                     vert = Input.GetAxis("Vertical");
 
                 // take the greater between keyboard and gamepad axes
-                if (Mathf.Abs(horz) < Mathf.Abs(Input.GetAxis("Pad_Horizontal")))
+                /*if (Mathf.Abs(horz) < Mathf.Abs(Input.GetAxis("Pad_Horizontal")))
                     horz = Input.GetAxis("Pad_Horizontal");
                 if (Mathf.Abs(vert) < Mathf.Abs(Input.GetAxis("Pad_Vertical")))
-                    vert = Input.GetAxis("Pad_Vertical");
+                    vert = Input.GetAxis("Pad_Vertical");*/
+                if (Input.GetAxis("Pad_Horizontal") != 0)
+                    horz += Input.GetAxis("Pad_Horizontal");
+                if (Input.GetAxis("Pad_Vertical") != 0)
+                    vert += Input.GetAxis("Pad_Vertical");
+
+                if (horz > 1.0f)
+                    horz = 1.0f;
+                else if (horz < -1.0f)
+                    horz = -1.0f;
+
+                if (vert > 1.0f)
+                    vert = 1.0f;
+                else if (vert < -1.0f)
+                    vert = -1.0f;
 
                 // less vertical movement because we're 2.5d
                 vert *= 0.5f;
@@ -217,7 +220,8 @@ public class PlayerController : MonoBehaviour
 
 
             if ((Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE
+                && party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
             {
                 // Testing projectile firing
                 //Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
@@ -258,6 +262,8 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetButtonDown("SwitchRight") || Input.GetButtonDown("Pad_SwitchRight"))
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
+                SwitchNextPartyMember(true);
+                /*
                 int loopz = 0;
                 while (true)
                 {
@@ -270,7 +276,7 @@ public class PlayerController : MonoBehaviour
                         loopz++;
                     else
                         break;
-                }
+                }*/
 
                 /*for (int i = 0; i < 2; i++)
                 {
@@ -286,7 +292,8 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetButtonDown("SwitchLeft") || Input.GetButtonDown("Pad_SwitchLeft"))
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
-                int loopz = 0;
+                SwitchNextPartyMember(false);
+                /*int loopz = 0;
                 while (true)
                 {
                     currChar--;
@@ -298,7 +305,7 @@ public class PlayerController : MonoBehaviour
                         loopz++;
                     else
                         break;
-                }
+                }*/
                 /*for (int i = 0; i < 2; i++)
                 {
                     if (party[currChar].Act_currHP > 0)
@@ -320,7 +327,9 @@ public class PlayerController : MonoBehaviour
             // 
             else if ((Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0)
                 || party[currChar].state == ACT_CHAR_Base.STATES.DASHING)
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+                && (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
+                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING
+                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING))
             {
                 if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
                 {
@@ -329,7 +338,7 @@ public class PlayerController : MonoBehaviour
                     nextState = ACT_CHAR_Base.STATES.IDLE;
                     loop = false;
                 }
-                float dashmax = 15.0f;
+                float dashmax = 25.0f;
                 if (Mathf.Abs(horz) < dashmax)
                     horz *= dashmax;
                 if (horz > dashmax)
@@ -348,7 +357,9 @@ public class PlayerController : MonoBehaviour
             }
             else if ((Input.GetAxis("Pad_DodgeHorizontal") != 0 || Input.GetAxis("Pad_DodgeVertical") != 0
                 || party[currChar].state == ACT_CHAR_Base.STATES.DASHING) && !notjoydash
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+                && (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
+                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING 
+                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING))
             {
                 notjoydash = true;
                 if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
@@ -358,7 +369,7 @@ public class PlayerController : MonoBehaviour
                     nextState = ACT_CHAR_Base.STATES.IDLE;
                     loop = false;
                 }
-                float dashmax = 15.0f;
+                float dashmax = 25.0f;
                 float joyHorz = Input.GetAxis("Pad_DodgeHorizontal");
                 float joyVert = Input.GetAxis("Pad_DodgeVertical");
                 if (joyHorz > 0)
@@ -377,16 +388,18 @@ public class PlayerController : MonoBehaviour
             {
                 notjoydash = false;
             }
-            /* deprecated
-             else if (curTmr <= 0)
-            {
-                party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
-                curTmr = maxTmr[(int)party[currChar].state];
-                loop = true;
-            }*/
-            // modify velocity only after we set everything else up
+            // modify velocity only if we aren't in special state (for custom special movement)
             if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
+            {
+                // dashing shouldn't be affected by speed
+                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
+                {
+                    horz *= party[currChar].Act_currSpeed * 0.25f;
+                    vert *= party[currChar].Act_currSpeed * 0.25f;
+                }
+                // always calls unless current character is ded.
                 GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+            }
         }
         if (Input.GetKey(KeyCode.K))
         {
@@ -445,6 +458,28 @@ public class PlayerController : MonoBehaviour
                 warrior_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
                 ranger_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
                 mage_GUI.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                break;
+        }
+    }
+
+    void SwitchNextPartyMember(bool _forward)
+    {
+        int loopz = 0;
+        int next = 1;
+        if (!_forward)
+            next *= -1;
+        while (true)
+        {
+            currChar += next;
+            if (currChar < 0)
+                currChar = 2;
+            if (currChar > 2)
+                currChar = 0;
+            if (party[currChar].Act_currHP > 0)
+                break;
+            else if (loopz < 5)
+                loopz++;
+            else
                 break;
         }
     }
