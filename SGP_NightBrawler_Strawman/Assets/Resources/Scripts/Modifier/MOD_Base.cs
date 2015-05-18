@@ -5,41 +5,40 @@ using System.Collections.Generic;
 public class MOD_Base : Item {
 
     public bool Mod_IsBuff;
-    public float Mod_effectTimer;
-    public MOD_Base[] Mod_effects;
-    public MOD_Base Mod_CurrEffect;
-    public PlayerController Item_Actor;
-    public bool Mod_PartyWide; 
+    public bool Mod_PartyWide;
 
+    public int Mod_ModIndexNum;
+    public float Mod_effectTimer;
+
+    public MOD_Base Mod_CurrEffect;
+    public PlayerController Mod_Actor;
+    
+    
     // Use this for initialization
     void Start()
     {
-        Mod_effects = new MOD_Base[11];
         Mod_CurrEffect = null;
-        Item_IsMod = true;
-
-        //Buffs
-        Mod_effects[0] = new MOD_CDDecrease();
-        Mod_effects[1] = new MOD_DMGIncrease();
-        Mod_effects[2] = new MOD_DMGProtection();
-        Mod_effects[3] = new MOD_HPInstant();
-        Mod_effects[4] = new MOD_HPRegen();
-        Mod_effects[5] = new MOD_SPDIncrease();
-
-        //Debuffs
-        Mod_effects[6] = new MOD_DMGDecrease();
-        Mod_effects[7] = new MOD_DMGIncomingIncrease();
-        Mod_effects[8] = new MOD_DoT();
-        Mod_effects[9] = new MOD_Slowed();
-        Mod_effects[10] = new MOD_Stunned();
+        Mod_ModIndexNum = -1;
+        
+        ////Buffs
+        //[0] = MOD_CDDecrease;
+        //[1] = MOD_DMGIncrease();
+        //[2] = MOD_DMGProtection();
+        //[3] = MOD_HPInstant();
+        //[4] = MOD_HPRegen();
+        //[5] = MOD_SPDIncrease();
+        ////Debuffs
+        //[0] = new MOD_DMGDecrease() 
+        //[1] = new MOD_DMGIncomingIncrease() 
+        //[2] = new MOD_DoT()
+        //[3] = new MOD_Slowed()
+        //[4] = new MOD_Stunned()
     }
 
 	// Update is called once per frame
     public override void Update()
     {
-        //base.Update();
-
-        if (Item_Actor != null)
+        if (Mod_Actor != null)
         {
             ModifyActor();
             Mod_effectTimer -= Time.deltaTime;
@@ -47,38 +46,93 @@ public class MOD_Base : Item {
                 EndModifyActor(); 
         }
         else
-            Item_Actor = transform.gameObject.GetComponent<PlayerController>();
-        
-
+            Mod_Actor = transform.gameObject.GetComponent<PlayerController>();
 	}
 
     public virtual void ModifyActor()
     {
-        if (Item_Actor.party[Item_Actor.currChar].Act_HasMod)
-        {
-            if (Mod_CurrEffect.Mod_IsBuff != Item_Actor.party[Item_Actor.currChar].Act_IsModaBuff)
-            {
-                Mod_effectTimer = 0.0f;
-                EndModifyActor();
-            }
-        }
-        else 
-        {
-            if (!Mod_PartyWide)
-                Item_Actor.party[Item_Actor.currChar].Act_HasMod = true;
-            else if (Mod_PartyWide)
-                for (int i = 0; i < Item_Actor.party.Length; i++)
-                {
-                    Item_Actor.party[i].Act_HasMod = true;
-                }
-
-            Mod_effectTimer = 20.0f;
-        }
+        
     }
 
     public virtual void EndModifyActor()
     {
-        Item_Actor.party[Item_Actor.currChar].Act_HasMod = false;
+        if (!Mod_PartyWide)
+            Mod_Actor.party[Mod_Actor.currChar].Act_HasMod = false;
+        else if (Mod_PartyWide)
+            for (int i = 0; i < Mod_Actor.party.Length; i++)
+                Mod_Actor.party[i].Act_HasMod = false;
     }
 
+    public void SetModEffect(bool _IsItBuff, int _IndexNum)
+    {
+        if (_IsItBuff)
+        {
+            switch (_IndexNum)
+            {
+                case 0:
+                    Mod_Actor.gameObject.AddComponent<MOD_CDDecrease>();
+                    break;
+                case 1: 
+                    Mod_Actor.gameObject.AddComponent<MOD_DMGIncrease>();
+                    break;
+                case 2:
+                    Mod_Actor.gameObject.AddComponent<MOD_DMGProtection>();
+                    break;
+                case 3:
+                    Mod_Actor.gameObject.AddComponent<MOD_HPInstant>();
+                    break;
+                case 4:
+                    Mod_CurrEffect = new MOD_HPRegen();
+                    Mod_Actor.gameObject.AddComponent<MOD_HPRegen>();
+                    break;
+                case 5:
+                    Mod_Actor.gameObject.AddComponent<MOD_SPDIncrease>();
+                    break;
+            }
+        }
+        else if (!_IsItBuff)
+        {
+            switch (_IndexNum)
+            {
+                case 0:
+                    Mod_Actor.gameObject.AddComponent<MOD_DMGDecrease>();
+                    break;
+                case 1:
+                    Mod_Actor.gameObject.AddComponent<MOD_DMGIncomingIncrease>();
+                    break;
+                case 2:
+                    Mod_Actor.gameObject.AddComponent<MOD_DoT>();
+                    break;
+                case 3:
+                    Mod_Actor.gameObject.AddComponent<MOD_Slowed>();
+                    break;
+                case 4:
+                    Mod_Actor.gameObject.AddComponent<MOD_Stunned>();
+                    break;
+            }
+        }
+    }
+
+    public bool NullNewEffects()
+    {
+        if (Mod_Actor.party[Mod_Actor.currChar].Act_HasMod)
+        {
+            if (Mod_Actor.party[Mod_Actor.currChar].Act_ModIsBuff != Mod_IsBuff)
+            {
+                //Remove All effects in Character.
+                Debug.Log("Get Reck Potion");
+            }
+            return true;
+        }
+        else
+        {
+            if (!Mod_PartyWide)
+                Mod_Actor.party[Mod_Actor.currChar].Act_HasMod = true;
+            else if (Mod_PartyWide)
+                for (int i = 0; i < Mod_Actor.party.Length; i++)
+                    Mod_Actor.party[i].Act_HasMod = true;
+            return false;
+        }
+        
+    }
 }

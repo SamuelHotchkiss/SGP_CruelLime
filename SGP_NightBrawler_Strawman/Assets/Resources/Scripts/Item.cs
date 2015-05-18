@@ -3,9 +3,6 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 
-    public bool Item_IsMod;
-    public MOD_Base Item_Effect;
-
 	// Use this for initialization
 	void Start () {
 	    

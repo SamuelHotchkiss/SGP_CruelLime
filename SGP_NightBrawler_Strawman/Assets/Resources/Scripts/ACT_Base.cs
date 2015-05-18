@@ -15,7 +15,7 @@ public class ACT_Base
 
     public bool Act_facingRight = true;     //The direction the Actor is facing, use fro back attacks and shilds
     public bool Act_HasMod;                 //Does the Actor has a Modification acting on it
-    public bool Act_IsModaBuff;             //If the Actor is afflicted is it a Buff or a DeBuff
+    public bool Act_ModIsBuff;             //If the Actor is afflicted is it a Buff or a DeBuff
 
     //Mutators
     public void SetCurrHP(int n_hp)
