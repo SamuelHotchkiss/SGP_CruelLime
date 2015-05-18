@@ -13,7 +13,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 		Act_basePower = 100;
 		Act_baseSpeed = 10;
 		Act_currHP = 100;
-		Act_currPower = 100;
+		Act_currPower = 0;
 		Act_currSpeed = 100;
 
 		//sprites = Resources.LoadAll<Sprite>("Sprites/Player/Warrior");

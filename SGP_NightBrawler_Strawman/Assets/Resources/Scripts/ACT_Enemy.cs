@@ -215,7 +215,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	void NewState()
 	{
-		randomState = (int)Random.Range(0.0f, 4.999f);
+		randomState = (int)Random.Range(4.0f, 4.999f);
 
 		state = (STATES)randomState;
 		curTime = stateTime[(int)state];
