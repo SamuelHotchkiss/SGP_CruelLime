@@ -95,7 +95,7 @@ public class ACT_Enemy : MonoBehaviour
 	void Start () 
 	{
 								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
-		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.3f, 0.6f, 0.1f, 1.0f, 1.0f };
+		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.1f, 0.6f, 0.1f, 1.0f, 1.0f };
 		behaviors[0].owner = gameObject.GetComponent<ACT_Enemy>();
 
 		target = GameObject.FindGameObjectWithTag("Player");
@@ -184,7 +184,9 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.ATTACKING:
 				{
-
+					PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+					clone.owner = gameObject;
+					clone.Initialize();
 					break;
 				}
 			case STATES.SPECIAL:
