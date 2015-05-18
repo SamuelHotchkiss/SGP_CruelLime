@@ -13,7 +13,7 @@ public class PROJ_Base : MonoBehaviour
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
 
-    public virtual void Start()
+    public virtual void Initialize()
     {
         gameObject.layer = owner.layer;
 
