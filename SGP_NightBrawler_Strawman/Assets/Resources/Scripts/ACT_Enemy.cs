@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ACT_Enemy : MonoBehaviour
 {
@@ -19,11 +19,13 @@ public class ACT_Enemy : MonoBehaviour
 	public enum STATES
 	{
 		IDLE, WALKING, RUNNING,
-		ATTACKING, HURT, DEAD
+		ATTACKING, SPECIAL, HURT, DEAD
 	}
 
 	public STATES state;
 	public int randomState;
+	public float curTime;
+	public float[] stateTime;
 
 
 	public bool nightThresh;
@@ -92,7 +94,9 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-	
+							// IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
+		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.3f, 0.2f, 0.5f, 1.0f, 0.1f, 1.0f, 1.0f };
+
 	}
 	
 	// Update is called once per frame
@@ -100,10 +104,111 @@ public class ACT_Enemy : MonoBehaviour
 	{
 		if (Act_currHP <= 0)
 			Destroy(gameObject);
+
+		curTime -= Time.deltaTime;
+
+		if (curTime <= 0.0f)
+			NewState();
+
+		switch (state)
+		{
+			case STATES.IDLE:
+				{
+					GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+					break;
+				}
+			case STATES.WALKING:
+				{
+					Act_currSpeed = 1;
+					if (target.transform.position.x > transform.position.x)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(-Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+
+					if (target.transform.position.y > transform.position.y)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, -Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					break;
+				}
+			case STATES.RUNNING:
+				{
+					Act_currSpeed = 2;
+					if (target.transform.position.x > transform.position.x)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(-Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					if (target.transform.position.y > transform.position.y)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, -Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					break;
+				}
+			case STATES.ATTACKING:
+				{
+
+					break;
+				}
+			case STATES.SPECIAL:
+				{
+
+					break;
+				}
+			case STATES.HURT:
+				{
+
+					break;
+				}
+			case STATES.DEAD:
+				{
+
+					break;
+				}
+		}
 	}
 
 	void CheckThresholds()
 	{
 
+	}
+
+	void NewState()
+	{
+		randomState = (int)Random.Range(0.0f, 3.999f);
+
+		state = (STATES)randomState;
+		curTime = stateTime[(int)state];
 	}
 }
