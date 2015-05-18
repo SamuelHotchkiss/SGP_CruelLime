@@ -10,6 +10,8 @@ GameObject:
   - 4: {fileID: 420226}
   - 212: {fileID: 21219372}
   - 114: {fileID: 11456318}
+  - 50: {fileID: 5080590}
+  - 114: {fileID: 11481870}
   m_Layer: 0
   m_Name: ENY_GloblinWarrior
   m_TagString: Untagged
@@ -29,6 +31,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5080590
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107682}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!114 &11456318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -45,11 +62,13 @@ MonoBehaviour:
   Act_baseSpeed: 100
   Act_currHP: 100
   Act_currPower: 100
-  Act_currSpeed: 100
+  Act_currSpeed: 5
   Act_facingRight: 0
   Act_HasMod: 0
   state: 0
   randomState: 0
+  curTime: 0
+  stateTime: []
   nightThresh: 0
   hpThresh: 0
   speedThresh: 0
@@ -59,6 +78,17 @@ MonoBehaviour:
   currBehavior: {fileID: 0}
   target: {fileID: 0}
   projectile: {fileID: 0}
+--- !u!114 &11481870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21219372
 SpriteRenderer:
   m_ObjectHideFlags: 1
