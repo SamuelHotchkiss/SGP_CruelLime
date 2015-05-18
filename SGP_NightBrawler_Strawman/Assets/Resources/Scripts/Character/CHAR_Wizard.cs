@@ -6,7 +6,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
 {
 	public CHAR_Wizard()
 	{
-		characterIndex = 0;
+		characterIndex = 6;
 		cooldownTmr = 0;
 
 		Act_baseHP = 100;

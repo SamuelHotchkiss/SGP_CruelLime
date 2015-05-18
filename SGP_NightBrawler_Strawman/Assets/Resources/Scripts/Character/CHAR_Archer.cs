@@ -7,7 +7,7 @@ public class CHAR_Archer : ACT_CHAR_Base
 {
 	public CHAR_Archer()
 	{
-		characterIndex = 0;
+		characterIndex = 3;
 		cooldownTmr = 0;
 
 		Act_baseHP = 100;
