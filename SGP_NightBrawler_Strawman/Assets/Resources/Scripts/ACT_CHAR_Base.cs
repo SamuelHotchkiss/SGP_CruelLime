@@ -23,6 +23,10 @@ public class ACT_CHAR_Base : ACT_Base
 	{
 		cooldownTmrBase = 3;
 		cooldownTmr = 0;
+
+        Act_currHP = Act_baseHP;
+        Act_currPower = Act_basePower;
+        Act_currSpeed = Act_baseSpeed;
 	}
 	
 	// Update is called once per frame

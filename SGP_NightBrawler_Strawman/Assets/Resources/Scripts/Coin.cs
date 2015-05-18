@@ -13,13 +13,11 @@ public class Coin : Item {
 
     public override void OnTriggerEnter2D(Collider2D Col)
     {
-
         if (Col.name == "PLY_PlayerObject")
         {
             AudioSource.PlayClipAtPoint(Coin_PickUp, new Vector3(0, 0, 0), 1.0f);
             MNGR_Game.wallet += Coin_Amount;
             base.OnTriggerEnter2D(Col);
         }
-
     }
 }
