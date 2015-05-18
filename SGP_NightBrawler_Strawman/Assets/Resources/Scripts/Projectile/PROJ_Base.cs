@@ -9,7 +9,7 @@ public class PROJ_Base : MonoBehaviour
 
     public float speed;       // how fast are we moving?
 
-    public void Initialize()
+    public virtual void Start()
     {
         gameObject.layer = owner.layer;
 
@@ -45,7 +45,7 @@ public class PROJ_Base : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("HIT!");
         if (collision.gameObject.tag == "Enemy")
