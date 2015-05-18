@@ -21,6 +21,7 @@ public class MOD_HPRegen : MOD_Base
         MHPR_Timer -= Time.deltaTime;
 	}
 
+    
     public override void ModifyActor()
     {
         if (MHPR_Timer <= 0)
