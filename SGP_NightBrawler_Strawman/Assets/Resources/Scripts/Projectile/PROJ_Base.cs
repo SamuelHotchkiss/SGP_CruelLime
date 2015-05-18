@@ -72,7 +72,7 @@ public class PROJ_Base : MonoBehaviour
             int target = player.currChar;
 
             // Mess with the active character
-            player.FindPartyMember(target).ChangeHP(-power);
+            player.party[target].ChangeHP(-power);
 
             Destroy(gameObject);
         }
