@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
-    public bool keyboard = true;
+    //public bool keyboard = true;
 
     public ACT_CHAR_Base[] party;
     public int currChar = 0;
@@ -59,14 +59,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        // Update the timer
         if (curTmr > 0)
         {
             curTmr -= Time.deltaTime;
             if (curTmr < 0)
             {
-                //EndOfAnim(); // Engage things to do when the animation loops/ ends.
-                curTmr = loop ? maxTmr[(int)party[currChar].state] : 0; // reset to maxTmr if looping, otherwise set to 0 and stop updating timer.
+                // reset to maxTmr if looping, otherwise set to 0 and stop updating timer.
+                curTmr = loop ? maxTmr[(int)party[currChar].state] : 0;
                 if (curTmr == 0)
                 {
                     if (party[currChar].state != ACT_CHAR_Base.STATES.DYING)
@@ -107,12 +107,8 @@ public class PlayerController : MonoBehaviour
 
         if (party[currChar].state != ACT_CHAR_Base.STATES.DYING)
         {
-            if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING
-                && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
-                && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
-                && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3
-                && party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
+                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
             {
                 // Get axis movement
                 if (Input.GetAxis("Horizontal") != 0)
@@ -120,16 +116,15 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetAxis("Vertical") != 0)
                     vert = Input.GetAxis("Vertical");
 
-                // take the greater between keyboard and gamepad axes
-                /*if (Mathf.Abs(horz) < Mathf.Abs(Input.GetAxis("Pad_Horizontal")))
-                    horz = Input.GetAxis("Pad_Horizontal");
-                if (Mathf.Abs(vert) < Mathf.Abs(Input.GetAxis("Pad_Vertical")))
-                    vert = Input.GetAxis("Pad_Vertical");*/
+                // add gamepad axis movement
                 if (Input.GetAxis("Pad_Horizontal") != 0)
-                    horz += Input.GetAxis("Pad_Horizontal");
+                {
+                    horz = Input.GetAxis("Pad_Horizontal");
+                }
                 if (Input.GetAxis("Pad_Vertical") != 0)
-                    vert += Input.GetAxis("Pad_Vertical");
+                    vert = Input.GetAxis("Pad_Vertical");
 
+                // but cap it off at 1
                 if (horz > 1.0f)
                     horz = 1.0f;
                 else if (horz < -1.0f)
@@ -142,6 +137,14 @@ public class PlayerController : MonoBehaviour
 
                 // less vertical movement because we're 2.5d
                 vert *= 0.5f;
+
+                // dashing shouldn't be affected by speed
+                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
+                {
+                    horz *= party[currChar].Act_currSpeed * 0.25f;
+                    vert *= party[currChar].Act_currSpeed * 0.25f;
+                }
+
 
                 // random bugfix
                 if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0
@@ -194,20 +197,6 @@ public class PlayerController : MonoBehaviour
                 loop = true;
                 //GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
             }
-            /*else if (party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
-            {
-                party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
-                //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                horz = 0.0f;
-                vert = 0.0f;
-                curTmr = maxTmr[(int)party[currChar].state];
-            }
-            else if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
-            {
-                horz = 0.0f;
-                vert = 0.0f;
-            }*/
-
 
             if ((Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE
@@ -224,7 +213,6 @@ public class PlayerController : MonoBehaviour
                 {
                     party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
                     curTmr = maxTmr[(int)party[currChar].state];
-                    //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     horz = 0.0f;
                     vert = 0.0f;
                 }
@@ -255,58 +243,11 @@ public class PlayerController : MonoBehaviour
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
                 SwitchNextPartyMember(true);
-                /*
-                int loopz = 0;
-                while (true)
-                {
-                    currChar++;
-                    if (currChar > 2)
-                        currChar = 0;
-                    if (party[currChar].Act_currHP > 0)
-                        break;
-                    else if (loopz < 5)
-                        loopz++;
-                    else
-                        break;
-                }*/
-
-                /*for (int i = 0; i < 2; i++)
-                {
-                    if (party[currChar].Act_currHP > 0)
-                        break;
-                    else if (curTmr <= 0)
-                        currChar++;
-                    if (currChar > 2)
-                        currChar = 0;
-
-                }*/
             }
             else if ((Input.GetButtonDown("SwitchLeft") || Input.GetButtonDown("Pad_SwitchLeft"))
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
                 SwitchNextPartyMember(false);
-                /*int loopz = 0;
-                while (true)
-                {
-                    currChar--;
-                    if (currChar < 0)
-                        currChar = 2;
-                    if (party[currChar].Act_currHP > 0)
-                        break;
-                    else if (loopz < 5)
-                        loopz++;
-                    else
-                        break;
-                }*/
-                /*for (int i = 0; i < 2; i++)
-                {
-                    if (party[currChar].Act_currHP > 0)
-                        break;
-                    else if (curTmr <= 0)
-                        currChar--;
-                    if (currChar < 0)
-                        currChar = 2;
-                }*/
             }
             // currently does nothing
             else if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
@@ -383,12 +324,6 @@ public class PlayerController : MonoBehaviour
             // modify velocity only if we aren't in special state (for custom special movement)
             if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
             {
-                // dashing shouldn't be affected by speed
-                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
-                {
-                    horz *= party[currChar].Act_currSpeed * 0.25f;
-                    vert *= party[currChar].Act_currSpeed * 0.25f;
-                }
                 // always calls unless current character is ded.
                 GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
             }
