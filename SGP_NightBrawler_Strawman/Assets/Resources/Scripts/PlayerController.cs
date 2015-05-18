@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     bool loop;
     public ACT_CHAR_Base.STATES nextState;
 
+    //Testing projectile firing, will be removed later, projectile should be part of the character classes instead
+    public PROJ_Base testProjectile;
+
     // Use this for initialization
     void Start()
     {
@@ -163,6 +166,9 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetButtonDown("Attack/Confirm"))
                 {
+                    // Testing projectile firing
+                    Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+
                     if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
                         && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
                         && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)
