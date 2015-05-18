@@ -22,11 +22,15 @@ public class PlayerController : MonoBehaviour
     //Testing projectile firing, will be removed later, projectile should be part of the character classes instead
     public PROJ_Base testProjectile;
 
+    public ACT_CHAR_Base FindPartyMember(int index)
+    {
+        return party[index];
+    }
     // Use this for initialization
     void Start()
     {
         party = new ACT_CHAR_Base[3];
-
+        
         party[0] = new CHAR_Swordsman();
         party[1] = new CHAR_Archer();
         party[2] = new CHAR_Wizard();
@@ -167,7 +171,8 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetButtonDown("Attack/Confirm"))
                 {
                     // Testing projectile firing
-                    Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+                    PROJ_Base clone = (PROJ_Base)Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+                    clone.Initialize();
 
                     if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
                         && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
