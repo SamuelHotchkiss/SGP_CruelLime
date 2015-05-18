@@ -6,12 +6,9 @@ public class MNGR_Animation_Player : MonoBehaviour {
     string[] filepaths;
     Sprite[] sprites;
     ACT_CHAR_Base currentCharacter;
-    ACT_CHAR_Base.STATES plyState;
+    ACT_CHAR_Base.STATES lastState;
+    ACT_CHAR_Base.STATES curState;
     PlayerController currentController;
-    //float[] maxTmr;
-    //int tmrIndex;
-    //float curTmr;
-    //bool loop;
     int[] idleSprites;
     int[] walkSprites;
     int[] attack1Sprites;
@@ -29,14 +26,9 @@ public class MNGR_Animation_Player : MonoBehaviour {
             "Sprites/Player/Spellslinger", };
         currentController = GetComponent<PlayerController>();
         currentCharacter = currentController.party[currentController.currChar];
-        plyState = currentCharacter.state;
-        //plyState = ACT_CHAR_Base.STATES.IDLE;
+        lastState = currentCharacter.state;
+        curState = currentCharacter.state;
         sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
-
-        //maxTmr = new float[] { 2.0f, 0.75f, 0.5f, 0.2f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f };
-        //tmrIndex = 0;
-        //curTmr = maxTmr[tmrIndex];
-        //loop = true;
 
         // Works for swordsman...
         idleSprites = new int[] { 0, 1, 2 };
@@ -51,30 +43,24 @@ public class MNGR_Animation_Player : MonoBehaviour {
 	
 	void Update () {
 
+        // change this script's character if the party changes its character, but don't waste the time otherwise.
         if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
         {
             currentCharacter = GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar];
             sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
         }
-        if (plyState != currentCharacter.state)
+        // change this script's state if the character changes his state, but don't waste the time otherwise.
+        if (curState != currentCharacter.state)
             ChangeState(currentCharacter.state);
 
-        /*if (curTmr > 0)
-        {
-            curTmr -= Time.deltaTime;
-            if (curTmr < 0)
-            {
-                //EndOfAnim(); // Engage things to do when the animation loops/ ends.
-                curTmr = loop ? maxTmr[tmrIndex] : 0; // reset to maxTmr if looping, otherwise set to 0 and stop updating timer.
-            }
-        }*/
-
+        // rotate based upon facing bool
         if (currentCharacter.Act_facingRight)
             transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         else
             transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
-        switch(plyState)
+        // animate based upon state.  mostly the same code, but has to be unique for each animation
+        switch (curState)
         {
             case ACT_CHAR_Base.STATES.IDLE:
 
@@ -189,11 +175,29 @@ public class MNGR_Animation_Player : MonoBehaviour {
         }
 	}
 
+    // handled in one easy-to-access function
     void ChangeState(ACT_CHAR_Base.STATES _newstate)
     {
-        plyState = _newstate;
-        //tmrIndex = (int)_newstate;
-        //curTmr = maxTmr[tmrIndex];
+        // this allows us to know exactly which transition we're in.  Very useful.
+        lastState = curState;
+
+        // position correction when warrior finishes his combo
+        if ( currentCharacter.characterIndex == 0 
+            && (lastState == ACT_CHAR_Base.STATES.ATTACK_2 && _newstate == ACT_CHAR_Base.STATES.IDLE)
+            || (lastState == ACT_CHAR_Base.STATES.ATTACK_3 && _newstate == ACT_CHAR_Base.STATES.IDLE) )
+        {
+            // just move him by 0.35 in the direction he's facing, but looks more complicated than that.
+            Vector3 newpos = transform.position;
+            float move = 0.35f;
+            if (!currentCharacter.Act_facingRight)
+                move *= -1.0f;
+
+            newpos.x += move;
+            transform.position = newpos;
+        }
+
+        // the part we've all been waiting for
+        curState = _newstate;
 
     }
 
