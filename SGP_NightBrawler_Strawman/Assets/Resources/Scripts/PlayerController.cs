@@ -220,7 +220,10 @@ public class PlayerController : MonoBehaviour
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
                 // Testing projectile firing
-                //Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+                PROJ_Base clone = (PROJ_Base)Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+                clone.owner = gameObject;
+                clone.Initialize();
+
 
                 if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
                     && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2

@@ -107,8 +107,8 @@ public class ACT_Enemy : MonoBehaviour
 
 		curTime -= Time.deltaTime;
 
-		if (curTime <= 0.0f)
-			NewState();
+        if (curTime <= 0.0f)
+            NewState();
 
 		switch (state)
 		{
