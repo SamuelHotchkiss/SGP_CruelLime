@@ -223,7 +223,7 @@ Prefab:
     - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
       propertyPath: ranger_GUI
       value: 
-      objectReference: {fileID: 1604662364}
+      objectReference: {fileID: 173681921}
     - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
       propertyPath: mage_GUI
       value: 
@@ -251,6 +251,10 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 4081147}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!1 &173681921 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 138072, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
+  m_PrefabInternal: {fileID: 4081147}
 --- !u!114 &180906153 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11436268, guid: 326d4ddd09f95b7409022328fa4d11e7,
@@ -535,7 +539,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 462648, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 199132, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
       propertyPath: m_Name
@@ -651,12 +655,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 462648, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 11430062, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
-      propertyPath: Mod_Party
-      value: 
-      objectReference: {fileID: 59692581}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
   m_IsPrefabParent: 0

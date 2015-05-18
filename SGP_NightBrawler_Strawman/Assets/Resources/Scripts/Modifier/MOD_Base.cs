@@ -4,30 +4,28 @@ using System.Collections.Generic;
 
 public class MOD_Base : Item {
 
-    public bool Mod_IsBuff;
-    public bool Mod_PartyWide;
+    public bool Mod_IsBuff;             //Is true if its a Buff and False if is a Debuff
+    public bool Mod_PartyWide;          //Dose it affect the whole party or only the current player.
 
-    public int Mod_ModIndexNum;
-    public float Mod_effectTimer;
+    public int Mod_ModIndexNum;         //The Number ID of the Effect 
+    public float Mod_effectTimer;       //How long the effect will last
 
-    public MOD_Base Mod_CurrEffect;
-    public PlayerController Mod_Actor;
+    public PlayerController Mod_Actor;  //The Actor been aflicted with the Effect
     
     
     // Use this for initialization
     void Start()
     {
-        Mod_CurrEffect = null;
-        Mod_ModIndexNum = -1;
+        Mod_ModIndexNum = -1;           //Base class
         
-        ////Buffs
+        ////Buffs IDs
         //[0] = MOD_CDDecrease;
         //[1] = MOD_DMGIncrease();
         //[2] = MOD_DMGProtection();
         //[3] = MOD_HPInstant();
         //[4] = MOD_HPRegen();
         //[5] = MOD_SPDIncrease();
-        ////Debuffs
+        ////Debuffs IDs
         //[0] = new MOD_DMGDecrease() 
         //[1] = new MOD_DMGIncomingIncrease() 
         //[2] = new MOD_DoT()
@@ -38,32 +36,32 @@ public class MOD_Base : Item {
 	// Update is called once per frame
     public override void Update()
     {
-        if (Mod_Actor != null)
+        if (Mod_Actor != null)                      //If No Actor is selected just ignore the update
         {
-            ModifyActor();
-            Mod_effectTimer -= Time.deltaTime;
+            ModifyActor();                          //Actually affect the Actor
+            Mod_effectTimer -= Time.deltaTime;      //Reduce the Time of the effect
             if (Mod_effectTimer <= 0.0f)
-                EndModifyActor(); 
+                EndModifyActor();                   //Once Timer is over kill the effect.
         }
         else
-            Mod_Actor = transform.gameObject.GetComponent<PlayerController>();
+            Mod_Actor = transform.gameObject.GetComponent<PlayerController>();      //Get the Actor once attach to the effect
 	}
 
-    public virtual void ModifyActor()
+    public virtual void ModifyActor()   //Just a virtual fuction for its children
     {
         
-    }
+    }   
 
-    public virtual void EndModifyActor()
+    public virtual void EndModifyActor()    //Reset the characte's HasMod Veriables.
     {
-        if (!Mod_PartyWide)
+        if (!Mod_PartyWide)     
             Mod_Actor.party[Mod_Actor.currChar].Act_HasMod = false;
         else if (Mod_PartyWide)
             for (int i = 0; i < Mod_Actor.party.Length; i++)
                 Mod_Actor.party[i].Act_HasMod = false;
     }
 
-    public void SetModEffect(bool _IsItBuff, int _IndexNum)
+    public void SetModEffect(bool _IsItBuff, int _IndexNum)     //Selects the Buff or Debuff from the list
     {
         if (_IsItBuff)
         {
@@ -82,7 +80,6 @@ public class MOD_Base : Item {
                     Mod_Actor.gameObject.AddComponent<MOD_HPInstant>();
                     break;
                 case 4:
-                    Mod_CurrEffect = new MOD_HPRegen();
                     Mod_Actor.gameObject.AddComponent<MOD_HPRegen>();
                     break;
                 case 5:
@@ -113,7 +110,7 @@ public class MOD_Base : Item {
         }
     }
 
-    public bool NullNewEffects()
+    public bool NullNewEffects()        //Checks if the current actor already has an effect 
     {
         if (Mod_Actor.party[Mod_Actor.currChar].Act_HasMod)
         {
