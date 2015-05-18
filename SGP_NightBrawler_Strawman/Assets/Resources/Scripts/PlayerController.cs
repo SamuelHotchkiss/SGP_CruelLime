@@ -214,6 +214,7 @@ public class PlayerController : MonoBehaviour
 				clone.owner = gameObject;
 				clone.Initialize();
 
+
                 if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
                     && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
                     && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)

@@ -6,9 +6,9 @@ public class PROJ_Base : MonoBehaviour
     public GameObject owner;  // who fired us?
 
     Vector2 start;            // where are we from?
-    Vector2 velocity;         // which way are we going?
-    int power;                // how much damage will we deal?
-    public float distance;           // how far have we gone?
+    public Vector2 velocity;         // which way are we going?
+    public int power;         // how much damage will we deal?
+    public float distance;    // how far have we gone?
 
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
@@ -20,7 +20,7 @@ public class PROJ_Base : MonoBehaviour
         // Are you my mommy?
         if(owner.tag == "Player")
         {
-            owner = GameObject.FindGameObjectWithTag("Player");
+            //owner = GameObject.FindGameObjectWithTag("Player");
 
             PlayerController player = owner.GetComponent<PlayerController>();
             int target = player.currChar;
