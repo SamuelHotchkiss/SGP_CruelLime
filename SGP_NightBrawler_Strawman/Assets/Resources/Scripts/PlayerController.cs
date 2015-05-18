@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         party = new ACT_CHAR_Base[3];
-
+        
         party[0] = new CHAR_Swordsman();
         party[1] = new CHAR_Archer();
         party[2] = new CHAR_Wizard();
