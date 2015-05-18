@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetButtonDown("Attack/Confirm"))
                 {
                     // Testing projectile firing
-                    Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+                    //Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
 
                     if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
                         && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2

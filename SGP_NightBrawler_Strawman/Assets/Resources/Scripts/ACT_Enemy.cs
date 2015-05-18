@@ -34,7 +34,7 @@ public class ACT_Enemy : MonoBehaviour
 	public float distThresh;
 	public float coolThresh;
 
-	public BHR_Base[] behaviors;
+	public BHR_Base[] behaviors = new BHR_Base[10];
 	public BHR_Base currBehavior;
 
 	public GameObject target;
@@ -94,9 +94,11 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-							// IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
-		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.3f, 0.2f, 0.5f, 1.0f, 0.1f, 1.0f, 1.0f };
+								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
+		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.3f, 0.6f, 0.1f, 1.0f, 1.0f };
+		behaviors[0].owner = gameObject.GetComponent<ACT_Enemy>();
 
+		target = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -125,12 +127,14 @@ public class ACT_Enemy : MonoBehaviour
 						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
 						vel = new Vector2(Act_currSpeed, vel.y);
 						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = true;
 					}
 					else
 					{
 						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
 						vel = new Vector2(-Act_currSpeed, vel.y);
 						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = false;
 					}
 
 					if (target.transform.position.y > transform.position.y)
@@ -155,12 +159,14 @@ public class ACT_Enemy : MonoBehaviour
 						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
 						vel = new Vector2(Act_currSpeed, vel.y);
 						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = true;
 					}
 					else
 					{
 						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
 						vel = new Vector2(-Act_currSpeed, vel.y);
 						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = false;
 					}
 					if (target.transform.position.y > transform.position.y)
 					{
@@ -183,7 +189,8 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
-
+					CheckThresholds();
+					currBehavior.PerformBehavior();
 					break;
 				}
 			case STATES.HURT:
@@ -201,12 +208,12 @@ public class ACT_Enemy : MonoBehaviour
 
 	void CheckThresholds()
 	{
-
+		currBehavior = behaviors[0];
 	}
 
 	void NewState()
 	{
-		randomState = (int)Random.Range(0.0f, 3.999f);
+		randomState = (int)Random.Range(0.0f, 4.999f);
 
 		state = (STATES)randomState;
 		curTime = stateTime[(int)state];
