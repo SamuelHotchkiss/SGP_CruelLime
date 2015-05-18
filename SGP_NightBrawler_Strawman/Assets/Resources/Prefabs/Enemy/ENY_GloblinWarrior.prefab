@@ -10,9 +10,12 @@ GameObject:
   - 4: {fileID: 420226}
   - 212: {fileID: 21219372}
   - 114: {fileID: 11456318}
-  m_Layer: 0
+  - 50: {fileID: 5080590}
+  - 114: {fileID: 11481870}
+  - 61: {fileID: 6139328}
+  m_Layer: 9
   m_Name: ENY_GloblinWarrior
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,11 +27,39 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.06999993, y: .370000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5080590
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107682}
+  m_Mass: 9.99999975e-05
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+--- !u!61 &6139328
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107682}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!114 &11456318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -45,20 +76,34 @@ MonoBehaviour:
   Act_baseSpeed: 100
   Act_currHP: 100
   Act_currPower: 100
-  Act_currSpeed: 100
+  Act_currSpeed: 5
   Act_facingRight: 0
   Act_HasMod: 0
   state: 0
   randomState: 0
+  curTime: 0
+  stateTime: []
   nightThresh: 0
   hpThresh: 0
   speedThresh: 0
   distThresh: 0
   coolThresh: 0
-  behaviors: []
+  behaviors:
+  - {fileID: 11425104, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
   currBehavior: {fileID: 0}
   target: {fileID: 0}
-  projectile: {fileID: 0}
+  projectile: {fileID: 11416326, guid: 47be1f86c76fd6c4ca3df9930167ea68, type: 2}
+--- !u!114 &11481870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21219372
 SpriteRenderer:
   m_ObjectHideFlags: 1

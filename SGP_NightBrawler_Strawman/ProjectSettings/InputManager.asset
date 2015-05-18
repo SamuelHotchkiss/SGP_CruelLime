@@ -174,8 +174,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
-    dead: .000300000014
-    sensitivity: .0799999982
+    dead: .189999998
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 2
@@ -202,7 +202,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 1
+    positiveButton: joystick button 2
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -218,7 +218,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 2
+    positiveButton: joystick button 1
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -243,8 +243,8 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 0
-    joyNum: 2
+    axis: 3
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Pad_DodgeVertical
     descriptiveName: 
@@ -257,16 +257,16 @@ InputManager:
     dead: .189999998
     sensitivity: 1
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
-    axis: 1
-    joyNum: 2
+    axis: 4
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Pad_SwitchRight
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 3
+    positiveButton: joystick button 5
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ACT_Enemy : MonoBehaviour
 {
@@ -19,11 +19,13 @@ public class ACT_Enemy : MonoBehaviour
 	public enum STATES
 	{
 		IDLE, WALKING, RUNNING,
-		ATTACKING, HURT, DEAD
+		ATTACKING, SPECIAL, HURT, DEAD
 	}
 
 	public STATES state;
 	public int randomState;
+	public float curTime;
+	public float[] stateTime;
 
 
 	public bool nightThresh;
@@ -32,7 +34,7 @@ public class ACT_Enemy : MonoBehaviour
 	public float distThresh;
 	public float coolThresh;
 
-	public BHR_Base[] behaviors;
+	public BHR_Base[] behaviors = new BHR_Base[10];
 	public BHR_Base currBehavior;
 
 	public GameObject target;
@@ -92,7 +94,11 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-	
+								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
+		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.1f, 0.6f, 0.1f, 1.0f, 1.0f };
+		behaviors[0].owner = gameObject.GetComponent<ACT_Enemy>();
+
+		target = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -100,10 +106,118 @@ public class ACT_Enemy : MonoBehaviour
 	{
 		if (Act_currHP <= 0)
 			Destroy(gameObject);
+
+		curTime -= Time.deltaTime;
+
+		if (curTime <= 0.0f)
+			NewState();
+
+		switch (state)
+		{
+			case STATES.IDLE:
+				{
+					GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+					break;
+				}
+			case STATES.WALKING:
+				{
+					Act_currSpeed = 1;
+					if (target.transform.position.x > transform.position.x)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = true;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(-Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = false;
+					}
+
+					if (target.transform.position.y > transform.position.y)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, -Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					break;
+				}
+			case STATES.RUNNING:
+				{
+					Act_currSpeed = 2;
+					if (target.transform.position.x > transform.position.x)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = true;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(-Act_currSpeed, vel.y);
+						GetComponent<Rigidbody2D>().velocity = vel;
+						Act_facingRight = false;
+					}
+					if (target.transform.position.y > transform.position.y)
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					else
+					{
+						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+						vel = new Vector2(vel.x, -Act_currSpeed);
+						GetComponent<Rigidbody2D>().velocity = vel;
+					}
+					break;
+				}
+			case STATES.ATTACKING:
+				{
+					PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+					clone.owner = gameObject;
+					clone.Initialize();
+					break;
+				}
+			case STATES.SPECIAL:
+				{
+					CheckThresholds();
+					currBehavior.PerformBehavior();
+					break;
+				}
+			case STATES.HURT:
+				{
+
+					break;
+				}
+			case STATES.DEAD:
+				{
+
+					break;
+				}
+		}
 	}
 
 	void CheckThresholds()
 	{
+		currBehavior = behaviors[0];
+	}
 
+	void NewState()
+	{
+		randomState = (int)Random.Range(0.0f, 4.999f);
+
+		state = (STATES)randomState;
+		curTime = stateTime[(int)state];
 	}
 }
