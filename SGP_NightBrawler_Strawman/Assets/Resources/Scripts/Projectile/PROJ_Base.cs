@@ -7,7 +7,6 @@ public class PROJ_Base : MonoBehaviour
     Vector2 velocity;         // which way are we going?
     int power;                // how much damage will we deal?
     Rigidbody2D myBody;       // PHYSICS
-    //bool isPiercing;
 
     public float speed;       // how fast are we moving?
 
@@ -19,12 +18,15 @@ public class PROJ_Base : MonoBehaviour
         // Are you my mommy?
         if(owner.tag == "Player")
         {
-            bool right = owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight;
+            //power = owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_currPower;
+            bool right = true; // owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight;
 
             if (right)
                 velocity = new Vector2(1, 0) * speed;
             else
                 velocity = new Vector2(-1, 0) * speed;
+
+            myBody.velocity = velocity;
         }
         else if (owner.tag == "Enemy")
         {
