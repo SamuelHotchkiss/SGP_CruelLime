@@ -22,6 +22,11 @@ public class PlayerController : MonoBehaviour
     //Testing projectile firing, will be removed later, projectile should be part of the character classes instead
     public PROJ_Base testProjectile;
 
+    // L: just works better this way
+    public float horz;
+    public float vert;
+    bool notjoydash;
+
     // Use this for initialization
     void Start()
     {
@@ -35,8 +40,8 @@ public class PlayerController : MonoBehaviour
         rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
         leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
-        // IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
-        maxTmr = new float[] { 2.0f, 0.75f, 0.5f, 0.3f, 0.2f, 0.5f, 1.0f, 0.1f, 1.0f, 1.0f };
+        //-----Labels4dayz---- IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
+        maxTmr = new float[] { 2.0f, 0.75f, 0.1f, 0.3f, 0.2f, 0.5f, 1.0f, 0.1f, 1.0f, 1.0f };
 
         curTmr = maxTmr[(int)party[currChar].state];
         loop = true;
@@ -46,6 +51,10 @@ public class PlayerController : MonoBehaviour
         // Initialize other components
         GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
         GetComponent<MNGR_Animation_Player>().Initialize();
+
+        horz = 0.0f;
+        vert = 0.0f;
+        notjoydash = false;
     }
 
     void Update()
@@ -65,6 +74,8 @@ public class PlayerController : MonoBehaviour
                         if (nextState == ACT_CHAR_Base.STATES.IDLE)
                         {
                             party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+                            horz = 0.0f;
+                            vert = 0.0f;
                         }
                         else
                         {
@@ -115,256 +126,296 @@ public class PlayerController : MonoBehaviour
         if (party[currChar].Act_currHP <= 0)
             Application.LoadLevel(Application.loadedLevel);*/
 
-        // Are we using the keyboard?
-        if (keyboard)
+        if (party[currChar].state != ACT_CHAR_Base.STATES.DYING)
         {
-            if (party[currChar].state != ACT_CHAR_Base.STATES.DYING)
+            if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING
+                && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
+                && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
+                && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3
+                && party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
                 // Get axis movement
-                float horz = Input.GetAxis("Horizontal");
-                float vert = Input.GetAxis("Vertical");
+                if (Input.GetAxis("Horizontal") != 0)
+                    horz = Input.GetAxis("Horizontal");
+                if (Input.GetAxis("Vertical") != 0)
+                    vert = Input.GetAxis("Vertical");
 
-                if (horz > 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+                // take the greater between keyboard and gamepad axes
+                if (Mathf.Abs(horz) < Mathf.Abs(Input.GetAxis("Pad_Horizontal")))
+                    horz = Input.GetAxis("Pad_Horizontal");
+                if (Mathf.Abs(vert) < Mathf.Abs(Input.GetAxis("Pad_Vertical")))
+                    vert = Input.GetAxis("Pad_Vertical");
+
+                // less vertical movement because we're 2.5d
+                vert *= 0.5f;
+
+                // random bugfix
+                if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0
+                    && Input.GetAxis("Pad_Horizontal") == 0 && Input.GetAxis("Pad_Vertical") == 0
+                    && party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
                 {
-                    party[currChar].Act_facingRight = true;
-                    if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
-                    {
-                        party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-                        curTmr = maxTmr[(int)party[currChar].state];
-                    }
-                    loop = true;
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+                    horz = 0.0f;
+                    vert = 0.0f;
                 }
-                else if (horz < 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
-                {
-                    party[currChar].Act_facingRight = false;
-                    if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
-                    {
-                        party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-                        curTmr = maxTmr[(int)party[currChar].state];
-                    }
-                    loop = true;
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-                }
-				else if (vert != 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
-				{
-					if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
-					{
-						party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-						curTmr = maxTmr[(int)party[currChar].state];
-					}
-					loop = true;
-					GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-				}
-                else if (party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
-                {
+
+                // manual deadzones
+                if (Mathf.Abs(horz) < 0.1f )
+                    horz = 0.0f;
+                if (Mathf.Abs(vert) < 0.1f)
+                    vert = 0.0f;
+
+                if (horz == 0.0f && vert == 0.0f
+                    && party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
                     party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
-                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+
+            if (horz > 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+            {
+                party[currChar].Act_facingRight = true;
+                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
+                {
+                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
                     curTmr = maxTmr[(int)party[currChar].state];
                 }
-
-
-                if (Input.GetButtonDown("Attack/Confirm"))
+                loop = true;
+            }
+            else if (horz < 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+            {
+                party[currChar].Act_facingRight = false;
+                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
                 {
-                    // Testing projectile firing
-                    Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
-
-                    if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
-                        && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
-                        && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)
-                    {
-                        party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
-                        curTmr = maxTmr[(int)party[currChar].state];
-                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    }
-                    else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_1)
-                    {
-                        nextState = ACT_CHAR_Base.STATES.ATTACK_2;
-                    }
-                    else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_2)
-                    {
-                        nextState = ACT_CHAR_Base.STATES.ATTACK_3;
-                    }
-                    loop = false;
-                }
-                else if (Input.GetButton("Special/Cancel") && party[currChar].cooldownTmr == 0)
-                {
-                    party[currChar].state = ACT_CHAR_Base.STATES.SPECIAL;
+                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
                     curTmr = maxTmr[(int)party[currChar].state];
-                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    loop = false;
-
-                    party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
                 }
-                else if (Input.GetButtonDown("SwitchRight"))
+                loop = true;
+                //GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+            }
+            else if (vert != 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+            {
+                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
+                {
+                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
+                    curTmr = maxTmr[(int)party[currChar].state];
+                }
+                loop = true;
+                //GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+            }
+            /*else if (party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
+            {
+                party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+                //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                horz = 0.0f;
+                vert = 0.0f;
+                curTmr = maxTmr[(int)party[currChar].state];
+            }
+            else if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
+            {
+                horz = 0.0f;
+                vert = 0.0f;
+            }*/
+
+
+            if ((Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                // Testing projectile firing
+                //Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+
+                if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
+                    && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
+                    && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)
+                {
+                    party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
+                    curTmr = maxTmr[(int)party[currChar].state];
+                    //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    horz = 0.0f;
+                    vert = 0.0f;
+                }
+                else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_1)
+                {
+                    nextState = ACT_CHAR_Base.STATES.ATTACK_2;
+                }
+                else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_2)
+                {
+                    nextState = ACT_CHAR_Base.STATES.ATTACK_3;
+                }
+                loop = false;
+            }
+            else if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
+                && party[currChar].cooldownTmr == 0
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                party[currChar].state = ACT_CHAR_Base.STATES.SPECIAL;
+                curTmr = maxTmr[(int)party[currChar].state];
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                horz = 0.0f;
+                vert = 0.0f;
+                loop = false;
+
+                party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
+            }
+            else if ((Input.GetButtonDown("SwitchRight") || Input.GetButtonDown("Pad_SwitchRight"))
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                int loopz = 0;
+                while (true)
                 {
                     currChar++;
                     if (currChar > 2)
                         currChar = 0;
-                    for (int i = 0; i < 2; i++)
-                    {
-                        if (party[currChar].Act_currHP > 0)
-                            break;
-                        else if (curTmr <= 0)
-                            currChar++;
-                        if (currChar > 2)
-                            currChar = 0;
-
-                    }
+                    if (party[currChar].Act_currHP > 0)
+                        break;
+                    else if (loopz < 5)
+                        loopz++;
+                    else
+                        break;
                 }
-                else if (Input.GetButtonDown("SwitchLeft"))
+
+                /*for (int i = 0; i < 2; i++)
+                {
+                    if (party[currChar].Act_currHP > 0)
+                        break;
+                    else if (curTmr <= 0)
+                        currChar++;
+                    if (currChar > 2)
+                        currChar = 0;
+
+                }*/
+            }
+            else if ((Input.GetButtonDown("SwitchLeft") || Input.GetButtonDown("Pad_SwitchLeft"))
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                int loopz = 0;
+                while (true)
                 {
                     currChar--;
                     if (currChar < 0)
                         currChar = 2;
-                    for (int i = 0; i < 2; i++)
-                    {
-                        if (party[currChar].Act_currHP > 0)
-                            break;
-                        else if (curTmr <= 0)
-                            currChar--;
-                        if (currChar < 0)
-                            currChar = 2;
-                    }
+                    if (party[currChar].Act_currHP > 0)
+                        break;
+                    else if (loopz < 5)
+                        loopz++;
+                    else
+                        break;
                 }
-
-                // Use button rotates the object
-                else if (Input.GetButton("Use"))
+                /*for (int i = 0; i < 2; i++)
                 {
-                    party[currChar].state = ACT_CHAR_Base.STATES.USE;
-                    curTmr = maxTmr[(int)party[currChar].state];
-                    loop = false;
-                }
-                // Dodge button rotates the object based upon current movement
-                else if (Input.GetButton("Dodge"))
+                    if (party[currChar].Act_currHP > 0)
+                        break;
+                    else if (curTmr <= 0)
+                        currChar--;
+                    if (currChar < 0)
+                        currChar = 2;
+                }*/
+            }
+            // currently does nothing
+            else if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                party[currChar].state = ACT_CHAR_Base.STATES.USE;
+                curTmr = maxTmr[(int)party[currChar].state];
+                loop = false;
+            }
+            // 
+            else if ((Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0)
+                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING)
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
                 {
                     party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
                     curTmr = maxTmr[(int)party[currChar].state];
+                    nextState = ACT_CHAR_Base.STATES.IDLE;
                     loop = false;
                 }
-                else if (curTmr <= 0)
+                float dashmax = 15.0f;
+                if (Mathf.Abs(horz) < dashmax)
+                    horz *= dashmax;
+                if (horz > dashmax)
+                    horz = dashmax;
+                else if (horz < -dashmax)
+                    horz = -dashmax;
+
+                // less vertical movement
+                dashmax *= 0.75f;
+                if (Mathf.Abs(vert) < dashmax)
+                    vert *= dashmax;
+                if (vert > dashmax)
+                    vert = dashmax;
+                else if (vert < -dashmax)
+                    vert = -dashmax;
+            }
+            else if ((Input.GetAxis("Pad_DodgeHorizontal") != 0 || Input.GetAxis("Pad_DodgeVertical") != 0
+                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING) && !notjoydash
+                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                notjoydash = true;
+                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
                 {
-                    party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+                    party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
                     curTmr = maxTmr[(int)party[currChar].state];
-                    loop = true;
+                    nextState = ACT_CHAR_Base.STATES.IDLE;
+                    loop = false;
                 }
-            }
-            if (Input.GetKey(KeyCode.K))
-            {
-                party[currChar].Act_currHP -= 1;
-                if (party[currChar].Act_currHP <= 0)
-                {
-                    party[currChar].Act_currHP = 0;
-                    party[currChar].state = ACT_CHAR_Base.STATES.DYING;
-                }
+                float dashmax = 15.0f;
+                float joyHorz = Input.GetAxis("Pad_DodgeHorizontal");
+                float joyVert = Input.GetAxis("Pad_DodgeVertical");
+                if (joyHorz > 0)
+                    party[currChar].Act_facingRight = true;
                 else
-                {
-                    party[currChar].state = ACT_CHAR_Base.STATES.HURT;
-                }
+                    party[currChar].Act_facingRight = false;
+
+                if (Mathf.Abs(horz) < dashmax)
+                    horz = dashmax * joyHorz;
+
+                // less vertical movement
+                dashmax *= 0.75f;
+                vert = dashmax * joyVert;
+            }
+            else if (Input.GetAxis("Pad_DodgeHorizontal") == 0 && Input.GetAxis("Pad_DodgeVertical") == 0)
+            {
+                notjoydash = false;
+            }
+            /* deprecated
+             else if (curTmr <= 0)
+            {
+                party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
                 curTmr = maxTmr[(int)party[currChar].state];
-                loop = false;
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                MNGR_Game.wallet += 10;
-                MNGR_Save.OverwriteCurrentSave();
-            }
-            else if (Input.GetKeyDown(KeyCode.M))
-            {
-                Debug.Log("Saving Game");
-                MNGR_Save.OverwriteCurrentSave();
-                MNGR_Save.SaveProfiles();
-            }
-
+                loop = true;
+            }*/
+            // modify velocity only after we set everything else up
+            if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
+                GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
         }
-        // Testing for gamepad input
-        // NOT TESTED YET PLZ FIX ERF PRBLMS OKAI BAI.
-        else
+        if (Input.GetKey(KeyCode.K))
         {
-            // get axis movement
-            float horz = Input.GetAxis("Pad_Horizontal");
-            float vert = Input.GetAxis("Pad_Vertical");
-
-            // move the object
-            GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-
-            // Confirm button sets scale to 2x
-            if (Input.GetButton("Pad_Attack/Confirm"))
+            party[currChar].Act_currHP -= 1;
+            if (party[currChar].Act_currHP <= 0)
             {
-                transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
-            }
-            // Cancel button sets scale to 1/2x
-            else if (Input.GetButton("Pad_Special/Cancel"))
-            {
-                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            }
-            // Switch Right button increases scale over time
-            else if (Input.GetButton("Pad_SwitchRight"))
-            {
-                Vector3 scale = transform.localScale;
-                scale *= 1.1f;
-                transform.localScale = scale;
-            }
-            // Switch Left button decreases scale over time
-            else if (Input.GetButton("Pad_SwitchLeft"))
-            {
-                Vector3 scale = transform.localScale;
-                scale *= 0.9f;
-                transform.localScale = scale;
-            }
-            // Reset scale if these buttons are not pressed
-            else
-            {
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            }
-
-            float rotx = transform.localEulerAngles.x;
-            float roty = transform.localEulerAngles.y;
-            // Use button rotates the object
-            if (Input.GetButton("Pad_Use"))
-            {
-                rotx++;
-                roty++;
-            }
-            // Dodge button rotates the object based upon current movement
-            rotx = Input.GetAxis("Pad_DodgeVertical");
-            roty = Input.GetAxis("Pad_DodgeHorizontal");
-
-            // reset stuff when it goes bad
-            if (roty >= 360)
-                roty -= 360;
-            else if (roty < 0)
-                roty += 360;
-            // gimbal locking grrr
-            if (rotx > 90)
-                rotx -= 90;
-            else if (rotx < 0)
-                rotx += 85;
-
-            transform.localEulerAngles = new Vector3(rotx, roty, 0);
-
-            // Pause button makes the object invisible
-            if (Input.GetButton("Pad_Pause"))
-            {
-                if (GetComponent<MeshRenderer>() != null)
-                    GetComponent<MeshRenderer>().enabled = false;
-                else if (GetComponent<SpriteRenderer>() != null)
-                    GetComponent<SpriteRenderer>().enabled = false;
-
-                transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-                transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                party[currChar].Act_currHP = 0;
+                party[currChar].state = ACT_CHAR_Base.STATES.DYING;
             }
             else
             {
-                if (GetComponent<MeshRenderer>() != null)
-                    GetComponent<MeshRenderer>().enabled = true;
-                else if (GetComponent<SpriteRenderer>() != null)
-                    GetComponent<SpriteRenderer>().enabled = true;
+                party[currChar].state = ACT_CHAR_Base.STATES.HURT;
             }
-
+            curTmr = maxTmr[(int)party[currChar].state];
+            loop = false;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            MNGR_Game.wallet += 10;
+            MNGR_Save.OverwriteCurrentSave();
+        }
+        else if (Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log("Saving Game");
+            MNGR_Save.OverwriteCurrentSave();
+            MNGR_Save.SaveProfiles();
+        }
+
 
         switch (currChar)
         {
