@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BHR_Knockback : MonoBehaviour {
+public class BHR_Knockback : BHR_Base
+{
 
 	// Use this for initialization
 	void Start () {
@@ -11,5 +12,9 @@ public class BHR_Knockback : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	public override void PerformBehavior()
+	{
+		Debug.Log("Buffer Activated!");
 	}
 }
