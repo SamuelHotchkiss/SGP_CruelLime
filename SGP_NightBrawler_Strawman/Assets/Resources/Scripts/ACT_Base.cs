@@ -13,8 +13,9 @@ public class ACT_Base
     public int Act_currPower;       //The current Power of the Actor, can be modifie and change in play
     public int Act_currSpeed;       //The current Speed of the Actor, can be modifie and change in play
 
-    public bool Act_facingRight = true;    //The direction the Actor is facing, use fro back attacks and shilds
-    public bool Act_HasMod;         //Does the Actor has a Modification acting on it
+    public bool Act_facingRight = true;     //The direction the Actor is facing, use fro back attacks and shilds
+    public bool Act_HasMod;                 //Does the Actor has a Modification acting on it
+    public bool Act_ModIsBuff;             //If the Actor is afflicted is it a Buff or a DeBuff
 
     //Mutators
     public void SetCurrHP(int n_hp)
