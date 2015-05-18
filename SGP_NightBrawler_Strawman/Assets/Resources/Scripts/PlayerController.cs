@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         party = new ACT_CHAR_Base[3];
-
+        
         party[0] = new CHAR_Swordsman();
         party[1] = new CHAR_Archer();
         party[2] = new CHAR_Wizard();
@@ -97,23 +97,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        /*if (party[currChar].Act_currHP <= 0)
-        {
-            currChar--;
-                if (currChar < 0)
-                    currChar = 2;
-                for (int i = 0; i < 2; i++)
-                {
-                    if (party[currChar].Act_currHP > 0)
-                        break;
-                    else
-                        currChar--;
-                        if (currChar < 0)
-                            currChar = 2;
-                }
-        }
         if (party[currChar].Act_currHP <= 0)
-            Application.LoadLevel(Application.loadedLevel);*/
+        {
+			party[currChar].Act_currHP = 0;
+			party[currChar].state = ACT_CHAR_Base.STATES.DYING;
+			loop = false;
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
 
         if (party[currChar].state != ACT_CHAR_Base.STATES.DYING)
         {
@@ -224,7 +214,9 @@ public class PlayerController : MonoBehaviour
                 && party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
             {
                 // Testing projectile firing
-                //Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+                PROJ_Base clone = (PROJ_Base)Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
+				clone.owner = gameObject;
+				clone.Initialize();
 
                 if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
                     && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2

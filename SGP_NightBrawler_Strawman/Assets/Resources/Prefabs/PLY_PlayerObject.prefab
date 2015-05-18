@@ -13,9 +13,9 @@ GameObject:
   - 114: {fileID: 11496764}
   - 114: {fileID: 11487402}
   - 61: {fileID: 6183574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PLY_PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,9 +57,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 1, y: 1.79999924}
+  m_Offset: {x: 0, y: .75}
   serializedVersion: 2
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 1, y: 2}
 --- !u!114 &11487402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,6 +91,10 @@ MonoBehaviour:
   coins: 0
   maxTmr: []
   curTmr: 0
+  nextState: 0
+  testProjectile: {fileID: 11416326, guid: 47be1f86c76fd6c4ca3df9930167ea68, type: 2}
+  horz: 0
+  vert: 0
 --- !u!212 &21296406
 SpriteRenderer:
   m_ObjectHideFlags: 1
