@@ -40,6 +40,8 @@ public class ACT_Enemy : MonoBehaviour
 	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
 
+    public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemie
+
 	public GameObject target;
 
 	public PROJ_Base projectile;
@@ -103,6 +105,7 @@ public class ACT_Enemy : MonoBehaviour
 		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.1f, 0.6f, 0.1f, 1.0f, 1.0f };
 		
 		behaviors = new BHR_Base[behaviorSize];
+        Act_facingRight = false;
 
 		for (int i = 0; i < behaviorSize; i++)
 		{

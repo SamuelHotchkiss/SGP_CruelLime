@@ -23,7 +23,7 @@ public class InputTester : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            MNGR_Save.Load();
+            MNGR_Save.LoadProfiles();
             Debug.Log(MNGR_Save.saveFiles[0].theCharacters[0].Act_currHP);
             MNGR_Save.saveFiles[0].AssignGameManager();
         }
