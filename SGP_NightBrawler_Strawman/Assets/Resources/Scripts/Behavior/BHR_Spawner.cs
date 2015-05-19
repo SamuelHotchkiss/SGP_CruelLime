@@ -25,20 +25,22 @@ public class BHR_Spawner : BHR_Base
 	// Update is called once per frame
 	void Update () 
     {
-
-        Spw_SpawnPosition = owner.transform.position;
-
-        Spw_SpawnCoolDown -= Time.deltaTime;
-        Spw_SpawnPerSec -= Time.deltaTime;
-
-        if (Spw_SpawnCoolDown <= 0 )
+        if (owner != null)
         {
-            Spw_SpawnAllCritters = !Spw_SpawnAllCritters;
-            Spw_SpawnCoolDown = 20.0f;
-        }
+            Spw_SpawnPosition = owner.transform.position;
 
-        if (Spw_CritterThreshold == Spw_CrittersCreated)
-            Spw_SpawnAllCritters = false;
+            Spw_SpawnCoolDown -= Time.deltaTime;
+            Spw_SpawnPerSec -= Time.deltaTime;
+
+            if (Spw_SpawnCoolDown <= 0)
+            {
+                Spw_SpawnAllCritters = !Spw_SpawnAllCritters;
+                Spw_SpawnCoolDown = 20.0f;
+            }
+
+            if (Spw_CritterThreshold == Spw_CrittersCreated)
+                Spw_SpawnAllCritters = false; 
+        }
 	}
 
 	public override void PerformBehavior()
