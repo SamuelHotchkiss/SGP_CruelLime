@@ -37,6 +37,11 @@ public class MENU_Options : MonoBehaviour
         MNGR_Options.sfxVol = value;
     }
 
+    public void PreviewSFXVolume()
+    {
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+    }
+
     public void ChangeMusicVolume(float value)
     {
         MNGR_Options.musicVol = value;
