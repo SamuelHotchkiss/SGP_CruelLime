@@ -93,16 +93,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 else
                     transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
-                /*if (currentController.curTmr > currentController.maxTmr[(int)currentCharacter.state] * 0.8f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)currentCharacter.state] * 0.6f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)currentCharacter.state] * 0.4f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[2]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)currentCharacter.state] * 0.2f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[3]];
-                else if (currentController.curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[4]];*/
                 GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_1:
@@ -191,7 +181,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
             Vector3 newpos = transform.position;
             float move = 0.35f;
             if (!currentCharacter.Act_facingRight)
-                move *= -1.0f;
+                move = -move;
 
             newpos.x += move;
             transform.position = newpos;
