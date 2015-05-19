@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.06999993, y: 3.31999993, z: 0}
+  m_LocalPosition: {x: 4.36000013, y: -1.57000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,13 +72,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Act_baseHP: 100
-  Act_basePower: 20
+  Act_basePower: 5
   Act_baseSpeed: 100
   Act_currHP: 100
-  Act_currPower: 10
-  Act_currSpeed: 5
+  Act_currPower: 5
+  Act_currSpeed: 10
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_baseAttackSpeed: .5
+  Act_currAttackSpeed: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -89,7 +91,7 @@ MonoBehaviour:
   distThresh: 0
   coolThresh: 0
   behaviorSize: 1
-  behaviorID: 04000000000000000000000000000000000000000000000000000000000000000000000000000000
+  behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors:
   - {fileID: 0}
   - {fileID: 0}
@@ -104,8 +106,8 @@ MonoBehaviour:
   currBehavior: {fileID: 0}
   Spw_Critter: {fileID: 107682}
   target: {fileID: 0}
-  projectile: {fileID: 11416326, guid: 47be1f86c76fd6c4ca3df9930167ea68, type: 2}
-  isMelee: 0
+  projectile: {fileID: 11453502, guid: 99fbcfdf35f81884cbb94723eed2690e, type: 2}
+  isMelee: 1
 --- !u!114 &11481870
 MonoBehaviour:
   m_ObjectHideFlags: 1

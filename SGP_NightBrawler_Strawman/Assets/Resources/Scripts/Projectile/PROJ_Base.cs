@@ -47,12 +47,14 @@ public class PROJ_Base : MonoBehaviour
                 velocity = new Vector2(-1, 0) * speed;
         }
 
-        GetComponent<Rigidbody2D>().velocity = velocity;
+        //GetComponent<Rigidbody2D>().velocity = velocity;
         start = new Vector2(transform.position.x, transform.position.y);
     }
 
     void Update()
     {
+        transform.position += (new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime);
+
         distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));
         if (distance >= range)
             Destroy(gameObject);
