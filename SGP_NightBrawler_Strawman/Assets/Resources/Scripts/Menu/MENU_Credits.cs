@@ -7,7 +7,7 @@ public class MENU_Credits : MonoBehaviour {
 
     public void Return()
     {
-        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), 1.0f);
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         StartCoroutine(WaitForSound());
     }
 

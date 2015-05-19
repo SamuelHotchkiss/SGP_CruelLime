@@ -3,13 +3,13 @@ using System.Collections;
 
 using UnityEngine.UI;
 
-public class MENU_Load : MonoBehaviour 
+public class MENU_Load : MonoBehaviour
 {
     public MENU_LoadText[] profiles;
     public AudioClip Menu_SelectedSound;    //Clip of sound that will play wen a button is press.
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
         MNGR_Save.LoadProfiles();
 
@@ -17,8 +17,8 @@ public class MENU_Load : MonoBehaviour
         {
             profiles[i].WriteText();
         }
-	}
-	
+    }
+
 
     // Loads the selected profile
     public void LoadProfile(int saveIndex)
@@ -27,20 +27,24 @@ public class MENU_Load : MonoBehaviour
         MNGR_Save.LoadCurrentSave();
         MNGR_Save.SaveProfiles();
 
-        Application.LoadLevel("ForestLevel0");
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+        StartCoroutine(WaitForSound(1));
+
     }
 
     // Clears the selected profile
     public void DeleteProfile(int saveIndex)
     {
         MNGR_Save.DeleteCurrentSave(saveIndex); // clears GameData of the profile
-        Application.LoadLevel(Application.loadedLevelName); // reloads the LoadMenu scene
+
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+        StartCoroutine(WaitForSound(2));
     }
 
     // Go back to Main Menu
     public void Return()
     {
-        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), 1.0f);
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         StartCoroutine(WaitForSound(0));
         //Application.LoadLevel("MainMenu");
     }
@@ -55,6 +59,12 @@ public class MENU_Load : MonoBehaviour
         {
             case 0:
                 Application.LoadLevel("MainMenu");
+                break;
+            case 1:
+                Application.LoadLevel("ForestLevel0");
+                break;
+            case 2:
+                Application.LoadLevel(Application.loadedLevelName); // reloads the LoadMenu scene
                 break;
             default:
                 break;
