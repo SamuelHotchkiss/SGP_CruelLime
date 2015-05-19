@@ -40,4 +40,6 @@ public class BHR_Spawner : BHR_Base
 
 		Debug.Log("Buffer Activated!");
 	}
+
+
 }
