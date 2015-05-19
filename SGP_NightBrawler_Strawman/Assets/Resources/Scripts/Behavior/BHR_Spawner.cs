@@ -34,7 +34,7 @@ public class BHR_Spawner : BHR_Base
         {
             if (Dist <= 10.0f)
             {
-                Instantiate(Spw_CrittersTypes[0])
+                Instantiate(Spw_CrittersTypes[0], Spw_SpawnPosition, new Quaternion());
             } 
         }
 
