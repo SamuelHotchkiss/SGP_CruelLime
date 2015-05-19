@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PROJ_Melee : PROJ_Base {
+public class PROJ_Melee : PROJ_Base 
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    public override void Initialize()
+    {
+        base.Initialize();
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+    public override void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("HIT!");
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
+        }
+        else if (collision.gameObject.tag == "Player")
+        {
+            // Find the active character
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            int target = player.currChar;
+
+            // Mess with the active character
+            player.party[target].ChangeHP(-power);
+        }
+    }
 }
