@@ -24,10 +24,13 @@ public class PROJ_PiercingArrow : PROJ_Base
 
             GetComponent<Rigidbody2D>().velocity = ogVelocity; // reset velocity so that we don't slow down or veer off
 
-            if (hits <= 0)
+            if (hits <= 0 && gameObject != null)
                 Destroy(gameObject); // I'll just show myself out
         }
         else
-            Destroy(gameObject);
+        {
+            if (gameObject != null)
+                Destroy(gameObject);
+        }
     }
 }

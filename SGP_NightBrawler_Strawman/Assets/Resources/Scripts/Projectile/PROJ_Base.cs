@@ -63,7 +63,8 @@ public class PROJ_Base : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
-            Destroy(gameObject);
+            if (gameObject != null)
+                Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Player")
         {
@@ -74,7 +75,8 @@ public class PROJ_Base : MonoBehaviour
             // Mess with the active character
             player.party[target].ChangeHP(-power);
 
-            Destroy(gameObject);
+            if (gameObject != null)
+                Destroy(gameObject);
         }
     }
 }
