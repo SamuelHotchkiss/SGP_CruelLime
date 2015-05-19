@@ -3,15 +3,9 @@ using System.Collections;
 
 public class BHR_Dodge : BHR_Base
 {
-
-
 	// Use this for initialization
 	void Start () {
 		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 	}
 
 	public override void PerformBehavior()

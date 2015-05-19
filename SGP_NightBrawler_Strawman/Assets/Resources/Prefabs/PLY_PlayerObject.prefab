@@ -42,8 +42,8 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
-  m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_FixedAngle: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -82,7 +82,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dc551192d03d24fbc8d818f5855eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboard: 1
   party: []
   currChar: 0
   warrior_GUI: {fileID: 0}
@@ -92,7 +91,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   nextState: 0
-  testProjectile: {fileID: 11416326, guid: 47be1f86c76fd6c4ca3df9930167ea68, type: 2}
+  testProjectile: {fileID: 11453502, guid: 99fbcfdf35f81884cbb94723eed2690e, type: 2}
   horz: 0
   vert: 0
 --- !u!212 &21296406
