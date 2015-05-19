@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public float[] maxTmr;
     public float curTmr;
-    bool loop;
+    public bool loop;
     public ACT_CHAR_Base.STATES nextState;
 
     //Testing projectile firing, will be removed later, projectile should be part of the character classes instead
@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     public float horz;
     public float vert;
     bool notjoydash;
+
+    // J: Need this for Knockback
+    public bool Pc_HasKnockBack;
 
     // Use this for initialization
     void Start()
@@ -92,7 +95,6 @@ public class PlayerController : MonoBehaviour
                         if (party[currChar].Act_currHP <= 0)
                             Application.LoadLevel(Application.loadedLevel);
                     }
-
                 }
             }
         }
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
 			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
 
-        if (party[currChar].state != ACT_CHAR_Base.STATES.DYING)
+        if (party[currChar].state != ACT_CHAR_Base.STATES.DYING && party[currChar].state != ACT_CHAR_Base.STATES.HURT)
         {
             if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
                 || party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
@@ -144,8 +146,6 @@ public class PlayerController : MonoBehaviour
                     horz *= party[currChar].Act_currSpeed * 0.25f;
                     vert *= party[currChar].Act_currSpeed * 0.25f;
                 }
-
-
                 // random bugfix
                 if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0
                     && Input.GetAxis("Pad_Horizontal") == 0 && Input.GetAxis("Pad_Vertical") == 0
@@ -331,13 +331,42 @@ public class PlayerController : MonoBehaviour
             {
                 notjoydash = false;
             }
-            // modify velocity only if we aren't in special state (for custom special movement)
-            if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
+          
+        }
+
+        // modify velocity only if we aren't in special state (for custom special movement)
+        if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
+        {
+            // always calls unless current character is ded.
+            GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+        }
+
+        if (party[currChar].state == ACT_CHAR_Base.STATES.HURT)
+        {
+            if (Pc_HasKnockBack)
             {
-                // always calls unless current character is ded.
-                GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+                vert = 0.0f;
+                if (horz < 0.0f)    //moving Left
+                {
+                    horz += Time.deltaTime * 50.0f;
+                    if (horz >= 0.0f)
+                    {
+                        horz = 0.0f;
+                        Pc_HasKnockBack = false;
+                    }
+                }
+                else if (horz > 0.0f) //moving right
+                {
+                    horz -= Time.deltaTime * 50.0f;
+                    if (horz <= 0.0f)
+                    {
+                        horz = 0.0f;
+                        Pc_HasKnockBack = false;
+                    }
+                }
             }
         }
+
         if (Input.GetKey(KeyCode.K))
         {
             party[currChar].Act_currHP -= 1;
@@ -365,7 +394,11 @@ public class PlayerController : MonoBehaviour
             MNGR_Save.OverwriteCurrentSave();
             MNGR_Save.SaveProfiles();
         }
-
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            //Le Debug Le Knockback
+            ApplyKnockBack(20);
+        }
 
         switch (currChar)
         {
@@ -397,6 +430,7 @@ public class PlayerController : MonoBehaviour
                 mage_GUI.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                 break;
         }
+
     }
 
     void SwitchNextPartyMember(bool _forward)
@@ -419,5 +453,24 @@ public class PlayerController : MonoBehaviour
             else
                 break;
         }
+    }
+
+    // J: This is for use with Enemy Knockback but can be use for anything 
+    // The Force will affect how far and how long the player will be knockback 
+    public void ApplyKnockBack(float _Force)
+    {
+        horz = _Force / 2;
+        if (_Force < 0.0f)          //Since _Force is use for the Timer, it needs to alway be positive.
+            _Force = -_Force;
+
+        curTmr = _Force / 50.0f;    //This is compensating for Force been larger than 1
+                                    //If this number is change, another most be change in the if check for when the character is in the Hurt State.
+        loop = false;
+        Pc_HasKnockBack = true;
+
+        party[currChar].state = ACT_CHAR_Base.STATES.HURT;
+        nextState = ACT_CHAR_Base.STATES.IDLE;
+        vert = 0.0f;
+        
     }
 }

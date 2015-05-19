@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class MNGR_Save
 {
     public static List<MNGR_GameData> saveFiles = new List<MNGR_GameData>();
+    public static MNGR_OptionsData optionsFile = new MNGR_OptionsData();
 
     public static int currSave;
 
@@ -36,14 +37,21 @@ public static class MNGR_Save
     // Saves out Options
     public static void SaveOptions()
     {
+        optionsFile.CopyOptions();
+
         BinaryFormatter bff = new BinaryFormatter();
-        FileStream file = File.Create("Assets/Resources/options.OPTIONS");
-        //bff.Serialize(file, saveFiles);
+
+        if (!Directory.Exists("Assets/Resources/Options"))
+            Directory.CreateDirectory("Assets/Resources/Options");
+
+        FileStream file = File.Create("Assets/Resources/Options/options.OPTIONS");
+
+        bff.Serialize(file, optionsFile);
         file.Close();
     }
 
     // Loads in the save files from an exterior file
-    public static void Load()
+    public static void LoadProfiles()
     {
         if (File.Exists("Assets/Resources/GameSaves/savedGames.SAMMICH"))
         {
@@ -56,6 +64,19 @@ public static class MNGR_Save
             InitializeProfiles();
     }
 
+    // Loads in saved options
+    public static void LoadOptions()
+    {
+        if(File.Exists("Assets/Resources/Options/options.OPTIONS"))
+        {
+            BinaryFormatter bff = new BinaryFormatter();
+            FileStream file = File.Open("Assets/Resources/Options/options.OPTIONS", FileMode.Open);
+            optionsFile = (MNGR_OptionsData)bff.Deserialize(file);
+            file.Close();
+        }
+
+        optionsFile.AssignOptions();
+    }
     // Only overwrites the data of one save profile
     public static void OverwriteCurrentSave()
     {
