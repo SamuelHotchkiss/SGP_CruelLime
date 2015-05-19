@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MENU_Options : MonoBehaviour
 {
+    MENU_Controller myController;
+    int currSelected;
 
     public AudioClip Menu_SelectedSound;
 
@@ -17,6 +19,8 @@ public class MENU_Options : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        myController = this.gameObject.GetComponent<MENU_Controller>();
+
         MNGR_Save.LoadOptions();
 
         sfxSlider.value = MNGR_Options.sfxVol;
@@ -27,13 +31,28 @@ public class MENU_Options : MonoBehaviour
         musicSlider.onValueChanged.AddListener(delegate { ChangeMusicVolume(musicSlider.value); });
         fullscreenToggle.onValueChanged.AddListener(delegate { ChangeFullscreen(fullscreenToggle.isOn); });
 
-        sfxButton.onClick.AddListener(delegate { ChangeMusicSlider(Input.GetAxisRaw("Horizontal")); });
+        //sfxButton.onClick.AddListener(delegate { ChangeSFXSlider(Input.GetAxisRaw("Horizontal")); });
     }
 
     // Update is called once per frame
     void Update()
     {
+        currSelected = myController.Menu_CurrButton;
 
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if (currSelected == 0)
+                ChangeSFXSlider(Input.GetAxis("Horizontal"));
+            else if (currSelected == 2)
+                ChangeMusicSlider(Input.GetAxis("Horizontal"));
+        }
+        else if (Input.GetAxis("Pad_Horizontal") != 0)
+        {
+            if (currSelected == 0)
+                ChangeSFXSlider(Input.GetAxis("Pad_Horizontal"));
+            else if (currSelected == 2)
+                ChangeMusicSlider(Input.GetAxis("Pad_Horizontal"));
+        }
     }
 
     public void ChangeSFXVolume(float value)
