@@ -10,7 +10,7 @@ public class PROJ_Melee : PROJ_Base
     }
 	
 	// Update is called once per frame
-    public override void OnCollisionEnter2D(Collision2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("HIT!");
         if (collision.gameObject.tag == "Enemy")
