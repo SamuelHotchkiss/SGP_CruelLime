@@ -15,12 +15,11 @@ public class PROJ_Base : MonoBehaviour
 
     public virtual void Initialize()
     {
-        gameObject.layer = owner.layer;
-
         // Are you my mommy?
         if(owner.tag == "Player")
         {
             //owner = GameObject.FindGameObjectWithTag("Player");
+            gameObject.layer = 10;
 
             PlayerController player = owner.GetComponent<PlayerController>();
             int target = player.currChar;
@@ -36,6 +35,8 @@ public class PROJ_Base : MonoBehaviour
         }
         else if (owner.tag == "Enemy")
         {
+            gameObject.layer = 11;
+
             bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
             power = owner.GetComponent<ACT_Enemy>().Act_currPower;
