@@ -17,6 +17,10 @@ public class MENU_Options : MonoBehaviour
     {
         MNGR_Save.LoadOptions();
 
+        sfxSlider.value = MNGR_Options.sfxVol;
+        musicSlider.value = MNGR_Options.musicVol;
+        fullscreenToggle.isOn = MNGR_Options.fullscreen;
+
         sfxSlider.onValueChanged.AddListener(delegate { ChangeSFXVolume(sfxSlider.value); });
         musicSlider.onValueChanged.AddListener(delegate { ChangeMusicVolume(musicSlider.value); });
         fullscreenToggle.onValueChanged.AddListener(delegate { ChangeFullscreen(fullscreenToggle.isOn); });

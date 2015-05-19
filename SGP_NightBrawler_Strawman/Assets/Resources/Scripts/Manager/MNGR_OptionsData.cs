@@ -13,7 +13,7 @@ public class MNGR_OptionsData
     public MNGR_OptionsData()
     {
         musicVol = sfxVol = 1.0f;
-        fullscreen = true;
+        fullscreen = false;
     }
 
     public void AssignOptions()
