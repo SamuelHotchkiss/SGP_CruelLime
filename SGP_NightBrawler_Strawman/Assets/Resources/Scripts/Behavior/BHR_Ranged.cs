@@ -15,6 +15,8 @@ public class BHR_Ranged : BHR_Base
 	}
 	public override void PerformBehavior()
 	{
-		Debug.Log("Buffer Activated!");
+
+
+		Debug.Log("Ranged Activated!");
 	}
 }
