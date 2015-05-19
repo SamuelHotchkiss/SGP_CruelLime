@@ -1,45 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &175448
+--- !u!1 &103318
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 444898}
-  - 114: {fileID: 11442846}
+  - 4: {fileID: 472304}
+  - 114: {fileID: 11434894}
   m_Layer: 0
-  m_Name: BHR_Debuffer
+  m_Name: _Overlord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &444898
+--- !u!4 &472304
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175448}
+  m_GameObject: {fileID: 103318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.12781358, y: .356861711, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11442846
+--- !u!114 &11434894
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175448}
+  m_GameObject: {fileID: 103318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e928a74bd53975841bed77c3bf85af26, type: 3}
+  m_Script: {fileID: 11500000, guid: 70af4cedf388ed04d80c1a09b36ece75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
+  behaviors:
+  - {fileID: 11400204, guid: cc0c07e566a44e543b4e6e152164a593, type: 2}
+  - {fileID: 11449242, guid: 9b34f75f170d76747b27ec12a27b503b, type: 2}
+  - {fileID: 11460826, guid: 486977f37d9a375499b85ac474a2e3b5, type: 2}
+  - {fileID: 11442846, guid: 03d3206642ea8084c953e5345b1e1b28, type: 2}
+  - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
+  - {fileID: 11434622, guid: f672c8740bb85e3408c3ccd490431f6a, type: 2}
+  - {fileID: 11434964, guid: db087961c48fd844097f730c19cf0a03, type: 2}
+  - {fileID: 11490870, guid: 80f2547d6214af645bd15ae380aa3034, type: 2}
+  - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
+  - {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -49,5 +59,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 175448}
+  m_RootGameObject: {fileID: 103318}
   m_IsPrefabParent: 1

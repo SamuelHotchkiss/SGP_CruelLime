@@ -34,7 +34,10 @@ public class ACT_Enemy : MonoBehaviour
 	public float distThresh;
 	public float coolThresh;
 
-	public BHR_Base[] behaviors = new BHR_Base[10];
+
+	public int behaviorSize;
+	public int[] behaviorID = new int[10];
+	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
 
 	public GameObject target;
@@ -96,7 +99,14 @@ public class ACT_Enemy : MonoBehaviour
 	{
 								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
 		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.1f, 0.6f, 0.1f, 1.0f, 1.0f };
-		behaviors[0].owner = gameObject.GetComponent<ACT_Enemy>();
+		
+		behaviors = new BHR_Base[behaviorSize];
+
+		for (int i = 0; i < behaviorSize; i++)
+		{
+			behaviors[i] = Instantiate(GameObject.FindGameObjectWithTag("_Overlord").GetComponent<BHR_Overlord>().behaviors[behaviorID[i]]);
+			behaviors[i].owner = GetComponent<ACT_Enemy>();
+		}
 
 		target = GameObject.FindGameObjectWithTag("Player");
 	}
