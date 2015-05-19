@@ -60,7 +60,7 @@ public class PROJ_Base : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public virtual void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("HIT!");
         if (collision.gameObject.tag == "Enemy")
