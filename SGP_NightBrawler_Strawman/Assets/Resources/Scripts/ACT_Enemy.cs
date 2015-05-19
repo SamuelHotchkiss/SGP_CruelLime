@@ -46,6 +46,8 @@ public class ACT_Enemy : MonoBehaviour
 
 	public PROJ_Base projectile;
 
+	public bool isMelee;
+
 	//Mutators
 	public void SetCurrHP(int n_hp)
 	{
@@ -134,73 +136,148 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.WALKING:
 				{
-					Act_currSpeed = 1;
-					if (target.transform.position.x > transform.position.x)
+					if (isMelee)
 					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(Act_currSpeed, vel.y);
-						GetComponent<Rigidbody2D>().velocity = vel;
-						Act_facingRight = true;
+						Act_currSpeed = 1;
+						if (target.transform.position.x > transform.position.x)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = true;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(-Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = false;
+						}
+						if (target.transform.position.y > transform.position.y)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, -Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						break;
 					}
 					else
 					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(-Act_currSpeed, vel.y);
-						GetComponent<Rigidbody2D>().velocity = vel;
-						Act_facingRight = false;
+						Act_currSpeed = 2;
+						if (target.transform.position.x > transform.position.x)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(-Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = true;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = false;
+						}
+						if (target.transform.position.y > transform.position.y)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, -Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						break;
 					}
-
-					if (target.transform.position.y > transform.position.y)
-					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(vel.x, Act_currSpeed);
-						GetComponent<Rigidbody2D>().velocity = vel;
-					}
-					else
-					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(vel.x, -Act_currSpeed);
-						GetComponent<Rigidbody2D>().velocity = vel;
-					}
-					break;
 				}
 			case STATES.RUNNING:
 				{
-					Act_currSpeed = 2;
-					if (target.transform.position.x > transform.position.x)
+					if (isMelee)
 					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(Act_currSpeed, vel.y);
-						GetComponent<Rigidbody2D>().velocity = vel;
-						Act_facingRight = true;
+						Act_currSpeed = 2;
+						if (target.transform.position.x > transform.position.x)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = true;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(-Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = false;
+						}
+						if (target.transform.position.y > transform.position.y)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, -Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						break;
 					}
 					else
 					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(-Act_currSpeed, vel.y);
-						GetComponent<Rigidbody2D>().velocity = vel;
-						Act_facingRight = false;
+						Act_currSpeed = 2;
+						if (target.transform.position.x > transform.position.x)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(-Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = true;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(Act_currSpeed, vel.y);
+							GetComponent<Rigidbody2D>().velocity = vel;
+							Act_facingRight = false;
+						}
+						if (target.transform.position.y > transform.position.y)
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						else
+						{
+							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+							vel = new Vector2(vel.x, -Act_currSpeed);
+							GetComponent<Rigidbody2D>().velocity = vel;
+						}
+						break;
 					}
-					if (target.transform.position.y > transform.position.y)
-					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(vel.x, Act_currSpeed);
-						GetComponent<Rigidbody2D>().velocity = vel;
-					}
-					else
-					{
-						Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-						vel = new Vector2(vel.x, -Act_currSpeed);
-						GetComponent<Rigidbody2D>().velocity = vel;
-					}
-					break;
 				}
 			case STATES.ATTACKING:
 				{
-					PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
-					clone.owner = gameObject;
-					clone.Initialize();
-					break;
+					if (isMelee)
+					{
+						
+						break;
+					}
+					else
+					{
+						PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+						clone.owner = gameObject;
+						clone.Initialize();
+						break;
+					}
 				}
 			case STATES.SPECIAL:
 				{
@@ -228,7 +305,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	void NewState()
 	{
-		randomState = (int)Random.Range(4.0f, 4.999f);
+		randomState = (int)Random.Range(2.0f, 3.999f);
 
 		state = (STATES)randomState;
 		curTime = stateTime[(int)state];
