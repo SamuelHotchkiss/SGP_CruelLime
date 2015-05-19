@@ -12,6 +12,8 @@ public class MENU_Options : MonoBehaviour
     public Slider musicSlider;
     public Toggle fullscreenToggle;
 
+    public Button sfxButton, musicButton, screenButton;
+
     // Use this for initialization
     void Start()
     {
@@ -24,6 +26,8 @@ public class MENU_Options : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(delegate { ChangeSFXVolume(sfxSlider.value); });
         musicSlider.onValueChanged.AddListener(delegate { ChangeMusicVolume(musicSlider.value); });
         fullscreenToggle.onValueChanged.AddListener(delegate { ChangeFullscreen(fullscreenToggle.isOn); });
+
+        sfxButton.onClick.AddListener(delegate { ChangeMusicSlider(Input.GetAxisRaw("Horizontal")); });
     }
 
     // Update is called once per frame
@@ -37,6 +41,11 @@ public class MENU_Options : MonoBehaviour
         MNGR_Options.sfxVol = value;
     }
 
+    public void ChangeSFXSlider(float value)
+    {
+        sfxSlider.value += (value / 100);
+    }
+
     public void PreviewSFXVolume()
     {
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
@@ -47,10 +56,20 @@ public class MENU_Options : MonoBehaviour
         MNGR_Options.musicVol = value;
     }
 
+    public void ChangeMusicSlider(float value)
+    {
+        musicSlider.value += (value / 100);
+    }
+
     public void ChangeFullscreen(bool screen)
     {
         MNGR_Options.fullscreen = screen;
         Screen.fullScreen = MNGR_Options.fullscreen;
+    }
+
+    public void ChangeScreenToggle()
+    {
+        fullscreenToggle.isOn = !fullscreenToggle.isOn;
     }
 
     public void Return()

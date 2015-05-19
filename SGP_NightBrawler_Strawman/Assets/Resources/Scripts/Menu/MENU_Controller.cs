@@ -9,7 +9,7 @@ public class MENU_Controller : MonoBehaviour {
     public Button[] Menu_UIButtons;         //Can Hold all buttons in the current Scene
     public int Menu_CurrButton;             //Currnt selected Button.
     public float Menu_JoyController;        //Debug Only with use with controllers 
-    public AudioClip Menu_SelectedSound;    //Clip of Audio the willplay wen a new button is highlighet but no selected.
+    public AudioClip Menu_MoveSound;    //Clip of Audio the willplay wen a new button is highlighet but no selected.
 
     private float Menu_JoyTimer;            //Stops controller from jumping all over the menu
 
@@ -89,7 +89,7 @@ public class MENU_Controller : MonoBehaviour {
         }
 
         if (OldCurrbutton != Menu_CurrButton)
-            AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), 1.0f);
+            AudioSource.PlayClipAtPoint(Menu_MoveSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
 
         Menu_JoyTimer -= Time.deltaTime;
         Menu_UIButtons[Menu_CurrButton].Select(); //Highlights the currently selected option
