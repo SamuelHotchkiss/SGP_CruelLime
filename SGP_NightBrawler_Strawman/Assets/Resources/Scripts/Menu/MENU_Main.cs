@@ -13,7 +13,10 @@ public class MENU_Main : MonoBehaviour
     {
         MNGR_Save.LoadOptions();            // Load in the options file, if there is one
 
-        Screen.fullScreen = MNGR_Options.fullscreen;
+        if (MNGR_Options.fullscreen)
+            Screen.SetResolution(1920, 1200, true);
+        else
+            Screen.SetResolution(1280, 720, false);
     }
 
     public void ChangeSceneButton(string levelname)

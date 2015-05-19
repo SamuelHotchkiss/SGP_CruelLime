@@ -30,8 +30,6 @@ public class MENU_Options : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(delegate { ChangeSFXVolume(sfxSlider.value); });
         musicSlider.onValueChanged.AddListener(delegate { ChangeMusicVolume(musicSlider.value); });
         fullscreenToggle.onValueChanged.AddListener(delegate { ChangeFullscreen(fullscreenToggle.isOn); });
-
-        //sfxButton.onClick.AddListener(delegate { ChangeSFXSlider(Input.GetAxisRaw("Horizontal")); });
     }
 
     // Update is called once per frame
@@ -83,7 +81,11 @@ public class MENU_Options : MonoBehaviour
     public void ChangeFullscreen(bool screen)
     {
         MNGR_Options.fullscreen = screen;
-        Screen.fullScreen = MNGR_Options.fullscreen;
+
+        if (screen)
+            Screen.SetResolution(1920, 1200, screen);
+        else
+            Screen.SetResolution(1280, 720, screen);
     }
 
     public void ChangeScreenToggle()
