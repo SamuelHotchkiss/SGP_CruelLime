@@ -11,7 +11,6 @@ public class BHR_Spawner : BHR_Base
 
     public Vector3 Spw_SpawnPosition;
     public Vector2 Spw_Force; 
-    public GameObject Spw_Critter;
 
 	// Use this for initialization
 	void Start () 
@@ -26,6 +25,9 @@ public class BHR_Spawner : BHR_Base
 	// Update is called once per frame
 	void Update () 
     {
+
+        Spw_SpawnPosition = owner.transform.position;
+
         Spw_SpawnCoolDown -= Time.deltaTime;
         Spw_SpawnPerSec -= Time.deltaTime;
 
@@ -47,8 +49,8 @@ public class BHR_Spawner : BHR_Base
             {
                 Vector3 ActSpawn = new Vector3(Random.Range(Spw_SpawnPosition.x - 1, Spw_SpawnPosition.x + 1), Random.Range(Spw_SpawnPosition.y - 1, Spw_SpawnPosition.y + 1));
 
-                Instantiate(Spw_Critter, ActSpawn, new Quaternion());
-                Spw_Critter.GetComponent<Rigidbody2D>().AddForce(Spw_Force);
+                Instantiate(owner.Spw_Critter, ActSpawn, new Quaternion());
+                owner.Spw_Critter.GetComponent<Rigidbody2D>().AddForce(Spw_Force);
                 Spw_SpawnPerSec = 1.0f;
                 Spw_CrittersCreated++;
             } 
