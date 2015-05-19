@@ -15,12 +15,11 @@ public class PROJ_Base : MonoBehaviour
 
     public virtual void Initialize()
     {
-        gameObject.layer = owner.layer;
-
         // Are you my mommy?
         if(owner.tag == "Player")
         {
             //owner = GameObject.FindGameObjectWithTag("Player");
+            gameObject.layer = 10;
 
             PlayerController player = owner.GetComponent<PlayerController>();
             int target = player.currChar;
@@ -36,6 +35,8 @@ public class PROJ_Base : MonoBehaviour
         }
         else if (owner.tag == "Enemy")
         {
+            gameObject.layer = 11;
+
             bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
             power = owner.GetComponent<ACT_Enemy>().Act_currPower;
@@ -46,12 +47,14 @@ public class PROJ_Base : MonoBehaviour
                 velocity = new Vector2(-1, 0) * speed;
         }
 
-        GetComponent<Rigidbody2D>().velocity = velocity;
+        //GetComponent<Rigidbody2D>().velocity = velocity;
         start = new Vector2(transform.position.x, transform.position.y);
     }
 
     void Update()
     {
+        transform.position += (new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime);
+
         distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));
         if (distance >= range)
             Destroy(gameObject);

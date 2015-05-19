@@ -16,6 +16,9 @@ public class ACT_Enemy : MonoBehaviour
 	public bool Act_facingRight;    //The direction the Actor is facing, use fro back attacks and shilds
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
 
+    public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
+    public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
+
 	public enum STATES
 	{
 		IDLE, WALKING, RUNNING,
@@ -123,6 +126,7 @@ public class ACT_Enemy : MonoBehaviour
 			Destroy(gameObject);
 
 		curTime -= Time.deltaTime;
+        Act_currAttackSpeed -= Time.deltaTime;
 
         if (curTime <= 0.0f)
             NewState();
@@ -266,18 +270,20 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.ATTACKING:
 				{
-					if (isMelee)
-					{
-						
-						break;
-					}
-					else
-					{
-						PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
-						clone.owner = gameObject;
-						clone.Initialize();
-						break;
-					}
+                    //if (isMelee)
+                    //{
+                    //    break;
+                    //}
+                    //else
+                    //{
+                    if (Act_currAttackSpeed <= 0.0f)
+                    {
+                        PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+                        clone.owner = gameObject;
+                        clone.Initialize();
+                        Act_currAttackSpeed = Act_baseAttackSpeed;
+                    }
+                    break;
 				}
 			case STATES.SPECIAL:
 				{
