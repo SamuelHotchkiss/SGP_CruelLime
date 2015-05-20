@@ -57,9 +57,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .75}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: .5}
 --- !u!114 &11487402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb6802e7aa7ed49b7a11872cd58ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnProj: 0
 --- !u!114 &11496764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,13 +88,15 @@ MonoBehaviour:
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
+  Projs: []
   coins: 0
   maxTmr: []
   curTmr: 0
+  loop: 0
   nextState: 0
-  testProjectile: {fileID: 11453502, guid: 99fbcfdf35f81884cbb94723eed2690e, type: 2}
   horz: 0
   vert: 0
+  Pc_HasKnockBack: 0
 --- !u!212 &21296406
 SpriteRenderer:
   m_ObjectHideFlags: 1
