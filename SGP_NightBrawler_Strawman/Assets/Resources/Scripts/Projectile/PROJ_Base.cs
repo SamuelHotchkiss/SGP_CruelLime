@@ -53,6 +53,9 @@ public class PROJ_Base : MonoBehaviour
 
     void Update()
     {
+		if (MNGR_Game.paused)
+			return;
+
         transform.position += (new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime);
 
         distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));

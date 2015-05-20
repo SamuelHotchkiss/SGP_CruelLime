@@ -45,13 +45,16 @@ public class ACT_Enemy : MonoBehaviour
 	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
 
-    public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemie
+    public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemy
 
 	public GameObject target;
+	public float distanceToTarget;
+	public float maxDistance;
 
 	public PROJ_Base projectile;
 
 	public bool isMelee;
+	public bool paused = false;
 
 	//Mutators
 	public void SetCurrHP(int n_hp)
@@ -133,9 +136,14 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if (MNGR_Game.paused)
+		{
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			return;
+		}
 
-        if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
-            state = STATES.IDLE;
+		if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
+			state = STATES.IDLE;
 
 
 		curTime -= Time.deltaTime;
@@ -146,6 +154,8 @@ public class ACT_Enemy : MonoBehaviour
 
         if (curTime <= 0.0f)
             NewState();
+
+		distanceToTarget = Mathf.Abs(target.transform.position.x - transform.position.x);
 
 		switch (state)
 		{
@@ -192,17 +202,37 @@ public class ACT_Enemy : MonoBehaviour
 						Act_currSpeed = 2;
 						if (target.transform.position.x > transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(-Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = true;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
 						}
-						else
+						else if (target.transform.position.x < transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = false;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
 						}
 						if (target.transform.position.y > transform.position.y)
 						{
@@ -257,17 +287,37 @@ public class ACT_Enemy : MonoBehaviour
 						Act_currSpeed = 2;
 						if (target.transform.position.x > transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(-Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = true;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
 						}
-						else
+						else if (target.transform.position.x < transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = false;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
 						}
 						if (target.transform.position.y > transform.position.y)
 						{
@@ -304,8 +354,10 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
-					CheckThresholds();
-					currBehavior.PerformBehavior();
+					if (CheckThresholds())
+					{
+						currBehavior.PerformBehavior();
+					}
 					break;
 				}
 			case STATES.HURT:
@@ -318,19 +370,24 @@ public class ACT_Enemy : MonoBehaviour
 
 					break;
 				}
-		}
+		} 
 	}
 
-	void CheckThresholds()
+	bool CheckThresholds()
 	{
-		currBehavior = behaviors[0];
+		if (Act_currHP < hpThresh)
+		{
+			currBehavior = behaviors[0];
+			return true;
+		}
+		return false;
 	}
 
 	void NewState()
 	{
-        if (state != STATES.HURT || state != STATES.DEAD)
+        if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
         {
-            randomState = (int)Random.Range(2.0f, 3.999f);
+            randomState = (int)Random.Range(0.0f, 4.999f);
 
             state = (STATES)randomState;
             curTime = stateTime[(int)state];
