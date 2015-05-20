@@ -4,10 +4,6 @@ using System.Collections;
 [System.Serializable]
 public class ACT_CHAR_Base : ACT_Base 
 {
-	// Remove later
-	//public Sprite[] sprites;
-	// 
-
                         //      0,      1,      2,
 	public enum STATES { IDLE = 0, WALKING, DASHING, 
         /*  3,          4,      5,      6,      7,      8,   9*/
@@ -15,8 +11,11 @@ public class ACT_CHAR_Base : ACT_Base
 	public STATES state;
 
 	public float cooldownTmrBase;
-	public float cooldownTmr;
-	public int characterIndex;
+    public float cooldownTmr;
+    public float[] StateTmrs;        // durations for different states
+    public int characterIndex;
+
+    public string[] ProjFilePaths;
 
 	// Use this for initialization
 	public virtual void Start () 
@@ -27,6 +26,7 @@ public class ACT_CHAR_Base : ACT_Base
         Act_currHP = Act_baseHP;
         Act_currPower = Act_basePower;
         Act_currSpeed = Act_baseSpeed;
+        Act_currAspeed = Act_baseAspeed;
 	}
 	
 	// Update is called once per frame
@@ -37,34 +37,9 @@ public class ACT_CHAR_Base : ACT_Base
 		{
 			cooldownTmr = 0;
 		}
+        
 	}
 
-	void Render()
-	{
-		switch (state)
-		{
-		case STATES.IDLE:
-				break;
-		case STATES.WALKING:
-				break;
-		case STATES.DASHING:
-				break;
-		case STATES.ATTACK_1:
-				break;
-		case STATES.ATTACK_2:
-				break;
-		case STATES.ATTACK_3:
-				break;
-		case STATES.SPECIAL:
-				break;
-		case STATES.HURT:
-				break;
-		case STATES.DYING:
-				break;
-		case STATES.USE:
-				break;
-		}
-	}
 
 	public virtual void ActivateSpecial()
 	{

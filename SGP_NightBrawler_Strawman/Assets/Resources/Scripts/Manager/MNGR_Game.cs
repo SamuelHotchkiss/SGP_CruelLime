@@ -6,6 +6,7 @@ using System.Collections;
 public static class MNGR_Game
 {
     public static ACT_CHAR_Base[] theCharacters;
+    public static ACT_CHAR_Base[] currentParty;
 
 
     public static bool isNight;

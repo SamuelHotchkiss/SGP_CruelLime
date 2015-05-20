@@ -7,6 +7,7 @@ public class ACT_Enemy : MonoBehaviour
     // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
     // 4 = Ent, 5 = GloblinShaman, 6 = Trollgre, 7...
     public int Act_ID;
+
 	public int Act_baseHP;          //The base HP of the current Actor
 	public int Act_basePower;       //The base Power of the current Actor
 	public int Act_baseSpeed;       //The base Speed of the current Actor
@@ -123,6 +124,11 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+        Act_currAttackSpeed = Act_baseAttackSpeed;
+        Act_currHP = Act_baseHP;
+        Act_currPower = Act_basePower;
+        Act_currSpeed = Act_baseSpeed;
+
 								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
 		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 0.6f, 0.3f, 1.0f, 1.0f };
 		
@@ -369,6 +375,9 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.HURT:
 				{
+                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                    vel *= 0.9f;
+                    GetComponent<Rigidbody2D>().velocity = vel;
 
 					break;
 				}
@@ -400,4 +409,15 @@ public class ACT_Enemy : MonoBehaviour
             curTime = stateTime[(int)state];
         }
 	}
+
+    // L: movin' this over here.
+    public void ApplyKnockBack(Vector2 _Force)
+    {
+
+        GetComponent<Rigidbody2D>().velocity = _Force;
+
+        state = STATES.HURT;
+        curTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
+
+    }
 }
