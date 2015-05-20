@@ -155,7 +155,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 }
                 else if (currentController.curTmr >= 0)
                 {
-                    if ((int)(currentController.curTmr * 1000) % 20 > 9)
+                    if ((int)(currentController.curTmr * 1000) % 27 > 9)
                         GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[0]];
                     else
                         GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[1]];

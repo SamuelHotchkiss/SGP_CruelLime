@@ -368,6 +368,9 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.HURT:
 				{
+                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                    vel *= 0.9f;
+                    GetComponent<Rigidbody2D>().velocity = vel;
 
 					break;
 				}
@@ -407,7 +410,7 @@ public class ACT_Enemy : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = _Force;
 
         state = STATES.HURT;
-        curTime = stateTime[(int)state];
+        curTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
 
     }
 }
