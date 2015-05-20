@@ -28,12 +28,6 @@ public class MENU_World : MonoBehaviour
         Vector3 arrowPos = new Vector3(levels[index].transform.position.x, levels[index].transform.position.y + 73.0f, 0);
         arrow.transform.position = arrowPos;
 	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-	
-	}
 
     public void StartLevel()
     {
