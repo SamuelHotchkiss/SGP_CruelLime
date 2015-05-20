@@ -51,10 +51,10 @@ public class MOD_HPRegen : MOD_Base
         if (Col.name == "PLY_PlayerObject")                             //Use for Enemy Drops.
         {
             Mod_Actor = Col.GetComponent<PlayerController>();
-            if (!NullNewEffects())
+            if (!NullNewEffectsPlayer())
             {
                 Mod_Actor.party[Mod_Actor.currChar].Act_ModIsBuff = Mod_IsBuff;
-                SetModEffect(Mod_IsBuff, Mod_ModIndexNum);
+                SetModEffectPlayer(Mod_IsBuff, Mod_ModIndexNum);
             }
 
             base.OnTriggerEnter2D(Col);

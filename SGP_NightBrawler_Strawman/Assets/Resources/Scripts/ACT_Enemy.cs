@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
 
@@ -17,6 +17,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	public bool Act_facingRight;    //The direction the Actor is facing, use fro back attacks and shilds
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
+	public bool Act_ModIsBuff;
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
@@ -46,6 +47,10 @@ public class ACT_Enemy : MonoBehaviour
 	public BHR_Base currBehavior;
 
     public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemy
+	public List<GameObject> squad = new List<GameObject>();
+	public float maxBuffRange;
+	public MOD_Base buff;
+	public int buffIndex;
 
 	public GameObject target;
 	public float distanceToTarget;
@@ -131,6 +136,8 @@ public class ACT_Enemy : MonoBehaviour
 		}
 
 		target = GameObject.FindGameObjectWithTag("Player");
+
+		//squad = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
