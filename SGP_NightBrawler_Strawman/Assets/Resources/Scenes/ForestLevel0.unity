@@ -594,11 +594,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 407314, guid: 293ef272b72ad4e41833ef27620d1def, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 186660, guid: 293ef272b72ad4e41833ef27620d1def, type: 2}
-      propertyPath: m_TagString
-      value: Enemy
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 293ef272b72ad4e41833ef27620d1def, type: 2}
@@ -609,87 +605,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 4081147}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!1 &1834842059 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 186660, guid: 293ef272b72ad4e41833ef27620d1def, type: 2}
-  m_PrefabInternal: {fileID: 1642120442}
---- !u!114 &1834842060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1834842059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b6334afdf77ebb4da966a545bf5dda8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Act_ID: 0
-  Act_baseHP: 0
-  Act_basePower: 0
-  Act_baseSpeed: 0
-  Act_currHP: 0
-  Act_currPower: 0
-  Act_currSpeed: 0
-  Act_facingRight: 0
-  Act_HasMod: 0
-  Act_baseAttackSpeed: 0
-  Act_currAttackSpeed: 0
-  state: 0
-  randomState: 0
-  curTime: 0
-  stateTime: []
-  nightThresh: 0
-  hpThresh: 0
-  speedThresh: 0
-  distThresh: 0
-  coolThresh: 0
-  behaviorSize: 0
-  behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-  behaviors: []
-  currBehavior: {fileID: 0}
-  Spw_Critter: {fileID: 0}
-  Spw_CritterThreshold: 0
-  Spw_CrittersCreated: 0
-  Spw_SpawnCoolDown: 0
-  Spw_SpawnPerSec: 0
-  Spw_SpawnPosition: {x: 0, y: 0, z: 0}
-  Spw_Force: {x: 0, y: 0}
-  Knck_Cooldown: 0
-  Knck_baseCooldown: 0
-  target: {fileID: 0}
-  projectile: {fileID: 0}
-  isMelee: 0
-  Ent_Roots: {fileID: 0}
-  Ent_RootWall: {fileID: 0}
---- !u!61 &1834842062
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1834842059}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .752001047}
-  serializedVersion: 2
-  m_Size: {x: 2.40999985, y: 10}
---- !u!50 &1834842063
-Rigidbody2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1834842059}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 0
-  m_FixedAngle: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
 --- !u!114 &1882058641 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11422794, guid: 326d4ddd09f95b7409022328fa4d11e7,

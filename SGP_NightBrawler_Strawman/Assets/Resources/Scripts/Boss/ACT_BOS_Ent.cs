@@ -58,7 +58,7 @@ public class ACT_BOS_Ent : ACT_Enemy
             if (Ent_HealCooldown <= 0.0f)
             {
                 ChangeHP(5);
-                Ent_HealCooldown = 0.1f;
+                Ent_HealCooldown = 0.05f;
             }
             
             currBehavior = behaviors[0]; //Spawn roots
