@@ -125,6 +125,10 @@ public class ACT_Enemy : MonoBehaviour
 		if (Act_currHP <= 0)
 			Destroy(gameObject);
 
+        if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
+            state = STATES.IDLE;
+
+
 		curTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
 

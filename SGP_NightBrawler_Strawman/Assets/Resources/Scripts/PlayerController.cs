@@ -390,6 +390,10 @@ public class PlayerController : MonoBehaviour
             //Le Debug Le Knockback
             ApplyKnockBack(20);
         }
+        else if (Input.GetKeyDown(KeyCode.N))
+        {
+            MNGR_Game.isNight = !MNGR_Game.isNight;
+        }
 
         switch (currChar)
         {
