@@ -8,11 +8,12 @@ public class MENU_World : MonoBehaviour
     int playIndex, hordeIndex;
 
     public Button[] levels, hordeSteps;
+    public Text[] characterHP;
     public Text playerPos, hordePos;
 
     public Button playerArrow, hordeArrow;
     public Image theSky;
-
+    public GameObject merchantPanel;
 
     public AudioClip Menu_SelectedSound;    //Clip of sound that will play when a button is pressed.
 
@@ -36,6 +37,11 @@ public class MENU_World : MonoBehaviour
 
         playerArrow.transform.position = playMarker;
         hordeArrow.transform.position = hordeMarker;
+
+        for (int i = 0; i < characterHP.Length; i++)
+        {
+            characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
+        }
 	}
 
     public void StartLevel()
@@ -43,6 +49,20 @@ public class MENU_World : MonoBehaviour
         string lvlName = levels[playIndex].name;
 
         StartCoroutine(WaitForSound(lvlName));
+    }
+
+    public void VisitMerchant()
+    {
+        merchantPanel.SetActive(true);
+
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(), MNGR_Options.sfxVol);
+    }
+
+    public void LeaveMerchant()
+    {
+        merchantPanel.SetActive(false);
+
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(), MNGR_Options.sfxVol);
     }
 
     // Go back to Main Menu
