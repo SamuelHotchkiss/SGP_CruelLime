@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class ACT_Enemy : MonoBehaviour
 {
-	
 
+    // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
+    // 4 = Ent, 5 = GloblinShaman, 6 = Trollgre, 7...
+    public int Act_ID;
 	public int Act_baseHP;          //The base HP of the current Actor
 	public int Act_basePower;       //The base Power of the current Actor
 	public int Act_baseSpeed;       //The base Speed of the current Actor
@@ -82,11 +84,20 @@ public class ACT_Enemy : MonoBehaviour
 	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
 	{                                   //Damage needs to be negative.
 		Act_currHP += Dmg;
-
+        if (Dmg < 0)
+        {
+            state = STATES.HURT;
+            curTime = stateTime[(int)state];
+        }
 		if (Act_currHP > Act_baseHP)
 			Act_currHP = Act_baseHP;
-		if (Act_currHP < 0)
-			Act_currHP = 0;
+        if (Act_currHP < 0)
+        {
+            Act_currHP = 0;
+            state = STATES.DEAD;
+            curTime = stateTime[(int)state];
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
 	}
 	public void RestoreToBaseHP()       //Restores current HP to its base value
 	{
@@ -105,7 +116,7 @@ public class ACT_Enemy : MonoBehaviour
 	void Start () 
 	{
 								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
-		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.1f, 0.6f, 0.1f, 1.0f, 1.0f };
+		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 0.6f, 0.3f, 1.0f, 1.0f };
 		
 		behaviors = new BHR_Base[behaviorSize];
         Act_facingRight = false;
@@ -122,11 +133,12 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Act_currHP <= 0)
-			Destroy(gameObject);
 
 		curTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
+
+		if (state == STATES.DEAD && curTime <= 0)
+			Destroy(gameObject);
 
         if (curTime <= 0.0f)
             NewState();
@@ -282,6 +294,7 @@ public class ACT_Enemy : MonoBehaviour
                         clone.owner = gameObject;
                         clone.Initialize();
                         Act_currAttackSpeed = Act_baseAttackSpeed;
+                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     }
                     break;
 				}
@@ -311,9 +324,12 @@ public class ACT_Enemy : MonoBehaviour
 
 	void NewState()
 	{
-		randomState = (int)Random.Range(2.0f, 3.999f);
+        if (state != STATES.HURT || state != STATES.DEAD)
+        {
+            randomState = (int)Random.Range(2.0f, 3.999f);
 
-		state = (STATES)randomState;
-		curTime = stateTime[(int)state];
+            state = (STATES)randomState;
+            curTime = stateTime[(int)state];
+        }
 	}
 }

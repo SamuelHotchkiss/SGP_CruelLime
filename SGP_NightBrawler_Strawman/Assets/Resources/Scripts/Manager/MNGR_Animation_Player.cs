@@ -9,6 +9,8 @@ public class MNGR_Animation_Player : MonoBehaviour {
     ACT_CHAR_Base.STATES lastState;
     ACT_CHAR_Base.STATES curState;
     PlayerController currentController;
+
+    // these contain the sprite IDs used for each animaiton
     int[] idleSprites;
     int[] walkSprites;
     int[] attack1Sprites;
@@ -23,7 +25,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
         filepaths = new string[] { "Sprites/Player/Swordsman", "Sprites/Player/Lancer",
             "Sprites/Player/Defender", "Sprites/Player/Archer", "Sprites/Player/Ninja",
             "Sprites/Player/Poisoner", "Sprites/Player/Wizard", "Sprites/Player/ForceMage",
-            "Sprites/Player/Spellslinger", };
+            "Sprites/Player/Spellslinger"};
         currentController = GetComponent<PlayerController>();
         currentCharacter = currentController.party[currentController.currChar];
         lastState = currentCharacter.state;
