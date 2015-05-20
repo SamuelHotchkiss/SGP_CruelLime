@@ -27,6 +27,8 @@ public class MENU_Load : MonoBehaviour
         MNGR_Save.LoadCurrentSave();
         MNGR_Save.SaveProfiles();
 
+        if (GameObject.Find("DJ") != null)
+            Destroy(GameObject.Find("DJ"));
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         StartCoroutine(WaitForSound(1));
