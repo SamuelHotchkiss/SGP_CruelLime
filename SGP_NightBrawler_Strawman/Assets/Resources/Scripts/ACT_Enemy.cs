@@ -7,6 +7,7 @@ public class ACT_Enemy : MonoBehaviour
     // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
     // 4 = Ent, 5 = GloblinShaman, 6 = Trollgre, 7...
     public int Act_ID;
+
 	public int Act_baseHP;          //The base HP of the current Actor
 	public int Act_basePower;       //The base Power of the current Actor
 	public int Act_baseSpeed;       //The base Speed of the current Actor
@@ -64,10 +65,13 @@ public class ACT_Enemy : MonoBehaviour
 /// <Behavior Variables>
 
 	public GameObject target;
+	public float distanceToTarget;
+	public float maxDistance;
 
 	public PROJ_Base projectile;
 
 	public bool isMelee;
+	public bool paused = false;
 
 	//Mutators
 	public void SetCurrHP(int n_hp)
@@ -130,6 +134,11 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+        Act_currAttackSpeed = Act_baseAttackSpeed;
+        Act_currHP = Act_baseHP;
+        Act_currPower = Act_basePower;
+        Act_currSpeed = Act_baseSpeed;
+
 								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
 		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 0.6f, 0.3f, 1.0f, 1.0f };
 		
@@ -149,8 +158,14 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
-            state = STATES.IDLE;
+		if (MNGR_Game.paused)
+		{
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			return;
+		}
+
+		if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
+			state = STATES.IDLE;
 
 		curTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
@@ -160,6 +175,8 @@ public class ACT_Enemy : MonoBehaviour
 
         if (curTime <= 0.0f)
             NewState();
+
+		distanceToTarget = Mathf.Abs(target.transform.position.x - transform.position.x);
 
 		switch (state)
 		{
@@ -206,17 +223,37 @@ public class ACT_Enemy : MonoBehaviour
 						Act_currSpeed = 2;
 						if (target.transform.position.x > transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(-Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = true;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
 						}
-						else
+						else if (target.transform.position.x < transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = false;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
 						}
 						if (target.transform.position.y > transform.position.y)
 						{
@@ -271,17 +308,37 @@ public class ACT_Enemy : MonoBehaviour
 						Act_currSpeed = 2;
 						if (target.transform.position.x > transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(-Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = true;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
 						}
-						else
+						else if (target.transform.position.x < transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = false;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
 						}
 						if (target.transform.position.y > transform.position.y)
 						{
@@ -318,34 +375,56 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
-					CheckThresholds();
-					currBehavior.PerformBehavior();
+					if (CheckThresholds())
+					{
+						currBehavior.PerformBehavior();
+					}
 					break;
 				}
 			case STATES.HURT:
 				{
+                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                    vel *= 0.9f;
+                    GetComponent<Rigidbody2D>().velocity = vel;
+
 					break;
 				}
 			case STATES.DEAD:
 				{
 					break;
 				}
-		}
+		} 
 	}
 
 	public virtual void CheckThresholds()
 	{
-		currBehavior = behaviors[0];
+		if (Act_currHP < hpThresh)
+		{
+			currBehavior = behaviors[0];
+			return true;
+		}
+		return false;
 	}
 
 	public virtual void NewState()
 	{
-        if (state != STATES.HURT || state != STATES.DEAD)
+        if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
         {
-            randomState = (int)Random.Range(2.0f, 3.999f);
+            randomState = (int)Random.Range(0.0f, 4.999f);
 
             state = (STATES)randomState;
             curTime = stateTime[(int)state];
         }
 	}
+
+    // L: movin' this over here.
+    public void ApplyKnockBack(Vector2 _Force)
+    {
+
+        GetComponent<Rigidbody2D>().velocity = _Force;
+
+        state = STATES.HURT;
+        curTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
+
+    }
 }

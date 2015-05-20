@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public int currChar = 0;
 
     public GameObject warrior_GUI, ranger_GUI, mage_GUI;
+    public Object[] Projs;
 
     Vector3 currentChar_GUI, rightChar_GUI, leftChar_GUI;
 
@@ -18,9 +19,6 @@ public class PlayerController : MonoBehaviour
     public float curTmr;
     public bool loop;
     public ACT_CHAR_Base.STATES nextState;
-
-    //Testing projectile firing, will be removed later, projectile should be part of the character classes instead
-    public PROJ_Base testProjectile;
 
     // L: just works better this way
     public float horz;
@@ -43,8 +41,19 @@ public class PlayerController : MonoBehaviour
         rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
         leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
-        //-----Labels4dayz---- IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
-        maxTmr = new float[] { 2.0f, 0.75f, 0.1f, 0.3f, 0.2f, 0.5f, 1.0f, 0.1f, 1.0f, 1.0f };
+        Projs = new GameObject[2];
+        Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
+        Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
+
+        // Slick as doody
+        //maxTmr = party[currChar].StateTmrs;
+
+        // Ok, not as slick as doody.  more like a wet floor.
+        maxTmr = new float[party[currChar].StateTmrs.Length];
+        for (int i = 0; i < party[currChar].StateTmrs.Length; i++ )
+        {
+            maxTmr[i] = party[currChar].StateTmrs[i];
+        }
 
         curTmr = maxTmr[(int)party[currChar].state];
         loop = true;
@@ -86,7 +95,16 @@ public class PlayerController : MonoBehaviour
                             nextState = ACT_CHAR_Base.STATES.IDLE;
                         }
 
+                        // modify the attack timers if we are now in the attacking state
+                        if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_1
+                            || party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_2
+                            || party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_3)
+                        {
+                            maxTmr[(int)party[currChar].state] = GetAtkSpeed();
+                        }
+
                         curTmr = maxTmr[(int)party[currChar].state];
+
                         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     }
                     else
@@ -166,31 +184,14 @@ public class PlayerController : MonoBehaviour
                     party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
             }
 
-            // begin walking to the right
-            if (horz > 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+            // begin walking
+            if ( (horz != 0 || vert != 0 )&& (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
             {
-                party[currChar].Act_facingRight = true;
-                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
-                {
-                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-                    curTmr = maxTmr[(int)party[currChar].state];
-                }
-                loop = true;
-            }
-            // begin walking to the left
-            else if (horz < 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
-            {
-                party[currChar].Act_facingRight = false;
-                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
-                {
-                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-                    curTmr = maxTmr[(int)party[currChar].state];
-                }
-                loop = true;
-            }
-            // begin walking vertically
-            else if (vert != 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
-            {
+                if (horz > 0)
+                    party[currChar].Act_facingRight = true;
+                else
+                    party[currChar].Act_facingRight = false;
+
                 if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
                 {
                     party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
@@ -203,10 +204,6 @@ public class PlayerController : MonoBehaviour
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE
                 && party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
             {
-                // Testing projectile firing
-                PROJ_Base clone = (PROJ_Base)Instantiate(testProjectile, transform.position, new Quaternion(0, 0, 0, 0));
-				clone.owner = gameObject;
-				clone.Initialize();
 
                 // if we are not attacking go into ATTACK_1
                 if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
@@ -214,6 +211,7 @@ public class PlayerController : MonoBehaviour
                     && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)
                 {
                     party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
+                    maxTmr[(int)party[currChar].state] = GetAtkSpeed();
                     curTmr = maxTmr[(int)party[currChar].state];
                     horz = 0.0f;
                     vert = 0.0f;
@@ -457,6 +455,17 @@ public class PlayerController : MonoBehaviour
             else
                 break;
         }
+
+        maxTmr = new float[party[currChar].StateTmrs.Length];
+        for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
+        {
+            maxTmr[i] = party[currChar].StateTmrs[i];
+        }
+        party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
+        curTmr = party[currChar].StateTmrs[(int)party[currChar].state];
+
+        Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
+        Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
     }
 
     // J: This is for use with Enemy Knockback but can be use for anything 
@@ -477,4 +486,28 @@ public class PlayerController : MonoBehaviour
         vert = 0.0f;
         
     }
+
+    // L: called in animation manager when we're displaying the right sprite to attack at
+    // _index allows us to choose which projectile.
+    public bool SpawnProj(int _index = 0)
+    {
+        GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
+        clone.GetComponent<PROJ_Base>().owner = gameObject;
+        clone.GetComponent<PROJ_Base>().Initialize();
+
+        // disables a one-way boolean in the animation manager.  goofy, I know.  Harmless, hopefully.
+        return false;
+    }
+
+    float GetAtkSpeed()
+    {
+        float limiter = 1.0f;      // return to this value when testing how high stats can go and all that.
+        float ratio = party[currChar].Act_currAspeed * party[currChar].Act_currSpeed;
+
+        if ( limiter - ratio < 0.2f)
+            ratio = 0.2f;
+
+        return party[currChar].StateTmrs[(int)party[currChar].state] * (limiter - ratio);
+    }
+
 }

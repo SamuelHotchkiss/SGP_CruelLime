@@ -22,7 +22,7 @@ public class PROJ_PiercingArrow : PROJ_Base
             power += 5; // MOAR powah!
             hits--;     // losing hull integrity captain!
 
-            //GetComponent<Rigidbody2D>().velocity = ogVelocity; // reset velocity so that we don't slow down or veer off
+            velocity = ogVelocity; // reset velocity so that we don't slow down or veer off
 
             if (hits <= 0 && gameObject != null)
                 Destroy(gameObject); // I'll just show myself out

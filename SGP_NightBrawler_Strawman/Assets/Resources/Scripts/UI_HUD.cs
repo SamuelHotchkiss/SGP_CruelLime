@@ -84,7 +84,9 @@ public class UI_HUD : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
+			MNGR_Game.paused = true;
 			party.SetActive(false);
+
 			theCanvas.transform.GetChild(3).gameObject.SetActive(true);
 			Cursor.visible = true;
 		}
@@ -92,7 +94,9 @@ public class UI_HUD : MonoBehaviour {
 
 	public void ResumeGame()
 	{
+		MNGR_Game.paused = false;
 		party.SetActive(true);
+
 		theCanvas.transform.GetChild(3).gameObject.SetActive(false);
 		Cursor.visible = false;
 	}
