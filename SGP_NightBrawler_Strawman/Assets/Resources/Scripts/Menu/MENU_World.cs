@@ -20,7 +20,7 @@ public class MENU_World : MonoBehaviour
 	void Start () 
     {
 
-        index = MNGR_Game.playerPosition + 1;
+        index = MNGR_Game.playerPosition;
 
         playerPos.text = "Player Position: " + levels[index].GetComponentInChildren<Text>().text;
         hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();

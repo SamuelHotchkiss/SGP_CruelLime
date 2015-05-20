@@ -64,7 +64,7 @@ public class MENU_Load : MonoBehaviour
                 Application.LoadLevel("MainMenu");
                 break;
             case 1:
-                Application.LoadLevel("ForestLevel0");
+                Application.LoadLevel("WorldMap");
                 break;
             case 2:
                 Application.LoadLevel(Application.loadedLevelName); // reloads the LoadMenu scene
