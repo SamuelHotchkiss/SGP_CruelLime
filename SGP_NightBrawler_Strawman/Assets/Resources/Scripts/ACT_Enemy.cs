@@ -45,9 +45,11 @@ public class ACT_Enemy : MonoBehaviour
 	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
 
-    public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemie
+    public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemy
 
 	public GameObject target;
+	public float distanceToTarget;
+	public float maxDistance;
 
 	public PROJ_Base projectile;
 
@@ -133,9 +135,8 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
-        if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
-            state = STATES.IDLE;
+		//if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
+		//	state = STATES.IDLE;
 
 
 		curTime -= Time.deltaTime;
@@ -146,6 +147,8 @@ public class ACT_Enemy : MonoBehaviour
 
         if (curTime <= 0.0f)
             NewState();
+
+		distanceToTarget = Mathf.Abs(target.transform.position.x - transform.position.x);
 
 		switch (state)
 		{
@@ -192,17 +195,37 @@ public class ACT_Enemy : MonoBehaviour
 						Act_currSpeed = 2;
 						if (target.transform.position.x > transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(-Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = true;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
 						}
-						else
+						else if (target.transform.position.x < transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = false;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
 						}
 						if (target.transform.position.y > transform.position.y)
 						{
@@ -257,17 +280,37 @@ public class ACT_Enemy : MonoBehaviour
 						Act_currSpeed = 2;
 						if (target.transform.position.x > transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(-Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = true;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
 						}
-						else
+						else if (target.transform.position.x < transform.position.x)
 						{
-							Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-							vel = new Vector2(Act_currSpeed, vel.y);
-							GetComponent<Rigidbody2D>().velocity = vel;
-							Act_facingRight = false;
+							if (distanceToTarget < maxDistance)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
+							else
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
 						}
 						if (target.transform.position.y > transform.position.y)
 						{
