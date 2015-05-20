@@ -54,6 +54,7 @@ public class ACT_Enemy : MonoBehaviour
 	public PROJ_Base projectile;
 
 	public bool isMelee;
+	public bool paused = false;
 
 	//Mutators
 	public void SetCurrHP(int n_hp)
@@ -135,6 +136,12 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if (MNGR_Game.paused)
+		{
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			return;
+		}
+
 		//if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
 		//	state = STATES.IDLE;
 
