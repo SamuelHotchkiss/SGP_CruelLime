@@ -463,7 +463,7 @@ public class PlayerController : MonoBehaviour
     // The Force will affect how far and how long the player will be knockback 
     public void ApplyKnockBack(float _Force)
     {
-        horz = _Force / 2;
+        horz = _Force;
         if (_Force < 0.0f)          //Since _Force is use for the Timer, it needs to alway be positive.
             _Force = -_Force;
 

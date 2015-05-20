@@ -3,42 +3,22 @@ using System.Collections;
 
 public class BHR_Spawner : BHR_Base
 {
-    public bool Spw_SpawnAllCritters;
-    public int Spw_CritterThreshold;
-    public int Spw_CrittersCreated;
-    public float Spw_SpawnCoolDown;
-    public float Spw_SpawnPerSec;
-
-    public Vector3 Spw_SpawnPosition;
-    public Vector2 Spw_Force; 
-
-	// Use this for initialization
-	void Start () 
-    {
-        Spw_SpawnAllCritters = true;
-        Spw_SpawnCoolDown = 20.0f;
-        Spw_SpawnPerSec = 1.0f;
-        Spw_SpawnPosition = owner.transform.position;
-        Spw_CrittersCreated = 0;
-	}
-	
+    public bool Spw_SpawnAllCritters = true;
 	// Update is called once per frame
 	void Update () 
     {
         if (owner != null)
         {
-            Spw_SpawnPosition = owner.transform.position;
+            owner.Spw_SpawnCoolDown -= Time.deltaTime;
+            owner.Spw_SpawnPerSec -= Time.deltaTime;
 
-            Spw_SpawnCoolDown -= Time.deltaTime;
-            Spw_SpawnPerSec -= Time.deltaTime;
-
-            if (Spw_SpawnCoolDown <= 0)
+            if (owner.Spw_SpawnCoolDown <= 0)
             {
                 Spw_SpawnAllCritters = !Spw_SpawnAllCritters;
-                Spw_SpawnCoolDown = 20.0f;
+                owner.Spw_SpawnCoolDown = 20.0f;
             }
 
-            if (Spw_CritterThreshold == Spw_CrittersCreated)
+            if (owner.Spw_CritterThreshold == owner.Spw_CrittersCreated)
                 Spw_SpawnAllCritters = false; 
         }
 	}
@@ -47,14 +27,14 @@ public class BHR_Spawner : BHR_Base
 	{
         if (Spw_SpawnAllCritters)
         {
-            if (Spw_SpawnPerSec <= 0.0f)
+            if (owner.Spw_SpawnPerSec <= 0.0f)
             {
-                Vector3 ActSpawn = new Vector3(Random.Range(Spw_SpawnPosition.x - 1, Spw_SpawnPosition.x + 1), Random.Range(Spw_SpawnPosition.y - 1, Spw_SpawnPosition.y + 1));
+                Vector3 ActSpawn = new Vector3(Random.Range(owner.Spw_SpawnPosition.x - 1, owner.Spw_SpawnPosition.x + 1), Random.Range(owner.Spw_SpawnPosition.y - 1, owner.Spw_SpawnPosition.y + 1));
 
                 Instantiate(owner.Spw_Critter, ActSpawn, new Quaternion());
-                owner.Spw_Critter.GetComponent<Rigidbody2D>().AddForce(Spw_Force);
-                Spw_SpawnPerSec = 1.0f;
-                Spw_CrittersCreated++;
+                owner.Spw_Critter.GetComponent<Rigidbody2D>().AddForce(owner.Spw_Force);
+                owner.Spw_SpawnPerSec = 1.0f;
+                owner.Spw_CrittersCreated++;
             } 
         }
 		Debug.Log("Spawner Activated!");

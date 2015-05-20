@@ -45,7 +45,23 @@ public class ACT_Enemy : MonoBehaviour
 	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
 
-    public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemie
+/// <Behavior Variables>
+
+    //Spawner
+    public GameObject Spw_Critter;      //The Critter to spawn.
+    public int Spw_CritterThreshold;    //The point to stop creating creatures.
+    public int Spw_CrittersCreated;     //How many critters have been created.
+    public float Spw_SpawnCoolDown;     //How often to spawn waves of enemies.
+    public float Spw_BaseSpawnCoolDown; //Keeps tracks of the original Spawn CoolDown.
+    public float Spw_SpawnPerSec;       //How often to spawn a single enemy.
+    public float Spw_baseSpawnPerSec;   //Keeps track of Spawn PerSec.
+    public Vector3 Spw_SpawnPosition;   //Where to spawn the critters.
+    public Vector2 Spw_Force;           //Add a force to the critters.
+    //KnockBack
+    public float Knck_Cooldown;         //How long it takes to reuse the knockback.
+    public float Knck_baseCooldown;     //Keeps track of the initial cooldown. 
+
+/// <Behavior Variables>
 
 	public GameObject target;
 
@@ -66,7 +82,6 @@ public class ACT_Enemy : MonoBehaviour
 	{
 		Act_currSpeed = n_spd;
 	}
-
 	public void SetBaseHP(int n_hp)
 	{
 		Act_baseHP = n_hp;
@@ -124,7 +139,8 @@ public class ACT_Enemy : MonoBehaviour
 		for (int i = 0; i < behaviorSize; i++)
 		{
 			behaviors[i] = Instantiate(GameObject.FindGameObjectWithTag("_Overlord").GetComponent<BHR_Overlord>().behaviors[behaviorID[i]]);
-			behaviors[i].owner = GetComponent<ACT_Enemy>();
+            if (behaviors[i].owner == null)
+                behaviors[i].owner = GetComponent<ACT_Enemy>();
 		}
 
 		target = GameObject.FindGameObjectWithTag("Player");
@@ -133,10 +149,8 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
         if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
             state = STATES.IDLE;
-
 
 		curTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
@@ -310,23 +324,21 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.HURT:
 				{
-
 					break;
 				}
 			case STATES.DEAD:
 				{
-
 					break;
 				}
 		}
 	}
 
-	void CheckThresholds()
+	public virtual void CheckThresholds()
 	{
 		currBehavior = behaviors[0];
 	}
 
-	void NewState()
+	public virtual void NewState()
 	{
         if (state != STATES.HURT || state != STATES.DEAD)
         {
