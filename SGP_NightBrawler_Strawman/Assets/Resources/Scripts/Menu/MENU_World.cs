@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class MENU_World : MonoBehaviour 
 {
-    int index;
+    int playIndex, hordeIndex;
 
-    public Button[] levels;
+    public Button[] levels, hordeSteps;
     public Text playerPos, hordePos;
 
-    public Button arrow;
+    public Button playerArrow, hordeArrow;
+    public Image theSky;
 
 
     public AudioClip Menu_SelectedSound;    //Clip of sound that will play when a button is pressed.
@@ -19,19 +20,27 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        if (MNGR_Game.isNight)
+            theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Moon");
+        else
+            theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Sun");
 
-        index = MNGR_Game.playerPosition;
+        playIndex = MNGR_Game.playerPosition;
+        hordeIndex = MNGR_Game.hordePosition;
 
-        playerPos.text = "Player Position: " + levels[index].GetComponentInChildren<Text>().text;
+        playerPos.text = "Player Position: " + levels[playIndex].GetComponentInChildren<Text>().text;
         hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();
 
-        Vector3 arrowPos = new Vector3(levels[index].transform.position.x, levels[index].transform.position.y + 73.0f, 0);
-        arrow.transform.position = arrowPos;
+        Vector3 playMarker = new Vector3(levels[playIndex].transform.position.x, levels[playIndex].transform.position.y + 73.0f, 0);
+        Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 73.0f, 0);
+
+        playerArrow.transform.position = playMarker;
+        hordeArrow.transform.position = hordeMarker;
 	}
 
     public void StartLevel()
     {
-        string lvlName = levels[index].name;
+        string lvlName = levels[playIndex].name;
 
         StartCoroutine(WaitForSound(lvlName));
     }
