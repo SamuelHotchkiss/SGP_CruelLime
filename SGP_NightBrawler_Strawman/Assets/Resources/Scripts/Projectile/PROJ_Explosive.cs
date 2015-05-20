@@ -10,11 +10,10 @@ public class PROJ_Explosive : PROJ_Base
         base.Initialize();
     }
 
-    public override void OnCollisionEnter2D(Collision2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
         CreateExplosion();
-
-        base.OnCollisionEnter2D(collision);                                     // start the pain
+        base.OnTriggerEnter2D(collision);                                 // start the pain
     }
 
     void CreateExplosion()

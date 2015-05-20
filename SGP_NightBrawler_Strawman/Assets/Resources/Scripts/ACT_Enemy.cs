@@ -134,6 +134,10 @@ public class ACT_Enemy : MonoBehaviour
 	void Update () 
 	{
 
+        if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
+            state = STATES.IDLE;
+
+
 		curTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
 

@@ -21,7 +21,7 @@ public class PROJ_Explosion : PROJ_Base
             Destroy(gameObject);
 	}
 
-    public override void OnCollisionEnter2D(Collision2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
