@@ -142,8 +142,8 @@ public class ACT_Enemy : MonoBehaviour
 			return;
 		}
 
-		//if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
-		//	state = STATES.IDLE;
+		if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
+			state = STATES.IDLE;
 
 
 		curTime -= Time.deltaTime;
@@ -354,8 +354,10 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
-					CheckThresholds();
-					currBehavior.PerformBehavior();
+					if (CheckThresholds())
+					{
+						currBehavior.PerformBehavior();
+					}
 					break;
 				}
 			case STATES.HURT:
@@ -368,19 +370,24 @@ public class ACT_Enemy : MonoBehaviour
 
 					break;
 				}
-		}
+		} 
 	}
 
-	void CheckThresholds()
+	bool CheckThresholds()
 	{
-		currBehavior = behaviors[0];
+		if (Act_currHP < hpThresh)
+		{
+			currBehavior = behaviors[0];
+			return true;
+		}
+		return false;
 	}
 
 	void NewState()
 	{
-        if (state != STATES.HURT || state != STATES.DEAD)
+        if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
         {
-            randomState = (int)Random.Range(2.0f, 3.999f);
+            randomState = (int)Random.Range(0.0f, 4.999f);
 
             state = (STATES)randomState;
             curTime = stateTime[(int)state];
