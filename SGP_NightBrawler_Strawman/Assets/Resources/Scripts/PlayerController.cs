@@ -166,6 +166,7 @@ public class PlayerController : MonoBehaviour
                     party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
             }
 
+            // begin walking to the right
             if (horz > 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
             {
                 party[currChar].Act_facingRight = true;
@@ -176,6 +177,7 @@ public class PlayerController : MonoBehaviour
                 }
                 loop = true;
             }
+            // begin walking to the left
             else if (horz < 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
             {
                 party[currChar].Act_facingRight = false;
@@ -185,8 +187,8 @@ public class PlayerController : MonoBehaviour
                     curTmr = maxTmr[(int)party[currChar].state];
                 }
                 loop = true;
-                //GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
             }
+            // begin walking vertically
             else if (vert != 0 && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
             {
                 if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
@@ -195,7 +197,6 @@ public class PlayerController : MonoBehaviour
                     curTmr = maxTmr[(int)party[currChar].state];
                 }
                 loop = true;
-                //GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
             }
 
             if ((Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
@@ -207,7 +208,7 @@ public class PlayerController : MonoBehaviour
 				clone.owner = gameObject;
 				clone.Initialize();
 
-
+                // if we are not attacking go into ATTACK_1
                 if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
                     && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
                     && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)
@@ -217,16 +218,19 @@ public class PlayerController : MonoBehaviour
                     horz = 0.0f;
                     vert = 0.0f;
                 }
+                // if we are in ATTACK_1 go into ATTACK_2
                 else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_1)
                 {
                     nextState = ACT_CHAR_Base.STATES.ATTACK_2;
                 }
+                // if we are in ATTACK_2 go into ATTACK_3
                 else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_2)
                 {
                     nextState = ACT_CHAR_Base.STATES.ATTACK_3;
                 }
                 loop = false;
             }
+            // we can currently do our special when in mid-combo.  Is that good?
             else if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
                 && party[currChar].cooldownTmr == 0
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
@@ -258,13 +262,14 @@ public class PlayerController : MonoBehaviour
                 curTmr = maxTmr[(int)party[currChar].state];
                 loop = false;
             }
-            // 
+            // can only dodge at certain times.
             else if ((Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0)
                 || party[currChar].state == ACT_CHAR_Base.STATES.DASHING)
                 && (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
                 || party[currChar].state == ACT_CHAR_Base.STATES.WALKING
                 || party[currChar].state == ACT_CHAR_Base.STATES.DASHING))
             {
+                // special stuff when first initializing the dodge
                 if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
                 {
                     party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
@@ -272,6 +277,7 @@ public class PlayerController : MonoBehaviour
                     nextState = ACT_CHAR_Base.STATES.IDLE;
                     loop = false;
                 }
+                // always do this stuff, though
                 float dashmax = 25.0f;
                 if (Mathf.Abs(horz) < dashmax)
                     horz *= dashmax;
@@ -295,7 +301,9 @@ public class PlayerController : MonoBehaviour
                 || party[currChar].state == ACT_CHAR_Base.STATES.WALKING 
                 || party[currChar].state == ACT_CHAR_Base.STATES.DASHING))
             {
+                // buffered input #PutsOnShadesYEEEAAAAAHH
                 notjoydash = true;
+                // special stuff when first initializing the dodge
                 if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
                 {
                     party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
@@ -303,6 +311,7 @@ public class PlayerController : MonoBehaviour
                     nextState = ACT_CHAR_Base.STATES.IDLE;
                     loop = false;
                 }
+                // always do this stuff, though
                 float dashmax = 25.0f;
                 float joyHorz = Input.GetAxis("Pad_DodgeHorizontal");
                 float joyVert = Input.GetAxis("Pad_DodgeVertical");
