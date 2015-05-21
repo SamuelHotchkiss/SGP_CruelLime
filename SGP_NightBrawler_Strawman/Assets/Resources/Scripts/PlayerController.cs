@@ -87,6 +87,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (myBuffs.Count == 0)
+            buffState = MNGR_Item.BuffStates.NEUTRAL;
+
         // Update the timer
         if (curTmr > 0)
         {

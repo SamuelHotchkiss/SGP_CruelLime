@@ -162,6 +162,9 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+        if (myBuffs.Count == 0)
+            buffState = MNGR_Item.BuffStates.NEUTRAL;
+
 		if (MNGR_Game.paused)
 		{
 			GetComponent<Rigidbody2D>().velocity = Vector2.zero;

@@ -137,11 +137,13 @@ public class MOD_Base : MonoBehaviour
         else if (Mod_PartyWide)
             for (int i = 0; i < player.party.Length; i++)
                 player.party[i].Act_HasMod = false;
+
+        player.myBuffs.Remove(this);
     }
 
-	public virtual void EndModifyEnemy()    //Reset the characte's HasMod Veriables.
+	public virtual void EndModifyEnemy()    //Reset the character's HasMod Veriables.
 	{
-		enemy.Act_HasMod = false;
+        enemy.myBuffs.Remove(this);
 	}
 
 #region OldnBusted
