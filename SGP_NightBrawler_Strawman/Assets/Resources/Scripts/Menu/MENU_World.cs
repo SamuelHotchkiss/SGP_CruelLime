@@ -84,7 +84,7 @@ public class MENU_World : MonoBehaviour
         //    if (MNGR_Game.currentParty[i].Act_currHP > 0)
         //        MNGR_Game.currentParty[i].Act_currHP = MNGR_Game.currentParty[i].Act_baseHP;
         //}
-
+        MNGR_Game.theInventory.Decrement(1);
         MNGR_Game.isNight = !MNGR_Game.isNight;
     }
 
