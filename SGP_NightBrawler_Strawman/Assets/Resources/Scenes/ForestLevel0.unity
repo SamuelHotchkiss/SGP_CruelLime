@@ -301,6 +301,23 @@ Prefab:
       propertyPath: m_Name
       value: ENY_GloblinArcher 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11417646, guid: fb1d98c967d499749ac2a8217fe0a53c, type: 2}
+      propertyPath: behaviorID.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11417646, guid: fb1d98c967d499749ac2a8217fe0a53c, type: 2}
+      propertyPath: maxBuffRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11417646, guid: fb1d98c967d499749ac2a8217fe0a53c, type: 2}
+      propertyPath: buff
+      value: 
+      objectReference: {fileID: 11441350, guid: c53ede0d8d7865b4b8c0e7657af3b816,
+        type: 2}
+    - target: {fileID: 11417646, guid: fb1d98c967d499749ac2a8217fe0a53c, type: 2}
+      propertyPath: buffIndex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb1d98c967d499749ac2a8217fe0a53c, type: 2}
   m_IsPrefabParent: 0
@@ -674,15 +691,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 462648, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 199132, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
       propertyPath: m_Name
       value: ITM_RegenPotion 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11430062, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
-      propertyPath: Mod_IsBuff
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
@@ -899,11 +912,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425388, guid: 0bae022e386ec06429c900f01aeeabda, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6116414, guid: 0bae022e386ec06429c900f01aeeabda, type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0bae022e386ec06429c900f01aeeabda, type: 2}
@@ -945,7 +954,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 462648, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}

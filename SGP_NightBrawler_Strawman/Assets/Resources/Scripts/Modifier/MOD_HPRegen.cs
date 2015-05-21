@@ -3,10 +3,12 @@ using System.Collections;
 
 public class MOD_HPRegen : MOD_Base
 {
-    private float MHPR_Timer;       //Slows the regen from been quick
+    private float MHPR_Timer;       //Slows the regen from being quick
 	// Use this for initialization
-	void Start () 
+	public override void Start () 
     {
+        base.Start();
+
         Mod_IsBuff = true;          //This is a positive effect
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 10.0f;
@@ -33,7 +35,7 @@ public class MOD_HPRegen : MOD_Base
                 if (OnePercentHP < 1.0f)
                     OnePercentHP = 1.0f;
 
-                if (Mod_Actor.party[i].Act_HasMod)
+                //if (Mod_Actor.party[i].Act_HasMod)
                     Mod_Actor.party[i].ChangeHP((int)OnePercentHP);
             }
             MHPR_Timer = 0.5f;
@@ -43,21 +45,8 @@ public class MOD_HPRegen : MOD_Base
     public override void EndModifyActor()
     {
         base.EndModifyActor();
-        Destroy(Mod_Actor.gameObject.GetComponent<MOD_HPRegen>());      //Destroy this script once timer is done
+        //Destroy(Mod_Actor.gameObject.GetComponent<MOD_HPRegen>());      //Destroy this script once timer is done
+        Destroy(this);
     }
 
-    public override void OnTriggerEnter2D(Collider2D Col)
-    {
-        if (Col.name == "PLY_PlayerObject")                             //Use for Enemy Drops.
-        {
-            Mod_Actor = Col.GetComponent<PlayerController>();
-            if (!NullNewEffects())
-            {
-                Mod_Actor.party[Mod_Actor.currChar].Act_ModIsBuff = Mod_IsBuff;
-                SetModEffect(Mod_IsBuff, Mod_ModIndexNum);
-            }
-
-            base.OnTriggerEnter2D(Col);
-        }
-    }
 }

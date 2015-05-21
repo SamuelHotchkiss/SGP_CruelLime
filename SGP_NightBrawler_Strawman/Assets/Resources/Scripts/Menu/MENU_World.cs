@@ -41,10 +41,10 @@ public class MENU_World : MonoBehaviour
         playerArrow.transform.position = playMarker;
         hordeArrow.transform.position = hordeMarker;
 
-        for (int i = 0; i < characterHP.Length; i++)
-        {
-            characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
-        }
+        //for (int i = 0; i < characterHP.Length; i++)
+        //{
+        //    characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
+        //}
 	}
 
     public void StartLevel()
@@ -54,18 +54,48 @@ public class MENU_World : MonoBehaviour
         StartCoroutine(WaitForSound(lvlName));
     }
 
+    // opens merchant menu
     public void VisitMerchant()
     {
         merchantPanel.SetActive(true);
+        //GameObject.Find("Canvas").GetComponent<MENU_Controller>().enabled = false;
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(), MNGR_Options.sfxVol);
     }
 
+    // closes merchant menu
     public void LeaveMerchant()
     {
         merchantPanel.SetActive(false);
+        //GameObject.Find("Canvas").GetComponent<MENU_Controller>().enabled = true;
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(), MNGR_Options.sfxVol);
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    // heals party and advances time
+    public void Rest()
+    {
+        // use this to heal every member in the party
+        //for(int i = 0; i < 3; i++)
+        //{
+        //    if (MNGR_Game.currentParty[i].Act_currHP > 0)
+        //        MNGR_Game.currentParty[i].Act_currHP = MNGR_Game.currentParty[i].Act_baseHP;
+        //}
+
+        MNGR_Game.isNight = !MNGR_Game.isNight;
+    }
+
+    // buys instant HP potions
+    public void BuyPotion()
+    {
+
+    }
+
+    // opens up revive menu
+    public void Revive()
+    {
+
     }
 
     // Go back to Main Menu
