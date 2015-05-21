@@ -72,21 +72,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Act_ID: 0
   Act_baseHP: 500
-  Act_basePower: 50
+  Act_basePower: 15
   Act_baseSpeed: 0
   Act_currHP: 500
   Act_currPower: 15
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 1
+  Act_IsIntelligent: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   state: 0
   randomState: 0
   curTime: 0
   stateTime: []
-  nightThresh: 0
   hpThresh: 0
+  nightThresh: 0
+  TimeThresh: -1
   speedThresh: 0
   distThresh: 0
   coolThresh: 0
@@ -96,25 +98,28 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currBehavior: {fileID: 0}
-  Spw_Critter: {fileID: 0}
+  Spw_Critter: {fileID: 173766, guid: 1dd68da29b7a17f43b786924723b2f59, type: 2}
   Spw_CritterThreshold: -1
   Spw_CrittersCreated: 0
   Spw_SpawnCoolDown: 0
-  Spw_BaseSpawnCoolDown: 0
+  Spw_BaseSpawnCoolDown: 1
   Spw_SpawnPerSec: .300000012
   Spw_baseSpawnPerSec: .300000012
-  Spw_SpawnPosition: {x: 0, y: 0, z: 0}
-  Spw_Force: {x: 0, y: 0}
+  Spw_SpawnPositionOffset: {x: -4, y: 0, z: 0}
+  Spw_Force: {x: -150, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 20
   target: {fileID: 0}
+  distanceToTarget: 0
+  maxDistance: 0
   projectile: {fileID: 0}
   isMelee: 0
+  paused: 0
   myBehaviours:
   - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
   - {fileID: 11434964, guid: db087961c48fd844097f730c19cf0a03, type: 2}
-  Ent_Roots: {fileID: 0}
-  Ent_RootWall: {fileID: 0}
+  Ent_Roots: {fileID: 173766, guid: 1dd68da29b7a17f43b786924723b2f59, type: 2}
+  Ent_RootWall: {fileID: 147398, guid: c3ec7ae0b9e1ab048bb58a4054a9f93f, type: 2}
   DISTANCE: 0
 --- !u!212 &21291044
 SpriteRenderer:

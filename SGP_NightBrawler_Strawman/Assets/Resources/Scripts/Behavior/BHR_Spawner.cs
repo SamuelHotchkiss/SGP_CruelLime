@@ -15,7 +15,7 @@ public class BHR_Spawner : BHR_Base
             if (owner.Spw_SpawnCoolDown <= 0)
             {
                 Spw_SpawnAllCritters = !Spw_SpawnAllCritters;
-                owner.Spw_SpawnCoolDown = 20.0f;
+                owner.Spw_SpawnCoolDown = owner.Spw_BaseSpawnCoolDown;
             }
 
             if (owner.Spw_CritterThreshold == owner.Spw_CrittersCreated)
@@ -23,17 +23,17 @@ public class BHR_Spawner : BHR_Base
         }
 	}
 
+
 	public override void PerformBehavior()
 	{
         if (Spw_SpawnAllCritters)
         {
             if (owner.Spw_SpawnPerSec <= 0.0f)
             {
-                Vector3 ActSpawn = new Vector3(Random.Range(owner.Spw_SpawnPosition.x - 1, owner.Spw_SpawnPosition.x + 1), Random.Range(owner.Spw_SpawnPosition.y - 1, owner.Spw_SpawnPosition.y + 1));
-
-                Instantiate(owner.Spw_Critter, ActSpawn, new Quaternion());
-                owner.Spw_Critter.GetComponent<Rigidbody2D>().AddForce(owner.Spw_Force);
-                owner.Spw_SpawnPerSec = 1.0f;
+                Vector3 ActSpawn = owner.Spw_SpawnPositionOffset + owner.transform.position;
+                GameObject CritterSpwn = Instantiate(owner.Spw_Critter, ActSpawn, new Quaternion()) as GameObject;
+                CritterSpwn.GetComponent<Rigidbody2D>().AddForce(owner.Spw_Force);
+                owner.Spw_SpawnPerSec = owner.Spw_baseSpawnPerSec;
                 owner.Spw_CrittersCreated++;
             } 
         }
