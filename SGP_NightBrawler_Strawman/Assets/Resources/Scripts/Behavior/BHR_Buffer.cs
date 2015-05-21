@@ -32,12 +32,14 @@ public class BHR_Buffer : BHR_Base
 
 		for (int i = 0; i < owner.GetComponent<ACT_Enemy>().squad.Count; i++)
 		{
-			owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().enemy = owner.GetComponent<ACT_Enemy>().squad[i].GetComponent<ACT_Enemy>();
-			if (!owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().NullNewEffectsEnemy())
-            {
-				owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().enemy.Act_ModIsBuff = true;
-				owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().SetModEffectEnemy(true, owner.GetComponent<ACT_Enemy>().buffIndex);
-            }
+            // S: completely revamped modifier classes, hopefully will make this section a little easier to code, right now is broken :(
+
+            //owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().enemy = owner.GetComponent<ACT_Enemy>().squad[i].GetComponent<ACT_Enemy>();
+            //if (!owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().NullNewEffectsEnemy())
+            //{
+            //    owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().enemy.Act_ModIsBuff = true;
+            //    owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().SetModEffectEnemy(true, owner.GetComponent<ACT_Enemy>().buffIndex);
+            //}
 		}
 
 		Debug.Log("Buffer Activated!");

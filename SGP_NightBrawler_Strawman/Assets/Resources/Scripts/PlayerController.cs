@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
         // modify velocity only if we aren't in special state (for custom special movement)
         if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
         {
-            // always calls unless current character is ded.
+            // always calls unless current character is dead.
             GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
         }
 

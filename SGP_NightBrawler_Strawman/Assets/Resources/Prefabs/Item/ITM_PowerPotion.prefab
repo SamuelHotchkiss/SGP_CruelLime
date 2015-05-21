@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 425388}
   - 212: {fileID: 21228952}
   - 61: {fileID: 6116414}
-  - 114: {fileID: 11445508}
+  - 114: {fileID: 11462466}
   m_Layer: 0
   m_Name: ITM_PowerPotion
   m_TagString: Untagged
@@ -38,12 +38,12 @@ BoxCollider2D:
   m_GameObject: {fileID: 159220}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .639999986, y: .639999986}
---- !u!114 &11445508
+--- !u!114 &11462466
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -51,14 +51,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 159220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15805f7edcf293f4e99f43be112c8ea7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a5bdeedf9c7ff14083c29cc590e9cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mod_IsBuff: 0
-  Mod_PartyWide: 0
-  Mod_ModIndexNum: 0
-  Mod_effectTimer: 0
-  Mod_Actor: {fileID: 0}
+  effectID: 1
 --- !u!212 &21228952
 SpriteRenderer:
   m_ObjectHideFlags: 1

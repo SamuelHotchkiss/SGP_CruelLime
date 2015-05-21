@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 462648}
   - 212: {fileID: 21296650}
   - 61: {fileID: 6132432}
-  - 114: {fileID: 11430062}
+  - 114: {fileID: 11486726}
   m_Layer: 0
   m_Name: ITM_RegenPotion
   m_TagString: Untagged
@@ -43,7 +43,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .639999986, y: .639999986}
---- !u!114 &11430062
+--- !u!114 &11486726
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -51,14 +51,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 199132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8793932cebd52ba46a6170fe16c4e5c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a5bdeedf9c7ff14083c29cc590e9cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mod_IsBuff: 0
-  Mod_PartyWide: 0
-  Mod_ModIndexNum: 0
-  Mod_effectTimer: 20
-  Mod_Actor: {fileID: 0}
+  effectID: 4
 --- !u!212 &21296650
 SpriteRenderer:
   m_ObjectHideFlags: 1
