@@ -9,12 +9,15 @@ public class MNGR_GameData
     public ACT_CHAR_Base[] theCharacters;
     public ACT_CHAR_Base[] currentParty;
 
+	public MNGR_Inventory inventory = new MNGR_Inventory();
+
     public bool isNew, isNight;
     public int hordePosition, playerPosition, wallet;
 
     // Initializes GameData's value when new is called
     public MNGR_GameData()
     {
+		inventory = new MNGR_Inventory();
         isNew = true;
         isNight = false;
         hordePosition = playerPosition = wallet = 0;
@@ -46,6 +49,7 @@ public class MNGR_GameData
         hordePosition = MNGR_Game.hordePosition;
         playerPosition = MNGR_Game.playerPosition;
         wallet = MNGR_Game.wallet;
+		inventory = MNGR_Game.inventory;
 
         currentParty = MNGR_Game.currentParty;
     }
@@ -58,6 +62,7 @@ public class MNGR_GameData
         MNGR_Game.hordePosition = hordePosition;
         MNGR_Game.playerPosition = playerPosition;
         MNGR_Game.wallet = wallet;
+		MNGR_Game.inventory = inventory;
 
         MNGR_Game.currentParty = currentParty;
     }

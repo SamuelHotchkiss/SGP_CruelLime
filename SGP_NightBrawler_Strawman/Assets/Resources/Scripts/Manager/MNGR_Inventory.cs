@@ -1,15 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+[System.Serializable]
 public class MNGR_Inventory {
 
-	// Use this for initialization
-	void Start () {
-	
+	public MNGR_Container[] inventory = new MNGR_Container[9];
+
+	public void Increment(int _ID)
+	{
+		inventory[_ID].count++;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void Decrement(int _ID)
+	{
+		inventory[_ID].count--;
+	}
+
+	public MNGR_Inventory()
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			inventory[i].ID = i;
+		}
 	}
 }

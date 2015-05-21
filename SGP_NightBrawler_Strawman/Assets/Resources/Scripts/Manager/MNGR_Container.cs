@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MNGR_Container {
+public class MNGR_Container
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public int ID;
+	public int count;
 }
