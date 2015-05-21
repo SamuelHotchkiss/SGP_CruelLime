@@ -18,8 +18,10 @@ public class Item : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D Col)
     {
-        MNGR_Item.AttachModifier(effectID, Col.gameObject);
-        MNGR_Game.theInventory.Increment(effectID);
+        if (effectID == 3)
+            MNGR_Game.theInventory.Increment(effectID);
+        else
+            MNGR_Item.AttachModifier(effectID, Col.gameObject);
         Destroy(gameObject);
     }
 }
