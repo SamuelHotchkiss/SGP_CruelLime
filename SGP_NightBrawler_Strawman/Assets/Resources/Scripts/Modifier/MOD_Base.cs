@@ -21,7 +21,6 @@ public class MOD_Base : MonoBehaviour
     public virtual void Start()
     {
         Mod_ModIndexNum = -1;           //Base class
-
         #region WhatAmIAttachedTo?
         if (gameObject.tag == "Enemy")
         {
