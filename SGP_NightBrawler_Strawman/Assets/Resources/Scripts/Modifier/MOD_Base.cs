@@ -13,10 +13,10 @@ public class MOD_Base : MonoBehaviour
     public float Mod_effectTimer;       //How long the effect will last
 
     public PlayerController player;  //The Actor been afflicted with the Effect
-	public ACT_Enemy enemy;
+    public ACT_Enemy enemy;
 
     public bool isPlayer;
-    
+
     // Use this for initialization
     public virtual void Start()
     {
@@ -67,25 +67,29 @@ public class MOD_Base : MonoBehaviour
         #endregion
     }
 
-	// Update is called once per frame
+    // Update is called once per frame
     public virtual void Update()
     {
-        if (isPlayer)
+        if (!MNGR_Game.paused)
         {
-            ModifyActor();
-            Mod_effectTimer -= Time.deltaTime;
-            if (Mod_effectTimer <= 0.0f)
-                EndModifyActor();
-        }
-        else
-        {
-            ModifyEnemy();
-            Mod_effectTimer -= Time.deltaTime;
-            if (Mod_effectTimer <= 0.0f)
-                EndModifyEnemy();
+
+            if (isPlayer)
+            {
+                ModifyActor();
+                Mod_effectTimer -= Time.deltaTime;
+                if (Mod_effectTimer <= 0.0f)
+                    EndModifyActor();
+            }
+            else
+            {
+                ModifyEnemy();
+                Mod_effectTimer -= Time.deltaTime;
+                if (Mod_effectTimer <= 0.0f)
+                    EndModifyEnemy();
+            }
         }
 
-#region OldnBusted
+        #region OldnBusted
 #if false
 		//bool isEnemy = false;
 		if (gameObject.tag == "Enemy")
@@ -116,22 +120,22 @@ public class MOD_Base : MonoBehaviour
 				Mod_Actor = transform.gameObject.GetComponent<PlayerController>();  //Get the Actor once attach to the effect
 		}    
 #endif
-#endregion
+        #endregion
     }
 
     public virtual void ModifyActor()   //Just a virtual fuction for its children
     {
-        
+
     }
 
-	public virtual void ModifyEnemy()
-	{
-		
-	}
+    public virtual void ModifyEnemy()
+    {
+
+    }
 
     public virtual void EndModifyActor()    //Reset the characte's HasMod Veriables.
     {
-        if (!Mod_PartyWide)     
+        if (!Mod_PartyWide)
             player.party[player.currChar].Act_HasMod = false;
         else if (Mod_PartyWide)
             for (int i = 0; i < player.party.Length; i++)
@@ -140,12 +144,12 @@ public class MOD_Base : MonoBehaviour
         player.myBuffs.Remove(this);
     }
 
-	public virtual void EndModifyEnemy()    //Reset the character's HasMod Veriables.
-	{
+    public virtual void EndModifyEnemy()    //Reset the character's HasMod Veriables.
+    {
         enemy.myBuffs.Remove(this);
-	}
+    }
 
-#region OldnBusted
+    #region OldnBusted
 #if false
     public void SetModEffectPlayer(bool _IsItBuff, int _IndexNum)     //Selects the Buff or Debuff from the list
     {
@@ -287,6 +291,6 @@ public class MOD_Base : MonoBehaviour
 
 	}
 #endif
-#endregion
+    #endregion
 
 }

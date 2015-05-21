@@ -4,8 +4,8 @@ using System.Collections;
 public class MOD_HPRegen : MOD_Base
 {
     private float MHPR_Timer;       //Slows the regen from being quick
-	// Use this for initialization
-	public override void Start () 
+    // Use this for initialization
+    public override void Start()
     {
         buffState = MNGR_Item.BuffStates.BUFFED;
         base.Start();
@@ -13,14 +13,16 @@ public class MOD_HPRegen : MOD_Base
         Mod_effectTimer = 10.0f;
         MHPR_Timer = 0.0f;
         Mod_ModIndexNum = 4;        //Regen HP
-	}
-	
-	// Update is called once per frame
+    }
+
+    // Update is called once per frame
     public override void Update()
     {
         base.Update();
-        MHPR_Timer -= Time.deltaTime;
-	}
+        if (!MNGR_Game.paused)
+            MHPR_Timer -= Time.deltaTime;
+    }
+
 
     public override void ModifyActor()
     {

@@ -31,7 +31,6 @@ public class MOD_DMGIncrease : MOD_Base
 	public override void ModifyEnemy()
 	{
 		float IncreaseDmgPercent = enemy.Act_basePower * 1.5f;
-		if (enemy.Act_HasMod)
 			enemy.SetCurrPower((int)IncreaseDmgPercent);
 	}
 
@@ -45,8 +44,6 @@ public class MOD_DMGIncrease : MOD_Base
 
 	public override void EndModifyEnemy()
 	{
-		if (enemy.Act_HasMod)
-			enemy.RestoreToBasePower();
 		base.EndModifyEnemy();
         Destroy(this);
 	}
