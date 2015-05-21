@@ -275,6 +275,12 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
+                if(!MNGR_Game.usedItem)
+                {
+                    MNGR_Game.usedItem = true;
+                    MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
+                }
+
                 party[currChar].state = ACT_CHAR_Base.STATES.USE;
                 curTmr = maxTmr[(int)party[currChar].state];
                 loop = false;

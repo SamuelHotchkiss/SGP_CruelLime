@@ -20,9 +20,7 @@ public class BHR_Buffer : BHR_Base
 	public override void PerformBehavior()
 	{
 
-			owner.GetComponent<ACT_Enemy>().squad.Clear();
-
-		
+		owner.GetComponent<ACT_Enemy>().squad.Clear();
 
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 		for (int i = 0; i < enemies.Length; i++)
