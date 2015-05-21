@@ -50,7 +50,7 @@ public class ACT_Enemy : MonoBehaviour
     public GameObject Spw_Critter;  //If it can divide or Spawn more enemies it will spawn this enemy
 	public List<GameObject> squad = new List<GameObject>();
 	public float maxBuffRange;
-	public MOD_Base buff;
+	//public MOD_Base buff;         // S: shouldn't be needed anymore
 	public int buffIndex;
 
 	public GameObject target;

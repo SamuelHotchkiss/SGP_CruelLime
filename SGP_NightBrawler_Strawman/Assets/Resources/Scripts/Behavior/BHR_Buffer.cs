@@ -40,6 +40,9 @@ public class BHR_Buffer : BHR_Base
             //    owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().enemy.Act_ModIsBuff = true;
             //    owner.GetComponent<ACT_Enemy>().buff.GetComponent<MOD_Base>().SetModEffectEnemy(true, owner.GetComponent<ACT_Enemy>().buffIndex);
             //}
+
+            // S: Ideally this should be all you need
+            MNGR_Item.AttachModifier(owner.buffIndex, owner.squad[i]);
 		}
 
 		Debug.Log("Buffer Activated!");
