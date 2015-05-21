@@ -24,12 +24,12 @@ public class MOD_DMGIncrease : MOD_Base
 
     public override void ModifyActor()
     {
-        for (int i = 0; i < Mod_Actor.party.Length; i++)
+        for (int i = 0; i < player.party.Length; i++)
         {
-            float IncreaseDmgPercent = Mod_Actor.party[i].Act_basePower * 1.5f;     //Increse Damage by 50%
+            float IncreaseDmgPercent = player.party[i].Act_basePower * 1.5f;     //Increse Damage by 50%
 
             //if (Mod_Actor.party[i].Act_HasMod)
-                Mod_Actor.party[i].SetCurrPower((int)IncreaseDmgPercent);
+                player.party[i].SetCurrPower((int)IncreaseDmgPercent);
         }
     }
 
@@ -42,10 +42,10 @@ public class MOD_DMGIncrease : MOD_Base
 
     public override void EndModifyActor()
     {
-        for (int i = 0; i < Mod_Actor.party.Length; i++)
+        for (int i = 0; i < player.party.Length; i++)
         {
             //if (Mod_Actor.party[i].Act_HasMod)
-                Mod_Actor.party[i].RestoreToBasePower();
+                player.party[i].RestoreToBasePower();
         }
         base.EndModifyActor();
         //Destroy(Mod_Actor.gameObject.GetComponent<MOD_DMGIncrease>());      //Destroy this script once timer is done

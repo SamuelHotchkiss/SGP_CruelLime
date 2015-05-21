@@ -30,15 +30,15 @@ public class MOD_HPRegen : MOD_Base
     {
         if (MHPR_Timer <= 0)
         {
-            for (int i = 0; i < Mod_Actor.party.Length; i++)
+            for (int i = 0; i < player.party.Length; i++)
             {
-                float OnePercentHP = Mod_Actor.party[i].Act_baseHP * 0.01f;     //Regen 2% of the Character's Hp every second.
+                float OnePercentHP = player.party[i].Act_baseHP * 0.01f;     //Regen 2% of the Character's Hp every second.
 
                 if (OnePercentHP < 1.0f)
                     OnePercentHP = 1.0f;
 
                 //if (Mod_Actor.party[i].Act_HasMod)
-                    Mod_Actor.party[i].ChangeHP((int)OnePercentHP);
+                    player.party[i].ChangeHP((int)OnePercentHP);
             }
             MHPR_Timer = 0.5f;
         }

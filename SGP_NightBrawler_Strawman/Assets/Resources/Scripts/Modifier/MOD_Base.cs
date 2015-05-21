@@ -12,7 +12,7 @@ public class MOD_Base : MonoBehaviour
     public int Mod_ModIndexNum;         //The Number ID of the Effect 
     public float Mod_effectTimer;       //How long the effect will last
 
-    public PlayerController Mod_Actor;  //The Actor been afflicted with the Effect
+    public PlayerController player;  //The Actor been afflicted with the Effect
 	public ACT_Enemy enemy;
 
     public bool isPlayer;
@@ -30,38 +30,38 @@ public class MOD_Base : MonoBehaviour
 
             if (enemy.buffState == MNGR_Item.BuffStates.NEUTRAL)
             {
-                // Add to buff list
+                enemy.myBuffs.Add(this);
                 enemy.buffState = buffState;
             }
             else if (enemy.buffState == buffState)
             {
-                // Add to buff list
+                enemy.myBuffs.Add(this);
             }
             else if (enemy.buffState != buffState)
             {
-                // Clear buff list
+                enemy.KillBuffs();
                 enemy.buffState = MNGR_Item.BuffStates.NEUTRAL;
                 Destroy(this);
             }
         }
         else if (gameObject.tag == "Player")
         {
-            Mod_Actor = GetComponent<PlayerController>();
+            player = GetComponent<PlayerController>();
             isPlayer = true;
 
-            if (Mod_Actor.buffState == MNGR_Item.BuffStates.NEUTRAL)
+            if (player.buffState == MNGR_Item.BuffStates.NEUTRAL)
             {
-                // Add to buff list
-                Mod_Actor.buffState = buffState;
+                player.myBuffs.Add(this);
+                player.buffState = buffState;
             }
-            else if (Mod_Actor.buffState == buffState)
+            else if (player.buffState == buffState)
             {
-                // Add to buff list
+                player.myBuffs.Add(this);
             }
-            else if (Mod_Actor.buffState != buffState)
+            else if (player.buffState != buffState)
             {
-                // Clear buff list
-                Mod_Actor.buffState = MNGR_Item.BuffStates.NEUTRAL;
+                player.KillBuffs();
+                player.buffState = MNGR_Item.BuffStates.NEUTRAL;
                 Destroy(this);
             }
         }
@@ -133,10 +133,10 @@ public class MOD_Base : MonoBehaviour
     public virtual void EndModifyActor()    //Reset the characte's HasMod Veriables.
     {
         if (!Mod_PartyWide)     
-            Mod_Actor.party[Mod_Actor.currChar].Act_HasMod = false;
+            player.party[player.currChar].Act_HasMod = false;
         else if (Mod_PartyWide)
-            for (int i = 0; i < Mod_Actor.party.Length; i++)
-                Mod_Actor.party[i].Act_HasMod = false;
+            for (int i = 0; i < player.party.Length; i++)
+                player.party[i].Act_HasMod = false;
     }
 
 	public virtual void EndModifyEnemy()    //Reset the characte's HasMod Veriables.

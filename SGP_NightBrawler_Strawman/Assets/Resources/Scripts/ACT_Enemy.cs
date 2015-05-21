@@ -3,8 +3,19 @@ using UnityEngine;
 using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
-    // S: for use with buffs and debuffs 
+    // S: for use with buffs and debuffs ////////////////////////////////
     public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
+
+    public List<MOD_Base> myBuffs = new List<MOD_Base>();
+    public void KillBuffs()
+    {
+        for (int i = 0; i < myBuffs.Count; i++)
+        {
+            myBuffs[i].EndModifyEnemy();
+        }
+        myBuffs.Clear();
+    }
+    /////////////////////////////////////////////////////////////////////
 
     // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
     // 4 = Ent, 5 = GloblinShaman, 6 = Trollgre, 7...

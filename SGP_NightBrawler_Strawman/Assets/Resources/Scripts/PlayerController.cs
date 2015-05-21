@@ -1,10 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
 public class PlayerController : MonoBehaviour
 {
-    // S: for use with buffs and debuffs
+    // S: for use with buffs and debuffs ////////////////////////////////
     public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
+
+    public List<MOD_Base> myBuffs = new List<MOD_Base>();
+    public void KillBuffs()
+    {
+        for (int i = 0; i < myBuffs.Count; i++)
+        {
+            myBuffs[i].EndModifyActor();
+        }
+        myBuffs.Clear();
+    }
+    /////////////////////////////////////////////////////////////////////
 
     //public bool keyboard = true;
 
