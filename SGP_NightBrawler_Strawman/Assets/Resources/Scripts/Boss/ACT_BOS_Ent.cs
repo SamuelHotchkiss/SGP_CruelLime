@@ -120,7 +120,7 @@ public class ACT_BOS_Ent : ACT_Enemy
         }
 	}
 
-    public override void CheckThresholds()
+    public override bool CheckThresholds()
     {
         //base.CheckThresholds();
         if (hpThresh >= Act_currHP)
@@ -164,8 +164,7 @@ public class ACT_BOS_Ent : ACT_Enemy
 
         //if (nightThresh == MNGR_Game.isNight)
         //    Act_currPower = Act_currPower + (int)(Act_currPower * 0.1f); //When is night power will increse by 10%
-        
-            
-        
+
+        return true;
     }
 }

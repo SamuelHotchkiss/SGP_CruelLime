@@ -18,6 +18,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	public bool Act_facingRight;    //The direction the Actor is facing, use fro back attacks and shilds
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
+    public bool Act_IsIntelligent;  //Is this Enemy inanimate.
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
@@ -152,7 +153,8 @@ public class ACT_Enemy : MonoBehaviour
                 behaviors[i].owner = GetComponent<ACT_Enemy>();
 		}
 
-		target = GameObject.FindGameObjectWithTag("Player");
+        target = null;
+		//target = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -166,6 +168,10 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
 			state = STATES.IDLE;
+        
+        if ((MNGR_Game.isNight || Act_currHP != Act_baseHP) &&
+            target == null && Act_IsIntelligent)
+            target = GameObject.FindGameObjectWithTag("Player");
 
 		curTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
@@ -396,7 +402,7 @@ public class ACT_Enemy : MonoBehaviour
 		} 
 	}
 
-	public virtual void CheckThresholds()
+	public virtual bool CheckThresholds()
 	{
 		if (Act_currHP < hpThresh)
 		{
