@@ -70,6 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6334afdf77ebb4da966a545bf5dda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
   Act_baseHP: 500
   Act_basePower: 15
@@ -79,7 +81,8 @@ MonoBehaviour:
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 1
-  Act_IsIntelligent: 0
+  Act_ModIsBuff: 0
+  Act_IsIntelligent: 1
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   state: 0
@@ -98,6 +101,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 173766, guid: 1dd68da29b7a17f43b786924723b2f59, type: 2}
   Spw_CritterThreshold: -1
   Spw_CrittersCreated: 0
