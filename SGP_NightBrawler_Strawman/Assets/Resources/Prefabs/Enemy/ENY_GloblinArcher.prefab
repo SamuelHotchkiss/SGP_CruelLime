@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.36000013, y: -1.57000005, z: 0}
+  m_LocalPosition: {x: 4.16888523, y: -2.64668894, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,28 +72,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
-  Act_baseHP: 1000
+  Act_baseHP: 100
   Act_basePower: 5
   Act_baseSpeed: 100
-  Act_currHP: 1000
+  Act_currHP: 100
   Act_currPower: 20
   Act_currSpeed: 10
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
+  Act_IsIntelligent: 1
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   state: 0
   randomState: 0
   curTime: 0
   stateTime: []
-  nightThresh: 0
   hpThresh: 500
+  nightThresh: 0
+  TimeThresh: -1
   speedThresh: 0
   distThresh: 0
   coolThresh: 0
   behaviorSize: 1
-  behaviorID: 04000000000000000000000000000000000000000000000000000000000000000000000000000000
+  behaviorID: 02000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors:
   - {fileID: 0}
   - {fileID: 0}
@@ -107,6 +112,19 @@ MonoBehaviour:
   - {fileID: 0}
   currBehavior: {fileID: 0}
   Spw_Critter: {fileID: 184872}
+  squad: []
+  maxBuffRange: 10
+  buffIndex: 1
+  Spw_CritterThreshold: 0
+  Spw_CrittersCreated: 0
+  Spw_SpawnCoolDown: 0
+  Spw_BaseSpawnCoolDown: 0
+  Spw_SpawnPerSec: 0
+  Spw_baseSpawnPerSec: 0
+  Spw_SpawnPositionOffset: {x: 0, y: 0, z: 0}
+  Spw_Force: {x: 0, y: 0}
+  Knck_Cooldown: 0
+  Knck_baseCooldown: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 5

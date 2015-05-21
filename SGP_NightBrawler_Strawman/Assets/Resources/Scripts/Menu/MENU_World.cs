@@ -8,7 +8,7 @@ public class MENU_World : MonoBehaviour
     int playIndex, hordeIndex;
 
     public Button[] levels, hordeSteps;
-    public Text[] characterHP;
+    public Text[] characterHP, inventory;
     public Text playerPos, hordePos;
 
     public Button playerArrow, hordeArrow;
@@ -45,6 +45,11 @@ public class MENU_World : MonoBehaviour
         //{
         //    characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
         //}
+
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            inventory[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
+        }
 	}
 
     public void StartLevel()

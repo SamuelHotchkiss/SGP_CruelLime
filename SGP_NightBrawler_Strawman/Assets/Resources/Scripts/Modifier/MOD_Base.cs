@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MOD_Base : MonoBehaviour
 {
+    public MNGR_Item.BuffStates buffState;
 
     public bool Mod_IsBuff;             //Is true if it's a Buff and False if it's a Debuff
     public bool Mod_PartyWide;          //Does it affect the whole party? Or only the current player.
@@ -11,47 +12,84 @@ public class MOD_Base : MonoBehaviour
     public int Mod_ModIndexNum;         //The Number ID of the Effect 
     public float Mod_effectTimer;       //How long the effect will last
 
-    public PlayerController Mod_Actor;  //The Actor been aflicted with the Effect
-	public ACT_Enemy enemy;
+    public PlayerController player;  //The Actor been afflicted with the Effect
+    public ACT_Enemy enemy;
 
     public bool isPlayer;
-    
+
     // Use this for initialization
     public virtual void Start()
     {
         Mod_ModIndexNum = -1;           //Base class
-
+        #region WhatAmIAttachedTo?
         if (gameObject.tag == "Enemy")
         {
             enemy = GetComponent<ACT_Enemy>();
             isPlayer = false;
+
+            if (enemy.buffState == MNGR_Item.BuffStates.NEUTRAL)
+            {
+                enemy.myBuffs.Add(this);
+                enemy.buffState = buffState;
+            }
+            else if (enemy.buffState == buffState)
+            {
+                enemy.myBuffs.Add(this);
+            }
+            else if (enemy.buffState != buffState)
+            {
+                enemy.KillBuffs();
+                enemy.buffState = MNGR_Item.BuffStates.NEUTRAL;
+                Destroy(this);
+            }
         }
         else if (gameObject.tag == "Player")
         {
-            Mod_Actor = GetComponent<PlayerController>();
+            player = GetComponent<PlayerController>();
             isPlayer = true;
+
+            if (player.buffState == MNGR_Item.BuffStates.NEUTRAL)
+            {
+                player.myBuffs.Add(this);
+                player.buffState = buffState;
+            }
+            else if (player.buffState == buffState)
+            {
+                player.myBuffs.Add(this);
+            }
+            else if (player.buffState != buffState)
+            {
+                player.KillBuffs();
+                player.buffState = MNGR_Item.BuffStates.NEUTRAL;
+                Destroy(this);
+            }
         }
+        #endregion
     }
 
-	// Update is called once per frame
+    // Update is called once per frame
     public virtual void Update()
     {
-        if (isPlayer)
+        if (!MNGR_Game.paused)
         {
-            ModifyActor();
-            Mod_effectTimer -= Time.deltaTime;
-            if (Mod_effectTimer <= 0.0f)
-                EndModifyActor();
-        }
-        else
-        {
-            ModifyEnemy();
-            Mod_effectTimer -= Time.deltaTime;
-            if (Mod_effectTimer <= 0.0f)
-                EndModifyEnemy();
+
+            if (isPlayer)
+            {
+                ModifyActor();
+                Mod_effectTimer -= Time.deltaTime;
+                if (Mod_effectTimer <= 0.0f)
+                    EndModifyActor();
+            }
+            else
+            {
+                ModifyEnemy();
+                Mod_effectTimer -= Time.deltaTime;
+                if (Mod_effectTimer <= 0.0f)
+                    EndModifyEnemy();
+            }
         }
 
-#region OldnBusted
+        #region OldnBusted
 #if false
 		//bool isEnemy = false;
 		if (gameObject.tag == "Enemy")
@@ -82,34 +120,36 @@ public class MOD_Base : MonoBehaviour
 				Mod_Actor = transform.gameObject.GetComponent<PlayerController>();  //Get the Actor once attach to the effect
 		}    
 #endif
-#endregion
+        #endregion
     }
 
     public virtual void ModifyActor()   //Just a virtual fuction for its children
     {
-        
+
     }
 
-	public virtual void ModifyEnemy()
-	{
-		
-	}
+    public virtual void ModifyEnemy()
+    {
+
+    }
 
     public virtual void EndModifyActor()    //Reset the characte's HasMod Veriables.
     {
-        if (!Mod_PartyWide)     
-            Mod_Actor.party[Mod_Actor.currChar].Act_HasMod = false;
+        if (!Mod_PartyWide)
+            player.party[player.currChar].Act_HasMod = false;
         else if (Mod_PartyWide)
-            for (int i = 0; i < Mod_Actor.party.Length; i++)
-                Mod_Actor.party[i].Act_HasMod = false;
+            for (int i = 0; i < player.party.Length; i++)
+                player.party[i].Act_HasMod = false;
+
+        player.myBuffs.Remove(this);
     }
 
-	public virtual void EndModifyEnemy()    //Reset the characte's HasMod Veriables.
-	{
-		enemy.Act_HasMod = false;
-	}
+    public virtual void EndModifyEnemy()    //Reset the character's HasMod Veriables.
+    {
+        enemy.myBuffs.Remove(this);
+    }
 
-#region OldnBusted
+    #region OldnBusted
 #if false
     public void SetModEffectPlayer(bool _IsItBuff, int _IndexNum)     //Selects the Buff or Debuff from the list
     {
@@ -251,6 +291,6 @@ public class MOD_Base : MonoBehaviour
 
 	}
 #endif
-#endregion
+    #endregion
 
 }

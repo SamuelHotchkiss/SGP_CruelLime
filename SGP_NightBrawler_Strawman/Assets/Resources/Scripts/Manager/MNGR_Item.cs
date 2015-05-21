@@ -4,6 +4,8 @@ using System.Collections;
 public static class MNGR_Item
 {
 
+    public enum BuffStates { DEBUFFED, NEUTRAL, BUFFED }
+
     // anything that applies a buff/debuff to another object should just call this function
 	public static void AttachModifier(int ID, GameObject victim)
     {

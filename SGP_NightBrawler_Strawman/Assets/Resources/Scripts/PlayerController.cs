@@ -1,8 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
 public class PlayerController : MonoBehaviour
 {
+    // S: for use with buffs and debuffs ////////////////////////////////
+    public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
+
+    public List<MOD_Base> myBuffs = new List<MOD_Base>();
+    public void KillBuffs()
+    {
+        for (int i = 0; i < myBuffs.Count; i++)
+        {
+            myBuffs[i].EndModifyActor();
+        }
+        myBuffs.Clear();
+    }
+    /////////////////////////////////////////////////////////////////////
+
     //public bool keyboard = true;
 
     public ACT_CHAR_Base[] party;
@@ -71,6 +87,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (myBuffs.Count == 0)
+            buffState = MNGR_Item.BuffStates.NEUTRAL;
+
         // Update the timer
         if (curTmr > 0)
         {
@@ -256,6 +275,12 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
+                if(!MNGR_Game.usedItem)
+                {
+                    MNGR_Game.usedItem = true;
+                    MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
+                }
+
                 party[currChar].state = ACT_CHAR_Base.STATES.USE;
                 curTmr = maxTmr[(int)party[currChar].state];
                 loop = false;
@@ -472,7 +497,7 @@ public class PlayerController : MonoBehaviour
     // The Force will affect how far and how long the player will be knockback 
     public void ApplyKnockBack(float _Force)
     {
-        horz = _Force / 2;
+        horz = _Force;
         if (_Force < 0.0f)          //Since _Force is use for the Timer, it needs to alway be positive.
             _Force = -_Force;
 
