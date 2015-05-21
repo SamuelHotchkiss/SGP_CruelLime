@@ -7,10 +7,7 @@ public class MOD_DMGIncrease : MOD_Base
 	public override void Start () 
     {
         buffState = MNGR_Item.BuffStates.BUFFED;
-
         base.Start();
-
-        //Mod_IsBuff = true;          //This is a positive effect
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 20.0f;
         Mod_ModIndexNum = 1;   
@@ -27,8 +24,7 @@ public class MOD_DMGIncrease : MOD_Base
         for (int i = 0; i < player.party.Length; i++)
         {
             float IncreaseDmgPercent = player.party[i].Act_basePower * 1.5f;     //Increse Damage by 50%
-
-                player.party[i].SetCurrPower((int)IncreaseDmgPercent);
+            player.party[i].SetCurrPower((int)IncreaseDmgPercent);
         }
     }
 
@@ -41,9 +37,7 @@ public class MOD_DMGIncrease : MOD_Base
     public override void EndModifyActor()
     {
         for (int i = 0; i < player.party.Length; i++)
-        {
-                player.party[i].RestoreToBasePower();
-        }
+            player.party[i].RestoreToBasePower();
         base.EndModifyActor();
         Destroy(this);
     }
