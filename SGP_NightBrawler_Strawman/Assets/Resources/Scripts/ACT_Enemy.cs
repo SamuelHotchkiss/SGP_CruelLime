@@ -1,8 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
+    // S: for use with buffs and debuffs ////////////////////////////////
+    public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
+
+    public List<MOD_Base> myBuffs = new List<MOD_Base>();
+    public void KillBuffs()
+    {
+        for (int i = 0; i < myBuffs.Count; i++)
+        {
+            myBuffs[i].EndModifyEnemy();
+        }
+        myBuffs.Clear();
+    }
+    /////////////////////////////////////////////////////////////////////
 
     // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
     // 4 = Ent, 5 = GloblinShaman, 6 = Trollgre, 7...
@@ -18,6 +31,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	public bool Act_facingRight;    //The direction the Actor is facing, use fro back attacks and shilds
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
+	public bool Act_ModIsBuff;
     public bool Act_IsIntelligent;  //Is this Enemy inanimate.
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
@@ -49,6 +63,10 @@ public class ACT_Enemy : MonoBehaviour
 	public BHR_Base currBehavior;
 
 /// <Behavior Variables>
+	public List<GameObject> squad = new List<GameObject>();
+	public float maxBuffRange;
+	//public MOD_Base buff;         // S: shouldn't be needed anymore
+	public int buffIndex;
 
     //Spawner
     public GameObject Spw_Critter;          //The Critter to spawn.
@@ -155,11 +173,16 @@ public class ACT_Enemy : MonoBehaviour
 		}
         target = null;
 		//target = GameObject.FindGameObjectWithTag("Player");
+
+		//squad = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+        if (myBuffs.Count == 0)
+            buffState = MNGR_Item.BuffStates.NEUTRAL;
+
 		if (MNGR_Game.paused)
 		{
 			GetComponent<Rigidbody2D>().velocity = Vector2.zero;

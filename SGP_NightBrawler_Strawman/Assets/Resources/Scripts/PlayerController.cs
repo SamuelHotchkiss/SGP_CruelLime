@@ -1,8 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
 public class PlayerController : MonoBehaviour
 {
+    // S: for use with buffs and debuffs ////////////////////////////////
+    public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
+
+    public List<MOD_Base> myBuffs = new List<MOD_Base>();
+    public void KillBuffs()
+    {
+        for (int i = 0; i < myBuffs.Count; i++)
+        {
+            myBuffs[i].EndModifyActor();
+        }
+        myBuffs.Clear();
+    }
+    /////////////////////////////////////////////////////////////////////
+
     //public bool keyboard = true;
 
     public ACT_CHAR_Base[] party;
@@ -71,6 +87,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (myBuffs.Count == 0)
+            buffState = MNGR_Item.BuffStates.NEUTRAL;
+
         // Update the timer
         if (curTmr > 0)
         {
@@ -335,7 +354,7 @@ public class PlayerController : MonoBehaviour
         // modify velocity only if we aren't in special state (for custom special movement)
         if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
         {
-            // always calls unless current character is ded.
+            // always calls unless current character is dead.
             GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
         }
 
