@@ -6,9 +6,11 @@ public class MOD_DMGIncrease : MOD_Base
 	// Use this for initialization
 	public override void Start () 
     {
+        buffState = MNGR_Item.BuffStates.BUFFED;
+
         base.Start();
 
-        Mod_IsBuff = true;          //This is a positive effect
+        //Mod_IsBuff = true;          //This is a positive effect
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 20.0f;
         Mod_ModIndexNum = 1;   

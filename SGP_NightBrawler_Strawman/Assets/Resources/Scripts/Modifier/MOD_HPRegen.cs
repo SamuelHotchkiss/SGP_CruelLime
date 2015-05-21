@@ -7,9 +7,11 @@ public class MOD_HPRegen : MOD_Base
 	// Use this for initialization
 	public override void Start () 
     {
+        buffState = MNGR_Item.BuffStates.BUFFED;
+
         base.Start();
 
-        Mod_IsBuff = true;          //This is a positive effect
+        //Mod_IsBuff = true;          //This is a positive effect
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 10.0f;
         MHPR_Timer = 0.0f;

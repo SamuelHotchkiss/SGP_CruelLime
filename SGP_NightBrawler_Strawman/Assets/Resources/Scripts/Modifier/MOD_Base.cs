@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MOD_Base : MonoBehaviour
 {
+    public MNGR_Item.BuffStates buffState;
 
     public bool Mod_IsBuff;             //Is true if it's a Buff and False if it's a Debuff
     public bool Mod_PartyWide;          //Does it affect the whole party? Or only the current player.
@@ -11,7 +12,7 @@ public class MOD_Base : MonoBehaviour
     public int Mod_ModIndexNum;         //The Number ID of the Effect 
     public float Mod_effectTimer;       //How long the effect will last
 
-    public PlayerController Mod_Actor;  //The Actor been aflicted with the Effect
+    public PlayerController Mod_Actor;  //The Actor been afflicted with the Effect
 	public ACT_Enemy enemy;
 
     public bool isPlayer;
@@ -21,16 +22,50 @@ public class MOD_Base : MonoBehaviour
     {
         Mod_ModIndexNum = -1;           //Base class
 
+        #region WhatAmIAttachedTo?
         if (gameObject.tag == "Enemy")
         {
             enemy = GetComponent<ACT_Enemy>();
             isPlayer = false;
+
+            if (enemy.buffState == MNGR_Item.BuffStates.NEUTRAL)
+            {
+                // Add to buff list
+                enemy.buffState = buffState;
+            }
+            else if (enemy.buffState == buffState)
+            {
+                // Add to buff list
+            }
+            else if (enemy.buffState != buffState)
+            {
+                // Clear buff list
+                enemy.buffState = MNGR_Item.BuffStates.NEUTRAL;
+                Destroy(this);
+            }
         }
         else if (gameObject.tag == "Player")
         {
             Mod_Actor = GetComponent<PlayerController>();
             isPlayer = true;
+
+            if (Mod_Actor.buffState == MNGR_Item.BuffStates.NEUTRAL)
+            {
+                // Add to buff list
+                Mod_Actor.buffState = buffState;
+            }
+            else if (Mod_Actor.buffState == buffState)
+            {
+                // Add to buff list
+            }
+            else if (Mod_Actor.buffState != buffState)
+            {
+                // Clear buff list
+                Mod_Actor.buffState = MNGR_Item.BuffStates.NEUTRAL;
+                Destroy(this);
+            }
         }
+        #endregion
     }
 
 	// Update is called once per frame

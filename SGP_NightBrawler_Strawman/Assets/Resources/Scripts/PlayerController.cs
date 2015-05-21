@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
+    // S: for use with buffs and debuffs
+    public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
+
     //public bool keyboard = true;
 
     public ACT_CHAR_Base[] party;
