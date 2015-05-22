@@ -26,16 +26,15 @@ public class MENU_Controller : MonoBehaviour {
 
         Menu_JoyController = Input.GetAxisRaw("Pad_Vertical");
 
-        //Allows only one button to be highlighted at any one time
-        //unless the mouse hover over it.
-        for (int i = 0; i < Menu_UIButtons.Length; i++)
-        {
-            if (i != Menu_CurrButton)
-            {
-                Menu_UIButtons[i].interactable = false;
-                Menu_UIButtons[i].interactable = true;
-            }
-        }
+        //OLD N BUSTED
+        //for (int i = 0; i < Menu_UIButtons.Length; i++)
+        //{
+        //    //if (i != Menu_CurrButton)
+        //    //{
+        //    //    Menu_UIButtons[i].interactable = false;
+        //    //    Menu_UIButtons[i].interactable = true;
+        //    //}
+        //}
 
         int OldCurrbutton = Menu_CurrButton;
 
