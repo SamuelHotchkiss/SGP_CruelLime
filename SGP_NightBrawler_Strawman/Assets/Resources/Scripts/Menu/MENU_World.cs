@@ -21,9 +21,10 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        MNGR_Game.playerPosition = 1;
+
         MNGR_Game.isNight = true;
-        MNGR_Game.playerPosition = 2;
-        MNGR_Game.hordePosition = 2;
+
         if (MNGR_Game.isNight)
             theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Moon");
         else
