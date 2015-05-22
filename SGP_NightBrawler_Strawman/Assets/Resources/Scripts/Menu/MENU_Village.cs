@@ -31,26 +31,26 @@ public class MENU_Village : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         MENU_Controller OpenShops = Vll_Shops[0].GetComponent<MENU_Controller>();
-        if (MNGR_Game.isNight)
+        if (Vll_CurrCanvas == 0)
         {
-            GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[1];
-            for (int i = 0; i < Vll_DayShopsID.Length; i++)
-                OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = false;
-            for (int i = 0; i < Vll_NightShopID.Length; i++)
-                OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = true;
-        }
-        else if (!MNGR_Game.isNight)
-        {
-            GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[0];
-            for (int i = 0; i < Vll_DayShopsID.Length; i++)
-                OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = true;
-            for (int i = 0; i < Vll_NightShopID.Length; i++)
-                OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            MNGR_Game.isNight = !MNGR_Game.isNight;
+            if (MNGR_Game.isNight)
+            {
+                GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[1];
+                for (int i = 0; i < Vll_DayShopsID.Length; i++)
+                    OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = false;
+                for (int i = 0; i < Vll_NightShopID.Length; i++)
+                    OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = true;
+            }
+            else if (!MNGR_Game.isNight)
+            {
+                GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[0];
+                for (int i = 0; i < Vll_DayShopsID.Length; i++)
+                    OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = true;
+                for (int i = 0; i < Vll_NightShopID.Length; i++)
+                    OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = false;
+            }
+            if (Input.GetKeyDown(KeyCode.N))
+                MNGR_Game.isNight = !MNGR_Game.isNight; 
         }
 	}
 
