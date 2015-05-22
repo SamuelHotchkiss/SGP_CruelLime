@@ -2,8 +2,20 @@
 using System.Collections;
 
 [System.Serializable]
-public class ACT_CHAR_Base : ACT_Base 
+public class ACT_CHAR_Base : ACT_Base
 {
+    public struct SpecialInfo
+    {
+        public int spriteIndex;
+        public Vector2 velocity;
+        public bool spawnproj;
+        public SpecialInfo(int _sprdex, Vector2 _vel, bool _spawn)
+        {
+            spriteIndex = _sprdex;
+            velocity = _vel;
+            spawnproj = _spawn;
+        }
+    }
                         //      0,      1,      2,
 	public enum STATES { IDLE = 0, WALKING, DASHING, 
         /*  3,          4,      5,      6,      7,      8,   9*/
@@ -16,6 +28,9 @@ public class ACT_CHAR_Base : ACT_Base
     public int characterIndex;
 
     public string[] ProjFilePaths;
+
+
+    public int[] specialSprites;       // taken from the animation manager.  debating whether or not to do this with all sprites.
 
 	// Use this for initialization
 	public virtual void Start () 
@@ -41,9 +56,11 @@ public class ACT_CHAR_Base : ACT_Base
 	}
 
 
-	public virtual void ActivateSpecial()
+    public virtual SpecialInfo ActivateSpecial(float _curTmr, float _maxTmr)
 	{
+        SpecialInfo ret = new SpecialInfo(0, Vector2.zero, false);
 
+        return ret;
 	}
 
 	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well

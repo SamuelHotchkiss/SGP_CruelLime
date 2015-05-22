@@ -16,7 +16,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
     int[] attack1Sprites;
     int[] attack2Sprites;
     int[] attack3Sprites;
-    int[] specialSprites;
     int[] hurtSprites;
     int[] deadSprites;
     public bool SpawnProj;
@@ -39,7 +38,6 @@ public class MNGR_Animation_Player : MonoBehaviour {
         attack1Sprites = new int[] { 10, 11, 12, 13 };
         attack2Sprites = new int[] { 15, 16, 17 };
         attack3Sprites = new int[] { 20, 21, 22, 23 };
-        specialSprites = new int[] { 25, 26 };
         hurtSprites = new int[] { 30 };
         deadSprites = new int[] { 30, 31 };
         SpawnProj = true;
@@ -137,31 +135,22 @@ public class MNGR_Animation_Player : MonoBehaviour {
                     GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[3]];
 
                 if (SpawnProj && currentController.curTmr < currentController.maxTmr[(int)curState] * 0.5f)
-                    SpawnProj = currentController.SpawnProj();
+                    SpawnProj = currentController.SpawnProj(1);
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
+                ACT_CHAR_Base.SpecialInfo info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
+                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
-                // Works for swordsman...
-                if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.95f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.7f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[1]];
-                else if (currentController.curTmr + Time.deltaTime * 2.0f > currentController.maxTmr[(int)curState] * 0.7f)
+                // completely pointless if statement and variable nonsense except it randomly wont work otherwise.
+                if (info.velocity.magnitude != 0)
                 {
-                    if (currentCharacter.Act_facingRight)
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(2.0f, 0.0f);
-                    else
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(-2.0f, 0.0f);
+                    Vector2 test = GetComponent<Rigidbody2D>().velocity;
+                    GetComponent<Rigidbody2D>().velocity = info.velocity;
+                    test = GetComponent<Rigidbody2D>().velocity;
                 }
-                else if (currentController.curTmr >= 0)
-                {
-                    if ((int)(currentController.curTmr * 1000) % 27 > 9)
-                        GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[0]];
-                    else
-                        GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[1]];
-                }
-                if (SpawnProj && currentController.curTmr < currentController.maxTmr[(int)curState] * 0.7f)
-                    SpawnProj = currentController.SpawnProj(1);
+
+                if (SpawnProj && info.spawnproj)
+                    SpawnProj = currentController.SpawnProj(2);
                 break;
             case ACT_CHAR_Base.STATES.HURT:
                 GetComponent<SpriteRenderer>().sprite = sprites[hurtSprites[0]];

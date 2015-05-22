@@ -57,9 +57,10 @@ public class PlayerController : MonoBehaviour
         rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
         leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
-        Projs = new GameObject[2];
+        Projs = new GameObject[3];
         Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
+        Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
 
         // Slick as doody
         //maxTmr = party[currChar].StateTmrs;
@@ -531,6 +532,7 @@ public class PlayerController : MonoBehaviour
 
         Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
+        Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
     }
 
     // J: This is for use with Enemy Knockback but can be use for anything 
