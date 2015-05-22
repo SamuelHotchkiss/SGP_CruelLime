@@ -54,7 +54,7 @@ public class PROJ_Base : MonoBehaviour
         start = new Vector2(transform.position.x, transform.position.y);
     }
 
-    void Update()
+    public virtual void Update()
     {
 		if (MNGR_Game.paused)
 			return;
