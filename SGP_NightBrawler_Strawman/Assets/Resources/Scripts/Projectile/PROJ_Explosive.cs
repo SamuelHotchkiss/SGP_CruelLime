@@ -10,6 +10,13 @@ public class PROJ_Explosive : PROJ_Base
         base.Initialize();
     }
 
+    public override void Update()
+    {
+        if (distance >= range)
+            CreateExplosion();
+
+        base.Update();
+    }
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         CreateExplosion();

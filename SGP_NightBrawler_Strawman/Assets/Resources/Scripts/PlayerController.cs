@@ -57,9 +57,10 @@ public class PlayerController : MonoBehaviour
         rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
         leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
-        Projs = new GameObject[2];
+        Projs = new GameObject[3];
         Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
+        Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
 
         // Slick as doody
         //maxTmr = party[currChar].StateTmrs;
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour
                     {
                         SwitchNextPartyMember(true);
                         if (party[currChar].Act_currHP <= 0)
-                            Application.LoadLevel(Application.loadedLevel);
+                            Death();
                     }
                 }
             }
@@ -531,6 +532,7 @@ public class PlayerController : MonoBehaviour
 
         Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
+        Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
     }
 
     // J: This is for use with Enemy Knockback but can be use for anything 
@@ -578,4 +580,12 @@ public class PlayerController : MonoBehaviour
         return party[currChar].StateTmrs[(int)party[currChar].state] * (limiter - ratio);
     }
 
+    // S: til this do us part
+    public void Death()
+    {
+        MNGR_Game.hordePosition++;
+        MNGR_Game.isNight = !MNGR_Game.isNight;
+
+        Application.LoadLevel("WorldMap");
+    }
 }
