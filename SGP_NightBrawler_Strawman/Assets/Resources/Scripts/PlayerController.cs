@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
                     {
                         SwitchNextPartyMember(true);
                         if (party[currChar].Act_currHP <= 0)
-                            Application.LoadLevel(Application.loadedLevel);
+                            Death();
                     }
                 }
             }
@@ -535,4 +535,12 @@ public class PlayerController : MonoBehaviour
         return party[currChar].StateTmrs[(int)party[currChar].state] * (limiter - ratio);
     }
 
+    // S: til this do us part
+    public void Death()
+    {
+        MNGR_Game.hordePosition++;
+        MNGR_Game.isNight = !MNGR_Game.isNight;
+
+        Application.LoadLevel("WorldMap");
+    }
 }

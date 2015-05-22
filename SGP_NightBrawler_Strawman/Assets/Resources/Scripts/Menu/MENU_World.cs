@@ -21,8 +21,6 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        MNGR_Game.playerPosition = 1;
-
         MNGR_Game.isNight = true;
 
         if (MNGR_Game.isNight)
