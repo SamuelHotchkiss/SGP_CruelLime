@@ -69,6 +69,7 @@ public class ACT_BOS_Ent : ACT_Enemy
             if (Act_currHP > (int)(Act_baseHP * Ent_NewMaxRegen))
             {
                 Ent_HealHP = false;
+				Ent_WallUp = false;
                 Ent_NewMaxRegen -= 0.25f;
             }
             Ent_HealCooldown -= Time.deltaTime;
@@ -143,7 +144,7 @@ public class ACT_BOS_Ent : ACT_Enemy
             if (Act_currHP <= (int)(Act_baseHP * 0.25f))
             {
                 Ent_HealHP = true;
-                if (distThresh + 10 >= Vector3.Distance(target.transform.position, transform.position))
+                if (distThresh + 5 >= Vector3.Distance(target.transform.position, transform.position))
                 {
                     currBehavior = behaviors[1]; //Pushback
                     Knck_Cooldown = 0.0f;

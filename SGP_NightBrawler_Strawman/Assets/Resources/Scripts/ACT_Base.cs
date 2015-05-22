@@ -55,15 +55,7 @@ public class ACT_Base
     }
 
     //Interface
-    public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
-    {                                   //Damage needs to be negative.
-        Act_currHP += Dmg;
 
-        if (Act_currHP > Act_baseHP)
-            Act_currHP = Act_baseHP;
-        if (Act_currHP < 0)
-            Act_currHP = 0;
-    }
     public void RestoreToBaseHP()       //Restores current HP to its base value
     {
         Act_currHP = Act_baseHP;

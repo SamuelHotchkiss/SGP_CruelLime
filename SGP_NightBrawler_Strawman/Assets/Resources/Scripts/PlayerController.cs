@@ -88,6 +88,45 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+		switch (party[currChar].state)
+		{
+			case ACT_CHAR_Base.STATES.IDLE:
+				loop = true;
+				break;
+			case ACT_CHAR_Base.STATES.WALKING:
+				loop = true;
+				break;
+			case ACT_CHAR_Base.STATES.DASHING:
+				loop = false;
+				break;
+			case ACT_CHAR_Base.STATES.ATTACK_1:
+				loop = false;
+				break;
+			case ACT_CHAR_Base.STATES.ATTACK_2:
+				loop = false;
+				break;
+			case ACT_CHAR_Base.STATES.ATTACK_3:
+				loop = false;
+				break;
+			case ACT_CHAR_Base.STATES.SPECIAL:
+				loop = false;
+				break;
+			case ACT_CHAR_Base.STATES.HURT:
+				loop = false;
+				break;
+			case ACT_CHAR_Base.STATES.DYING:
+				loop = false;
+				break;
+			case ACT_CHAR_Base.STATES.USE:
+				loop = false;
+				break;
+		}
+
+		if (party[currChar].state == ACT_CHAR_Base.STATES.DYING)
+		{
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			loop = false;
+		}
         if (myBuffs.Count == 0)
             buffState = MNGR_Item.BuffStates.NEUTRAL;
 
@@ -141,6 +180,7 @@ public class PlayerController : MonoBehaviour
         {
 			party[currChar].Act_currHP = 0;
 			party[currChar].state = ACT_CHAR_Base.STATES.DYING;
+			//curTmr = maxTmr[(int)party[currChar].state];
 			loop = false;
 			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
@@ -499,6 +539,9 @@ public class PlayerController : MonoBehaviour
     // The Force will affect how far and how long the player will be knockback 
     public void ApplyKnockBack(float _Force)
     {
+		if (party[currChar].state != ACT_CHAR_Base.STATES.HURT && party[currChar].state != ACT_CHAR_Base.STATES.DYING)
+		{
+				
         horz = _Force;
         if (_Force < 0.0f)          //Since _Force is use for the Timer, it needs to alway be positive.
             _Force = -_Force;
@@ -511,7 +554,7 @@ public class PlayerController : MonoBehaviour
         party[currChar].state = ACT_CHAR_Base.STATES.HURT;
         nextState = ACT_CHAR_Base.STATES.IDLE;
         vert = 0.0f;
-        
+		}        
     }
 
     // L: called in animation manager when we're displaying the right sprite to attack at

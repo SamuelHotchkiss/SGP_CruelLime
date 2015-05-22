@@ -62,4 +62,28 @@ public class ACT_CHAR_Base : ACT_Base
 
         return ret;
 	}
+
+	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
+	{                                   //Damage needs to be negative.
+		if (state != STATES.DYING && state != STATES.HURT)
+		{
+			
+			Act_currHP += Dmg;
+
+			if (Act_currHP > Act_baseHP)
+				Act_currHP = Act_baseHP;
+
+			if (Dmg < 0)
+				state = STATES.HURT;
+
+
+			if (Act_currHP < 0)
+			{
+				state = STATES.DYING;
+				Act_currHP = 0;
+			}
+
+		}
+
+	}
 }
