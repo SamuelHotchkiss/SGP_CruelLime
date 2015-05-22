@@ -5,8 +5,8 @@ using System.Collections;
 // A public class that ANY class can access data from
 public static class MNGR_Game
 {
-    public static ACT_CHAR_Base[] theCharacters;
-    public static ACT_CHAR_Base[] currentParty;
+    public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
+    public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];
 
     public static bool usedItem;
     public static int equippedItem;

@@ -29,11 +29,11 @@ public class PROJ_Base : MonoBehaviour
             bool right = player.party[target].Act_facingRight;
 
             if (right)
-                velocity = new Vector2(1, 0) * speed;
+                velocity = new Vector2(1, 0);// * speed;
             else
             {
                 transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
-                velocity = new Vector2(-1, 0) * speed;
+                velocity = new Vector2(-1, 0);// * speed;
             }
         }
         else if (owner.tag == "Enemy")
@@ -45,25 +45,25 @@ public class PROJ_Base : MonoBehaviour
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
 
             if (right)
-                velocity = new Vector2(1, 0) * speed;
+                velocity = new Vector2(1, 0);// * speed;
             else
-                velocity = new Vector2(-1, 0) * speed;
+                velocity = new Vector2(-1, 0);// *speed;
         }
 
         //GetComponent<Rigidbody2D>().velocity = velocity;
         start = new Vector2(transform.position.x, transform.position.y);
     }
 
-    void Update()
+    public virtual void Update()
     {
 		if (MNGR_Game.paused)
 			return;
 
-        transform.position += (new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime);
+        transform.position += (new Vector3(velocity.x * speed, velocity.y * speed, 0) * Time.deltaTime);
 
         distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));
         if (distance >= range)
-            Destroy(gameObject);
+            ProjectileExpired();
     }
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
@@ -73,7 +73,7 @@ public class PROJ_Base : MonoBehaviour
         {
             collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
             if (gameObject != null)
-                Destroy(gameObject);
+                ProjectileExpired();
         }
         else if (collision.gameObject.tag == "Player")
         {
@@ -85,7 +85,14 @@ public class PROJ_Base : MonoBehaviour
             player.party[target].ChangeHP(-power);
 
             if (gameObject != null)
-                Destroy(gameObject);
+                ProjectileExpired();
         }
     }
+
+    protected virtual void ProjectileExpired()
+    {
+        Destroy(gameObject);
+    }
+
+
 }

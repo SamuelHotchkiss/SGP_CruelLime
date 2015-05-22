@@ -21,9 +21,6 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        MNGR_Game.isNight = true;
-        MNGR_Game.playerPosition = 2;
-        MNGR_Game.hordePosition = 2;
         if (MNGR_Game.isNight)
             theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Moon");
         else
@@ -56,16 +53,18 @@ public class MENU_World : MonoBehaviour
     {
         string lvlName = levels[playIndex].name;
 
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);
+
         StartCoroutine(WaitForSound(lvlName));
     }
 
-    // opens merchant menu
     public void VisitMerchant()
     {
         merchantPanel.SetActive(true);
         //GameObject.Find("Canvas").GetComponent<MENU_Controller>().enabled = false;
 
-        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(), MNGR_Options.sfxVol);
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);
+        StartCoroutine(WaitForSound());
     }
 
     // closes merchant menu
@@ -74,8 +73,8 @@ public class MENU_World : MonoBehaviour
         merchantPanel.SetActive(false);
         //GameObject.Find("Canvas").GetComponent<MENU_Controller>().enabled = true;
 
-        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(), MNGR_Options.sfxVol);
-        Application.LoadLevel(Application.loadedLevel);
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);
+        StartCoroutine(WaitForSound(Application.loadedLevelName));
     }
 
     // heals party and advances time
@@ -107,21 +106,16 @@ public class MENU_World : MonoBehaviour
     public void Return()
     {
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
-        StartCoroutine(WaitForSound());
+        StartCoroutine(WaitForSound("MainMenu"));
     }
 
     IEnumerator WaitForSound()
     {
-        //This can be use to stop the action from been activated
-        //Each time a button is PRESS this sould be call to allow 
-        //the sound is play ONLY if the scene is been change. 
         yield return new WaitForSeconds(0.35f);
 
         /*TO BE IMPLEMENTED*/
         //MNGR_Save.saveFiles[MNGR_Save.currSave].CopyGameManager();
         //MNGR_Save.SaveProfiles();
-
-        Application.LoadLevel("MainMenu");
     }
 
     IEnumerator WaitForSound(string lvlName)

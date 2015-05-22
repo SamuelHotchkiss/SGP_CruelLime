@@ -14,12 +14,16 @@ public class MENU_Shop : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		coins.text = "x" + MNGR_Game.wallet.ToString();
+		for (int i = 0; i < inventoryCounts.Length; i++)
+		{
+			
+		}
 	}
 }

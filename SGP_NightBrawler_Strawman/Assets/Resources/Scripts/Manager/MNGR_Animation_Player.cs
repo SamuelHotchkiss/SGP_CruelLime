@@ -135,7 +135,9 @@ public class MNGR_Animation_Player : MonoBehaviour {
                     GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[3]];
 
                 if (SpawnProj && currentController.curTmr < currentController.maxTmr[(int)curState] * 0.5f)
+                {
                     SpawnProj = currentController.SpawnProj(1);
+                }
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
                 ACT_CHAR_Base.SpecialInfo info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
@@ -148,6 +150,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
                     GetComponent<Rigidbody2D>().velocity = info.velocity;
                     test = GetComponent<Rigidbody2D>().velocity;
                 }
+                // end of nonsense
 
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(2);
