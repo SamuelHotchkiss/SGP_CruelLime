@@ -27,7 +27,7 @@ public class PROJ_Explosion : PROJ_Base
     }
 
 	// Update is called once per frame
-	void Update () 
+	public override void Update () 
     {
         timer -= Time.deltaTime;
         if (timer <= 0)
