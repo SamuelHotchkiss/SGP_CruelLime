@@ -24,14 +24,17 @@ public class PROJ_Base : MonoBehaviour
             PlayerController player = owner.GetComponent<PlayerController>();
             int target = player.currChar;
 
-            power = player.party[target].Act_currPower;
+            power += player.party[target].Act_currPower;
 
             bool right = player.party[target].Act_facingRight;
 
             if (right)
                 velocity = new Vector2(1, 0) * speed;
             else
+            {
+                transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
                 velocity = new Vector2(-1, 0) * speed;
+            }
         }
         else if (owner.tag == "Enemy")
         {
@@ -39,7 +42,7 @@ public class PROJ_Base : MonoBehaviour
 
             bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
-            power = owner.GetComponent<ACT_Enemy>().Act_currPower;
+            power += owner.GetComponent<ACT_Enemy>().Act_currPower;
 
             if (right)
                 velocity = new Vector2(1, 0) * speed;

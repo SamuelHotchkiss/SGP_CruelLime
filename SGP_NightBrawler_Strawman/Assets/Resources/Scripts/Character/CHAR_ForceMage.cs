@@ -18,9 +18,10 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         Act_currSpeed = 100;
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
-        ProjFilePaths = new string[2];
+        ProjFilePaths = new string[3];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Melee";
-        ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Whirlwind";
+        ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Melee";
+        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Whirlwind";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f };
