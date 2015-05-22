@@ -17,7 +17,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
         ProjFilePaths = new string[3];
-        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Melee";
+        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Fireball";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Melee";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Whirlwind";
 
