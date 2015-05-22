@@ -11,6 +11,8 @@ public class CHAR_Archer : ACT_CHAR_Base
         cooldownTmr = 0;
 
         Act_baseHP = 75;
+        Act_currHP = Act_baseHP;
+
         Act_basePower = 10;
         Act_baseSpeed = 15;
         //Act_baseSpeed = 32;
