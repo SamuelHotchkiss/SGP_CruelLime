@@ -6,6 +6,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
 {
 	public CHAR_Wizard()
 	{
+        name = "Wizard"; // unfortunately the postal service has him listed as "Lizard" and keeps sending him crickets... neither are happy about it
 		characterIndex = 6;
 		cooldownTmr = 0;
 

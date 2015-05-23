@@ -7,6 +7,7 @@ public class CHAR_ForceMage : ACT_CHAR_Base
 {
 	public CHAR_ForceMage()
 	{
+        name = "Force Mage"; // ...it is strong with this one
 		characterIndex = 0;
 		cooldownTmr = 0;
 

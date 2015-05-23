@@ -32,9 +32,13 @@ public class ACT_CHAR_Base : ACT_Base
 
     public int[] specialSprites;       // taken from the animation manager.  debating whether or not to do this with all sprites.
 
+    public string name;
+
 	// Use this for initialization
 	public virtual void Start () 
 	{
+        name = "Default";
+
 		cooldownTmrBase = 3;
 		cooldownTmr = 0;
 

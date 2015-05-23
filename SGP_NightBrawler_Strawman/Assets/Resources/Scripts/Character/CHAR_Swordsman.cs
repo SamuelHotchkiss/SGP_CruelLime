@@ -7,6 +7,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
 	public CHAR_Swordsman()
 	{
+        name = "Swordsman"; // once a Swordsboy, now a Swordsman
 		characterIndex = 0;
 		cooldownTmr = 0;
 
