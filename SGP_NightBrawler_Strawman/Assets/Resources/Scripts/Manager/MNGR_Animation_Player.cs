@@ -135,7 +135,9 @@ public class MNGR_Animation_Player : MonoBehaviour {
                     GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[3]];
 
                 if (SpawnProj && currentController.curTmr < currentController.maxTmr[(int)curState] * 0.5f)
+                {
                     SpawnProj = currentController.SpawnProj(1);
+                }
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
                 ACT_CHAR_Base.SpecialInfo info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
@@ -145,9 +147,10 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 if (info.velocity.magnitude != 0)
                 {
                     Vector2 test = GetComponent<Rigidbody2D>().velocity;
-                    GetComponent<Rigidbody2D>().velocity = info.velocity;
+                    GetComponent<Rigidbody2D>().velocity = info.velocity; // this is the only line of code in this nonsense that I wish to work.
                     test = GetComponent<Rigidbody2D>().velocity;
                 }
+                // end of nonsense
 
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(2);

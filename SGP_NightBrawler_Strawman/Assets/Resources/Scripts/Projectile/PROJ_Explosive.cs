@@ -1,32 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PROJ_Explosive : PROJ_Base 
+public class PROJ_Explosive : PROJ_Base
 {
-    public PROJ_Explosion mySplosion;       // the aftershock
+    public int NumSpawnOnDeath;
+    public PROJ_Explosion SpawnOnDeath;       // the aftershock
+    public Sprite[] sprites;
+    int curSprite = 0;
+    float updateSprite = 0.0f;
 
     public override void Initialize()
     {
         base.Initialize();
+        sprites = Resources.LoadAll<Sprite>("Sprites/Projectile/Fireball");
     }
 
     public override void Update()
     {
-        if (distance >= range)
-            CreateExplosion();
+        if (updateSprite > 0)
+            updateSprite -= Time.deltaTime;
+        else
+        {
+            updateSprite = 0.075f;
+            curSprite++;
+            if (curSprite > 2)
+                curSprite = 0;
+            GetComponent<SpriteRenderer>().sprite = sprites[curSprite];
+        }
 
         base.Update();
     }
-    public override void OnTriggerEnter2D(Collider2D collision)
+
+    protected override void ProjectileExpired()
     {
         CreateExplosion();
-        base.OnTriggerEnter2D(collision);                                 // start the pain
+        base.ProjectileExpired();
     }
 
     void CreateExplosion()
     {
-        PROJ_Explosion clone = (PROJ_Explosion)Instantiate(mySplosion, transform.position, new Quaternion(0, 0, 0, 0));
-        clone.owner = owner;
-        clone.Initialize();
+        for (int i = 0; i < NumSpawnOnDeath; i++)
+        {
+            PROJ_Explosion clone = (PROJ_Explosion)Instantiate(SpawnOnDeath, transform.position, new Quaternion(0, 0, 0, 0));
+            clone.owner = owner;
+            clone.Initialize();
+        }
     }
+
 }
