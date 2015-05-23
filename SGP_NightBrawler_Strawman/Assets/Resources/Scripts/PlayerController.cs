@@ -561,9 +561,40 @@ public class PlayerController : MonoBehaviour
     // _index allows us to choose which projectile.
     public bool SpawnProj(int _index = 0)
     {
-        GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
-        clone.GetComponent<PROJ_Base>().owner = gameObject;
-        clone.GetComponent<PROJ_Base>().Initialize();
+        /*int num = 1;
+
+        if (party[currChar].characterIndex == 6 && party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_3)
+            num = 3;
+
+        for (int i = 0; i < num; i++)
+        {*/
+        Object test = Projs[_index];
+            GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
+            clone.GetComponent<PROJ_Base>().owner = gameObject;
+            clone.GetComponent<PROJ_Base>().Initialize();
+
+            // this makes me puke a little inside.
+            if (party[currChar].characterIndex == 6 && _index == 1)
+            {
+                clone.GetComponent<PROJ_Explosive>().sprites = Resources.LoadAll<Sprite>("Sprites/Projectile/FireballStrong");
+            }
+                 /*Vector3 rot = clone.transform.localEulerAngles;
+                 Vector2 vel = clone.GetComponent<PROJ_Base>().velocity;
+                 if (i == 1)
+                 {
+                     rot.z = 25.0f;
+                     vel = new Vector2(vel.x, 0.278f);
+                 }
+                 else if (i == 2)
+                 {
+                     rot.z = -25.0f;
+                     vel = new Vector2(vel.x, -0.278f);
+                 }
+                 clone.transform.localEulerAngles = rot;
+                 clone.GetComponent<PROJ_Base>().velocity = vel;
+
+            }
+        }*/
 
         // disables a one-way boolean in the animation manager.  goofy, I know.  Harmless, hopefully.
         return false;

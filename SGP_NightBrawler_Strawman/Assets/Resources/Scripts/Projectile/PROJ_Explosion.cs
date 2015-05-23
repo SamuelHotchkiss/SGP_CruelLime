@@ -3,36 +3,66 @@ using System.Collections;
 
 public class PROJ_Explosion : PROJ_Base
 {
-    public float timer;
-    public float radius;                    // screw you and everyone you knew and loved
+    float timer;
+    public float timerMax;
+    //public float radius;                    // screw you and everyone you knew and loved
     public float forcestr;
     public Vector2 forcedir;
+    public Sprite[] sprites;
 
     public override void Initialize()
     {
+        timer = timerMax;
         speed = 0;
+        GetComponent<SpriteRenderer>().sprite = sprites[0];
 
+        base.Initialize();
         // flip the circle collider if the owner faces the other way
-        if (!owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight)
+        // just for swordsman now.
+        if (owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].characterIndex == 0)
         {
-            Vector2 offset = GetComponent<CircleCollider2D>().offset;
-            offset.x = -offset.x;
-            GetComponent<CircleCollider2D>().offset = offset;
+            power = (int)((float)power * 0.75f);
+            if (!owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight)
+            {
+                Vector2 offset = GetComponent<CircleCollider2D>().offset;
+                offset.x = -offset.x;
+                GetComponent<CircleCollider2D>().offset = offset;
+            }
         }
 
 
-        base.Initialize();
-
-        power = (int)((float)power * 0.75f);
     }
 
-	// Update is called once per frame
-	public override void Update () 
+    // Update is called once per frame
+    public override void Update()
     {
         timer -= Time.deltaTime;
         if (timer <= 0)
-            Destroy(gameObject);
-	}
+            ProjectileExpired();
+
+        // hacky as chit.
+        if (sprites.Length == 8)
+        {
+            if (timer > timerMax * 0.875)
+                GetComponent<SpriteRenderer>().sprite = sprites[0];
+            else if (timer > timerMax * 0.75)
+                GetComponent<SpriteRenderer>().sprite = sprites[1];
+            else  if (timer > timerMax * 0.625)
+                GetComponent<SpriteRenderer>().sprite = sprites[2];
+            else if (timer > timerMax * 0.5)
+                GetComponent<SpriteRenderer>().sprite = sprites[3];
+            else if (timer > timerMax * 0.375)
+                GetComponent<SpriteRenderer>().sprite = sprites[4];
+            else if (timer > timerMax * 0.25)
+                GetComponent<SpriteRenderer>().sprite = sprites[5];
+            else if (timer > timerMax * 0.125)
+                GetComponent<SpriteRenderer>().sprite = sprites[6];
+            else
+                GetComponent<SpriteRenderer>().sprite = sprites[7];
+        }
+
+        base.Update();
+    }
 
     public override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -51,7 +81,7 @@ public class PROJ_Explosion : PROJ_Base
 
                 forcedir = colpos - ownpos;
 
-                collision.gameObject.GetComponent<ACT_Enemy>().ApplyKnockBack( forcedir * forcestr);
+                collision.gameObject.GetComponent<ACT_Enemy>().ApplyKnockBack(forcedir * forcestr);
             }
         }
         else if (collision.gameObject.tag == "Player")
