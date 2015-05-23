@@ -7,6 +7,8 @@ public class CHAR_Archer : ACT_CHAR_Base
 {
     public CHAR_Archer()
     {
+        name = "Archer"; // Sterling Archer, Codename: DUCHESS
+
         characterIndex = 3;
         cooldownTmr = 0;
 
