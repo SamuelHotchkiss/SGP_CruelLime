@@ -39,7 +39,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
 	}
 
 	// Update is called once per frame
-	public void Update()
+    public override void Update()
 	{
 		base.Update();
 	}
