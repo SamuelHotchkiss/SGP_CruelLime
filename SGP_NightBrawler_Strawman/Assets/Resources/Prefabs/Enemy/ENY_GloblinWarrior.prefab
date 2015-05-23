@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.3000002, y: .0299999993, z: 0}
+  m_LocalPosition: {x: 2.38000011, y: -3.16000009, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +83,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
   Act_baseHP: 50
   Act_basePower: 5
@@ -92,6 +94,7 @@ MonoBehaviour:
   Act_currSpeed: 10
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
@@ -119,6 +122,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 107682}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
