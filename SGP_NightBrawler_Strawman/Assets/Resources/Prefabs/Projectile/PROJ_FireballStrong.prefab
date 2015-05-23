@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.68055797, y: -2.91312122, z: 0}
+  m_LocalPosition: {x: 5.00643682, y: -2.89881063, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,9 +59,10 @@ MonoBehaviour:
   power: 0
   distance: 0
   speed: 6
-  range: 10
+  range: 6
   NumSpawnOnDeath: 1
-  SpawnOnDeath: {fileID: 11445348, guid: ad1a8d0bc22064f439c1c889b33506cc, type: 2}
+  SpawnOnDeath: {fileID: 11482188, guid: abd80117f7032524ba4e4a7514768b1c, type: 2}
+  sprites: []
 --- !u!212 &21212298
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 865e0cc3b661eec4fbb74b5ca9d0616c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e15e3f81ce251c478e8355fbe1c2041, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

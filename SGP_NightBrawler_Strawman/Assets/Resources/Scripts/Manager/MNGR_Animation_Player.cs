@@ -147,7 +147,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 if (info.velocity.magnitude != 0)
                 {
                     Vector2 test = GetComponent<Rigidbody2D>().velocity;
-                    GetComponent<Rigidbody2D>().velocity = info.velocity;
+                    GetComponent<Rigidbody2D>().velocity = info.velocity; // this is the only line of code in this nonsense that I wish to work.
                     test = GetComponent<Rigidbody2D>().velocity;
                 }
                 // end of nonsense

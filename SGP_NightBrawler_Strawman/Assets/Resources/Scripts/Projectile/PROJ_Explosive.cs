@@ -5,7 +5,7 @@ public class PROJ_Explosive : PROJ_Base
 {
     public int NumSpawnOnDeath;
     public PROJ_Explosion SpawnOnDeath;       // the aftershock
-    Sprite[] sprites;
+    public Sprite[] sprites;
     int curSprite = 0;
     float updateSprite = 0.0f;
 

@@ -9,8 +9,8 @@ public class CHAR_Wizard : ACT_CHAR_Base
 		characterIndex = 6;
 		cooldownTmr = 0;
 
-		Act_baseHP = 100;
-		Act_basePower = 100;
+		Act_baseHP = 50;
+		Act_basePower = 5;
         Act_baseSpeed = 10;
         //Act_baseSpeed = 20;
         Act_baseAspeed = 0.02f;
@@ -19,7 +19,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
         ProjFilePaths = new string[3];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Fireball";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_FireballStrong";
-        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Explosion";
+        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Fireball_ExplosionStrong";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f };
@@ -48,13 +48,9 @@ public class CHAR_Wizard : ACT_CHAR_Base
         else if (_curTmr > _maxTmr * 0.7f)
             ret.spriteIndex = specialSprites[1];
         else if (_curTmr >= 0)
-        {
-            if ((int)(_curTmr * 1000) % 27 > 9)
-                ret.spriteIndex = specialSprites[2];
-            else
-                ret.spriteIndex = specialSprites[3];
-        }
-        if (_curTmr < _maxTmr * 0.7f)
+            ret.spriteIndex = specialSprites[3];
+
+        if (_curTmr < _maxTmr * 0.1f)
             ret.spawnproj = true;
 
         return ret;
