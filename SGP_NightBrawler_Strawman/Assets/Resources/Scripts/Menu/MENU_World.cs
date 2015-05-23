@@ -38,10 +38,10 @@ public class MENU_World : MonoBehaviour
         playerArrow.transform.position = playMarker;
         hordeArrow.transform.position = hordeMarker;
 
-        //for (int i = 0; i < characterHP.Length; i++)
-        //{
-        //    characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
-        //}
+        for (int i = 0; i < characterHP.Length; i++)
+        {
+            characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
+        }
 
         for (int i = 0; i < inventory.Length; i++)
         {

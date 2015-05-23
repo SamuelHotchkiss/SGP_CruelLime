@@ -27,7 +27,9 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     void Start()
     {
 
-        filepaths = new string[] { "Sprites/Enemy/GloblinFighter" };
+        filepaths = new string[] { "GloblinFighter", "GloblinArcher" };
+        for (int i = 0; i < filepaths.Length; i++)
+            filepaths[i] = "Sprites/Enemy/" + filepaths[i];
         currentCharacter = GetComponent<ACT_Enemy>();
         lastState = currentCharacter.state;
         curState = currentCharacter.state;
@@ -40,7 +42,15 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     {
         switch (_ID)
         {
-            case 0:
+            case 0: // Globlin Fighter
+                idleSprites = new int[] { 0, 1, 2 };
+                walkSprites = new int[] { 5, 6, 7, 8, 9 };
+                attack1Sprites = new int[] { 10, 11, 12 };
+                specialSprites = new int[] { 0 };
+                hurtSprites = new int[] { 15 };
+                deadSprites = new int[] { 15, 16 };
+                break;
+            case 1: // Globlin Archer
                 idleSprites = new int[] { 0, 1, 2 };
                 walkSprites = new int[] { 5, 6, 7, 8, 9 };
                 attack1Sprites = new int[] { 10, 11, 12 };
@@ -49,6 +59,12 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 deadSprites = new int[] { 15, 16 };
                 break;
             default:
+                idleSprites = new int[] { 0, 1, 2 };
+                walkSprites = new int[] { 5, 6, 7, 8, 9 };
+                attack1Sprites = new int[] { 10, 11, 12 };
+                specialSprites = new int[] { 0 };
+                hurtSprites = new int[] { 15 };
+                deadSprites = new int[] { 15, 16 };
                 break;
         }
     }

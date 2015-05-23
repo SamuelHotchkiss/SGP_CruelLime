@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.16888523, y: -2.64668894, z: 0}
+  m_LocalPosition: {x: 12.9200001, y: -3.05999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffState: 1
   myBuffs: []
-  Act_ID: 0
+  Act_ID: 1
   Act_baseHP: 100
   Act_basePower: 5
   Act_baseSpeed: 100
@@ -91,16 +91,16 @@ MonoBehaviour:
   randomState: 0
   curTime: 0
   stateTime: []
-  hpThresh: 500
+  hpThresh: 50
   nightThresh: 0
   TimeThresh: -1
   speedThresh: 0
   distThresh: 0
   coolThresh: 0
   behaviorSize: 1
-  behaviorID: 02000000000000000000000000000000000000000000000000000000000000000000000000000000
+  behaviorID: 04000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors:
-  - {fileID: 0}
+  - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -111,10 +111,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currBehavior: {fileID: 0}
-  Spw_Critter: {fileID: 184872}
   squad: []
-  maxBuffRange: 10
+  maxBuffRange: 0
   buffIndex: 1
+  Spw_Critter: {fileID: 184872}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
   Spw_SpawnCoolDown: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   projectile: {fileID: 11416326, guid: 47be1f86c76fd6c4ca3df9930167ea68, type: 2}
   isMelee: 0
   paused: 0
+  coins: {fileID: 178380, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
 --- !u!114 &11452808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,7 +178,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 289a6ae7d6c7f0241a8cea59e054d0e3, type: 3}
+  m_Sprite: {fileID: 21300010, guid: 53746440d8b22c64a90858438b10f3f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
