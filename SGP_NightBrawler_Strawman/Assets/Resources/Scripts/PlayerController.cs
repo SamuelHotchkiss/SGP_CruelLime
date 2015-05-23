@@ -84,6 +84,14 @@ public class PlayerController : MonoBehaviour
         horz = 0.0f;
         vert = 0.0f;
         notjoydash = false;
+
+		// for testing
+		//MNGR_Game.dangerZone = true;
+
+		if (MNGR_Game.dangerZone)
+			GameObject.Find("_Horde").SetActive(true);
+		else
+			GameObject.Find("_Horde").SetActive(false);
     }
 
     void Update()
@@ -619,4 +627,17 @@ public class PlayerController : MonoBehaviour
 
         Application.LoadLevel("WorldMap");
     }
+
+	public void MurderEveryone()
+	{
+		currChar = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			party[currChar].Act_currHP = 0;
+			currChar++;
+		}
+
+		//MNGR_Save.saveFiles[MNGR_Save.currSave] = new MNGR_GameData();
+		Application.LoadLevel("MainMenu");
+	}
 }
