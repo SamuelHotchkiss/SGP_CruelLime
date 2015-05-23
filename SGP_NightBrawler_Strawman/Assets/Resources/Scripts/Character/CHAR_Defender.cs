@@ -17,6 +17,10 @@ public class CHAR_Defender : ACT_CHAR_Base
 		Act_currPower = 100;
         Act_currSpeed = 100;
 
+        Act_HPLevel = 1;
+        Act_PowerLevel = 1;
+        Act_SpeedLevel = 1;
+
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
         ProjFilePaths = new string[3];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Melee";

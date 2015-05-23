@@ -16,6 +16,10 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
         //Act_baseSpeed = 25;
         Act_baseAspeed = 0.025f;
 
+        Act_HPLevel = 1;
+        Act_PowerLevel = 1;
+        Act_SpeedLevel = 1;
+
         ProjFilePaths = new string[3];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Melee";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Melee";
