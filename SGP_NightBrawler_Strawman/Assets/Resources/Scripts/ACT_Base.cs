@@ -17,7 +17,12 @@ public class ACT_Base
 
     public bool Act_facingRight = true;     //The direction the Actor is facing, use fro back attacks and shilds
     public bool Act_HasMod;                 //Does the Actor has a Modification acting on it
-    public bool Act_ModIsBuff;             //If the Actor is afflicted is it a Buff or a DeBuff
+    public bool Act_ModIsBuff;              //If the Actor is afflicted is it a Buff or a DeBuff
+
+    public int Act_HPLevel;                 //Current HP level;
+    public int Act_PowerLevel;              //Current Power level;
+    public int Act_SpeedLevel;              //Current Speed level;
+    public int Act_AverageLevel;            //Average Of all levels;
 
     //Mutators
     public void SetCurrHP(int n_hp)
@@ -55,7 +60,6 @@ public class ACT_Base
     }
 
     //Interface
-
     public void RestoreToBaseHP()       //Restores current HP to its base value
     {
         Act_currHP = Act_baseHP;
@@ -67,5 +71,10 @@ public class ACT_Base
     public void RestoreToBaseSpeed()    //Restores current Speed to its base value
     {
         Act_currSpeed = Act_baseSpeed;
+    }
+    public int CalcAverageLvl()
+    {
+        Act_AverageLevel = (Act_HPLevel + Act_PowerLevel + Act_SpeedLevel) / 3;
+        return Act_AverageLevel;
     }
 }

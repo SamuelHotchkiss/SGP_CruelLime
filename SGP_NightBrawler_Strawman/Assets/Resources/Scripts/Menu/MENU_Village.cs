@@ -19,11 +19,23 @@ public class MENU_Village : MonoBehaviour {
      * [3] : Defence;
      * [4] : Items;
      * [5] : Cult;
+     * [6] : Character Selection;
     */
 
     // Use this for initialization
 	void Start () {
         Vll_CurrCanvas = 0;
+
+        //REMOVE THIS PLZ WEN BUILD IS BEEN MADE
+        MNGR_Game.currentParty[0] = new CHAR_Swordsman();
+        MNGR_Game.currentParty[0].Act_currHP = 0;
+        MNGR_Game.currentParty[1] = new CHAR_Archer();
+        MNGR_Game.currentParty[1].Act_currHP = 40;
+        MNGR_Game.currentParty[2] = new CHAR_Wizard();
+        MNGR_Game.currentParty[2].Act_currHP = 30;
+        MNGR_Game.wallet = 1000;
+        //REMOVE THIS PLZ WEN BUILD IS BEEN MADE
+
         for (int i = 1; i < Vll_Shops.Length; i++)
             Vll_Shops[i].SetActive(false);
 	}

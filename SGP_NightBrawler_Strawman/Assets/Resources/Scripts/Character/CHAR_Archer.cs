@@ -11,11 +11,16 @@ public class CHAR_Archer : ACT_CHAR_Base
         cooldownTmr = 0;
 
         Act_baseHP = 75;
+        Act_currHP = Act_baseHP;
+
         Act_basePower = 10;
         Act_baseSpeed = 15;
         //Act_baseSpeed = 32;
         Act_baseAspeed = 0.02f;
 
+        Act_HPLevel = 1;
+        Act_PowerLevel = 1;
+        Act_SpeedLevel = 1;
 
         ProjFilePaths = new string[3];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Arrow";
