@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.38000011, y: -3.16000009, z: 0}
+  m_LocalPosition: {x: 11.8026838, y: -2.26433849, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,16 +102,16 @@ MonoBehaviour:
   randomState: 0
   curTime: 0
   stateTime: []
-  hpThresh: 0
+  hpThresh: 50
   nightThresh: 0
   TimeThresh: -1
   speedThresh: 0
   distThresh: 0
   coolThresh: 0
   behaviorSize: 1
-  behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  behaviorID: 04000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors:
-  - {fileID: 0}
+  - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   projectile: {fileID: 11453502, guid: 99fbcfdf35f81884cbb94723eed2690e, type: 2}
   isMelee: 1
   paused: 0
+  coins: {fileID: 178380, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
 --- !u!114 &11481870
 MonoBehaviour:
   m_ObjectHideFlags: 1

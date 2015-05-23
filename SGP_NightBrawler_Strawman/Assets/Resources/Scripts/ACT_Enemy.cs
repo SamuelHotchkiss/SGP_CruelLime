@@ -93,6 +93,8 @@ public class ACT_Enemy : MonoBehaviour
 	public bool isMelee;
 	public bool paused = false;
 
+	public GameObject coins;
+
 	//Mutators
 	public void SetCurrHP(int n_hp)
 	{
@@ -200,7 +202,11 @@ public class ACT_Enemy : MonoBehaviour
         Act_currAttackSpeed -= Time.deltaTime;
 
 		if (state == STATES.DEAD && curTime <= 0)
+		{
+			if (coins != null)
+				Instantiate(coins);				
 			Destroy(gameObject);
+		}
 
         if (curTime <= 0.0f)
             NewState();
@@ -457,6 +463,9 @@ public class ACT_Enemy : MonoBehaviour
         if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
         {
             randomState = (int)Random.Range(0.0f, 4.999f);
+
+			if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
+				randomState = (int)Random.Range(0.0f, 4.999f);
 
             state = (STATES)randomState;
             curTime = stateTime[(int)state];
