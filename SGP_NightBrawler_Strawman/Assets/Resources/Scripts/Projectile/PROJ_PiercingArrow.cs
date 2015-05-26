@@ -25,7 +25,9 @@ public class PROJ_PiercingArrow : PROJ_Base
             velocity = ogVelocity; // reset velocity so that we don't slow down or veer off
 
             if (hits <= 0 && gameObject != null)
+            {
                 Destroy(gameObject); // I'll just show myself out
+            }
         }
         else
         {
