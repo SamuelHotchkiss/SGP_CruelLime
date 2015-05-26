@@ -4,12 +4,12 @@ using System.Collections;
 [System.Serializable]
 public class ACT_CHAR_Base : ACT_Base
 {
-    public struct SpecialInfo
+    public struct AttackInfo
     {
         public int spriteIndex;
         public Vector2 velocity;
         public bool spawnproj;
-        public SpecialInfo(int _sprdex, Vector2 _vel, bool _spawn)
+        public AttackInfo(int _sprdex, Vector2 _vel, bool _spawn)
         {
             spriteIndex = _sprdex;
             velocity = _vel;
@@ -29,8 +29,12 @@ public class ACT_CHAR_Base : ACT_Base
 
     public string[] ProjFilePaths;
 
-
-    public int[] specialSprites;       // taken from the animation manager.  debating whether or not to do this with all sprites.
+    // taken from the animation manager.  debating whether or not to do this with all sprites.
+    // debate over.  prosecution wins.
+    public int[] attack1Sprites;
+    public int[] attack2Sprites;
+    public int[] attack3Sprites;
+    public int[] specialSprites;       
 
     public string name;
 
@@ -60,9 +64,27 @@ public class ACT_CHAR_Base : ACT_Base
 	}
 
 
-    public virtual SpecialInfo ActivateSpecial(float _curTmr, float _maxTmr)
+    public virtual AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+
+        return ret;
+    }
+    public virtual AttackInfo ActivateAttack2(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+
+        return ret;
+    }
+    public virtual AttackInfo ActivateAttack3(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+
+        return ret;
+    }
+    public virtual AttackInfo ActivateSpecial(float _curTmr, float _maxTmr)
 	{
-        SpecialInfo ret = new SpecialInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
 
         return ret;
 	}

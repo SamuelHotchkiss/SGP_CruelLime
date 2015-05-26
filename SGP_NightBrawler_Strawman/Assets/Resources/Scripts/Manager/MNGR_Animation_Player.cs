@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MNGR_Animation_Player : MonoBehaviour {
+public class MNGR_Animation_Player : MonoBehaviour
+{
 
     string[] filepaths;
     Sprite[] sprites;
@@ -13,14 +14,12 @@ public class MNGR_Animation_Player : MonoBehaviour {
     // these contain the sprite IDs used for each animaiton
     int[] idleSprites;
     int[] walkSprites;
-    int[] attack1Sprites;
-    int[] attack2Sprites;
-    int[] attack3Sprites;
     int[] hurtSprites;
     int[] deadSprites;
     public bool SpawnProj;
 
-	public void Initialize () {
+    public void Initialize()
+    {
 
         filepaths = new string[] { "Sprites/Player/Swordsman", "Sprites/Player/Lancer",
             "Sprites/Player/Defender", "Sprites/Player/Archer", "Sprites/Player/Ninja",
@@ -35,15 +34,13 @@ public class MNGR_Animation_Player : MonoBehaviour {
         // Works for swordsman...
         idleSprites = new int[] { 0, 1, 2 };
         walkSprites = new int[] { 5, 6, 7, 8, 9 };
-        attack1Sprites = new int[] { 10, 11, 12, 13 };
-        attack2Sprites = new int[] { 15, 16, 17 };
-        attack3Sprites = new int[] { 20, 21, 22, 23 };
         hurtSprites = new int[] { 30 };
         deadSprites = new int[] { 30, 31 };
         SpawnProj = true;
-	}
-	
-	void Update () {
+    }
+
+    void Update()
+    {
 
         // change this script's character if the party changes its character, but don't waste the time otherwise.
         if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
@@ -61,6 +58,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
         else
             transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
+        ACT_CHAR_Base.AttackInfo info;
         // animate based upon state.  mostly the same code, but has to be unique for each animation
         switch (curState)
         {
@@ -99,48 +97,30 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_1:
 
-                if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.75f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.5f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[1]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.4f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[2]];
-                else if (currentController.curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[3]];
+                info = currentCharacter.ActivateAttack1(currentController.curTmr, currentController.maxTmr[(int)curState]);
+                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
-                if (SpawnProj && currentController.curTmr < currentController.maxTmr[(int)curState] * 0.5f)
+                if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj();
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_2:
 
-                if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.66f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.56f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[1]];
-                else if (currentController.curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack2Sprites[2]];
+                info = currentCharacter.ActivateAttack2(currentController.curTmr, currentController.maxTmr[(int)curState]);
+                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
-                if (SpawnProj && currentController.curTmr < currentController.maxTmr[(int)curState] * 0.66f)
+                if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj();
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_3:
 
-                if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.75f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.5f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[1]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.45f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[2]];
-                else if (currentController.curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack3Sprites[3]];
+                info = currentCharacter.ActivateAttack3(currentController.curTmr, currentController.maxTmr[(int)curState]);
+                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
-                if (SpawnProj && currentController.curTmr < currentController.maxTmr[(int)curState] * 0.5f)
-                {
+                if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(1);
-                }
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
-                ACT_CHAR_Base.SpecialInfo info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
+                info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
                 GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
                 // completely pointless if statement and variable nonsense except it randomly wont work otherwise.
@@ -171,7 +151,7 @@ public class MNGR_Animation_Player : MonoBehaviour {
                 GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
                 break;
         }
-	}
+    }
 
     // handled in one easy-to-access function
     void ChangeState(ACT_CHAR_Base.STATES _newstate)
@@ -180,9 +160,9 @@ public class MNGR_Animation_Player : MonoBehaviour {
         lastState = curState;
 
         // position correction when warrior finishes his combo
-        if ( currentCharacter.characterIndex == 0 
+        if (currentCharacter.characterIndex == 0
             && (lastState == ACT_CHAR_Base.STATES.ATTACK_2 && _newstate == ACT_CHAR_Base.STATES.IDLE)
-            || (lastState == ACT_CHAR_Base.STATES.ATTACK_3 && _newstate == ACT_CHAR_Base.STATES.IDLE) )
+            || (lastState == ACT_CHAR_Base.STATES.ATTACK_3 && _newstate == ACT_CHAR_Base.STATES.IDLE))
         {
             // just move him by 0.35 in the direction he's facing, but looks more complicated than that.
             Vector3 newpos = transform.position;
@@ -193,6 +173,19 @@ public class MNGR_Animation_Player : MonoBehaviour {
             newpos.x += move;
             transform.position = newpos;
         }
+
+        // if this state didn't spawn a projectile during animation, spawn it here.
+        if (SpawnProj)
+        {
+            if (lastState == ACT_CHAR_Base.STATES.ATTACK_1
+                || lastState == ACT_CHAR_Base.STATES.ATTACK_2)
+                SpawnProj = currentController.SpawnProj(0);
+            else if (lastState == ACT_CHAR_Base.STATES.ATTACK_3)
+                SpawnProj = currentController.SpawnProj(1);
+            else if (lastState == ACT_CHAR_Base.STATES.SPECIAL)
+                SpawnProj = currentController.SpawnProj(2);
+        }
+
 
         // we have changed states, we should be able to spawn another projectile
         SpawnProj = true;
