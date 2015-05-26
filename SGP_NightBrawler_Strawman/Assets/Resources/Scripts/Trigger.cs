@@ -8,6 +8,7 @@ public class Trigger : MonoBehaviour {
 	{
 		if (col.tag == "Player")
 		{
+            MNGR_Game.playerPosition++;
 			Application.LoadLevel(levelName);
 		}
 	}
