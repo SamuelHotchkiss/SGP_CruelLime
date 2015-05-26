@@ -455,7 +455,7 @@ public class ACT_Enemy : MonoBehaviour
 			currBehavior = behaviors[0];
 			return true;
 		}
-		else if (behaviorSize > 1)
+		else if (behaviorSize > 1 && MNGR_Game.isNight)
 		{
 			currBehavior = behaviors[1];
 			return true;
