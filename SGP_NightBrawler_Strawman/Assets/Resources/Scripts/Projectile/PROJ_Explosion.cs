@@ -14,8 +14,8 @@ public class PROJ_Explosion : PROJ_Base
     {
         timer = timerMax;
         speed = 0;
-        if (sprites.Length > 0)
-            GetComponent<SpriteRenderer>().sprite = sprites[0];
+		if (sprites.Length > 0)
+			GetComponent<SpriteRenderer>().sprite = sprites[0];
 
         base.Initialize();
         // flip the circle collider if the owner faces the other way

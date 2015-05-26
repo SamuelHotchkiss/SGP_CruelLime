@@ -7,6 +7,7 @@ public class CHAR_Defender : ACT_CHAR_Base
 {
 	public CHAR_Defender()
 	{
+        name = "Defender"; // OF THE POLYVERSE!
 		characterIndex = 0;
 		cooldownTmr = 0;
 

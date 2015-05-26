@@ -36,9 +36,13 @@ public class ACT_CHAR_Base : ACT_Base
     public int[] attack3Sprites;
     public int[] specialSprites;       
 
+    public string name;
+
 	// Use this for initialization
 	public virtual void Start () 
 	{
+        name = "Default";
+
 		cooldownTmrBase = 3;
 		cooldownTmr = 0;
 

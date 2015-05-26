@@ -33,7 +33,7 @@ public class MENU_Village : MonoBehaviour {
         MNGR_Game.currentParty[1].Act_currHP = 40;
         MNGR_Game.currentParty[2] = new CHAR_Wizard();
         MNGR_Game.currentParty[2].Act_currHP = 30;
-        MNGR_Game.wallet = 1000;
+        MNGR_Game.wallet = 5000;
         //REMOVE THIS PLZ WEN BUILD IS BEEN MADE
 
         for (int i = 1; i < Vll_Shops.Length; i++)

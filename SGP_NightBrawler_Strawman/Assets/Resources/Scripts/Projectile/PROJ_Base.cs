@@ -47,7 +47,10 @@ public class PROJ_Base : MonoBehaviour
             if (right)
                 velocity = new Vector2(1, 0);// * speed;
             else
+			{
+				transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
                 velocity = new Vector2(-1, 0);// *speed;
+			}
         }
 
         //GetComponent<Rigidbody2D>().velocity = velocity;
@@ -71,9 +74,9 @@ public class PROJ_Base : MonoBehaviour
         Debug.Log("HIT!");
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
             if (gameObject != null)
                 ProjectileExpired();
+            collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
         }
         else if (collision.gameObject.tag == "Player")
         {

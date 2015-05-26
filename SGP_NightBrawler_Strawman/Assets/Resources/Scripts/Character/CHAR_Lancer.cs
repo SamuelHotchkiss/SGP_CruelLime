@@ -7,6 +7,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
 {
 	public CHAR_Lancer()
 	{
+        name = "Lancer"; // not to be confused with Lancelot, or his lesser known cousin, Lancealitte
 		characterIndex = 0;
 		cooldownTmr = 0;
 
@@ -38,7 +39,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
 	}
 
 	// Update is called once per frame
-	public void Update()
+    public override void Update()
 	{
 		base.Update();
 	}
