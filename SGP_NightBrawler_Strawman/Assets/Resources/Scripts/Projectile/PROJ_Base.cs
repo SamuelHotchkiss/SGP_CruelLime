@@ -74,9 +74,9 @@ public class PROJ_Base : MonoBehaviour
         Debug.Log("HIT!");
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
             if (gameObject != null)
                 ProjectileExpired();
+            collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
         }
         else if (collision.gameObject.tag == "Player")
         {

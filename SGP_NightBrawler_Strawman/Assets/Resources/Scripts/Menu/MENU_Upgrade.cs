@@ -120,6 +120,8 @@ public class MENU_Upgrade : MonoBehaviour {
             MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel++;
 
             MNGR_Game.wallet -= Upg_SpeedCost;
+
+
         }
     }
 }
