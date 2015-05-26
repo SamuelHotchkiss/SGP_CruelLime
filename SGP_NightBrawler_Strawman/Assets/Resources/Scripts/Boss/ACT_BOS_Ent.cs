@@ -73,6 +73,7 @@ public class ACT_BOS_Ent : ACT_Enemy
                 Ent_NewMaxRegen -= 0.25f;
             }
             Ent_HealCooldown -= Time.deltaTime;
+
         }
 
         if (Act_currHP <= 0.0f)
@@ -89,7 +90,7 @@ public class ACT_BOS_Ent : ACT_Enemy
                 if (!Ent_HealHP)
                 {
                     Spw_Critter = Ent_Roots;
-                    Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x, target.transform.position.y);
+                    Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x, target.transform.position.y, 0);
                     currBehavior.PerformBehavior(); 
                 }
                 break;
@@ -104,7 +105,7 @@ public class ACT_BOS_Ent : ACT_Enemy
                 break;
             case STATES.HURT:
                 //Animations??
-                //Ent_HealHP = false;
+                Ent_HealHP = false;
                 Knck_Cooldown = 0.0f;
                 break;
             case STATES.DEAD:
@@ -141,7 +142,7 @@ public class ACT_BOS_Ent : ACT_Enemy
 
         if (hpThresh >= Act_currHP)
         {
-            if (Act_currHP <= (int)(Act_baseHP * 0.25f))
+            if (Act_currHP <= (int)(Act_baseHP * 0.25f) && Ent_NewMaxRegen > 0.0f)
             {
                 Ent_HealHP = true;
                 if (distThresh + 5 >= Vector3.Distance(target.transform.position, transform.position))
@@ -176,17 +177,17 @@ public class ACT_BOS_Ent : ACT_Enemy
         Vector3 ActLoc;
 
         yield return new WaitForSeconds(0.3f);
-        Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x, transform.position.y);
+        Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x, 0);
         ActLoc = transform.position + Spw_SpawnPositionOffset;
         Instantiate(Spw_Critter, ActLoc, Quaternion.identity);
         Spw_SpawnPositionOffset = Ent_BaseSpawn;
         yield return new WaitForSeconds(0.6f);
-        Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x - 0.75f, transform.position.y);
+        Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x - 0.75f, 0);
         ActLoc = transform.position + Spw_SpawnPositionOffset;
         Instantiate(Spw_Critter, ActLoc, Quaternion.identity);
         Spw_SpawnPositionOffset = Ent_BaseSpawn;
         yield return new WaitForSeconds(0.9f);
-        Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x - 1.5f, transform.position.y);
+        Spw_SpawnPositionOffset = new Vector3(Spw_SpawnPositionOffset.x - 1.5f, 0);
         ActLoc = transform.position + Spw_SpawnPositionOffset;
         Instantiate(Spw_Critter, ActLoc, Quaternion.identity);
         Spw_SpawnPositionOffset = Ent_BaseSpawn;
