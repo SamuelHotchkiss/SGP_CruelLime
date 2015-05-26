@@ -455,6 +455,11 @@ public class ACT_Enemy : MonoBehaviour
 			currBehavior = behaviors[0];
 			return true;
 		}
+		else if (behaviorSize > 1)
+		{
+			currBehavior = behaviors[1];
+			return true;
+		}
 		return false;
 	}
 

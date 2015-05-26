@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (horz > 0)
                     party[currChar].Act_facingRight = true;
-                else
+                else if (horz < 0)
                     party[currChar].Act_facingRight = false;
 
                 if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
