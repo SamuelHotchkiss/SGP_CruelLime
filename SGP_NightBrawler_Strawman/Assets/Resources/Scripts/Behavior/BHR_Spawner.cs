@@ -30,7 +30,7 @@ public class BHR_Spawner : BHR_Base
         {
             if (owner.Spw_SpawnPerSec <= 0.0f)
             {
-                Vector3 ActSpawn = owner.Spw_SpawnPositionOffset + owner.transform.position;
+                Vector3 ActSpawn = new Vector3(owner.Spw_SpawnPositionOffset.x + owner.transform.position.x, owner.Spw_SpawnPositionOffset.y);
                 GameObject CritterSpwn = Instantiate(owner.Spw_Critter, ActSpawn, new Quaternion()) as GameObject;
                 CritterSpwn.GetComponent<Rigidbody2D>().AddForce(owner.Spw_Force);
                 owner.Spw_SpawnPerSec = owner.Spw_baseSpawnPerSec;
