@@ -52,7 +52,7 @@ public class CHAR_Archer : ACT_CHAR_Base
 
     public override AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         if (_curTmr > _maxTmr * 0.75f)
             ret.spriteIndex = attack1Sprites[0];
@@ -69,7 +69,7 @@ public class CHAR_Archer : ACT_CHAR_Base
     }
     public override AttackInfo ActivateAttack2(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         if (_curTmr > _maxTmr * 0.66f)
             ret.spriteIndex = attack2Sprites[0];
@@ -84,13 +84,13 @@ public class CHAR_Archer : ACT_CHAR_Base
     }
     public override AttackInfo ActivateAttack3(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         if (_curTmr > _maxTmr * 0.75f)
             ret.spriteIndex = attack3Sprites[0];
         else if (_curTmr > _maxTmr * 0.5f)
             ret.spriteIndex = attack3Sprites[1];
-        else if (_curTmr > _maxTmr * 0.45f)
+        else if (_curTmr > _maxTmr * 0.4f)
             ret.spriteIndex = attack3Sprites[2];
         else if (_curTmr >= 0)
             ret.spriteIndex = attack3Sprites[3];
@@ -102,7 +102,7 @@ public class CHAR_Archer : ACT_CHAR_Base
 
     public override AttackInfo ActivateSpecial(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         if (_curTmr > _maxTmr * 0.9f)
             ret.spriteIndex = specialSprites[0];
