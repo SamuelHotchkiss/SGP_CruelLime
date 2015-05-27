@@ -42,6 +42,9 @@ public class MNGR_Animation_Player : MonoBehaviour
 
     void Update()
     {
+        // S: Should prevent this from running if player is dead
+        if (!currentController.isAlive)
+            return;
 
         // change this script's character if the party changes its character, but don't waste the time otherwise.
         if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
