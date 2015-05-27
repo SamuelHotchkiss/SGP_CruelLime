@@ -530,7 +530,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //MNGR_Save.saveFiles[MNGR_Save.currSave] = new MNGR_GameData();
-        Application.LoadLevel("MainMenu");
+        Application.LoadLevel("GameOverLose");
     }
 
     // L: Input functions reduce copy and pasting clutter!
