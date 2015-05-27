@@ -8,11 +8,13 @@ public class ACT_CHAR_Base : ACT_Base
     {
         public int spriteIndex;
         public Vector2 velocity;
+        public Vector3 newpos;
         public bool spawnproj;
-        public AttackInfo(int _sprdex, Vector2 _vel, bool _spawn)
+        public AttackInfo(int _sprdex, Vector2 _vel, Vector3 _pos, bool _spawn)
         {
             spriteIndex = _sprdex;
             velocity = _vel;
+            newpos = _pos;
             spawnproj = _spawn;
         }
     }
@@ -66,25 +68,25 @@ public class ACT_CHAR_Base : ACT_Base
 
     public virtual AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         return ret;
     }
     public virtual AttackInfo ActivateAttack2(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         return ret;
     }
     public virtual AttackInfo ActivateAttack3(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         return ret;
     }
     public virtual AttackInfo ActivateSpecial(float _curTmr, float _maxTmr)
-	{
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, false);
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
         return ret;
 	}
