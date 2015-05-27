@@ -23,6 +23,16 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        if (MNGR_Game.playerPosition > 2)
+            MNGR_Game.playerPosition = 2;
+
+        if ((MNGR_Game.hordePosition / 2) == MNGR_Game.playerPosition && MNGR_Game.hordePosition > 0)
+            MNGR_Game.dangerZone = true;
+        else
+            MNGR_Game.dangerZone = false;
+
+        Debug.Log(MNGR_Game.dangerZone);
+
         if (MNGR_Game.isNight)
             theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Moon");
         else
@@ -40,10 +50,10 @@ public class MENU_World : MonoBehaviour
         playerArrow.transform.position = playMarker;
         hordeArrow.transform.position = hordeMarker;
 
-		//for (int i = 0; i < characterHP.Length; i++)
-		//{
-		//	characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
-		//}
+        for (int i = 0; i < characterHP.Length; i++)
+        {
+            characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
+        }
 
 		//for (int i = 0; i < inventory.Length; i++)
 		//{

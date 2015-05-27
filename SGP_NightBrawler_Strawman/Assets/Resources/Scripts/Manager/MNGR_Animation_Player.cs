@@ -6,6 +6,7 @@ public class MNGR_Animation_Player : MonoBehaviour
 
     string[] filepaths;
     Sprite[] sprites;
+    Sprite lastSprite;
     ACT_CHAR_Base currentCharacter;
         ACT_CHAR_Base.AttackInfo info;
     PlayerController currentController;
@@ -14,7 +15,6 @@ public class MNGR_Animation_Player : MonoBehaviour
 
     // these contain the sprite IDs used for each animaiton
     int[] idleSprites;
-    int[] walkSprites;
     int[] hurtSprites;
     int[] deadSprites;
     public bool SpawnProj;
@@ -34,7 +34,6 @@ public class MNGR_Animation_Player : MonoBehaviour
 
         // Works for swordsman...
         idleSprites = new int[] { 0, 1, 2 };
-        walkSprites = new int[] { 5, 6, 7, 8, 9 };
         hurtSprites = new int[] { 30 };
         deadSprites = new int[] { 30, 31 };
         SpawnProj = true;
@@ -42,6 +41,9 @@ public class MNGR_Animation_Player : MonoBehaviour
 
     void Update()
     {
+        // S: Should prevent this from running if player is dead
+        if (!currentController.isAlive)
+            return;
 
         // change this script's character if the party changes its character, but don't waste the time otherwise.
         if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
@@ -55,9 +57,9 @@ public class MNGR_Animation_Player : MonoBehaviour
 
         // rotate based upon facing bool
         if (currentCharacter.Act_facingRight)
-            transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         else
-            transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
         // animate based upon state.  mostly the same code, but has to be unique for each animation
         switch (curState)
@@ -75,25 +77,20 @@ public class MNGR_Animation_Player : MonoBehaviour
                 break;
             case ACT_CHAR_Base.STATES.WALKING:
 
-                if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.8f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.6f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.4f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[2]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.2f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[3]];
-                else if (currentController.curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[4]];
+                info = currentCharacter.ActivateWalk(currentController.curTmr, currentController.maxTmr[(int)curState]);
+
+                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
 
-                if (currentCharacter.Act_facingRight)
-                    transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                else
-                    transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+                info = currentCharacter.ActivateDodge(currentController.curTmr, currentController.maxTmr[(int)curState]);
 
-                GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
+                //if (currentCharacter.Act_facingRight)
+                    //transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                //else
+                    //transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+
+                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_1:
 
@@ -151,6 +148,11 @@ public class MNGR_Animation_Player : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
                 break;
         }
+
+        if (currentCharacter.invulTmr > 0.0f)
+            GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
+        else if (!GetComponent<SpriteRenderer>().enabled)
+            GetComponent<SpriteRenderer>().enabled = true;
     }
 
     // handled in one easy-to-access function

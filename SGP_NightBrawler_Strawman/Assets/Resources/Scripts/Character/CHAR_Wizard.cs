@@ -11,8 +11,10 @@ public class CHAR_Wizard : ACT_CHAR_Base
 		cooldownTmr = 0;
 
 		Act_baseHP = 50;
+        Act_currHP = Act_baseHP;
 		Act_basePower = 5;
         Act_baseSpeed = 10;
+        Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 20;
         Act_baseAspeed = 0.02f;
 
@@ -45,6 +47,15 @@ public class CHAR_Wizard : ACT_CHAR_Base
 	public override void Update()
 	{
 		base.Update();
+    }
+
+    public override AttackInfo ActivateDodge(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+
+        ret.spriteIndex = walkSprites[4];
+
+        return ret;
     }
 
     public override AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
