@@ -8,7 +8,7 @@ public class Coin : Item {
 
 	// Use this for initialization
 	void Start () {
-        Coin_Amount = 1;
+        //Coin_Amount = 1;
 	}
 
     public override void OnTriggerEnter2D(Collider2D Col)
