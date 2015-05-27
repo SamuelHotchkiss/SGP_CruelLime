@@ -16,6 +16,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
 		Act_basePower = 10;
         Act_baseSpeed = 10;
+        Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 25;
         Act_baseAspeed = 0.025f;
 

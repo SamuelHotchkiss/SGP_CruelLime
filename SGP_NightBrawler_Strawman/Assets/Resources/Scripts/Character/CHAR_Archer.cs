@@ -17,6 +17,7 @@ public class CHAR_Archer : ACT_CHAR_Base
 
         Act_basePower = 10;
         Act_baseSpeed = 15;
+        Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 32;
         Act_baseAspeed = 0.02f;
 

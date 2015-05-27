@@ -13,6 +13,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
 		Act_baseHP = 50;
 		Act_basePower = 5;
         Act_baseSpeed = 10;
+        Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 20;
         Act_baseAspeed = 0.02f;
 
