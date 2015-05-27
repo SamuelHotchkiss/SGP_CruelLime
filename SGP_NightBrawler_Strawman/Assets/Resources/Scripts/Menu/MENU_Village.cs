@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MENU_Village : MonoBehaviour {
 
-    public  GameObject[] Vll_Shops;
+    public GameObject[] Vll_Shops;
+    public GameObject Vll_TimePanel;
     public int[] Vll_DayShopsID;
     public int[] Vll_NightShopID;
 
@@ -47,7 +49,8 @@ public class MENU_Village : MonoBehaviour {
         {
             if (MNGR_Game.isNight)
             {
-                GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[1];
+                //GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[1];
+                Vll_TimePanel.GetComponent<Image>().sprite = Vll_TimeOfDay[1];
                 for (int i = 0; i < Vll_DayShopsID.Length; i++)
                     OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = false;
                 for (int i = 0; i < Vll_NightShopID.Length; i++)
@@ -55,7 +58,8 @@ public class MENU_Village : MonoBehaviour {
             }
             else if (!MNGR_Game.isNight)
             {
-                GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[0];
+                //GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[0];
+                Vll_TimePanel.GetComponent<Image>().sprite = Vll_TimeOfDay[0];
                 for (int i = 0; i < Vll_DayShopsID.Length; i++)
                     OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = true;
                 for (int i = 0; i < Vll_NightShopID.Length; i++)
