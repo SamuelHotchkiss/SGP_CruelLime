@@ -84,9 +84,9 @@ public class MNGR_Animation_Enemy : MonoBehaviour
 
         // rotate based upon facing bool
         if (currentCharacter.Act_facingRight)
-            transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         else
-            transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
         // animate based upon state.  mostly the same code, but has to be unique for each animation
         switch (curState)
