@@ -27,7 +27,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     void Start()
     {
 
-        filepaths = new string[] { "GloblinFighter", "GloblinArcher" };
+        filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief" };
         for (int i = 0; i < filepaths.Length; i++)
             filepaths[i] = "Sprites/Enemy/" + filepaths[i];
         currentCharacter = GetComponent<ACT_Enemy>();
@@ -55,6 +55,14 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 walkSprites = new int[] { 5, 6, 7, 8, 9 };
                 attack1Sprites = new int[] { 10, 11, 12 };
                 specialSprites = new int[] { 0 };
+                hurtSprites = new int[] { 15 };
+                deadSprites = new int[] { 15, 16 };
+                break;
+            case 2: // Globlin Warchief
+                idleSprites = new int[] { 0, 1, 2 };
+                walkSprites = new int[] { 5, 6, 7, 8, 9 };
+                attack1Sprites = new int[] { 10, 11, 12 };
+                specialSprites = new int[] { 17 };
                 hurtSprites = new int[] { 15 };
                 deadSprites = new int[] { 15, 16 };
                 break;
@@ -150,6 +158,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                     else
                         GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[1]];
                 }*/
+                GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[0]];
                 break;
             case ACT_Enemy.STATES.HURT:
                 GetComponent<SpriteRenderer>().sprite = sprites[hurtSprites[0]];

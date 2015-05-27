@@ -7,6 +7,7 @@ public class MNGR_Animation_Player : MonoBehaviour
     string[] filepaths;
     Sprite[] sprites;
     ACT_CHAR_Base currentCharacter;
+        ACT_CHAR_Base.AttackInfo info;
     PlayerController currentController;
     ACT_CHAR_Base.STATES lastState;
     ACT_CHAR_Base.STATES curState;
@@ -58,7 +59,6 @@ public class MNGR_Animation_Player : MonoBehaviour
         else
             transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
-        ACT_CHAR_Base.AttackInfo info;
         // animate based upon state.  mostly the same code, but has to be unique for each animation
         switch (curState)
         {
@@ -160,9 +160,9 @@ public class MNGR_Animation_Player : MonoBehaviour
         lastState = curState;
 
         // position correction when warrior finishes his combo
-        if (currentCharacter.characterIndex == 0
-            && (lastState == ACT_CHAR_Base.STATES.ATTACK_2 && _newstate == ACT_CHAR_Base.STATES.IDLE)
-            || (lastState == ACT_CHAR_Base.STATES.ATTACK_3 && _newstate == ACT_CHAR_Base.STATES.IDLE))
+        /*if (currentCharacter.characterIndex == 0
+            && ((lastState == ACT_CHAR_Base.STATES.ATTACK_2 && _newstate == ACT_CHAR_Base.STATES.IDLE)
+            || (lastState == ACT_CHAR_Base.STATES.ATTACK_3 && _newstate == ACT_CHAR_Base.STATES.IDLE)))
         {
             // just move him by 0.35 in the direction he's facing, but looks more complicated than that.
             Vector3 newpos = transform.position;
@@ -172,6 +172,14 @@ public class MNGR_Animation_Player : MonoBehaviour
 
             newpos.x += move;
             transform.position = newpos;
+        }*/
+        if (_newstate == ACT_CHAR_Base.STATES.IDLE)
+        {
+            Vector3 newpos = transform.position;
+            if (!currentCharacter.Act_facingRight)
+                info.newpos *= -1.0f;
+            transform.position = newpos + info.newpos;
+            info.newpos = Vector3.zero;
         }
 
         // if this state didn't spawn a projectile during animation, spawn it here.
