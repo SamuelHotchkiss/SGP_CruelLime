@@ -14,6 +14,7 @@ public class MENU_Upgrade : MonoBehaviour {
     public int Upg_PowerCost;
     public int Upg_SpeedCost;
 
+    enum UpgType { HpUpg, PowerUpg, SpeedUpg };
 	// Use this for initialization
 	void Start () {
 
@@ -44,7 +45,7 @@ public class MENU_Upgrade : MonoBehaviour {
         {
             if (MNGR_Game.currentParty[i].Act_currHP > 0)
             {
-                Upg_CurrCharNames[i].text = MNGR_Game.currentParty[i].name;
+                Upg_CurrCharNames[i].text = MNGR_Game.currentParty[i].name + "\nHP: " + MNGR_Game.currentParty[i].Act_currHP + " / " + MNGR_Game.currentParty[i].Act_baseHP;
                 if (i == 0)
                     for (int j = 0; j < Upg_Char1.Length; j++)
                         Upg_Char1[j].interactable = true;
@@ -73,22 +74,23 @@ public class MENU_Upgrade : MonoBehaviour {
 
         Upg_CurrCoins.text = MNGR_Game.wallet.ToString();
 
-        Upg_Char1[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[0].Act_HPLevel.ToString();
-        Upg_Char1[1].GetComponentInChildren<Text>().text = "Power Lvl: " + MNGR_Game.currentParty[0].Act_PowerLevel.ToString();
-        Upg_Char1[2].GetComponentInChildren<Text>().text = "Speed Lvl: " + MNGR_Game.currentParty[0].Act_SpeedLevel.ToString();
+        Upg_Char1[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[0].Act_HPLevel.ToString() + "\nCost: " + CalculateUpgradeCost(0, UpgType.HpUpg).ToString() + " Gold";
+        Upg_Char1[1].GetComponentInChildren<Text>().text = "Power Lvl: " + MNGR_Game.currentParty[0].Act_PowerLevel.ToString() + "\nCost: " + CalculateUpgradeCost(0, UpgType.PowerUpg).ToString() + " Gold";
+        Upg_Char1[2].GetComponentInChildren<Text>().text = "Speed Lvl: " + MNGR_Game.currentParty[0].Act_SpeedLevel.ToString() + "\nCost: " + CalculateUpgradeCost(0, UpgType.SpeedUpg).ToString() + " Gold";
 
-        Upg_Char2[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[1].Act_HPLevel.ToString();
-        Upg_Char2[1].GetComponentInChildren<Text>().text = "Power Lvl: " + MNGR_Game.currentParty[1].Act_PowerLevel.ToString();
-        Upg_Char2[2].GetComponentInChildren<Text>().text = "Speed Lvl: " + MNGR_Game.currentParty[1].Act_SpeedLevel.ToString();
+        Upg_Char2[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[1].Act_HPLevel.ToString() + "\nCost: " + CalculateUpgradeCost(1, UpgType.HpUpg).ToString() + " Gold";
+        Upg_Char2[1].GetComponentInChildren<Text>().text = "Power Lvl: " + MNGR_Game.currentParty[1].Act_PowerLevel.ToString() + "\nCost: " + CalculateUpgradeCost(1, UpgType.PowerUpg).ToString() + " Gold";
+        Upg_Char2[2].GetComponentInChildren<Text>().text = "Speed Lvl: " + MNGR_Game.currentParty[1].Act_SpeedLevel.ToString() + "\nCost: " + CalculateUpgradeCost(1, UpgType.SpeedUpg).ToString() + " Gold";
 
-        Upg_Char3[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[2].Act_HPLevel.ToString();
-        Upg_Char3[1].GetComponentInChildren<Text>().text = "Power Lvl: " + MNGR_Game.currentParty[2].Act_PowerLevel.ToString();
-        Upg_Char3[2].GetComponentInChildren<Text>().text = "Speed Lvl: " + MNGR_Game.currentParty[2].Act_SpeedLevel.ToString();
+        Upg_Char3[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[2].Act_HPLevel.ToString() + "\nCost: " + CalculateUpgradeCost(2, UpgType.HpUpg).ToString() + " Gold";
+        Upg_Char3[1].GetComponentInChildren<Text>().text = "Power Lvl: " + MNGR_Game.currentParty[2].Act_PowerLevel.ToString() + "\nCost: " + CalculateUpgradeCost(2, UpgType.PowerUpg).ToString() + " Gold";
+        Upg_Char3[2].GetComponentInChildren<Text>().text = "Speed Lvl: " + MNGR_Game.currentParty[2].Act_SpeedLevel.ToString() + "\nCost: " + CalculateUpgradeCost(2, UpgType.SpeedUpg).ToString() + " Gold";
 	}
 
     public void UpgradeHP(int _CharIndex)
     {
-        Upg_HPCost = (MNGR_Game.currentParty[_CharIndex].Act_HPLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_HPLevel;
+        //Upg_HPCost = (MNGR_Game.currentParty[_CharIndex].Act_HPLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_HPLevel;
+        CalculateUpgradeCost(_CharIndex, UpgType.HpUpg);
         if (MNGR_Game.wallet >= Upg_HPCost && MNGR_Game.currentParty[_CharIndex].Act_HPLevel < 20)
         {
             MNGR_Game.currentParty[_CharIndex].Act_baseHP += 5;
@@ -99,7 +101,8 @@ public class MENU_Upgrade : MonoBehaviour {
 
     public void UpgradePower(int _CharIndex)
     {
-        Upg_PowerCost = (MNGR_Game.currentParty[_CharIndex].Act_PowerLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_PowerLevel;
+        //Upg_PowerCost = (MNGR_Game.currentParty[_CharIndex].Act_PowerLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_PowerLevel;
+        CalculateUpgradeCost(_CharIndex, UpgType.PowerUpg);
         if (MNGR_Game.wallet >= Upg_PowerCost && MNGR_Game.currentParty[_CharIndex].Act_PowerLevel < 20)
         {
             MNGR_Game.currentParty[_CharIndex].Act_basePower += 3;
@@ -112,7 +115,8 @@ public class MENU_Upgrade : MonoBehaviour {
 
     public void UpgradeSpeed(int _CharIndex)
     {
-        Upg_SpeedCost = (MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel;
+        //Upg_SpeedCost = (MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel;
+        CalculateUpgradeCost(_CharIndex, UpgType.SpeedUpg);
         if (MNGR_Game.wallet >= Upg_SpeedCost && MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel < 20)
         {
             MNGR_Game.currentParty[_CharIndex].Act_baseSpeed += 3;
@@ -123,5 +127,23 @@ public class MENU_Upgrade : MonoBehaviour {
 
 
         }
+    }
+
+    int CalculateUpgradeCost(int _CharIndex, UpgType _UpgType)
+    {
+        switch (_UpgType)
+        {
+            case UpgType.HpUpg:
+                Upg_HPCost = (MNGR_Game.currentParty[_CharIndex].Act_HPLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_HPLevel;
+                return Upg_HPCost;
+            case UpgType.PowerUpg:
+                Upg_PowerCost = (MNGR_Game.currentParty[_CharIndex].Act_PowerLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_PowerLevel;
+                return Upg_PowerCost;
+            case UpgType.SpeedUpg:
+                Upg_SpeedCost = (MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel * 5) + MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel;
+                return Upg_SpeedCost;
+        }
+
+        return -1;
     }
 }

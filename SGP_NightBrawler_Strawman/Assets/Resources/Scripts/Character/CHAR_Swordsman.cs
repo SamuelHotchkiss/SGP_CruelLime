@@ -11,11 +11,13 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 		characterIndex = 0;
 		cooldownTmr = 0;
 
+
 		Act_baseHP = 100;
         Act_currHP = Act_baseHP;
 
 		Act_basePower = 10;
         Act_baseSpeed = 10;
+        Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 25;
         Act_baseAspeed = 0.025f;
 
