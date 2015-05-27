@@ -8,7 +8,7 @@ public class MENU_World : MonoBehaviour
     int playIndex, hordeIndex;
 
     public Button[] levels, hordeSteps;
-    public Text[] characterHP, inventory;
+	public Text[] characterHP, inventoryCounts;
     public Text playerPos, hordePos;
 
     public Button playerArrow, hordeArrow;
@@ -17,10 +17,21 @@ public class MENU_World : MonoBehaviour
 
     public AudioClip Menu_SelectedSound;    //Clip of sound that will play when a button is pressed.
 
+	public Image[] inventoryImages;
+
 
 	// Use this for initialization
 	void Start () 
     {
+        MNGR_Game.playerPosition = 2;
+
+        if ((MNGR_Game.hordePosition / 2) == MNGR_Game.playerPosition && MNGR_Game.hordePosition > 0)
+            MNGR_Game.dangerZone = true;
+        else
+            MNGR_Game.dangerZone = false;
+
+        Debug.Log(MNGR_Game.dangerZone);
+
         if (MNGR_Game.isNight)
             theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Moon");
         else
@@ -38,15 +49,24 @@ public class MENU_World : MonoBehaviour
         playerArrow.transform.position = playMarker;
         hordeArrow.transform.position = hordeMarker;
 
-        for (int i = 0; i < characterHP.Length; i++)
-        {
-            characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
-        }
+		//for (int i = 0; i < characterHP.Length; i++)
+		//{
+		//	characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
+		//}
 
-        for (int i = 0; i < inventory.Length; i++)
-        {
-            inventory[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
-        }
+		//for (int i = 0; i < inventory.Length; i++)
+		//{
+		//	inventory[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
+		//}
+
+		for (int i = 0; i < inventoryCounts.Length; i++)
+		{
+			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
+			if (MNGR_Game.theInventory.containers[i].count < 1)
+				inventoryImages[i].gameObject.SetActive(false);
+			else
+				inventoryImages[i].gameObject.SetActive(true);
+		}
 	}
 
     public void StartLevel()

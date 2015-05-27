@@ -46,14 +46,11 @@ public class ACT_CHAR_Base : ACT_Base
 	// Use this for initialization
 	public virtual void Start () 
 	{
-        name = "Default";
-
 		cooldownTmrBase = 3;
         cooldownTmr = 0;
         invulMaxTmr = 2.0f;
         invulTmr = 0.0f;
 
-        Act_currHP = Act_baseHP;
         Act_currPower = Act_basePower;
         Act_currSpeed = Act_baseSpeed;
         Act_currAspeed = Act_baseAspeed;

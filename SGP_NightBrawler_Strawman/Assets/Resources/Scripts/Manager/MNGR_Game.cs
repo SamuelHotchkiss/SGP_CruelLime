@@ -15,5 +15,5 @@ public static class MNGR_Game
     public static bool isNight;
     public static int hordePosition, playerPosition, wallet;
 	public static bool paused;
-	public static bool dangerZone;
+	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
 }

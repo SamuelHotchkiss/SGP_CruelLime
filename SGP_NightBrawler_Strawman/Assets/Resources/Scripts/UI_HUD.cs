@@ -80,7 +80,7 @@ public class UI_HUD : MonoBehaviour {
 		ranger.Update();
 		mage.Update();
 
-		gold.text = "Coins: " + MNGR_Game.wallet;
+		gold.text = "C o i n s : " + MNGR_Game.wallet;
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{

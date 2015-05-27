@@ -45,9 +45,14 @@ public class PlayerController : MonoBehaviour
     // J: Need this for Knockback
     public bool Pc_HasKnockBack;
 
+    // S: check if we're alive
+    public bool isAlive;
+
     // Use this for initialization
     void Start()
     {
+        isAlive = true;
+
         party = new ACT_CHAR_Base[3];
 
         party[0] = new CHAR_Swordsman();
@@ -98,6 +103,9 @@ public class PlayerController : MonoBehaviour
     // aka The Situation.
     void Update()
     {
+        // S: Should prevent this from running if player is dead
+        if (!isAlive)
+            return;
         if (currentState != party[currChar].state)
             ChangeState(party[currChar].state);
 
@@ -503,6 +511,8 @@ public class PlayerController : MonoBehaviour
     // S: til this do us part
     public void Death()
     {
+        isAlive = false;
+
         MNGR_Game.hordePosition++;
         MNGR_Game.isNight = !MNGR_Game.isNight;
 
@@ -511,6 +521,7 @@ public class PlayerController : MonoBehaviour
 
     public void MurderEveryone()
     {
+        isAlive = false;
         currChar = 0;
         for (int i = 0; i < 3; i++)
         {

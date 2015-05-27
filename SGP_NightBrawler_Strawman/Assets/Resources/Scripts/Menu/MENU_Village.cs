@@ -11,8 +11,12 @@ public class MENU_Village : MonoBehaviour {
 
     public Sprite[] Vll_TimeOfDay;
 
-    public int Vll_CurrCanvas;
 
+	public AudioClip Menu_SelectedSound;    //Clip of sound that will play wen a button is press.
+	private string Menu_Levelname;          //Name that will be use to change scenes
+
+
+    public int Vll_CurrCanvas;
     /*
      * Canvas IDs
      * [0] : Village;
@@ -28,15 +32,15 @@ public class MENU_Village : MonoBehaviour {
 	void Start () {
         Vll_CurrCanvas = 0;
 
-        //REMOVE THIS PLZ WEN BUILD IS BEEN MADE
-        MNGR_Game.currentParty[0] = new CHAR_Swordsman();
-        MNGR_Game.currentParty[0].Act_currHP = 0;
-        MNGR_Game.currentParty[1] = new CHAR_Archer();
-        MNGR_Game.currentParty[1].Act_currHP = 40;
-        MNGR_Game.currentParty[2] = new CHAR_Wizard();
-        MNGR_Game.currentParty[2].Act_currHP = 30;
-        MNGR_Game.wallet = 5000;
-        //REMOVE THIS PLZ WEN BUILD IS BEEN MADE
+		////REMOVE THIS PLZ WEN BUILD IS BEEN MADE
+		//MNGR_Game.currentParty[0] = new CHAR_Swordsman();
+		//MNGR_Game.currentParty[0].Act_currHP = 0;
+		//MNGR_Game.currentParty[1] = new CHAR_Archer();
+		//MNGR_Game.currentParty[1].Act_currHP = 40;
+		//MNGR_Game.currentParty[2] = new CHAR_Wizard();
+		//MNGR_Game.currentParty[2].Act_currHP = 30;
+		//MNGR_Game.wallet = 5000;
+		////REMOVE THIS PLZ WEN BUILD IS BEEN MADE
 
         for (int i = 1; i < Vll_Shops.Length; i++)
             Vll_Shops[i].SetActive(false);
@@ -76,4 +80,29 @@ public class MENU_Village : MonoBehaviour {
         Vll_Shops[Vll_CurrCanvas].SetActive(false);
         Vll_CurrCanvas = _ShopID;
     }
+
+	public void ChangeSceneButton(string levelname)
+	{
+		//Level Name most be the EXACT name of the scene.
+		AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+		Menu_Levelname = levelname;
+		StartCoroutine(WaitForSound(0));
+		MNGR_Game.playerPosition++;
+	}
+
+	IEnumerator WaitForSound(int _selection)
+	{
+		yield return new WaitForSeconds(0.35f);     //This is how long the current sound clip takes to play.
+		switch (_selection)
+		{
+			case 0:
+				Application.LoadLevel(Menu_Levelname);
+				break;
+			case 1:
+				Application.Quit();
+				break;
+			default:
+				break;
+		}
+	}
 }
