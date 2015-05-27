@@ -44,11 +44,16 @@ public class PlayerController : MonoBehaviour
     // J: Need this for Knockback
     public bool Pc_HasKnockBack;
 
+    // S: check if we're alive
+    public bool isAlive;
+
     // Use this for initialization
     void Start()
     {
+        isAlive = true;
+
         party = new ACT_CHAR_Base[3];
-        
+
         //party[0] = new CHAR_Swordsman();
         //party[1] = new CHAR_Archer();
         //party[2] = new CHAR_Wizard();
@@ -69,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
         // Ok, not as slick as doody.  more like a wet floor.
         maxTmr = new float[party[currChar].StateTmrs.Length];
-        for (int i = 0; i < party[currChar].StateTmrs.Length; i++ )
+        for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
         {
             maxTmr[i] = party[currChar].StateTmrs[i];
         }
@@ -87,56 +92,60 @@ public class PlayerController : MonoBehaviour
         vert = 0.0f;
         notjoydash = false;
 
-		// for testing
-		//MNGR_Game.dangerZone = true;
+        // for testing
+        //MNGR_Game.dangerZone = true;
 
-		if (MNGR_Game.dangerZone)
-			GameObject.Find("_Horde").SetActive(true);
-		else
-			GameObject.Find("_Horde").SetActive(false);
+        if (MNGR_Game.dangerZone)
+            GameObject.Find("_Horde").SetActive(true);
+        else
+            GameObject.Find("_Horde").SetActive(false);
     }
 
     void Update()
     {
-		switch (party[currChar].state)
-		{
-			case ACT_CHAR_Base.STATES.IDLE:
-				loop = true;
-				break;
-			case ACT_CHAR_Base.STATES.WALKING:
-				loop = true;
-				break;
-			case ACT_CHAR_Base.STATES.DASHING:
-				loop = false;
-				break;
-			case ACT_CHAR_Base.STATES.ATTACK_1:
-				loop = false;
-				break;
-			case ACT_CHAR_Base.STATES.ATTACK_2:
-				loop = false;
-				break;
-			case ACT_CHAR_Base.STATES.ATTACK_3:
-				loop = false;
-				break;
-			case ACT_CHAR_Base.STATES.SPECIAL:
-				loop = false;
-				break;
-			case ACT_CHAR_Base.STATES.HURT:
-				loop = false;
-				break;
-			case ACT_CHAR_Base.STATES.DYING:
-				loop = false;
-				break;
-			case ACT_CHAR_Base.STATES.USE:
-				loop = false;
-				break;
-		}
+        // S: Should prevent this from running if player is dead
+        if (!isAlive)
+            return;
 
-		if (party[currChar].state == ACT_CHAR_Base.STATES.DYING)
-		{
-			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-			loop = false;
-		}
+        switch (party[currChar].state)
+        {
+            case ACT_CHAR_Base.STATES.IDLE:
+                loop = true;
+                break;
+            case ACT_CHAR_Base.STATES.WALKING:
+                loop = true;
+                break;
+            case ACT_CHAR_Base.STATES.DASHING:
+                loop = false;
+                break;
+            case ACT_CHAR_Base.STATES.ATTACK_1:
+                loop = false;
+                break;
+            case ACT_CHAR_Base.STATES.ATTACK_2:
+                loop = false;
+                break;
+            case ACT_CHAR_Base.STATES.ATTACK_3:
+                loop = false;
+                break;
+            case ACT_CHAR_Base.STATES.SPECIAL:
+                loop = false;
+                break;
+            case ACT_CHAR_Base.STATES.HURT:
+                loop = false;
+                break;
+            case ACT_CHAR_Base.STATES.DYING:
+                loop = false;
+                break;
+            case ACT_CHAR_Base.STATES.USE:
+                loop = false;
+                break;
+        }
+
+        if (party[currChar].state == ACT_CHAR_Base.STATES.DYING)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            loop = false;
+        }
         if (myBuffs.Count == 0)
             buffState = MNGR_Item.BuffStates.NEUTRAL;
 
@@ -188,11 +197,11 @@ public class PlayerController : MonoBehaviour
 
         if (party[currChar].Act_currHP <= 0)
         {
-			party[currChar].Act_currHP = 0;
-			party[currChar].state = ACT_CHAR_Base.STATES.DYING;
-			//curTmr = maxTmr[(int)party[currChar].state];
-			loop = false;
-			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            party[currChar].Act_currHP = 0;
+            party[currChar].state = ACT_CHAR_Base.STATES.DYING;
+            //curTmr = maxTmr[(int)party[currChar].state];
+            loop = false;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
 
         if (party[currChar].state != ACT_CHAR_Base.STATES.DYING && party[currChar].state != ACT_CHAR_Base.STATES.HURT)
@@ -244,7 +253,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // manual deadzones
-                if (Mathf.Abs(horz) < 0.1f )
+                if (Mathf.Abs(horz) < 0.1f)
                     horz = 0.0f;
                 if (Mathf.Abs(vert) < 0.1f)
                     vert = 0.0f;
@@ -255,7 +264,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // begin walking
-            if ( (horz != 0 || vert != 0 )&& (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
+            if ((horz != 0 || vert != 0) && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
             {
                 if (horz > 0)
                     party[currChar].Act_facingRight = true;
@@ -326,7 +335,7 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
                 && party[currChar].state != ACT_CHAR_Base.STATES.USE)
             {
-                if(!MNGR_Game.usedItem)
+                if (!MNGR_Game.usedItem)
                 {
                     MNGR_Game.usedItem = true;
                     MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
@@ -372,7 +381,7 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetAxis("Pad_DodgeHorizontal") != 0 || Input.GetAxis("Pad_DodgeVertical") != 0
                 || party[currChar].state == ACT_CHAR_Base.STATES.DASHING) && !notjoydash
                 && (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
-                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING 
+                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING
                 || party[currChar].state == ACT_CHAR_Base.STATES.DASHING))
             {
                 // buffered input #PutsOnShadesYEEEAAAAAHH
@@ -405,7 +414,7 @@ public class PlayerController : MonoBehaviour
             {
                 notjoydash = false;
             }
-          
+
         }
 
         // modify velocity only if we aren't in special state (for custom special movement)
@@ -549,22 +558,22 @@ public class PlayerController : MonoBehaviour
     // The Force will affect how far and how long the player will be knockback 
     public void ApplyKnockBack(float _Force)
     {
-		if (party[currChar].state != ACT_CHAR_Base.STATES.HURT && party[currChar].state != ACT_CHAR_Base.STATES.DYING)
-		{
-				
-        horz = _Force;
-        if (_Force < 0.0f)          //Since _Force is use for the Timer, it needs to alway be positive.
-            _Force = -_Force;
+        if (party[currChar].state != ACT_CHAR_Base.STATES.HURT && party[currChar].state != ACT_CHAR_Base.STATES.DYING)
+        {
 
-        curTmr = _Force / 50.0f;    //This is compensating for Force been larger than 1
-                                    //If this number is change, another most be change in the if check for when the character is in the Hurt State.
-        loop = false;
-        Pc_HasKnockBack = true;
+            horz = _Force;
+            if (_Force < 0.0f)          //Since _Force is use for the Timer, it needs to alway be positive.
+                _Force = -_Force;
 
-        party[currChar].state = ACT_CHAR_Base.STATES.HURT;
-        nextState = ACT_CHAR_Base.STATES.IDLE;
-        vert = 0.0f;
-		}        
+            curTmr = _Force / 50.0f;    //This is compensating for Force been larger than 1
+            //If this number is change, another most be change in the if check for when the character is in the Hurt State.
+            loop = false;
+            Pc_HasKnockBack = true;
+
+            party[currChar].state = ACT_CHAR_Base.STATES.HURT;
+            nextState = ACT_CHAR_Base.STATES.IDLE;
+            vert = 0.0f;
+        }
     }
 
     // L: called in animation manager when we're displaying the right sprite to attack at
@@ -579,32 +588,32 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < num; i++)
         {*/
         Object test = Projs[_index];
-            GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
-            clone.GetComponent<PROJ_Base>().owner = gameObject;
-            clone.GetComponent<PROJ_Base>().Initialize();
+        GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
+        clone.GetComponent<PROJ_Base>().owner = gameObject;
+        clone.GetComponent<PROJ_Base>().Initialize();
 
-            // this makes me puke a little inside.
-            if (party[currChar].characterIndex == 6 && _index == 1)
-            {
-                clone.GetComponent<PROJ_Explosive>().sprites = Resources.LoadAll<Sprite>("Sprites/Projectile/FireballStrong");
-            }
-                 /*Vector3 rot = clone.transform.localEulerAngles;
-                 Vector2 vel = clone.GetComponent<PROJ_Base>().velocity;
-                 if (i == 1)
-                 {
-                     rot.z = 25.0f;
-                     vel = new Vector2(vel.x, 0.278f);
-                 }
-                 else if (i == 2)
-                 {
-                     rot.z = -25.0f;
-                     vel = new Vector2(vel.x, -0.278f);
-                 }
-                 clone.transform.localEulerAngles = rot;
-                 clone.GetComponent<PROJ_Base>().velocity = vel;
+        // this makes me puke a little inside.
+        if (party[currChar].characterIndex == 6 && _index == 1)
+        {
+            clone.GetComponent<PROJ_Explosive>().sprites = Resources.LoadAll<Sprite>("Sprites/Projectile/FireballStrong");
+        }
+        /*Vector3 rot = clone.transform.localEulerAngles;
+        Vector2 vel = clone.GetComponent<PROJ_Base>().velocity;
+        if (i == 1)
+        {
+            rot.z = 25.0f;
+            vel = new Vector2(vel.x, 0.278f);
+        }
+        else if (i == 2)
+        {
+            rot.z = -25.0f;
+            vel = new Vector2(vel.x, -0.278f);
+        }
+        clone.transform.localEulerAngles = rot;
+        clone.GetComponent<PROJ_Base>().velocity = vel;
 
-            }
-        }*/
+   }
+}*/
 
         // disables a one-way boolean in the animation manager.  goofy, I know.  Harmless, hopefully.
         return false;
@@ -615,7 +624,7 @@ public class PlayerController : MonoBehaviour
         float limiter = 1.0f;      // return to this value when testing how high stats can go and all that.
         float ratio = party[currChar].Act_currAspeed * party[currChar].Act_currSpeed;
 
-        if ( limiter - ratio < 0.2f)
+        if (limiter - ratio < 0.2f)
             ratio = 0.2f;
 
         return party[currChar].StateTmrs[(int)party[currChar].state] * (limiter - ratio);
@@ -624,22 +633,28 @@ public class PlayerController : MonoBehaviour
     // S: til this do us part
     public void Death()
     {
+        isAlive = false;
+
         MNGR_Game.hordePosition++;
         MNGR_Game.isNight = !MNGR_Game.isNight;
 
         Application.LoadLevel("WorldMap");
     }
 
-	public void MurderEveryone()
-	{
-		currChar = 0;
-		for (int i = 0; i < 3; i++)
-		{
-			party[currChar].Act_currHP = 0;
-			currChar++;
-		}
+    public void MurderEveryone()
+    {
+        isAlive = false;
 
-		//MNGR_Save.saveFiles[MNGR_Save.currSave] = new MNGR_GameData();
-		Application.LoadLevel("MainMenu");
-	}
+        currChar = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            party[currChar].Act_currHP = 0;
+            currChar++;
+        }
+
+        MNGR_Save.saveFiles[MNGR_Save.currSave] = new MNGR_GameData(); // clears savedata
+        MNGR_Save.SaveProfiles();
+
+        Application.LoadLevel("MainMenu");
+    }
 }
