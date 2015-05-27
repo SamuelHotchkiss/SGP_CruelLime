@@ -32,7 +32,7 @@ public class PROJ_Base : MonoBehaviour
                 velocity = new Vector2(1, 0);// * speed;
             else
             {
-                transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
                 velocity = new Vector2(-1, 0);// * speed;
             }
         }
@@ -48,7 +48,7 @@ public class PROJ_Base : MonoBehaviour
                 velocity = new Vector2(1, 0);// * speed;
             else
 			{
-				transform.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
                 velocity = new Vector2(-1, 0);// *speed;
 			}
         }
