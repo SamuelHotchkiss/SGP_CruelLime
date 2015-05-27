@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public float[] maxTmr;
     public float curTmr;
     public bool loop;
+    ACT_CHAR_Base.STATES currentState;
     public ACT_CHAR_Base.STATES nextState;
 
     // L: just works better this way
@@ -101,114 +102,37 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("_Horde").SetActive(false);
     }
 
+    // aka The Situation.
     void Update()
     {
         // S: Should prevent this from running if player is dead
         if (!isAlive)
             return;
+        if (currentState != party[currChar].state)
+            ChangeState(party[currChar].state);
 
-        switch (party[currChar].state)
-        {
-            case ACT_CHAR_Base.STATES.IDLE:
-                loop = true;
-                break;
-            case ACT_CHAR_Base.STATES.WALKING:
-                loop = true;
-                break;
-            case ACT_CHAR_Base.STATES.DASHING:
-                loop = false;
-                break;
-            case ACT_CHAR_Base.STATES.ATTACK_1:
-                loop = false;
-                break;
-            case ACT_CHAR_Base.STATES.ATTACK_2:
-                loop = false;
-                break;
-            case ACT_CHAR_Base.STATES.ATTACK_3:
-                loop = false;
-                break;
-            case ACT_CHAR_Base.STATES.SPECIAL:
-                loop = false;
-                break;
-            case ACT_CHAR_Base.STATES.HURT:
-                loop = false;
-                break;
-            case ACT_CHAR_Base.STATES.DYING:
-                loop = false;
-                break;
-            case ACT_CHAR_Base.STATES.USE:
-                loop = false;
-                break;
-        }
+        // Sexy.
+        UpdateTimers(currentState);
 
-        if (party[currChar].state == ACT_CHAR_Base.STATES.DYING)
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            loop = false;
-        }
+        // Buff stuff.
         if (myBuffs.Count == 0)
             buffState = MNGR_Item.BuffStates.NEUTRAL;
 
-        // Update the timer
-        if (curTmr > 0)
-        {
-            curTmr -= Time.deltaTime;
-            if (curTmr < 0)
-            {
-                // reset to maxTmr if looping, otherwise set to 0 and stop updating timer.
-                curTmr = loop ? maxTmr[(int)party[currChar].state] : 0;
-                if (curTmr == 0)
-                {
-                    if (party[currChar].state != ACT_CHAR_Base.STATES.DYING)
-                    {
-                        if (nextState == ACT_CHAR_Base.STATES.IDLE)
-                        {
-                            party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
-                            horz = 0.0f;
-                            vert = 0.0f;
-                        }
-                        else
-                        {
-                            party[currChar].state = nextState;
-                            nextState = ACT_CHAR_Base.STATES.IDLE;
-                        }
-
-                        // modify the attack timers if we are now in the attacking state
-                        if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_1
-                            || party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_2
-                            || party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_3)
-                        {
-                            maxTmr[(int)party[currChar].state] = GetAtkSpeed();
-                        }
-
-                        curTmr = maxTmr[(int)party[currChar].state];
-
-                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    }
-                    else
-                    {
-                        SwitchNextPartyMember(true);
-                        if (party[currChar].Act_currHP <= 0)
-                            Death();
-                    }
-                }
-            }
-        }
-
-        if (party[currChar].Act_currHP <= 0)
+        // Initialize death state.
+        if (party[currChar].Act_currHP <= 0 && currentState != ACT_CHAR_Base.STATES.DYING)
         {
             party[currChar].Act_currHP = 0;
-            party[currChar].state = ACT_CHAR_Base.STATES.DYING;
-            //curTmr = maxTmr[(int)party[currChar].state];
-            loop = false;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            ChangeState(ACT_CHAR_Base.STATES.DYING);
         }
 
-        if (party[currChar].state != ACT_CHAR_Base.STATES.DYING && party[currChar].state != ACT_CHAR_Base.STATES.HURT)
+        // The meat of The Situation.
+        switch (currentState)
         {
-            if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
-                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
-            {
+            case ACT_CHAR_Base.STATES.IDLE:
+            // should inherit behavior from walking?
+            //loop = true;
+            //break;
+            case ACT_CHAR_Base.STATES.WALKING:
                 // Get axis movement
                 if (Input.GetAxis("Horizontal") != 0)
                     horz = Input.GetAxis("Horizontal");
@@ -217,237 +141,119 @@ public class PlayerController : MonoBehaviour
 
                 // add gamepad axis movement
                 if (Input.GetAxis("Pad_Horizontal") != 0)
-                {
                     horz = Input.GetAxis("Pad_Horizontal");
-                }
                 if (Input.GetAxis("Pad_Vertical") != 0)
                     vert = Input.GetAxis("Pad_Vertical");
 
                 // but cap it off at 1
-                if (horz > 1.0f)
-                    horz = 1.0f;
-                else if (horz < -1.0f)
-                    horz = -1.0f;
+                if (horz > 1.0f)        horz = 1.0f;
+                else if (horz < -1.0f)  horz = -1.0f;
 
-                if (vert > 1.0f)
-                    vert = 1.0f;
-                else if (vert < -1.0f)
-                    vert = -1.0f;
+                if (vert > 1.0f)        vert = 1.0f;
+                else if (vert < -1.0f)  vert = -1.0f;
 
                 // less vertical movement because we're 2.5d
                 vert *= 0.5f;
 
-                // dashing shouldn't be affected by speed
-                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
-                {
-                    horz *= party[currChar].Act_currSpeed * 0.25f;
-                    vert *= party[currChar].Act_currSpeed * 0.25f;
-                }
+                horz *= party[currChar].Act_currSpeed * 0.25f;
+                vert *= party[currChar].Act_currSpeed * 0.25f;
+
                 // random bugfix
                 if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0
                     && Input.GetAxis("Pad_Horizontal") == 0 && Input.GetAxis("Pad_Vertical") == 0
-                    && party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
+                    /*&& party[currChar].state == ACT_CHAR_Base.STATES.WALKING*/)
                 {
                     horz = 0.0f;
                     vert = 0.0f;
                 }
 
                 // manual deadzones
-                if (Mathf.Abs(horz) < 0.1f)
-                    horz = 0.0f;
-                if (Mathf.Abs(vert) < 0.1f)
-                    vert = 0.0f;
+                if (Mathf.Abs(horz) < 0.1f) horz = 0.0f;
+                if (Mathf.Abs(vert) < 0.1f) vert = 0.0f;
 
                 if (horz == 0.0f && vert == 0.0f
-                    && party[currChar].state == ACT_CHAR_Base.STATES.WALKING)
-                    party[currChar].state = ACT_CHAR_Base.STATES.IDLE;
-            }
+                    /*&& party[currChar].state == ACT_CHAR_Base.STATES.WALKING*/)
+                    ChangeState(ACT_CHAR_Base.STATES.IDLE);
 
-            // begin walking
-            if ((horz != 0 || vert != 0) && (party[currChar].state == ACT_CHAR_Base.STATES.WALKING || party[currChar].state == ACT_CHAR_Base.STATES.IDLE))
-            {
-                if (horz > 0)
-                    party[currChar].Act_facingRight = true;
-                else if (horz < 0)
-                    party[currChar].Act_facingRight = false;
-
-                if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
+                // we have movement, time to make movement happen.
+                if (horz != 0 || vert != 0)
                 {
-                    party[currChar].state = ACT_CHAR_Base.STATES.WALKING;
-                    curTmr = maxTmr[(int)party[currChar].state];
+                    if (horz > 0)       party[currChar].Act_facingRight = true;
+                    else if (horz < 0)  party[currChar].Act_facingRight = false;
+
+                    if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
+                    {
+                        ChangeState(ACT_CHAR_Base.STATES.WALKING);
+                    }
                 }
-                loop = true;
-            }
 
-            if ((Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE
-                && party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
-            {
-
-                // if we are not attacking go into ATTACK_1
-                if (party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_1
-                    && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_2
-                    && party[currChar].state != ACT_CHAR_Base.STATES.ATTACK_3)
+                if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
-                    party[currChar].state = ACT_CHAR_Base.STATES.ATTACK_1;
-                    maxTmr[(int)party[currChar].state] = GetAtkSpeed();
-                    curTmr = maxTmr[(int)party[currChar].state];
+                        ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
+                        horz = 0.0f;
+                        vert = 0.0f;
+                }
+                CheckSpecialInput(currentState);
+                CheckSwitchInput(currentState);
+                CheckUseInput(currentState);
+                CheckDodgeInput(currentState);
+                break;
+            case ACT_CHAR_Base.STATES.DASHING:
+                break;
+            case ACT_CHAR_Base.STATES.ATTACK_1:
+                if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
+                {
+                    ChangeState(ACT_CHAR_Base.STATES.ATTACK_2, false);
                     horz = 0.0f;
                     vert = 0.0f;
                 }
-                // if we are in ATTACK_1 go into ATTACK_2
-                else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_1)
+                break;
+            case ACT_CHAR_Base.STATES.ATTACK_2:
+                if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
-                    nextState = ACT_CHAR_Base.STATES.ATTACK_2;
+                    ChangeState(ACT_CHAR_Base.STATES.ATTACK_3, false);
+                    horz = 0.0f;
+                    vert = 0.0f;
                 }
-                // if we are in ATTACK_2 go into ATTACK_3
-                else if (party[currChar].state == ACT_CHAR_Base.STATES.ATTACK_2)
+                break;
+            case ACT_CHAR_Base.STATES.ATTACK_3:
+                break;
+            case ACT_CHAR_Base.STATES.SPECIAL:
+                break;
+            case ACT_CHAR_Base.STATES.HURT:
+                if (Pc_HasKnockBack)
                 {
-                    nextState = ACT_CHAR_Base.STATES.ATTACK_3;
+                    vert = 0.0f;
+                    if (horz < 0.0f)    //moving Left
+                    {
+                        horz += Time.deltaTime * 50.0f;
+                        if (horz >= 0.0f)
+                        {
+                            horz = 0.0f;
+                            Pc_HasKnockBack = false;
+                        }
+                    }
+                    else if (horz > 0.0f) //moving right
+                    {
+                        horz -= Time.deltaTime * 50.0f;
+                        if (horz <= 0.0f)
+                        {
+                            horz = 0.0f;
+                            Pc_HasKnockBack = false;
+                        }
+                    }
                 }
-                loop = false;
-            }
-            // we can currently do our special when in mid-combo.  Is that good?
-            else if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
-                && party[currChar].cooldownTmr == 0
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
-            {
-                party[currChar].state = ACT_CHAR_Base.STATES.SPECIAL;
-                curTmr = maxTmr[(int)party[currChar].state];
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                horz = 0.0f;
-                vert = 0.0f;
-                loop = false;
-
-                party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
-            }
-            else if ((Input.GetButtonDown("SwitchRight") || Input.GetButtonDown("Pad_SwitchRight"))
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
-            {
-                SwitchNextPartyMember(true);
-            }
-            else if ((Input.GetButtonDown("SwitchLeft") || Input.GetButtonDown("Pad_SwitchLeft"))
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
-            {
-                SwitchNextPartyMember(false);
-            }
-            // currently does nothing
-            else if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
-                && party[currChar].state != ACT_CHAR_Base.STATES.USE)
-            {
-                if (!MNGR_Game.usedItem)
-                {
-                    MNGR_Game.usedItem = true;
-                    MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
-                }
-
-                party[currChar].state = ACT_CHAR_Base.STATES.USE;
-                curTmr = maxTmr[(int)party[currChar].state];
-                loop = false;
-            }
-            // can only dodge at certain times.
-            else if ((Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0)
-                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING)
-                && (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
-                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING
-                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING))
-            {
-                // special stuff when first initializing the dodge
-                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
-                {
-                    party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
-                    curTmr = maxTmr[(int)party[currChar].state];
-                    nextState = ACT_CHAR_Base.STATES.IDLE;
-                    loop = false;
-                }
-                // always do this stuff, though
-                float dashmax = 25.0f;
-                if (Mathf.Abs(horz) < dashmax)
-                    horz *= dashmax;
-                if (horz > dashmax)
-                    horz = dashmax;
-                else if (horz < -dashmax)
-                    horz = -dashmax;
-
-                // less vertical movement
-                dashmax *= 0.75f;
-                if (Mathf.Abs(vert) < dashmax)
-                    vert *= dashmax;
-                if (vert > dashmax)
-                    vert = dashmax;
-                else if (vert < -dashmax)
-                    vert = -dashmax;
-            }
-            else if ((Input.GetAxis("Pad_DodgeHorizontal") != 0 || Input.GetAxis("Pad_DodgeVertical") != 0
-                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING) && !notjoydash
-                && (party[currChar].state == ACT_CHAR_Base.STATES.IDLE
-                || party[currChar].state == ACT_CHAR_Base.STATES.WALKING
-                || party[currChar].state == ACT_CHAR_Base.STATES.DASHING))
-            {
-                // buffered input #PutsOnShadesYEEEAAAAAHH
-                notjoydash = true;
-                // special stuff when first initializing the dodge
-                if (party[currChar].state != ACT_CHAR_Base.STATES.DASHING)
-                {
-                    party[currChar].state = ACT_CHAR_Base.STATES.DASHING;
-                    curTmr = maxTmr[(int)party[currChar].state];
-                    nextState = ACT_CHAR_Base.STATES.IDLE;
-                    loop = false;
-                }
-                // always do this stuff, though
-                float dashmax = 25.0f;
-                float joyHorz = Input.GetAxis("Pad_DodgeHorizontal");
-                float joyVert = Input.GetAxis("Pad_DodgeVertical");
-                if (joyHorz > 0)
-                    party[currChar].Act_facingRight = true;
                 else
-                    party[currChar].Act_facingRight = false;
-
-                if (Mathf.Abs(horz) < dashmax)
-                    horz = dashmax * joyHorz;
-
-                // less vertical movement
-                dashmax *= 0.75f;
-                vert = dashmax * joyVert;
-            }
-            else if (Input.GetAxis("Pad_DodgeHorizontal") == 0 && Input.GetAxis("Pad_DodgeVertical") == 0)
-            {
-                notjoydash = false;
-            }
-
-        }
-
-        // modify velocity only if we aren't in special state (for custom special movement)
-        if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
-        {
-            // always calls unless current character is dead.
-            GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-        }
-
-        if (party[currChar].state == ACT_CHAR_Base.STATES.HURT)
-        {
-            if (Pc_HasKnockBack)
-            {
-                vert = 0.0f;
-                if (horz < 0.0f)    //moving Left
                 {
-                    horz += Time.deltaTime * 50.0f;
-                    if (horz >= 0.0f)
-                    {
-                        horz = 0.0f;
-                        Pc_HasKnockBack = false;
-                    }
+                    horz = 0.0f;
+                    vert = 0.0f;
                 }
-                else if (horz > 0.0f) //moving right
-                {
-                    horz -= Time.deltaTime * 50.0f;
-                    if (horz <= 0.0f)
-                    {
-                        horz = 0.0f;
-                        Pc_HasKnockBack = false;
-                    }
-                }
-            }
+                break;
+            case ACT_CHAR_Base.STATES.DYING:
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                break;
+            case ACT_CHAR_Base.STATES.USE:
+                break;
         }
 
         if (Input.GetKey(KeyCode.K))
@@ -456,15 +262,12 @@ public class PlayerController : MonoBehaviour
             if (party[currChar].Act_currHP <= 0)
             {
                 party[currChar].Act_currHP = 0;
-                party[currChar].state = ACT_CHAR_Base.STATES.DYING;
+                ChangeState(ACT_CHAR_Base.STATES.DYING);
             }
             else
             {
-                party[currChar].state = ACT_CHAR_Base.STATES.HURT;
+                ChangeState(ACT_CHAR_Base.STATES.HURT);
             }
-            curTmr = maxTmr[(int)party[currChar].state];
-            loop = false;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
@@ -485,6 +288,12 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.N))
         {
             MNGR_Game.isNight = !MNGR_Game.isNight;
+        }
+        // modify velocity only if we aren't in special state (for custom special movement)
+        if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
+        {
+            // always calls unless current character is dead.
+            GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
         }
 
         switch (currChar)
@@ -517,6 +326,77 @@ public class PlayerController : MonoBehaviour
                 mage_GUI.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                 break;
         }
+
+    }
+
+    // Just put it in a function
+    void UpdateTimers(ACT_CHAR_Base.STATES _cur)
+    {
+        // Update the state timer
+        if (curTmr > 0)
+        {
+            curTmr -= Time.deltaTime;
+            if (curTmr < 0)
+            {
+                // L: reset to maxTmr if looping, otherwise set to 0 and stop updating timer.
+                // L: looking back at this, I know it is saving space but cannot read it for the life of me.
+                curTmr = loop ? maxTmr[(int)_cur] : 0;
+
+                // aka if we're not looping
+                if (curTmr == 0)
+                {
+                    if (_cur != ACT_CHAR_Base.STATES.DYING)
+                    {
+                        ChangeState(nextState);
+                        nextState = ACT_CHAR_Base.STATES.IDLE;
+
+                    }
+                    else
+                    {
+                        SwitchNextPartyMember(true);
+                        if (party[currChar].Act_currHP <= 0)
+                            Death();
+                    }
+                }
+                else if (_cur == ACT_CHAR_Base.STATES.HURT)
+                    ChangeState(nextState);
+            }
+        }
+
+
+    }
+
+    void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
+    {
+        ACT_CHAR_Base.STATES old = party[currChar].state;
+
+        // triggered on state change goes here.
+        if (_next == ACT_CHAR_Base.STATES.IDLE
+            || _next == ACT_CHAR_Base.STATES.WALKING)
+            loop = true;
+        else
+            loop = false;
+
+
+        // end triggered on state change FX
+
+        if (_immediately)
+        {
+            party[currChar].state = _next;
+            currentState = _next;
+            // modify the attack timers if we are now in the attacking state
+            if (_next == ACT_CHAR_Base.STATES.ATTACK_1
+                || _next == ACT_CHAR_Base.STATES.ATTACK_2
+                || _next == ACT_CHAR_Base.STATES.ATTACK_3)
+            {
+                maxTmr[(int)_next] = GetAtkSpeed();
+            }
+            // either way set the timer to the current state's max
+            if (_next != old)
+                curTmr = maxTmr[(int)_next];
+        }
+        else
+            nextState = _next;
 
     }
 
@@ -570,7 +450,7 @@ public class PlayerController : MonoBehaviour
             loop = false;
             Pc_HasKnockBack = true;
 
-            party[currChar].state = ACT_CHAR_Base.STATES.HURT;
+            ChangeState(ACT_CHAR_Base.STATES.HURT);
             nextState = ACT_CHAR_Base.STATES.IDLE;
             vert = 0.0f;
         }
@@ -644,7 +524,6 @@ public class PlayerController : MonoBehaviour
     public void MurderEveryone()
     {
         isAlive = false;
-
         currChar = 0;
         for (int i = 0; i < 3; i++)
         {
@@ -652,9 +531,112 @@ public class PlayerController : MonoBehaviour
             currChar++;
         }
 
-        MNGR_Save.saveFiles[MNGR_Save.currSave] = new MNGR_GameData(); // clears savedata
-        MNGR_Save.SaveProfiles();
-
+        //MNGR_Save.saveFiles[MNGR_Save.currSave] = new MNGR_GameData();
         Application.LoadLevel("MainMenu");
     }
+
+    // L: Input functions reduce copy and pasting clutter!
+    void CheckSpecialInput(ACT_CHAR_Base.STATES _cur)
+    {
+        if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
+            && party[currChar].cooldownTmr == 0)
+        {
+            ChangeState(ACT_CHAR_Base.STATES.SPECIAL);
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
+        }
+    }
+    void CheckSwitchInput(ACT_CHAR_Base.STATES _cur)
+    {
+        if ((Input.GetButtonDown("SwitchRight") || Input.GetButtonDown("Pad_SwitchRight"))
+        && _cur != ACT_CHAR_Base.STATES.USE)
+        {
+            SwitchNextPartyMember(true);
+        }
+        else if ((Input.GetButtonDown("SwitchLeft") || Input.GetButtonDown("Pad_SwitchLeft"))
+            && _cur != ACT_CHAR_Base.STATES.USE)
+        {
+            SwitchNextPartyMember(false);
+        }
+    }
+    void CheckUseInput(ACT_CHAR_Base.STATES _cur)
+    {
+        // currently does nothing
+        if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
+            && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+        {
+            if (!MNGR_Game.usedItem)
+            {
+                MNGR_Game.usedItem = true;
+                MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
+            }
+
+            ChangeState(ACT_CHAR_Base.STATES.USE);
+        }
+    }
+    void CheckDodgeInput(ACT_CHAR_Base.STATES _cur)
+{
+        if (Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0))
+        {
+            // special stuff when first initializing the dodge
+            if (_cur != ACT_CHAR_Base.STATES.DASHING)
+            {
+                ChangeState(ACT_CHAR_Base.STATES.DASHING);
+                nextState = ACT_CHAR_Base.STATES.IDLE;
+            }
+            // always do this stuff, though
+            float dashmax = 25.0f;
+            if (Mathf.Abs(horz) < dashmax)
+                horz *= dashmax;
+            if (horz > dashmax)
+                horz = dashmax;
+            else if (horz < -dashmax)
+                horz = -dashmax;
+
+            // less vertical movement
+            dashmax *= 0.75f;
+            if (Mathf.Abs(vert) < dashmax)
+                vert *= dashmax;
+            if (vert > dashmax)
+                vert = dashmax;
+            else if (vert < -dashmax)
+                vert = -dashmax;
+        }
+        else if ((Input.GetAxis("Pad_DodgeHorizontal") != 0 || Input.GetAxis("Pad_DodgeVertical") != 0
+               || party[currChar].state == ACT_CHAR_Base.STATES.DASHING) && !notjoydash)
+        {
+            // buffered input #PutsOnShadesYEEEAAAAAHH
+            notjoydash = true;
+            // special stuff when first initializing the dodge
+            if (_cur != ACT_CHAR_Base.STATES.DASHING)
+            {
+                ChangeState(ACT_CHAR_Base.STATES.DASHING);
+                nextState = ACT_CHAR_Base.STATES.IDLE;
+            }
+            // always do this stuff, though
+            float dashmax = 25.0f;
+            float joyHorz = Input.GetAxis("Pad_DodgeHorizontal");
+            float joyVert = Input.GetAxis("Pad_DodgeVertical");
+            if (joyHorz > 0)
+                party[currChar].Act_facingRight = true;
+            else
+                party[currChar].Act_facingRight = false;
+
+            if (Mathf.Abs(horz) < dashmax)
+                horz = dashmax * joyHorz;
+
+            // less vertical movement
+            dashmax *= 0.75f;
+            vert = dashmax * joyVert;
+        }
+        else if (Input.GetAxis("Pad_DodgeHorizontal") == 0 && Input.GetAxis("Pad_DodgeVertical") == 0)
+        {
+            notjoydash = false;
+        }
+    }
+
+
+
+
 }

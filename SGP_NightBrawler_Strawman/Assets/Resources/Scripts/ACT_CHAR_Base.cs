@@ -26,6 +26,8 @@ public class ACT_CHAR_Base : ACT_Base
 
 	public float cooldownTmrBase;
     public float cooldownTmr;
+    public float invulMaxTmr;
+    public float invulTmr;
     public float[] StateTmrs;        // durations for different states
     public int characterIndex;
 
@@ -33,6 +35,7 @@ public class ACT_CHAR_Base : ACT_Base
 
     // taken from the animation manager.  debating whether or not to do this with all sprites.
     // debate over.  prosecution wins.
+    public int[] walkSprites;
     public int[] attack1Sprites;
     public int[] attack2Sprites;
     public int[] attack3Sprites;
@@ -44,11 +47,15 @@ public class ACT_CHAR_Base : ACT_Base
 	public virtual void Start () 
 	{
 		cooldownTmrBase = 3;
-		cooldownTmr = 0;
+        cooldownTmr = 0;
+        invulMaxTmr = 2.0f;
+        invulTmr = 0.0f;
 
         Act_currPower = Act_basePower;
         Act_currSpeed = Act_baseSpeed;
         Act_currAspeed = Act_baseAspeed;
+
+        walkSprites = new int[] { 5, 6, 7, 8, 9 };
 	}
 	
 	// Update is called once per frame
@@ -59,10 +66,44 @@ public class ACT_CHAR_Base : ACT_Base
 		{
 			cooldownTmr = 0;
 		}
-        
+
+        // update  the invulnerability timer
+        if (invulTmr > 0.0f)
+        {
+            invulTmr -= Time.deltaTime;
+            if (invulTmr < 0.0f)
+            {
+                invulTmr = 0.0f;
+                state = STATES.IDLE;
+            }
+        }
 	}
 
+    public virtual AttackInfo ActivateWalk(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
+        if (_curTmr > _maxTmr * 0.8f)
+            ret.spriteIndex = walkSprites[0];
+        else if (_curTmr > _maxTmr * 0.6f)
+            ret.spriteIndex = walkSprites[1];
+        else if (_curTmr > _maxTmr * 0.4f)
+            ret.spriteIndex = walkSprites[2];
+        else if (_curTmr > _maxTmr * 0.2f)
+            ret.spriteIndex = walkSprites[3];
+        else if (_curTmr >= 0)
+            ret.spriteIndex = walkSprites[4];
+
+        return ret;
+    }
+    public virtual AttackInfo ActivateDodge(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+
+        ret.spriteIndex = walkSprites[1];
+
+        return ret;
+    }
     public virtual AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
         AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
@@ -90,7 +131,7 @@ public class ACT_CHAR_Base : ACT_Base
 
 	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
 	{                                   //Damage needs to be negative.
-		if (state != STATES.DYING && state != STATES.HURT)
+		if (state != STATES.DYING && state != STATES.HURT && invulTmr == 0.0f)
 		{
 			
 			Act_currHP += Dmg;
@@ -98,8 +139,11 @@ public class ACT_CHAR_Base : ACT_Base
 			if (Act_currHP > Act_baseHP)
 				Act_currHP = Act_baseHP;
 
-			if (Dmg < 0)
-				state = STATES.HURT;
+            if (Dmg < 0)
+            {
+                state = STATES.HURT;
+                invulTmr = StateTmrs[(int)STATES.HURT] + invulMaxTmr;
+            }
 
 
 			if (Act_currHP < 0)

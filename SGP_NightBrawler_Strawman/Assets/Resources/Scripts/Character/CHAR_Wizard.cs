@@ -49,6 +49,15 @@ public class CHAR_Wizard : ACT_CHAR_Base
 		base.Update();
     }
 
+    public override AttackInfo ActivateDodge(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+
+        ret.spriteIndex = walkSprites[4];
+
+        return ret;
+    }
+
     public override AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
         AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
