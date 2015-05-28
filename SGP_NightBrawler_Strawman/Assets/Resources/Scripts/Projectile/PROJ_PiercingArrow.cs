@@ -7,9 +7,9 @@ public class PROJ_PiercingArrow : PROJ_Base
 
     public int hits = 4;       // how many enemies can we pierce?
 
-    public override void Initialize()
+    public override void Initialize(bool _r = true)
     {
-        base.Initialize();
+        base.Initialize(_r);
         ogVelocity = velocity; // initialize original velocity
     }
 

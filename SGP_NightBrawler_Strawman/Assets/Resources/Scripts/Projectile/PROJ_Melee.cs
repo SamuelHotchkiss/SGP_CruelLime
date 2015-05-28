@@ -4,9 +4,9 @@ using System.Collections;
 public class PROJ_Melee : PROJ_Base 
 {
 
-    public override void Initialize()
+    public override void Initialize(bool _r = true)
     {
-        base.Initialize();
+        base.Initialize(_r);
     }
 	
 	// Update is called once per frame

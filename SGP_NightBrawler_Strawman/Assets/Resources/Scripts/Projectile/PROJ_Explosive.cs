@@ -9,9 +9,9 @@ public class PROJ_Explosive : PROJ_Base
     int curSprite = 0;
     float updateSprite = 0.0f;
 
-    public override void Initialize()
+    public override void Initialize(bool _r = true)
     {
-        base.Initialize();
+        base.Initialize(_r);
         sprites = Resources.LoadAll<Sprite>("Sprites/Projectile/Fireball");
     }
 

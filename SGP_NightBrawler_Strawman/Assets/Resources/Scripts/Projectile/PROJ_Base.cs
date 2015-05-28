@@ -13,7 +13,7 @@ public class PROJ_Base : MonoBehaviour
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
 
-    public virtual void Initialize()
+    public virtual void Initialize(bool _r = true)
     {
         // Are you my mommy?
         if(owner.tag == "Player")
@@ -26,7 +26,8 @@ public class PROJ_Base : MonoBehaviour
 
             power += player.party[target].Act_currPower;
 
-            bool right = player.party[target].Act_facingRight;
+            //bool right = player.party[target].Act_facingRight;
+            bool right = _r;
 
             if (right)
                 velocity = new Vector2(1, 0);// * speed;

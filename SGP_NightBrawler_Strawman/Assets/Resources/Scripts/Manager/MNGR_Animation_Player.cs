@@ -12,6 +12,8 @@ public class MNGR_Animation_Player : MonoBehaviour
     PlayerController currentController;
     ACT_CHAR_Base.STATES lastState;
     ACT_CHAR_Base.STATES curState;
+    //Vector3 lastpos;
+    bool lastRight;
 
     // these contain the sprite IDs used for each animaiton
     int[] idleSprites;
@@ -31,6 +33,8 @@ public class MNGR_Animation_Player : MonoBehaviour
         lastState = currentCharacter.state;
         curState = currentCharacter.state;
         sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
+        //lastpos = transform.position;
+        lastRight = currentCharacter.Act_facingRight;
 
         // Works for swordsman...
         idleSprites = new int[] { 0, 1, 2 };
@@ -98,7 +102,8 @@ public class MNGR_Animation_Player : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
                 if (SpawnProj && info.spawnproj)
-                    SpawnProj = currentController.SpawnProj();
+                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight);
+                //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_2:
 
@@ -106,7 +111,8 @@ public class MNGR_Animation_Player : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
                 if (SpawnProj && info.spawnproj)
-                    SpawnProj = currentController.SpawnProj();
+                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight);
+                //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_3:
 
@@ -114,7 +120,8 @@ public class MNGR_Animation_Player : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
                 if (SpawnProj && info.spawnproj)
-                    SpawnProj = currentController.SpawnProj(1);
+                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 1);
+                //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
                 info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
@@ -130,7 +137,8 @@ public class MNGR_Animation_Player : MonoBehaviour
                 // end of nonsense
 
                 if (SpawnProj && info.spawnproj)
-                    SpawnProj = currentController.SpawnProj(2);
+                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 2);
+                //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.HURT:
                 GetComponent<SpriteRenderer>().sprite = sprites[hurtSprites[0]];
@@ -189,16 +197,20 @@ public class MNGR_Animation_Player : MonoBehaviour
         {
             if (lastState == ACT_CHAR_Base.STATES.ATTACK_1
                 || lastState == ACT_CHAR_Base.STATES.ATTACK_2)
-                SpawnProj = currentController.SpawnProj(0);
+                SpawnProj = currentController.SpawnProj(lastRight, 0);
             else if (lastState == ACT_CHAR_Base.STATES.ATTACK_3)
-                SpawnProj = currentController.SpawnProj(1);
+                SpawnProj = currentController.SpawnProj(lastRight, 1);
             else if (lastState == ACT_CHAR_Base.STATES.SPECIAL)
-                SpawnProj = currentController.SpawnProj(2);
+                SpawnProj = currentController.SpawnProj(lastRight, 2);
         }
 
 
         // we have changed states, we should be able to spawn another projectile
         SpawnProj = true;
+
+        // update last pos now.
+        //lastpos = transform.position;
+        lastRight = currentCharacter.Act_facingRight;
 
         // the part we've all been waiting for
         curState = _newstate;

@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
                 else if (vert < -1.0f)  vert = -1.0f;
 
                 // less vertical movement because we're 2.5d
-                vert *= 0.5f;
+                vert *= 0.85f;
 
                 horz *= party[currChar].Act_currSpeed * 0.25f;
                 vert *= party[currChar].Act_currSpeed * 0.25f;
@@ -456,7 +456,7 @@ public class PlayerController : MonoBehaviour
 
     // L: called in animation manager when we're displaying the right sprite to attack at
     // _index allows us to choose which projectile.
-    public bool SpawnProj(int _index = 0)
+    public bool SpawnProj(bool _right = true, int _index = 0)
     {
         /*int num = 1;
 
@@ -468,7 +468,7 @@ public class PlayerController : MonoBehaviour
         Object test = Projs[_index];
         GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
         clone.GetComponent<PROJ_Base>().owner = gameObject;
-        clone.GetComponent<PROJ_Base>().Initialize();
+        clone.GetComponent<PROJ_Base>().Initialize(_right);
 
         // this makes me puke a little inside.
         if (party[currChar].characterIndex == 6 && _index == 1)
