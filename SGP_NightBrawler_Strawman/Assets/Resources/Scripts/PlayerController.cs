@@ -627,10 +627,21 @@ public class PlayerController : MonoBehaviour
             float dashmax = 25.0f;
             float joyHorz = Input.GetAxis("Pad_DodgeHorizontal");
             float joyVert = Input.GetAxis("Pad_DodgeVertical");
-            if (joyHorz > 0)
+            float thres = 0.025f;
+            if (joyHorz > thres)
+            {
                 party[currChar].Act_facingRight = true;
-            else
+                joyHorz = 1.0f;
+            }
+            else if (joyHorz < -thres)
+            {
                 party[currChar].Act_facingRight = false;
+                joyHorz = -1.0f;
+            }
+            if (joyVert > thres)
+                joyVert = 1.0f;
+            else if (joyVert < -thres)
+                joyVert = -1.0f;
 
             if (Mathf.Abs(horz) < dashmax)
                 horz = dashmax * joyHorz;
