@@ -71,15 +71,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
-  Act_baseHP: 10
+  Act_baseHP: 1
   Act_basePower: 5
   Act_baseSpeed: 0
-  Act_currHP: 10
+  Act_currHP: 1
   Act_currPower: 10
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
@@ -97,6 +100,9 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
@@ -114,6 +120,7 @@ MonoBehaviour:
   projectile: {fileID: 0}
   isMelee: 0
   paused: 0
+  coins: {fileID: 0}
 --- !u!114 &11441880
 MonoBehaviour:
   m_ObjectHideFlags: 1
