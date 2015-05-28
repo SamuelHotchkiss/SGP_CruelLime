@@ -23,8 +23,8 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-		MNGR_Game.playerPosition = 2;
-		MNGR_Game.hordePosition = 5;
+		//MNGR_Game.playerPosition = 2;
+		//MNGR_Game.hordePosition = 5;
 
         if (MNGR_Game.playerPosition > 2)
             MNGR_Game.playerPosition = 2;
@@ -129,6 +129,9 @@ public class MENU_World : MonoBehaviour
     // Go back to Main Menu
     public void Return()
     {
+        MNGR_Save.saveFiles[MNGR_Save.currSave].CopyGameManager();
+        MNGR_Save.SaveProfiles();
+
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         StartCoroutine(WaitForSound("MainMenu"));
     }

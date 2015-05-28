@@ -10,14 +10,14 @@ public class PROJ_Explosion : PROJ_Base
     public Vector2 forcedir;
     public Sprite[] sprites;
 
-    public override void Initialize()
+    public override void Initialize(bool _r = true)
     {
         timer = timerMax;
         speed = 0;
 		if (sprites.Length > 0)
 			GetComponent<SpriteRenderer>().sprite = sprites[0];
 
-        base.Initialize();
+        base.Initialize(_r);
         // flip the circle collider if the owner faces the other way
         // just for swordsman now.
         if (owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].characterIndex == 0)
