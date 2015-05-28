@@ -23,8 +23,11 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        //MNGR_Game.playerPosition = 1;
+		MNGR_Game.playerPosition = 2;
+		MNGR_Game.hordePosition = 5;
 
+        if (MNGR_Game.playerPosition > 2)
+            MNGR_Game.playerPosition = 2;
 
         if ((MNGR_Game.hordePosition / 2) == MNGR_Game.playerPosition && MNGR_Game.hordePosition > 0)
             MNGR_Game.dangerZone = true;
@@ -50,10 +53,10 @@ public class MENU_World : MonoBehaviour
         playerArrow.transform.position = playMarker;
         hordeArrow.transform.position = hordeMarker;
 
-		//for (int i = 0; i < characterHP.Length; i++)
-		//{
-		//	characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
-		//}
+        for (int i = 0; i < characterHP.Length; i++)
+        {
+            characterHP[i].text = MNGR_Game.currentParty[i].Act_currHP.ToString();
+        }
 
 		//for (int i = 0; i < inventory.Length; i++)
 		//{
