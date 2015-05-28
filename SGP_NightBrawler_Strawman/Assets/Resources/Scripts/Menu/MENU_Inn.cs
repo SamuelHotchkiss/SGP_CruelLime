@@ -37,12 +37,11 @@ public class MENU_Inn : MonoBehaviour {
             }
 
             MNGR_Game.wallet -= Inn_RestCost;
+            MNGR_Game.isNight = !MNGR_Game.isNight;
             Debug.Log("GOOD REST");
         }
         else
             Debug.Log("NO MONEY MO PROBLEMS!");
-
-        MNGR_Game.isNight = !MNGR_Game.isNight;
     }
 
     public void RevivePartyMember(int _ChrIndex)
@@ -56,11 +55,11 @@ public class MENU_Inn : MonoBehaviour {
             MNGR_Game.wallet -= Inn_ReviveCost;
             Debug.Log("IT'S ALIVE!");
             Debug.Log(MNGR_Game.currentParty[_ChrIndex].Act_currHP.ToString());
+
+            MNGR_Game.isNight = !MNGR_Game.isNight;
         }
         else
             Debug.Log("NO MONEY MO PROBLEMS!");
-
-        MNGR_Game.isNight = !MNGR_Game.isNight;
     }
 
 }
