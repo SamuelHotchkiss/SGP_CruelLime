@@ -1171,6 +1171,33 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce3cf6d5cf71fa9479d58b0da5bd21a8, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1131895347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1131895348}
+  m_Layer: 0
+  m_Name: _Horde
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1131895348
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1131895347}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.7600002, y: -.449999988, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 41
 --- !u!1 &1187622511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1431,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 426070, guid: 0c538cde072a5714ca36518241a1b7be, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c538cde072a5714ca36518241a1b7be, type: 2}

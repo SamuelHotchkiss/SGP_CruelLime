@@ -515,6 +515,14 @@ public class PlayerController : MonoBehaviour
     {
         isAlive = false;
 
+        for (int i = 0; i < party.Length; i++ )
+        {
+            party[i].Act_currHP = party[i].Act_baseHP;
+        }
+
+        MNGR_Save.saveFiles[MNGR_Save.currSave].CopyGameManager();
+        MNGR_Save.SaveProfiles();
+
         MNGR_Game.hordePosition++;
         MNGR_Game.isNight = !MNGR_Game.isNight;
 
@@ -531,7 +539,8 @@ public class PlayerController : MonoBehaviour
             currChar++;
         }
 
-        //MNGR_Save.saveFiles[MNGR_Save.currSave] = new MNGR_GameData();
+        MNGR_Save.DeleteCurrentSave(MNGR_Save.currSave);
+
         Application.LoadLevel("GameOverLose");
     }
 
