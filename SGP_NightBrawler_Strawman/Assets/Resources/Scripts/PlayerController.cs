@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
                 else if (vert < -1.0f)  vert = -1.0f;
 
                 // less vertical movement because we're 2.5d
-                vert *= 0.5f;
+                vert *= 0.85f;
 
                 horz *= party[currChar].Act_currSpeed * 0.25f;
                 vert *= party[currChar].Act_currSpeed * 0.25f;
@@ -458,7 +458,7 @@ public class PlayerController : MonoBehaviour
 
     // L: called in animation manager when we're displaying the right sprite to attack at
     // _index allows us to choose which projectile.
-    public bool SpawnProj(int _index = 0)
+    public bool SpawnProj(bool _right = true, int _index = 0)
     {
         /*int num = 1;
 
@@ -470,7 +470,7 @@ public class PlayerController : MonoBehaviour
         Object test = Projs[_index];
         GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
         clone.GetComponent<PROJ_Base>().owner = gameObject;
-        clone.GetComponent<PROJ_Base>().Initialize();
+        clone.GetComponent<PROJ_Base>().Initialize(_right);
 
         // this makes me puke a little inside.
         if (party[currChar].characterIndex == 6 && _index == 1)
@@ -627,10 +627,21 @@ public class PlayerController : MonoBehaviour
             float dashmax = 25.0f;
             float joyHorz = Input.GetAxis("Pad_DodgeHorizontal");
             float joyVert = Input.GetAxis("Pad_DodgeVertical");
-            if (joyHorz > 0)
+            float thres = 0.025f;
+            if (joyHorz > thres)
+            {
                 party[currChar].Act_facingRight = true;
-            else
+                joyHorz = 1.0f;
+            }
+            else if (joyHorz < -thres)
+            {
                 party[currChar].Act_facingRight = false;
+                joyHorz = -1.0f;
+            }
+            if (joyVert > thres)
+                joyVert = 1.0f;
+            else if (joyVert < -thres)
+                joyVert = -1.0f;
 
             if (Mathf.Abs(horz) < dashmax)
                 horz = dashmax * joyHorz;
