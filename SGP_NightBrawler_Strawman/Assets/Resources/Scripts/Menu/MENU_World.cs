@@ -28,8 +28,10 @@ public class MENU_World : MonoBehaviour
 
         if (MNGR_Game.playerPosition > 2)
             MNGR_Game.playerPosition = 2;
+        if (MNGR_Game.hordePosition > 5)
+            MNGR_Game.hordePosition = 5;
 
-        if ((MNGR_Game.hordePosition / 2) == MNGR_Game.playerPosition && MNGR_Game.hordePosition > 0)
+        if (MNGR_Game.hordePosition == 5 && MNGR_Game.playerPosition == 2)
             MNGR_Game.dangerZone = true;
         else
             MNGR_Game.dangerZone = false;
