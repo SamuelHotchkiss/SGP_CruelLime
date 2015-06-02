@@ -27,7 +27,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     void Start()
     {
 
-        filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief" };
+        filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "spider" };
         for (int i = 0; i < filepaths.Length; i++)
             filepaths[i] = "Sprites/Enemy/" + filepaths[i];
         currentCharacter = GetComponent<ACT_Enemy>();
@@ -65,6 +65,14 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 specialSprites = new int[] { 17 };
                 hurtSprites = new int[] { 15 };
                 deadSprites = new int[] { 15, 16 };
+                break;
+			case 3: // Spiderling
+				idleSprites = new int[] { 0, 0, 0 };
+                walkSprites = new int[] { 0, 0, 0, 0, 0 };
+                attack1Sprites = new int[] { 0, 0, 0 };
+                specialSprites = new int[] { 0 };
+                hurtSprites = new int[] { 0 };
+                deadSprites = new int[] { 0, 0 };
                 break;
             default:
                 idleSprites = new int[] { 0, 1, 2 };
