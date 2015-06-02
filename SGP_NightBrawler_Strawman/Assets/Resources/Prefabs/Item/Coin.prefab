@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21243204}
   - 114: {fileID: 11424130}
   - 58: {fileID: 5858688}
+  - 50: {fileID: 5000270}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -30,6 +31,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5000270
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178380}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!58 &5858688
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -54,8 +70,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc80d602c28005d4ea600182e44d6f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Coin_Amount: 0
+  Coin_Amount: 1
   Coin_PickUp: {fileID: 8300000, guid: 2ac98fa6359f2a144a4a1908f2ac0fbd, type: 3}
+  player: {fileID: 0}
+  ParentObjectPos: {x: 0, y: 0, z: 0}
+  Timer: 10
 --- !u!212 &21243204
 SpriteRenderer:
   m_ObjectHideFlags: 1
