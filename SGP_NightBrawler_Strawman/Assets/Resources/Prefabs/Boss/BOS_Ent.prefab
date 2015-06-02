@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 186660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.88000011, y: 0, z: 0}
+  m_LocalPosition: {x: 50.1627274, y: -1.5, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,10 +73,10 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
-  Act_baseHP: 500
+  Act_baseHP: 300
   Act_basePower: 15
   Act_baseSpeed: 0
-  Act_currHP: 500
+  Act_currHP: 300
   Act_currPower: 15
   Act_currSpeed: 0
   Act_facingRight: 0
@@ -85,6 +85,7 @@ MonoBehaviour:
   Act_IsIntelligent: 1
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -101,6 +102,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -111,7 +113,7 @@ MonoBehaviour:
   Spw_BaseSpawnCoolDown: 1
   Spw_SpawnPerSec: .300000012
   Spw_baseSpawnPerSec: .300000012
-  Spw_SpawnPositionOffset: {x: -4, y: 0, z: 0}
+  Spw_SpawnPositionOffset: {x: -4, y: 2, z: 0}
   Spw_Force: {x: -150, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 20

@@ -61,6 +61,7 @@ public class ACT_Enemy : MonoBehaviour
 	public int[] behaviorID = new int[10];
 	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
+	public BHR_Base basicBehavior;
 
 /// <Behavior Variables>
 	public List<GameObject> squad = new List<GameObject>();
@@ -173,8 +174,16 @@ public class ACT_Enemy : MonoBehaviour
             if (behaviors[i].owner == null)
                 behaviors[i].owner = GetComponent<ACT_Enemy>();
 		}
-        target = null;
-		//target = GameObject.FindGameObjectWithTag("Player");
+
+		if (basicBehavior)
+		{
+			basicBehavior = behaviors[0];
+		}
+        //target = null;
+		if (Act_IsIntelligent)
+		{
+			target = GameObject.FindGameObjectWithTag("Player");
+		}
 
 		//squad = new List<GameObject>();
 	}
@@ -426,11 +435,11 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
-					if (CheckThresholds())
+					CheckThresholds();
+					if (currBehavior)
 					{
 						currBehavior.PerformBehavior();
 					}
-                    
 					break;
 				}
 			case STATES.HURT:
@@ -450,19 +459,22 @@ public class ACT_Enemy : MonoBehaviour
 		} 
 	}
 
-	public virtual bool CheckThresholds()
+	public virtual void CheckThresholds()
 	{
 		if (Act_currHP < hpThresh)
 		{
 			currBehavior = behaviors[0];
-			return true;
 		}
-		else if (behaviorSize > 1 && MNGR_Game.isNight)
+		else if (behaviorSize > 1 && nightThresh && MNGR_Game.isNight)
 		{
 			currBehavior = behaviors[1];
-			return true;
 		}
-		return false;
+		else if (behaviorSize > 2 && distanceToTarget < distThresh)
+		{
+			currBehavior = behaviors[2];
+		}
+		else
+			currBehavior = basicBehavior;
 	}
 
 	public virtual void NewState()
