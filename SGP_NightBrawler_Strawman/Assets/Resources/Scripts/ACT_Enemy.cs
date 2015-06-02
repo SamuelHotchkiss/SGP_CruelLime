@@ -37,7 +37,7 @@ public class ACT_Enemy : MonoBehaviour
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
 
-    
+    public float damageMod;
 
 	public enum STATES
 	{
@@ -124,7 +124,7 @@ public class ACT_Enemy : MonoBehaviour
 	//Interface
 	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
 	{                                   //Damage needs to be negative.
-		Act_currHP += Dmg;
+		Act_currHP += (int)(Dmg * damageMod);
         if (Dmg < 0)
         {
             state = STATES.HURT;
@@ -156,6 +156,8 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+        damageMod = 1.0f;
+
         Act_currAttackSpeed = Act_baseAttackSpeed;
         Act_currHP = Act_baseHP;
         Act_currPower = Act_basePower;
@@ -486,5 +488,15 @@ public class ACT_Enemy : MonoBehaviour
         state = STATES.HURT;
         curTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
 
+    }
+
+    public void ModifyDefense(float newDefense)
+    {
+        damageMod = newDefense;
+    }
+
+    public void RestoreDefense()
+    {
+        damageMod = 1.0f;
     }
 }
