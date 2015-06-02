@@ -24,6 +24,8 @@ public class ACT_CHAR_Base : ACT_Base
 		ATTACK_1, ATTACK_2, ATTACK_3, SPECIAL, HURT, DYING, USE };
 	public STATES state;
 
+    public float damageMod;             // S: lessens or increases damage taken
+
 	public float cooldownTmrBase;
     public float cooldownTmr;
     public float invulMaxTmr;
@@ -46,6 +48,8 @@ public class ACT_CHAR_Base : ACT_Base
 	// Use this for initialization
 	public virtual void Start () 
 	{
+        damageMod = 1.0f;
+
 		cooldownTmrBase = 3;
         cooldownTmr = 0;
         invulMaxTmr = 2.0f;
@@ -134,7 +138,7 @@ public class ACT_CHAR_Base : ACT_Base
 		if (state != STATES.DYING && state != STATES.HURT && invulTmr == 0.0f)
 		{
 			
-			Act_currHP += Dmg;
+			Act_currHP += (int)(Dmg * damageMod);
 
 			if (Act_currHP > Act_baseHP)
 				Act_currHP = Act_baseHP;
@@ -153,6 +157,15 @@ public class ACT_CHAR_Base : ACT_Base
 			}
 
 		}
-
 	}
+
+    public void ModifyDefense(float newDefense)
+    {
+        damageMod = newDefense;
+    }
+
+    public void RestoreDefense()
+    {
+        damageMod = 1.0f;
+    }
 }

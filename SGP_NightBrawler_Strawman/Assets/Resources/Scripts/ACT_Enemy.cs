@@ -93,8 +93,6 @@ public class ACT_Enemy : MonoBehaviour
 	public bool isMelee;
 	public bool paused = false;
 
-	public GameObject coins;
-
 	//Mutators
 	public void SetCurrHP(int n_hp)
 	{
@@ -203,9 +201,8 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (state == STATES.DEAD && curTime <= 0)
 		{
-			if (coins != null)
-				Instantiate(coins);				
-			Destroy(gameObject);
+			GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+			Destroy(transform.gameObject);
 		}
 
         if (curTime <= 0.0f)
