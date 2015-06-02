@@ -8,7 +8,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
 	public CHAR_Lancer()
 	{
         name = "Lancer"; // not to be confused with Lancelot, or his lesser known cousin, Lancealitte
-		characterIndex = 0;
+		characterIndex = 1;
 		cooldownTmr = 0;
 
 		Act_baseHP = 100;

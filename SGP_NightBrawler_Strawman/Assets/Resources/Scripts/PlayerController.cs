@@ -54,12 +54,15 @@ public class PlayerController : MonoBehaviour
 		MNGR_Game.Initialize();
 
         isAlive = true;
-
+        MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
         party = new ACT_CHAR_Base[3];
 
         //party[0] = new CHAR_Swordsman();
         //party[1] = new CHAR_Archer();
         //party[2] = new CHAR_Wizard();
+
+        // degubbin'
+        MNGR_Game.Initialize();
 
         party = MNGR_Game.currentParty;
 
@@ -98,10 +101,13 @@ public class PlayerController : MonoBehaviour
         // for testing
         //MNGR_Game.dangerZone = true;
 
-        if (MNGR_Game.dangerZone)
-            GameObject.Find("_Horde").SetActive(true);
-        else
-            GameObject.Find("_Horde").SetActive(false);
+        if (GameObject.Find("_Horde") != null)
+        {
+            if (MNGR_Game.dangerZone)
+                GameObject.Find("_Horde").SetActive(true);
+            else
+                GameObject.Find("_Horde").SetActive(false);
+        }
     }
 
     // aka The Situation.
@@ -135,65 +141,13 @@ public class PlayerController : MonoBehaviour
             //loop = true;
             //break;
             case ACT_CHAR_Base.STATES.WALKING:
-                // Get axis movement
-                if (Input.GetAxis("Horizontal") != 0)
-                    horz = Input.GetAxis("Horizontal");
-                if (Input.GetAxis("Vertical") != 0)
-                    vert = Input.GetAxis("Vertical");
-
-                // add gamepad axis movement
-                if (Input.GetAxis("Pad_Horizontal") != 0)
-                    horz = Input.GetAxis("Pad_Horizontal");
-                if (Input.GetAxis("Pad_Vertical") != 0)
-                    vert = Input.GetAxis("Pad_Vertical");
-
-                // but cap it off at 1
-                if (horz > 1.0f)        horz = 1.0f;
-                else if (horz < -1.0f)  horz = -1.0f;
-
-                if (vert > 1.0f)        vert = 1.0f;
-                else if (vert < -1.0f)  vert = -1.0f;
-
-                // less vertical movement because we're 2.5d
-                vert *= 0.85f;
-
-                horz *= party[currChar].Act_currSpeed * 0.25f;
-                vert *= party[currChar].Act_currSpeed * 0.25f;
-
-                // random bugfix
-                if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0
-                    && Input.GetAxis("Pad_Horizontal") == 0 && Input.GetAxis("Pad_Vertical") == 0
-                    /*&& party[currChar].state == ACT_CHAR_Base.STATES.WALKING*/)
-                {
-                    horz = 0.0f;
-                    vert = 0.0f;
-                }
-
-                // manual deadzones
-                if (Mathf.Abs(horz) < 0.1f) horz = 0.0f;
-                if (Mathf.Abs(vert) < 0.1f) vert = 0.0f;
-
-                if (horz == 0.0f && vert == 0.0f
-                    /*&& party[currChar].state == ACT_CHAR_Base.STATES.WALKING*/)
-                    ChangeState(ACT_CHAR_Base.STATES.IDLE);
-
-                // we have movement, time to make movement happen.
-                if (horz != 0 || vert != 0)
-                {
-                    if (horz > 0)       party[currChar].Act_facingRight = true;
-                    else if (horz < 0)  party[currChar].Act_facingRight = false;
-
-                    if (party[currChar].state == ACT_CHAR_Base.STATES.IDLE)
-                    {
-                        ChangeState(ACT_CHAR_Base.STATES.WALKING);
-                    }
-                }
+                CheckMoveInput(currentState);
 
                 if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
-                        ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
-                        horz = 0.0f;
-                        vert = 0.0f;
+                    ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
+                    horz = 0.0f;
+                    vert = 0.0f;
                 }
                 CheckSpecialInput(currentState);
                 CheckSwitchInput(currentState);
@@ -221,6 +175,8 @@ public class PlayerController : MonoBehaviour
             case ACT_CHAR_Base.STATES.ATTACK_3:
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
+                if (party[currChar].characterIndex == 8)
+                    CheckMoveInput(currentState);
                 break;
             case ACT_CHAR_Base.STATES.HURT:
                 if (Pc_HasKnockBack)
@@ -292,11 +248,10 @@ public class PlayerController : MonoBehaviour
             MNGR_Game.isNight = !MNGR_Game.isNight;
         }
         // modify velocity only if we aren't in special state (for custom special movement)
-        if (party[currChar].state != ACT_CHAR_Base.STATES.SPECIAL)
-        {
-            // always calls unless current character is dead.
-            GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
-        }
+
+        // always calls unless current character is dead.
+        GetComponent<Rigidbody2D>().velocity = new Vector2(horz, vert);
+
 
         switch (currChar)
         {
@@ -379,6 +334,8 @@ public class PlayerController : MonoBehaviour
         else
             loop = false;
 
+        if (_next == ACT_CHAR_Base.STATES.SPECIAL)
+            horz = vert = 0;
 
         // end triggered on state change FX
 
@@ -517,7 +474,7 @@ public class PlayerController : MonoBehaviour
     {
         isAlive = false;
 
-        for (int i = 0; i < party.Length; i++ )
+        for (int i = 0; i < party.Length; i++)
         {
             party[i].Act_currHP = party[i].Act_baseHP;
         }
@@ -547,6 +504,62 @@ public class PlayerController : MonoBehaviour
     }
 
     // L: Input functions reduce copy and pasting clutter!
+    void CheckMoveInput(ACT_CHAR_Base.STATES _cur)
+    {
+        // Get axis movement
+        if (Input.GetAxis("Horizontal") != 0)
+            horz = Input.GetAxis("Horizontal");
+        if (Input.GetAxis("Vertical") != 0)
+            vert = Input.GetAxis("Vertical");
+
+        // add gamepad axis movement
+        if (Input.GetAxis("Pad_Horizontal") != 0)
+            horz = Input.GetAxis("Pad_Horizontal");
+        if (Input.GetAxis("Pad_Vertical") != 0)
+            vert = Input.GetAxis("Pad_Vertical");
+
+        // but cap it off at 1
+        if (horz > 1.0f) horz = 1.0f;
+        else if (horz < -1.0f) horz = -1.0f;
+
+        if (vert > 1.0f) vert = 1.0f;
+        else if (vert < -1.0f) vert = -1.0f;
+
+        // less vertical movement because we're 2.5d
+        vert *= 0.85f;
+
+        horz *= party[currChar].Act_currSpeed * 0.25f;
+        vert *= party[currChar].Act_currSpeed * 0.25f;
+
+        // random bugfix
+        if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0
+            && Input.GetAxis("Pad_Horizontal") == 0 && Input.GetAxis("Pad_Vertical") == 0
+            /*&& party[currChar].state == ACT_CHAR_Base.STATES.WALKING*/)
+        {
+            horz = 0.0f;
+            vert = 0.0f;
+        }
+
+        // manual deadzones
+        if (Mathf.Abs(horz) < 0.1f) horz = 0.0f;
+        if (Mathf.Abs(vert) < 0.1f) vert = 0.0f;
+
+        if (horz == 0.0f && vert == 0.0f
+            && _cur == ACT_CHAR_Base.STATES.WALKING)
+            ChangeState(ACT_CHAR_Base.STATES.IDLE);
+
+        // we have movement, time to make movement happen.
+        if (horz != 0 || vert != 0)
+        {
+            if (horz > 0) party[currChar].Act_facingRight = true;
+            else if (horz < 0) party[currChar].Act_facingRight = false;
+
+            if (_cur == ACT_CHAR_Base.STATES.IDLE)
+            {
+                ChangeState(ACT_CHAR_Base.STATES.WALKING);
+            }
+        }
+    }
     void CheckSpecialInput(ACT_CHAR_Base.STATES _cur)
     {
         if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
@@ -587,7 +600,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     void CheckDodgeInput(ACT_CHAR_Base.STATES _cur)
-{
+    {
         if (Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0))
         {
             // special stuff when first initializing the dodge

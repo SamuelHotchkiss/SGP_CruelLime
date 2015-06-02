@@ -8,7 +8,7 @@ public class CHAR_Poisoner : ACT_CHAR_Base
 	public CHAR_Poisoner()
 	{
         name = "Poisoner"; // Or is it Venomer? Or Toxiner?
-		characterIndex = 0;
+		characterIndex = 5;
 		cooldownTmr = 0;
 
 		Act_baseHP = 100;
