@@ -23,7 +23,7 @@ public class MENU_World : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-		//MNGR_Game.playerPosition = 2;
+		MNGR_Game.playerPosition = 2;
 		//MNGR_Game.hordePosition = 5;
 
         if (MNGR_Game.playerPosition > 2)
