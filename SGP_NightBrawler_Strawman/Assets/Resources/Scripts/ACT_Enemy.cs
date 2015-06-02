@@ -130,7 +130,7 @@ public class ACT_Enemy : MonoBehaviour
         }
 		if (Act_currHP > Act_baseHP)
 			Act_currHP = Act_baseHP;
-        if (Act_currHP < 0)
+        if (Act_currHP <= 0)
         {
             Act_currHP = 0;
             state = STATES.DEAD;

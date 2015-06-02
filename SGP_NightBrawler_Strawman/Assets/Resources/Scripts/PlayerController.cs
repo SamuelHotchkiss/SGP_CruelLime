@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		MNGR_Game.Initialize();
+
         isAlive = true;
 
         party = new ACT_CHAR_Base[3];
