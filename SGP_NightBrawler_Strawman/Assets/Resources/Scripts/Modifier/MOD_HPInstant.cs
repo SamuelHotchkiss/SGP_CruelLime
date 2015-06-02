@@ -11,6 +11,7 @@ public class MOD_HPInstant : MOD_Base
         base.Start();
         Mod_PartyWide = false;      //This Effect wil affect the whole party
         Mod_effectTimer = 0.01f;
+        Mod_BaseEffectTimer = Mod_effectTimer;
         Mod_ModIndexNum = 3;        //Instant HP
 	}
 	

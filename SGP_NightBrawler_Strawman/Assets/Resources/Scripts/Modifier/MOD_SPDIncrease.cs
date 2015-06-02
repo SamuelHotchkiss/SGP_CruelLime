@@ -11,6 +11,7 @@ public class MOD_SPDIncrease : MOD_Base {
         base.Start();
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 30.0f;
+        Mod_BaseEffectTimer = Mod_effectTimer;
         Mod_ModIndexNum = 5;
         Mod_OnceOnly = false;
 	}

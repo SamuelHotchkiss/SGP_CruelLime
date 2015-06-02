@@ -10,6 +10,7 @@ public class MOD_DMGIncrease : MOD_Base
         base.Start();
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 20.0f;
+        Mod_BaseEffectTimer = Mod_effectTimer;
         Mod_ModIndexNum = 1;   
 	}
 	

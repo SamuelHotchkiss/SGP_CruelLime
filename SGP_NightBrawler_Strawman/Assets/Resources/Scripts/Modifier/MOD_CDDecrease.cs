@@ -11,7 +11,8 @@ public class MOD_CDDecrease : MOD_Base
         base.Start();
         Mod_PartyWide = true;
         Mod_ModIndexNum = 0;            //The Number ID of the Effect 
-        Mod_effectTimer = 30.0f;  
+        Mod_effectTimer = 30.0f;
+        Mod_BaseEffectTimer = Mod_effectTimer;
 	}
 	
 	// Update is called once per frame
