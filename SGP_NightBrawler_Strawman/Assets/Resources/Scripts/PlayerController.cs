@@ -59,6 +59,9 @@ public class PlayerController : MonoBehaviour
         //party[1] = new CHAR_Archer();
         //party[2] = new CHAR_Wizard();
 
+        // degubbin'
+        MNGR_Game.Initialize();
+
         party = MNGR_Game.currentParty;
 
         currentChar_GUI = new Vector3(150.0f, -100.0f, 0.0f);
@@ -96,10 +99,13 @@ public class PlayerController : MonoBehaviour
         // for testing
         //MNGR_Game.dangerZone = true;
 
-        if (MNGR_Game.dangerZone)
-            GameObject.Find("_Horde").SetActive(true);
-        else
-            GameObject.Find("_Horde").SetActive(false);
+        if (GameObject.Find("_Horde") != null)
+        {
+            if (MNGR_Game.dangerZone)
+                GameObject.Find("_Horde").SetActive(true);
+            else
+                GameObject.Find("_Horde").SetActive(false);
+        }
     }
 
     // aka The Situation.

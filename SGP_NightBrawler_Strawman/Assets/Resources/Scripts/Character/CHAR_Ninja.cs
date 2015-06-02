@@ -8,7 +8,7 @@ public class CHAR_Ninja : ACT_CHAR_Base
 	public CHAR_Ninja()
 	{
         name = "Ninja"; // She'd tell you her real name, but then she'd have to kill you
-		characterIndex = 0;
+		characterIndex = 4;
 		cooldownTmr = 0;
 
 		Act_baseHP = 100;

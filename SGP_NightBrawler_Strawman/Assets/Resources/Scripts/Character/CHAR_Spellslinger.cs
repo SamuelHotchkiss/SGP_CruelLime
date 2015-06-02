@@ -8,7 +8,7 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 	public CHAR_Spellslinger()
 	{
         name = "Spellslinger"; // she renamed herself after her brief stint in prison, her street name was Dopeslinger
-		characterIndex = 0;
+		characterIndex = 8;
 		cooldownTmr = 0;
 
 		Act_baseHP = 100;
