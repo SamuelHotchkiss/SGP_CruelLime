@@ -31,6 +31,11 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f };
+
+        attack1Sprites = new int[] { 10, 11, 12, 13 };
+        attack2Sprites = new int[] { 15, 16, 17 };
+        attack3Sprites = new int[] { 20, 21, 22, 23 };
+        specialSprites = new int[] { 25, 26, 27, 28 };
 	}
 
 	// Use this for initialization
@@ -111,17 +116,19 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
     {
         AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
-        if (_curTmr > _maxTmr * 0.9f)
+        if (_curTmr > _maxTmr * 0.95f)
             ret.spriteIndex = specialSprites[0];
-        else if (_curTmr > _maxTmr * 0.5f)
+        else if (_curTmr > _maxTmr * 0.7f)
             ret.spriteIndex = specialSprites[1];
-        else if (_curTmr > _maxTmr * 0.4f)
-            ret.spriteIndex = specialSprites[2];
         else if (_curTmr >= 0)
-            ret.spriteIndex = specialSprites[3];
-
-        //if (_curTmr < _maxTmr * 0.1f)
-        //ret.spawnproj = true;
+        {
+            if ((int)(_curTmr * 1000) % 27 > 9)
+                ret.spriteIndex = specialSprites[2];
+            else
+                ret.spriteIndex = specialSprites[3];
+        }
+        if (_curTmr < _maxTmr * 0.7f)
+            ret.spawnproj = true;
 
         return ret;
     }
