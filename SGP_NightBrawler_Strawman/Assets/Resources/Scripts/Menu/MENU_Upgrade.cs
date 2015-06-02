@@ -119,7 +119,7 @@ public class MENU_Upgrade : MonoBehaviour {
         CalculateUpgradeCost(_CharIndex, UpgType.SpeedUpg);
         if (MNGR_Game.wallet >= Upg_SpeedCost && MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel < 20)
         {
-            MNGR_Game.currentParty[_CharIndex].Act_baseSpeed += 3;
+            MNGR_Game.currentParty[_CharIndex].Act_baseSpeed++;
             MNGR_Game.currentParty[_CharIndex].RestoreToBasePower();
             MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel++;
 
