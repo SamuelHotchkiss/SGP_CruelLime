@@ -50,7 +50,7 @@ public class ACT_CHAR_Base : ACT_Base
 	{
         damageMod = 1.0f;
 
-		cooldownTmrBase = 3;
+		//cooldownTmrBase = 3;
         cooldownTmr = 0;
         invulMaxTmr = 2.0f;
         invulTmr = 0.0f;
