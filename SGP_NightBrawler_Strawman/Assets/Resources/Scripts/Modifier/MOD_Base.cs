@@ -12,7 +12,7 @@ public class MOD_Base : MonoBehaviour
     public int Mod_ModIndexNum;         //The Number ID of the Effect 
     public float Mod_effectTimer;       //How long the effect will last
 
-    public PlayerController player;  //The Actor been afflicted with the Effect
+    public PlayerController player;     //The Actor been afflicted with the Effect
     public ACT_Enemy enemy;
 
     public bool isPlayer;
@@ -72,7 +72,6 @@ public class MOD_Base : MonoBehaviour
     {
         if (!MNGR_Game.paused)
         {
-
             if (isPlayer)
             {
                 ModifyActor();
