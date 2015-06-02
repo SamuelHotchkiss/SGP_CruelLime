@@ -16,4 +16,22 @@ public static class MNGR_Game
     public static int hordePosition, playerPosition, wallet;
 	public static bool paused;
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
+
+    public static void Initialize() // S: for debugging purposes
+    {
+        theCharacters[0] = new CHAR_Swordsman();
+        theCharacters[1] = new CHAR_Lancer();
+        theCharacters[2] = new CHAR_Defender();
+        theCharacters[3] = new CHAR_Archer();
+        theCharacters[4] = new CHAR_Ninja();
+        theCharacters[5] = new CHAR_Poisoner();
+        theCharacters[6] = new CHAR_Wizard();
+        theCharacters[7] = new CHAR_ForceMage();
+        theCharacters[8] = new CHAR_Spellslinger();
+
+        // Temporary to be removed later
+        currentParty[0] = theCharacters[0];
+        currentParty[1] = theCharacters[3];
+        currentParty[2] = theCharacters[6];
+    }
 }
