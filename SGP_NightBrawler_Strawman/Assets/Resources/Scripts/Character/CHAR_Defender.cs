@@ -8,7 +8,7 @@ public class CHAR_Defender : ACT_CHAR_Base
 	public CHAR_Defender()
 	{
         name = "Defender"; // OF THE POLYVERSE!
-		characterIndex = 0;
+		characterIndex = 2;
 		cooldownTmr = 0;
 
 		Act_baseHP = 100;

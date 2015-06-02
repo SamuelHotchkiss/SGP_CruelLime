@@ -37,7 +37,7 @@ public class ACT_Enemy : MonoBehaviour
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
 
-    
+    public float damageMod;
 
 	public enum STATES
 	{
@@ -61,6 +61,7 @@ public class ACT_Enemy : MonoBehaviour
 	public int[] behaviorID = new int[10];
 	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
+	public BHR_Base basicBehavior;
 
 /// <Behavior Variables>
 	public List<GameObject> squad = new List<GameObject>();
@@ -122,7 +123,7 @@ public class ACT_Enemy : MonoBehaviour
 	//Interface
 	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
 	{                                   //Damage needs to be negative.
-		Act_currHP += Dmg;
+		Act_currHP += (int)(Dmg * damageMod);
         if (Dmg < 0)
         {
             state = STATES.HURT;
@@ -130,7 +131,7 @@ public class ACT_Enemy : MonoBehaviour
         }
 		if (Act_currHP > Act_baseHP)
 			Act_currHP = Act_baseHP;
-        if (Act_currHP < 0)
+        if (Act_currHP <= 0)
         {
             Act_currHP = 0;
             state = STATES.DEAD;
@@ -154,6 +155,8 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+        damageMod = 1.0f;
+
         Act_currAttackSpeed = Act_baseAttackSpeed;
         Act_currHP = Act_baseHP;
         Act_currPower = Act_basePower;
@@ -171,8 +174,16 @@ public class ACT_Enemy : MonoBehaviour
             if (behaviors[i].owner == null)
                 behaviors[i].owner = GetComponent<ACT_Enemy>();
 		}
-        target = null;
-		//target = GameObject.FindGameObjectWithTag("Player");
+
+		if (basicBehavior)
+		{
+			basicBehavior = behaviors[0];
+		}
+        //target = null;
+		if (Act_IsIntelligent)
+		{
+			target = GameObject.FindGameObjectWithTag("Player");
+		}
 
 		//squad = new List<GameObject>();
 	}
@@ -201,7 +212,10 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (state == STATES.DEAD && curTime <= 0)
 		{
-			GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+			if (GetComponent<ITEM_DropLoot>())
+			{
+				GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+			}
 			Destroy(transform.gameObject);
 		}
 
@@ -421,11 +435,11 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
-					if (CheckThresholds())
+					CheckThresholds();
+					if (currBehavior)
 					{
 						currBehavior.PerformBehavior();
 					}
-                    
 					break;
 				}
 			case STATES.HURT:
@@ -445,19 +459,22 @@ public class ACT_Enemy : MonoBehaviour
 		} 
 	}
 
-	public virtual bool CheckThresholds()
+	public virtual void CheckThresholds()
 	{
 		if (Act_currHP < hpThresh)
 		{
 			currBehavior = behaviors[0];
-			return true;
 		}
-		else if (behaviorSize > 1 && MNGR_Game.isNight)
+		else if (behaviorSize > 1 && nightThresh && MNGR_Game.isNight)
 		{
 			currBehavior = behaviors[1];
-			return true;
 		}
-		return false;
+		else if (behaviorSize > 2 && distanceToTarget < distThresh)
+		{
+			currBehavior = behaviors[2];
+		}
+		else
+			currBehavior = basicBehavior;
 	}
 
 	public virtual void NewState()
@@ -483,5 +500,15 @@ public class ACT_Enemy : MonoBehaviour
         state = STATES.HURT;
         curTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
 
+    }
+
+    public void ModifyDefense(float newDefense)
+    {
+        damageMod = newDefense;
+    }
+
+    public void RestoreDefense()
+    {
+        damageMod = 1.0f;
     }
 }
