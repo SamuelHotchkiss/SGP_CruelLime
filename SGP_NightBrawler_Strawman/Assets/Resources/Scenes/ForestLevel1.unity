@@ -87,6 +87,48 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &2477104
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 307616841}
+    m_Modifications:
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.89715767
+      objectReference: {fileID: 0}
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.06037164
+      objectReference: {fileID: 0}
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &9518987 stripped
 Transform:
   m_PrefabParentObject: {fileID: 417230, guid: ff069fe4d6bee6a4da72d47a7be67fad, type: 2}
@@ -1004,8 +1046,13 @@ Transform:
   - {fileID: 192232458}
   - {fileID: 691822495}
   - {fileID: 1894674664}
+  - {fileID: 318898448}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!4 &318898448 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 459910, guid: a7556a5312df13f46816c41ebaf6f0be, type: 2}
+  m_PrefabInternal: {fileID: 2477104}
 --- !u!114 &356409232 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11402402, guid: 326d4ddd09f95b7409022328fa4d11e7,

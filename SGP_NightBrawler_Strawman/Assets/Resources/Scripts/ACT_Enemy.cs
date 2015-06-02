@@ -201,7 +201,10 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (state == STATES.DEAD && curTime <= 0)
 		{
-			GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+			if (GetComponent<ITEM_DropLoot>())
+			{
+				GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+			}
 			Destroy(transform.gameObject);
 		}
 
