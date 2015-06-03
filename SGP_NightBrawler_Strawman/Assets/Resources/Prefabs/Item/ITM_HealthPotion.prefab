@@ -11,7 +11,9 @@ GameObject:
   - 212: {fileID: 21205986}
   - 61: {fileID: 6187626}
   - 114: {fileID: 11420842}
-  m_Layer: 0
+  - 50: {fileID: 5083076}
+  - 114: {fileID: 11449830}
+  m_Layer: 13
   m_Name: ITM_HealthPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5083076
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155712}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!61 &6187626
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -55,6 +72,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectID: 3
+--- !u!114 &11449830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98a7334254775d40af81d8e2403fbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionPickUp: {fileID: 0}
+  player: {fileID: 0}
+  ParentObjectPos: {x: 0, y: 0, z: 0}
+  Timer: 0
 --- !u!212 &21205986
 SpriteRenderer:
   m_ObjectHideFlags: 1
