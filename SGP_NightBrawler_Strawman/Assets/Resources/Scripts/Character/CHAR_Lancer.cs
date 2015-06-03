@@ -33,7 +33,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Lancer_Melee";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
-        StateTmrs = new float[] { 1.0f, 0.75f, 0.1f, 0.8f, 0.7f, 0.8f, 0.6f, 0.1f, 1.0f, 1.0f };
+        StateTmrs = new float[] { 1.0f, 0.75f, 0.1f, 0.8f, 0.7f, 0.6f, 0.6f, 0.1f, 1.0f, 1.0f };
 
         attack1Sprites = new int[] { 10, 11, 12, 13 };
         attack2Sprites = new int[] { 15, 16, 17 };
@@ -65,15 +65,15 @@ public class CHAR_Lancer : ACT_CHAR_Base
     {
         AttackInfo ret = new AttackInfo(0);
 
-        if (_curTmr > _maxTmr * 0.75f)
+        if (_curTmr > _maxTmr * 0.8f)
             ret.spriteIndex = attack1Sprites[0];
-        else if (_curTmr > _maxTmr * 0.5f)
+        else if (_curTmr > _maxTmr * 0.6f)
             ret.spriteIndex = attack1Sprites[1];
-        else if (_curTmr > _maxTmr * 0.4f)
+        else if (_curTmr > _maxTmr * 0.5f)
             ret.spriteIndex = attack1Sprites[2];
         else if (_curTmr >= 0)
             ret.spriteIndex = attack1Sprites[3];
-        if (_curTmr < _maxTmr * 0.5f)
+        if (_curTmr < _maxTmr * 0.6f)
             ret.spawnproj = true;
 
         ret.newpos = new Vector3(0.35f, 0.0f, 0.0f);
@@ -84,9 +84,9 @@ public class CHAR_Lancer : ACT_CHAR_Base
     {
         AttackInfo ret = new AttackInfo(0);
 
-        if (_curTmr > _maxTmr * 0.85f)
+        if (_curTmr > _maxTmr * 0.9f)
             ret.spriteIndex = attack2Sprites[0];
-        else if (_curTmr > _maxTmr * 0.7f)
+        else if (_curTmr > _maxTmr * 0.8f)
             ret.spriteIndex = attack2Sprites[1];
         else if (_curTmr >= 0)
             ret.spriteIndex = attack2Sprites[2];
@@ -103,9 +103,9 @@ public class CHAR_Lancer : ACT_CHAR_Base
 
         if (_curTmr > _maxTmr * 0.6f)
             ret.spriteIndex = attack3Sprites[0];
-        else if (_curTmr > _maxTmr * 0.2f)
+        else if (_curTmr > _maxTmr * 0.3f)
             ret.spriteIndex = attack3Sprites[1];
-        else if (_curTmr > _maxTmr * 0.1f)
+        else if (_curTmr > _maxTmr * 0.2f)
             ret.spriteIndex = attack3Sprites[2];
         else if (_curTmr >= 0)
             ret.spriteIndex = attack3Sprites[3];
