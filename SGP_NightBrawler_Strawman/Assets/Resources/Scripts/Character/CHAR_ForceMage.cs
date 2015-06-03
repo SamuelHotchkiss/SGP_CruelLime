@@ -27,7 +27,7 @@ public class CHAR_ForceMage : ACT_CHAR_Base
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
         ProjFilePaths = new string[3];
-        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Force_Knockback";
+        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Force_Redirect";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Force_Knockback";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Null";
 
