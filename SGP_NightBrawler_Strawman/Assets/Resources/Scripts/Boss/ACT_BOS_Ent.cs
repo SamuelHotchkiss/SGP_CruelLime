@@ -121,7 +121,7 @@ public class ACT_BOS_Ent : ACT_Enemy
         }
 	}
 
-    public override bool CheckThresholds()
+    public override void CheckThresholds()
     {
         //base.CheckThresholds();
         if (target != null)
@@ -167,8 +167,6 @@ public class ACT_BOS_Ent : ACT_Enemy
                 hpThresh = (int)(Act_baseHP * 0.5f);            //If its HP is at 50% this will activate.
             }
         }
-
-        return true;
     }
 
     IEnumerator SpawnWalls()

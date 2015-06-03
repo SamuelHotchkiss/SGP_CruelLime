@@ -10,8 +10,9 @@ GameObject:
   - 4: {fileID: 402488}
   - 212: {fileID: 21243204}
   - 114: {fileID: 11424130}
-  - 58: {fileID: 5858688}
   - 50: {fileID: 5000270}
+  - 114: {fileID: 11425408}
+  - 61: {fileID: 6152106}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -40,14 +41,14 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 0
-  m_FixedAngle: 0
+  m_GravityScale: 1
+  m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!58 &5858688
-CircleCollider2D:
+--- !u!61 &6152106
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -56,9 +57,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: .0199999996, y: -.0250000004}
   serializedVersion: 2
-  m_Radius: .349999994
+  m_Size: {x: .75, y: .75}
 --- !u!114 &11424130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,6 +76,17 @@ MonoBehaviour:
   player: {fileID: 0}
   ParentObjectPos: {x: 0, y: 0, z: 0}
   Timer: 10
+--- !u!114 &11425408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21243204
 SpriteRenderer:
   m_ObjectHideFlags: 1

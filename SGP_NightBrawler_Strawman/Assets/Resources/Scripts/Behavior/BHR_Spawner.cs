@@ -3,7 +3,14 @@ using System.Collections;
 
 public class BHR_Spawner : BHR_Base
 {
-    public bool Spw_SpawnAllCritters = true;
+    public bool Spw_SpawnAllCritters;
+
+	void Start()
+	{
+		Spw_SpawnAllCritters = true;
+	}
+
+
 	// Update is called once per frame
 	void Update () 
     {
@@ -37,6 +44,6 @@ public class BHR_Spawner : BHR_Base
                 owner.Spw_CrittersCreated++;
             } 
         }
-		Debug.Log("Spawner Activated!");
+		// Debug.Log("Spawner Activated!");
 	}
 }

@@ -11,6 +11,8 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 		characterIndex = 8;
 		cooldownTmr = 0;
 
+        cooldownTmrBase = 5.0f;
+
 		Act_baseHP = 50;
 		Act_basePower = 5;
 		Act_baseSpeed = 10;
@@ -25,12 +27,12 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
         ProjFilePaths = new string[3];
-        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Melee";
-        ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Melee";
-        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Whirlwind";
+        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Sling1";
+        ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Sling2";
+        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_FlameThrower";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
-        StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f };
+        StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 2.0f, 0.1f, 1.0f, 1.0f };
 
         attack1Sprites = new int[] { 10, 11, 12, 13 };
         attack2Sprites = new int[] { 15, 16, 17 };

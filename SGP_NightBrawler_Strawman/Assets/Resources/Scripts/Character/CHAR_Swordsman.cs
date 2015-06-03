@@ -10,7 +10,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
         name = "Swordsman"; // once a Swordsboy, now a Swordsman
 		characterIndex = 0;
 		cooldownTmr = 0;
-
+        cooldownTmrBase = 3.0f;
 
 		Act_baseHP = 100;
         Act_currHP = Act_baseHP;
