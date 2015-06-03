@@ -17,7 +17,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
 		Act_basePower = 10;
         Act_baseSpeed = 10;
-        Act_currSpeed = Act_baseSpeed;
+        //Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 25;
         Act_baseAspeed = 0.025f;
 
@@ -53,7 +53,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
     public override AttackInfo ActivateDodge(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo();
 
         ret.spriteIndex = walkSprites[4];
 
@@ -61,7 +61,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
     }
     public override AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo();
 
         if (_curTmr > _maxTmr * 0.75f)
             ret.spriteIndex = attack1Sprites[0];
@@ -78,7 +78,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
     }
     public override AttackInfo ActivateAttack2(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo();
 
         if (_curTmr > _maxTmr * 0.66f)
             ret.spriteIndex = attack2Sprites[0];
@@ -95,7 +95,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
     }
     public override AttackInfo ActivateAttack3(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo();
 
         if (_curTmr > _maxTmr * 0.75f)
             ret.spriteIndex = attack3Sprites[0];
@@ -115,7 +115,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
     public override AttackInfo ActivateSpecial(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo();
 
         if (_curTmr > _maxTmr * 0.95f)
             ret.spriteIndex = specialSprites[0];
@@ -127,6 +127,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
                 ret.velocity = new Vector2(2.0f, 0.0f);
             else
                 ret.velocity = new Vector2(-2.0f, 0.0f);
+            ret.spriteIndex = specialSprites[1];
         }
         else if (_curTmr >= 0)
         {

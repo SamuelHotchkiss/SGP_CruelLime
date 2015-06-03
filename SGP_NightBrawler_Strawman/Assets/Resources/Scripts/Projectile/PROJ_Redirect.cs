@@ -3,9 +3,9 @@ using System.Collections;
 
 public class PROJ_Redirect : PROJ_Explosive 
 {
-    public override void Initialize(bool _r = true)
+    public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
-        base.Initialize(_r);
+        base.Initialize(_r, _damMult);
         gameObject.layer = 14;
     }
 

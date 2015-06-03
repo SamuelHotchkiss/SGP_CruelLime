@@ -347,7 +347,7 @@ public class PlayerController : MonoBehaviour
                 maxTmr[(int)_next] = GetAtkSpeed();
             }
             // either way set the timer to the current state's max
-            if (_next != old)
+            //if (_next != old)
                 curTmr = maxTmr[(int)_next];
         }
         else
@@ -413,7 +413,7 @@ public class PlayerController : MonoBehaviour
 
     // L: called in animation manager when we're displaying the right sprite to attack at
     // _index allows us to choose which projectile.
-    public bool SpawnProj(bool _right = true, int _index = 0)
+    public bool SpawnProj(bool _right = true, int _index = 0, float _damMult = 1.0f)
     {
         /*int num = 1;
 
@@ -425,7 +425,7 @@ public class PlayerController : MonoBehaviour
         Object test = Projs[_index];
         GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
         clone.GetComponent<PROJ_Base>().owner = gameObject;
-        clone.GetComponent<PROJ_Base>().Initialize(_right);
+        clone.GetComponent<PROJ_Base>().Initialize(_right, _damMult);
 
         // this makes me puke a little inside.
         if (party[currChar].characterIndex == 6 && _index == 1)

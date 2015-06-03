@@ -6,7 +6,7 @@ public class PROJ_Flamethrower : PROJ_Base
     float timer = 1.5f;
 
     // Use this for initialization
-    public override void Initialize(bool _r = true)
+    public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
         if(owner.tag == "Player")
         {
@@ -16,6 +16,7 @@ public class PROJ_Flamethrower : PROJ_Base
             int target = player.currChar;
 
             power += player.party[target].Act_currPower;
+            power = (int)(_damMult * (float)power);
 
             if(!_r)
             {

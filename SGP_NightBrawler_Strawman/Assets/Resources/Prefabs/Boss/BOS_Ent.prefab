@@ -12,7 +12,7 @@ GameObject:
   - 50: {fileID: 5046144}
   - 61: {fileID: 6164374}
   - 114: {fileID: 11478422}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BOS_Ent
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   Act_IsIntelligent: 1
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
-  damageMod: 0
+  damageMod: 1
   state: 0
   randomState: 0
   curTime: 0
@@ -117,6 +117,9 @@ MonoBehaviour:
   Spw_Force: {x: -150, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 20
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
