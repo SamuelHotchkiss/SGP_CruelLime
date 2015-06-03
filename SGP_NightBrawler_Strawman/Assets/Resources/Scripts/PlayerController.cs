@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
+    public void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
     {
         ACT_CHAR_Base.STATES old = party[currChar].state;
 
