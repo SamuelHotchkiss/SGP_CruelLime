@@ -11,6 +11,7 @@ public class MOD_HPRegen : MOD_Base
         base.Start();
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 10.0f;
+        Mod_BaseEffectTimer = Mod_effectTimer;
         MHPR_Timer = 0.0f;
         Mod_ModIndexNum = 4;        //Regen HP
     }
