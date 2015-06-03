@@ -11,6 +11,7 @@ public class MENU_Main : MonoBehaviour
 
     void Start()
     {
+		MNGR_Game.Initialize();
         MNGR_Save.LoadOptions();            // Load in the options file, if there is one
 
         if (MNGR_Options.fullscreen)

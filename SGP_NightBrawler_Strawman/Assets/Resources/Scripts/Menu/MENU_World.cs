@@ -175,4 +175,27 @@ public class MENU_World : MonoBehaviour
 
         Application.LoadLevel(lvlName);
     }
+
+	public void UsePotion(int _index)
+	{
+		if (MNGR_Game.equippedItem != -1)
+			MNGR_Game.theInventory.containers[MNGR_Game.equippedItem].count++;
+
+		MNGR_Game.theInventory.containers[_index].count--;
+		MNGR_Game.equippedItem = _index;
+
+		if (MNGR_Game.theInventory.containers[_index].count <= 0)
+			inventoryImages[_index].gameObject.SetActive(false);
+
+		for (int i = 0; i < inventoryCounts.Length; i++)
+		{
+			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
+			if (MNGR_Game.theInventory.containers[i].count < 1)
+				inventoryImages[i].gameObject.SetActive(false);
+			else
+				inventoryImages[i].gameObject.SetActive(true);
+		}
+
+		GameObject.Find("Held_Item").gameObject.GetComponent<Image>().sprite = inventoryImages[_index].sprite;
+	}
 }
