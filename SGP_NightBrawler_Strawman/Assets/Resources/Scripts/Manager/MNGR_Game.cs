@@ -5,6 +5,8 @@ using System.Collections;
 // A public class that ANY class can access data from
 public static class MNGR_Game
 {
+    static bool theMan = false;
+
 	public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
 	public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];
 
@@ -19,6 +21,11 @@ public static class MNGR_Game
 
 	public static void Initialize() // S: for debugging purposes
 	{
+        if (theMan)
+            return;
+
+        theMan = true;
+
 		theCharacters[0] = new CHAR_Swordsman();
 		theCharacters[1] = new CHAR_Lancer();
 		theCharacters[2] = new CHAR_Defender();
