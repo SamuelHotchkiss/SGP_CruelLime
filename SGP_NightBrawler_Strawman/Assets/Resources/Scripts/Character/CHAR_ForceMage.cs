@@ -17,7 +17,7 @@ public class CHAR_ForceMage : ACT_CHAR_Base
 
         Act_baseHP = 50;
         Act_currHP = Act_baseHP;
-        Act_basePower = 0;
+        Act_basePower = 5;
         Act_baseSpeed = 10;
         Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 20;
@@ -31,7 +31,7 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         ProjFilePaths = new string[3];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Fireball";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_FireballStrong";
-        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Fireball_ExplosionStrong";
+        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Null";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 3.0f, 0.1f, 1.0f, 1.0f };
