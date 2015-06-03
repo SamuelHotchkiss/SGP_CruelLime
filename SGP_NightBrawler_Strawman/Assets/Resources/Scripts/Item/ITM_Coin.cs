@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Coin : MonoBehaviour {
+public class ITM_Coin : MonoBehaviour {
 
     public int Coin_Amount;
     public AudioClip Coin_PickUp;
@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour {
 
     public float Timer = 10.0f;
 
-    public Coin(Vector3 Parent)
+    public ITM_Coin(Vector3 Parent)
     {
         ParentObjectPos = Parent;
     }
@@ -65,11 +65,10 @@ public class Coin : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D col)
     {
-        if (col.name == "Player" && transform.position.y < ParentObjectPos.y)
+        if (col.tag == "Player" && transform.position.y < ParentObjectPos.y)
         {
 			AudioSource.PlayClipAtPoint(Coin_PickUp, new Vector3(0, 0, 0), 1.0f);
 			MNGR_Game.wallet += Coin_Amount;
-			//base.OnTriggerEnter2D(col);
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * Random.Range(300, 400));
         }
     }

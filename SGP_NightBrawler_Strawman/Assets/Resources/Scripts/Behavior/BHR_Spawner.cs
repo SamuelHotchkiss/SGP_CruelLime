@@ -44,6 +44,6 @@ public class BHR_Spawner : BHR_Base
                 owner.Spw_CrittersCreated++;
             } 
         }
-		Debug.Log("Spawner Activated!");
+		// Debug.Log("Spawner Activated!");
 	}
 }

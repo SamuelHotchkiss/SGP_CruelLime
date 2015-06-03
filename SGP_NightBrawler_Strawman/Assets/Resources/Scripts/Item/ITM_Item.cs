@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Item : MonoBehaviour 
+public class ITM_Item : MonoBehaviour 
 {
 
     public int effectID;

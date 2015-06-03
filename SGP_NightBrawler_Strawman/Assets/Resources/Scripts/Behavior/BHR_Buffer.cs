@@ -43,6 +43,6 @@ public class BHR_Buffer : BHR_Base
                 MNGR_Item.AttachModifier(owner.buffIndex, owner.squad[i]);
 		}
 
-		Debug.Log("Buffer Activated!");
+		// Debug.Log("Buffer Activated!");
 	}
 }
