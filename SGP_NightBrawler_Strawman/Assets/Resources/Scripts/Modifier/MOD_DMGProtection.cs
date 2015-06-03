@@ -7,6 +7,8 @@ public class MOD_DMGProtection : MOD_Base
 
 	// Use this for initialization
 	void Start () {
+        myColor = Color.blue;
+
         buffState = MNGR_Item.BuffStates.BUFFED;
         base.Start();
         Mod_PartyWide = true;       //This Effect wil affect the whole party
