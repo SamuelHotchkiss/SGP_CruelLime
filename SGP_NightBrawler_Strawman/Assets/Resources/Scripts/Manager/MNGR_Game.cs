@@ -33,5 +33,8 @@ public static class MNGR_Game
         currentParty[0] = theCharacters[0];
         currentParty[1] = theCharacters[3];
         currentParty[2] = theCharacters[8];
+
+		usedItem = false;
+		equippedItem = -1;
     }
 }

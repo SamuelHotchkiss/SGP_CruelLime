@@ -18,18 +18,7 @@ public class ITM_Item : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D Col)
     {
-        MNGR_Game.usedItem = false;
-        MNGR_Game.equippedItem = 3;
-
-        Debug.Log(MNGR_Game.theInventory.containers[3].count);
-
-        if (effectID == 3)
-            MNGR_Game.theInventory.Increment(effectID);
-        else
-            MNGR_Item.AttachModifier(effectID, Col.gameObject);
-
-        Debug.Log(MNGR_Game.theInventory.containers[3].count);
-
+        MNGR_Item.AttachModifier(effectID, Col.gameObject);
         Destroy(gameObject);
     }
 }

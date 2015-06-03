@@ -51,18 +51,13 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		MNGR_Game.Initialize();
-
         isAlive = true;
-        MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
+        //MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
         party = new ACT_CHAR_Base[3];
 
         //party[0] = new CHAR_Swordsman();
         //party[1] = new CHAR_Archer();
         //party[2] = new CHAR_Wizard();
-
-        // degubbin'
-        MNGR_Game.Initialize();
 
         party = MNGR_Game.currentParty;
 
@@ -152,6 +147,7 @@ public class PlayerController : MonoBehaviour
                 CheckSpecialInput(currentState);
                 CheckSwitchInput(currentState);
                 CheckUseInput(currentState);
+				CheckHealInput(currentState);
                 CheckDodgeInput(currentState);
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
@@ -586,7 +582,6 @@ public class PlayerController : MonoBehaviour
     }
     void CheckUseInput(ACT_CHAR_Base.STATES _cur)
     {
-        // currently does nothing
         if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
             && party[currChar].state != ACT_CHAR_Base.STATES.USE)
         {
@@ -594,11 +589,28 @@ public class PlayerController : MonoBehaviour
             {
                 MNGR_Game.usedItem = true;
                 MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
+				MNGR_Game.equippedItem = -1;
             }
 
             ChangeState(ACT_CHAR_Base.STATES.USE);
         }
     }
+
+	void CheckHealInput(ACT_CHAR_Base.STATES _cur)
+	{
+		if ((Input.GetButton("Heal") || Input.GetButton("Pad_Heal"))
+			&& party[currChar].state != ACT_CHAR_Base.STATES.USE)
+		{
+			if (MNGR_Game.theInventory.containers[0].count > 0)
+			{
+				MNGR_Item.AttachModifier(3, gameObject);
+				MNGR_Game.theInventory.containers[0].count--;
+			}
+
+			ChangeState(ACT_CHAR_Base.STATES.USE);
+		}
+	}
+
     void CheckDodgeInput(ACT_CHAR_Base.STATES _cur)
     {
         if (Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0))
