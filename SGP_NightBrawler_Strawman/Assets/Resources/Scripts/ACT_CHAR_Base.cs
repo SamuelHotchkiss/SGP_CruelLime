@@ -10,12 +10,14 @@ public class ACT_CHAR_Base : ACT_Base
         public Vector2 velocity;
         public Vector3 newpos;
         public bool spawnproj;
-        public AttackInfo(int _sprdex, Vector2 _vel, Vector3 _pos, bool _spawn)
+        public float damMult;
+        public AttackInfo(int _sprdex = 0, Vector2 _vel = default(Vector2), Vector3 _pos = default(Vector3), bool _spawn = false, float _damMult = 1.0f)
         {
             spriteIndex = _sprdex;
             velocity = _vel;
             newpos = _pos;
             spawnproj = _spawn;
+            damMult = _damMult;
         }
     }
                         //      0,      1,      2,
@@ -50,8 +52,8 @@ public class ACT_CHAR_Base : ACT_Base
 	{
         damageMod = 1.0f;
 
-		//cooldownTmrBase = 3;
-        cooldownTmr = 0;
+        cooldownTmr = 0.0f;
+		//cooldownTmrBase = 3.0f;
         invulMaxTmr = 2.0f;
         invulTmr = 0.0f;
 

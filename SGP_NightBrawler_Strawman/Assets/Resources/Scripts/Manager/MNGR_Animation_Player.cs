@@ -127,20 +127,14 @@ public class MNGR_Animation_Player : MonoBehaviour
                 info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
                 GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
 
-                // completely pointless if statement and variable nonsense except it randomly wont work otherwise.
                 if (info.velocity.magnitude != 0)
                 {
-                    //Vector2 test = GetComponent<Rigidbody2D>().velocity;
-                    //GetComponent<Rigidbody2D>().velocity = info.velocity; // this is the only line of code in this nonsense that I wish to work.
-                    //test = GetComponent<Rigidbody2D>().velocity;
-
                     currentController.horz = info.velocity.x;
                     currentController.vert = info.velocity.y;
                 }
-                // end of nonsense
 
                 if (SpawnProj && info.spawnproj)
-                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 2);
+                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 2, info.damMult);
                 //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.HURT:

@@ -13,7 +13,7 @@ public class PROJ_Base : MonoBehaviour
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
 
-    public virtual void Initialize(bool _r = true)
+    public virtual void Initialize(bool _r = true, float _damMult = 1.0f)
     {
         // Are you my mommy?
         if(owner.tag == "Player")
@@ -44,6 +44,7 @@ public class PROJ_Base : MonoBehaviour
             bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
+            power = (int)(_damMult * (float)power);
 
             if (right)
                 velocity = new Vector2(1, 0);// * speed;

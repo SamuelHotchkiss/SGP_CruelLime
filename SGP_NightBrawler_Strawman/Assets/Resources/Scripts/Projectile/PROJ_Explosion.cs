@@ -10,7 +10,7 @@ public class PROJ_Explosion : PROJ_Base
     public Vector2 forcedir;
     public Sprite[] sprites;
 
-    public override void Initialize(bool _r = true)
+    public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
         timer = timerMax;
         speed = 0;

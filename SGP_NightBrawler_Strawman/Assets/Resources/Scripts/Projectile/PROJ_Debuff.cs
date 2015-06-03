@@ -6,7 +6,7 @@ public class PROJ_Debuff : PROJ_Base {
 	public int debuff_ID;
 
 	// Use this for initialization
-	public override void Initialize(bool _r = true)
+    public override void Initialize(bool _r = true, float _damMult = 1.0f)
 	{
 		base.Initialize(_r);
 	}
