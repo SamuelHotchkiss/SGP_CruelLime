@@ -42,6 +42,6 @@ public class BHR_Kamikaze : BHR_Base
 			owner.GetComponent<Rigidbody2D>().velocity = vel;
 		}
 
-		Debug.Log("Kamikaze Activated!");
+		// Debug.Log("Kamikaze Activated!");
 	}
 }

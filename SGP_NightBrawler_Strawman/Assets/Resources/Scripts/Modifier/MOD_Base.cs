@@ -18,7 +18,29 @@ public class MOD_Base : MonoBehaviour
 
     public bool isPlayer;
 
-    // Use this for initialization
+
+
+	/*--- Legend ---
+	 ===============
+	0 = MOD_CDDecrease
+	1 = MOD_DMGIncrease
+	2 = MOD_DMGProtection
+	3 = MOD_HPInstant
+	4 = MOD_HPRegen
+	5 = MOD_SPDIncrease
+	 * 
+	=== Debuffs IDs === 
+	 * 
+	6 = MOD_DMGDecrease
+	7 = MOD_DMGIncomingIncrease
+	8 = MOD_DoT
+	9 = MOD_Slowed
+	10 = MOD_Stunned
+	 ===============*/
+
+
+
+	// Use this for initialization
     public virtual void Start()
     {
         Mod_ModIndexNum = -1;           //Base class
