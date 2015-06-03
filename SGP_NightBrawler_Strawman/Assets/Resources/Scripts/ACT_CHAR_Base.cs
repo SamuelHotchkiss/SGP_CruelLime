@@ -25,6 +25,7 @@ public class ACT_CHAR_Base : ACT_Base
 	public STATES state;
 
     public float damageMod;             // S: lessens or increases damage taken
+    protected float chargeTimer;
 
 	public float cooldownTmrBase;
     public float cooldownTmr;
@@ -168,5 +169,17 @@ public class ACT_CHAR_Base : ACT_Base
     public void RestoreDefense()
     {
         damageMod = 1.0f;
+    }
+
+    protected void ChargeSpecial(bool isCharging)
+    {
+        if (!isCharging)
+            return;
+
+        if (chargeTimer <= 0)
+        {
+            MNGR_Item.AttachModifier(2, GameObject.FindGameObjectWithTag("Player"));
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().color = Color.blue;
+        }
     }
 }

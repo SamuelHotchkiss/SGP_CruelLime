@@ -5,8 +5,6 @@ using System.Collections;
 
 public class CHAR_ForceMage : ACT_CHAR_Base
 {
-    float chargeTimer;
-
 	public CHAR_ForceMage()
 	{
         name = "Force Mage"; // ...it is strong with this one
@@ -147,15 +145,5 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         return ret;
     }
 
-    void ChargeSpecial(bool isCharging)
-    {
-        if (!isCharging)
-            return;
-
-        if (chargeTimer <= 0)
-        {
-            MNGR_Item.AttachModifier(2, GameObject.FindGameObjectWithTag("Player"));
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().color = Color.blue;
-        }
-    }
+    
 }
