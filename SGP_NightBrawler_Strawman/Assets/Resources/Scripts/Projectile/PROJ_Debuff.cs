@@ -8,7 +8,7 @@ public class PROJ_Debuff : PROJ_Base {
 	// Use this for initialization
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
 	{
-		base.Initialize(_r);
+        base.Initialize(_r, _damMult);
 	}
 	
 	// Update is called once per frame

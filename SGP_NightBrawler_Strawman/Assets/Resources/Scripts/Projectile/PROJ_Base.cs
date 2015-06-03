@@ -25,6 +25,7 @@ public class PROJ_Base : MonoBehaviour
             int target = player.currChar;
 
             power += player.party[target].Act_currPower;
+            power = (int)(_damMult * (float)power);
 
             //bool right = player.party[target].Act_facingRight;
             bool right = _r;

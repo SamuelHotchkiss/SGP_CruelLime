@@ -23,6 +23,7 @@ public class PROJ_Explosion : PROJ_Base
         if (owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].characterIndex == 0)
         {
             power = (int)((float)power * 0.75f);
+            power = (int)(_damMult * (float)power);
             if (!owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight)
             {
                 Vector2 offset = GetComponent<CircleCollider2D>().offset;

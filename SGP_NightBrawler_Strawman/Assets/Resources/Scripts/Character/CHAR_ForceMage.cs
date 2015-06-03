@@ -11,7 +11,8 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         characterIndex = 7;
         cooldownTmr = 0;
         cooldownTmrBase = 10.0f;
-        chargeTimer = 3.0f;
+        chargeTimerMax = 3.0f;
+        chargeTimer = chargeTimerMax;
 
         Act_baseHP = 50;
         Act_currHP = Act_baseHP;

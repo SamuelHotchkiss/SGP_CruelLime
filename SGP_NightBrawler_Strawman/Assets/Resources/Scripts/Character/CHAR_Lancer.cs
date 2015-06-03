@@ -11,6 +11,8 @@ public class CHAR_Lancer : ACT_CHAR_Base
 		characterIndex = 1;
         cooldownTmr = 0;
         cooldownTmrBase = 3.0f;
+        chargeTimerMax = 1.0f;
+        chargeTimer = chargeTimerMax;
 
         Act_baseHP = 100;
         Act_currHP = Act_baseHP;
@@ -31,7 +33,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Lancer_Melee";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
-        StateTmrs = new float[] { 1.0f, 0.75f, 0.1f, 0.8f, 0.7f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f };
+        StateTmrs = new float[] { 1.0f, 0.75f, 0.1f, 0.8f, 0.7f, 0.8f, 0.6f, 0.1f, 1.0f, 1.0f };
 
         attack1Sprites = new int[] { 10, 11, 12, 13 };
         attack2Sprites = new int[] { 15, 16, 17 };
@@ -53,7 +55,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
 
     public override AttackInfo ActivateDodge(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         ret.spriteIndex = walkSprites[4];
 
@@ -61,7 +63,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
     }
     public override AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.75f)
             ret.spriteIndex = attack1Sprites[0];
@@ -80,7 +82,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
     }
     public override AttackInfo ActivateAttack2(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.85f)
             ret.spriteIndex = attack2Sprites[0];
@@ -97,7 +99,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
     }
     public override AttackInfo ActivateAttack3(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.6f)
             ret.spriteIndex = attack3Sprites[0];
@@ -117,25 +119,56 @@ public class CHAR_Lancer : ACT_CHAR_Base
 
     public override AttackInfo ActivateSpecial(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
-        if (_curTmr > _maxTmr * 0.9f)
+        if (chargeTimer > 0 && Input.GetButton("Special/Cancel"))
         {
-            if (Act_facingRight)
-                ret.velocity = new Vector2(5.0f, 0.0f);
-            else
-                ret.velocity = new Vector2(-5.0f, 0.0f);
-            ret.spriteIndex = specialSprites[0];
+            chargeTimer -= Time.deltaTime;
+
+            // really weird correction
+            if (chargeTimer == 0.0f)
+                chargeTimer -= Time.deltaTime;
+
+            if (chargeTimer > chargeTimerMax * 0.8f)
+                ret.spriteIndex = attack1Sprites[0];
+            else if (chargeTimer >= 0)
+                ret.spriteIndex = attack1Sprites[1];
+
+            if (_curTmr < 0.2f)
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
         }
-        else if (_curTmr > _maxTmr * 0.8f)
-            ret.spriteIndex = specialSprites[1];
-        else if (_curTmr > _maxTmr * 0.7f)
+        else if (chargeTimer != 0.0f) // || !Input.GetButton("Special/Cancel") )
         {
-            ret.spriteIndex = specialSprites[2];
-            ret.spawnproj = true;
+            chargeDur = chargeTimerMax - chargeTimer;
+            chargeTimer = 0.0f;
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
         }
-        else if (_curTmr >= 0)
-            ret.spriteIndex = specialSprites[3];
+        else if (chargeTimer == 0.0f)
+        {
+            if (_curTmr > _maxTmr * 0.8f)
+            {
+                if (Act_facingRight)
+                    ret.velocity = new Vector2(8.0f * chargeDur, 0.0f);
+                else
+                    ret.velocity = new Vector2(-8.0f * chargeDur, 0.0f);
+
+                ret.spriteIndex = specialSprites[0];
+            }
+            else if (_curTmr > _maxTmr * 0.6f)
+                ret.spriteIndex = specialSprites[1];
+            else if (_curTmr > _maxTmr * 0.5f)
+            {
+                ret.spriteIndex = specialSprites[2];
+                ret.damMult += chargeDur * 10.0f;
+                ret.spawnproj = true;
+            }
+            else if (_curTmr >= 0)
+                ret.spriteIndex = specialSprites[3];
+
+            ret.enableCollision = false;
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.IDLE);
+        }
 
         return ret;
     }

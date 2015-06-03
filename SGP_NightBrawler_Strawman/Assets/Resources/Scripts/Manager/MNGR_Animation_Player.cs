@@ -6,7 +6,7 @@ public class MNGR_Animation_Player : MonoBehaviour
 
     string[] filepaths;
     Sprite[] sprites;
-    Sprite lastSprite;
+    //Sprite lastSprite;
     ACT_CHAR_Base currentCharacter;
         ACT_CHAR_Base.AttackInfo info;
     PlayerController currentController;
@@ -135,6 +135,10 @@ public class MNGR_Animation_Player : MonoBehaviour
 
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 2, info.damMult);
+
+                bool curCol = currentController.GetComponent<BoxCollider2D>().enabled;
+                if (curCol != info.enableCollision)
+                    currentController.GetComponent<BoxCollider2D>().enabled = info.enableCollision;
                 //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.HURT:
@@ -180,6 +184,11 @@ public class MNGR_Animation_Player : MonoBehaviour
             newpos.x += move;
             transform.position = newpos;
         }*/
+        if (lastState == ACT_CHAR_Base.STATES.SPECIAL)
+        {
+            currentController.GetComponent<BoxCollider2D>().enabled = true;
+        }
+
         if (_newstate == ACT_CHAR_Base.STATES.IDLE)
         {
             Vector3 newpos = transform.position;
@@ -187,6 +196,15 @@ public class MNGR_Animation_Player : MonoBehaviour
                 info.newpos *= -1.0f;
             transform.position = newpos + info.newpos;
             info.newpos = Vector3.zero;
+        }
+        else if (lastState != ACT_CHAR_Base.STATES.SPECIAL && _newstate == ACT_CHAR_Base.STATES.SPECIAL)
+        {
+            if (currentCharacter.chargeTimer <= 0)
+            {
+                currentCharacter.chargeTimer = currentCharacter.chargeTimerMax;
+                currentCharacter.chargeDur = 0.0f;
+            }
+
         }
 
         // if this state didn't spawn a projectile during animation, spawn it here.

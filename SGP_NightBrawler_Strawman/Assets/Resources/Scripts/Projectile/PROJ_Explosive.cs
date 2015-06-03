@@ -11,7 +11,7 @@ public class PROJ_Explosive : PROJ_Base
 
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
-        base.Initialize(_r);
+        base.Initialize(_r, _damMult);
         sprites = Resources.LoadAll<Sprite>("Sprites/Projectile/Fireball");
     }
 

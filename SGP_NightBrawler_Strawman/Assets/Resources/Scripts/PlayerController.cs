@@ -351,7 +351,7 @@ public class PlayerController : MonoBehaviour
                 maxTmr[(int)_next] = GetAtkSpeed();
             }
             // either way set the timer to the current state's max
-            if (_next != old)
+            //if (_next != old)
                 curTmr = maxTmr[(int)_next];
         }
         else

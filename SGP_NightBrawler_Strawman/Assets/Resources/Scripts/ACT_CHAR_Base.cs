@@ -10,13 +10,16 @@ public class ACT_CHAR_Base : ACT_Base
         public Vector2 velocity;
         public Vector3 newpos;
         public bool spawnproj;
+        public bool enableCollision;
         public float damMult;
-        public AttackInfo(int _sprdex = 0, Vector2 _vel = default(Vector2), Vector3 _pos = default(Vector3), bool _spawn = false, float _damMult = 1.0f)
+        public AttackInfo(int _sprdex, Vector2 _vel = default(Vector2), Vector3 _pos = default(Vector3),
+            bool _spawn = false, bool _enabCol = true, float _damMult = 1.0f)
         {
             spriteIndex = _sprdex;
             velocity = _vel;
             newpos = _pos;
             spawnproj = _spawn;
+            enableCollision = _enabCol;
             damMult = _damMult;
         }
     }
@@ -27,7 +30,9 @@ public class ACT_CHAR_Base : ACT_Base
 	public STATES state;
 
     public float damageMod;             // S: lessens or increases damage taken
-    protected float chargeTimer;
+    public float chargeTimerMax;
+    public float chargeTimer;
+    public float chargeDur;         // chargeTimerMax - chargeTimer = chargeDur = the length we held down the button.
 
 	public float cooldownTmrBase;
     public float cooldownTmr;

@@ -7,7 +7,7 @@ public class PROJ_SpellSlinger1 : PROJ_Base
 
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
-        base.Initialize(_r);
+        base.Initialize(_r, _damMult);
 
         GameObject clone1, clone2;
 
