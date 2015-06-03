@@ -40,6 +40,5 @@ public class TUT_Traning : MonoBehaviour {
             Tut_SmackTimer = 0.5f;
         }
 
-
     }
 }
