@@ -133,29 +133,30 @@ public class ACT_CHAR_Base : ACT_Base
         return ret;
 	}
 
-	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
-	{                                   //Damage needs to be negative.
+    public void ChangeHP(int Dmg, bool Flinch = true)                           //Applies current HP by set amount can be use to Heal as well
+	{                                                                           //Damage needs to be negative.
 		if (state != STATES.DYING && state != STATES.HURT && invulTmr == 0.0f)
 		{
-			
-			Act_currHP += (int)(Dmg * damageMod);
+
+            if (Dmg < 0)
+                Act_currHP += (int)(Dmg * damageMod);
+            else
+                Act_currHP += Dmg;
 
 			if (Act_currHP > Act_baseHP)
 				Act_currHP = Act_baseHP;
 
-            if (Dmg < 0)
+            if (Dmg < 0 && Flinch)
             {
                 state = STATES.HURT;
                 invulTmr = StateTmrs[(int)STATES.HURT] + invulMaxTmr;
             }
-
 
 			if (Act_currHP < 0)
 			{
 				state = STATES.DYING;
 				Act_currHP = 0;
 			}
-
 		}
 	}
 

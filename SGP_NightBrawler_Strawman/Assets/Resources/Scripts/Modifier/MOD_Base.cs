@@ -11,8 +11,9 @@ public class MOD_Base : MonoBehaviour
 
     public int Mod_ModIndexNum;         //The Number ID of the Effect 
     public float Mod_effectTimer;       //How long the effect will last
+    public float Mod_BaseEffectTimer;   //Original Timer of the Mod.
 
-    public PlayerController player;  //The Actor been afflicted with the Effect
+    public PlayerController player;     //The Actor been afflicted with the Effect
     public ACT_Enemy enemy;
 
     public bool isPlayer;
@@ -72,7 +73,6 @@ public class MOD_Base : MonoBehaviour
     {
         if (!MNGR_Game.paused)
         {
-
             if (isPlayer)
             {
                 ModifyActor();
@@ -148,149 +148,9 @@ public class MOD_Base : MonoBehaviour
     {
         enemy.myBuffs.Remove(this);
     }
-
-    #region OldnBusted
-#if false
-    public void SetModEffectPlayer(bool _IsItBuff, int _IndexNum)     //Selects the Buff or Debuff from the list
+    
+    public virtual void ResetEffecTimer()
     {
-        if (_IsItBuff)
-        {
-            switch (_IndexNum)
-            {
-                case 0:
-                    Mod_Actor.gameObject.AddComponent<MOD_CDDecrease>();
-                    break;
-                case 1: 
-                    Mod_Actor.gameObject.AddComponent<MOD_DMGIncrease>();
-                    break;
-                case 2:
-                    Mod_Actor.gameObject.AddComponent<MOD_DMGProtection>();
-                    break;
-                case 3:
-                    Mod_Actor.gameObject.AddComponent<MOD_HPInstant>();
-                    break;
-                case 4:
-                    Mod_Actor.gameObject.AddComponent<MOD_HPRegen>();
-                    break;
-                case 5:
-                    Mod_Actor.gameObject.AddComponent<MOD_SPDIncrease>();
-                    break;
-            }
-        }
-        else if (!_IsItBuff)
-        {
-            switch (_IndexNum)
-            {
-                case 0:
-                    Mod_Actor.gameObject.AddComponent<MOD_DMGDecrease>();
-                    break;
-                case 1:
-                    Mod_Actor.gameObject.AddComponent<MOD_DMGIncomingIncrease>();
-                    break;
-                case 2:
-                    Mod_Actor.gameObject.AddComponent<MOD_DoT>();
-                    break;
-                case 3:
-                    Mod_Actor.gameObject.AddComponent<MOD_Slowed>();
-                    break;
-                case 4:
-                    Mod_Actor.gameObject.AddComponent<MOD_Stunned>();
-                    break;
-            }
-        }
+        Mod_effectTimer = Mod_BaseEffectTimer;
     }
-
-	public void SetModEffectEnemy(bool _IsItBuff, int _IndexNum)     //Selects the Buff or Debuff from the list
-	{
-		if (_IsItBuff)
-		{
-			switch (_IndexNum)
-			{
-				case 0:
-					enemy.gameObject.AddComponent<MOD_CDDecrease>();
-					break;
-				case 1:
-					enemy.gameObject.AddComponent<MOD_DMGIncrease>();
-					break;
-				case 2:
-					enemy.gameObject.AddComponent<MOD_DMGProtection>();
-					break;
-				case 3:
-					enemy.gameObject.AddComponent<MOD_HPInstant>();
-					break;
-				case 4:
-					enemy.gameObject.AddComponent<MOD_HPRegen>();
-					break;
-				case 5:
-					enemy.gameObject.AddComponent<MOD_SPDIncrease>();
-					break;
-			}
-		}
-		else if (!_IsItBuff)
-		{
-			switch (_IndexNum)
-			{
-				case 0:
-					enemy.gameObject.AddComponent<MOD_DMGDecrease>();
-					break;
-				case 1:
-					enemy.gameObject.AddComponent<MOD_DMGIncomingIncrease>();
-					break;
-				case 2:
-					enemy.gameObject.AddComponent<MOD_DoT>();
-					break;
-				case 3:
-					enemy.gameObject.AddComponent<MOD_Slowed>();
-					break;
-				case 4:
-					enemy.gameObject.AddComponent<MOD_Stunned>();
-					break;
-			}
-		}
-	}
-
-    public bool NullNewEffectsPlayer()        //Checks if the current actor already has an effect 
-    {
-        if (Mod_Actor.party[Mod_Actor.currChar].Act_HasMod)
-        {
-            if (Mod_Actor.party[Mod_Actor.currChar].Act_ModIsBuff != Mod_IsBuff)
-            {
-                //Remove All effects in Character.
-                Debug.Log("Get Reck Potion");
-            }
-            return true;
-        }
-        else
-        {
-            if (!Mod_PartyWide)
-                Mod_Actor.party[Mod_Actor.currChar].Act_HasMod = true;
-            else if (Mod_PartyWide)
-                for (int i = 0; i < Mod_Actor.party.Length; i++)
-                    Mod_Actor.party[i].Act_HasMod = true;
-            return false;
-        }
-        
-    }
-
-	public bool NullNewEffectsEnemy()        //Checks if the current actor already has an effect 
-	{
-		if (enemy.Act_HasMod)
-		{
-			if (enemy.Act_ModIsBuff != Mod_IsBuff)
-			{
-				//Remove All effects in Character.
-				Debug.Log("Get Reck Potion");
-			}
-			return true;
-		}
-		else
-		{
-			enemy.Act_HasMod = true;
-			return false;
-		}
-
-	}
-#endif
-    #endregion
-
 }

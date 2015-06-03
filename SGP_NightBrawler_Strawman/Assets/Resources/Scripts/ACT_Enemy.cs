@@ -61,6 +61,7 @@ public class ACT_Enemy : MonoBehaviour
 	public int[] behaviorID = new int[10];
 	public BHR_Base[] behaviors;
 	public BHR_Base currBehavior;
+	public BHR_Base basicBehavior;
 
 /// <Behavior Variables>
 	public List<GameObject> squad = new List<GameObject>();
@@ -81,6 +82,10 @@ public class ACT_Enemy : MonoBehaviour
     //KnockBack
     public float Knck_Cooldown;         //How long it takes to reuse the knockback.
     public float Knck_baseCooldown;     //Keeps track of the initial cooldown. 
+
+	public bool kamikazeActivated = false;
+	public float kamikazeTimer;
+	public GameObject explosion;
 
 /// <Behavior Variables>
 
@@ -173,8 +178,16 @@ public class ACT_Enemy : MonoBehaviour
             if (behaviors[i].owner == null)
                 behaviors[i].owner = GetComponent<ACT_Enemy>();
 		}
-        target = null;
-		//target = GameObject.FindGameObjectWithTag("Player");
+
+		if (basicBehavior)
+		{
+			basicBehavior = behaviors[0];
+		}
+        //target = null;
+		if (Act_IsIntelligent)
+		{
+			target = GameObject.FindGameObjectWithTag("Player");
+		}
 
 		//squad = new List<GameObject>();
 	}
@@ -203,7 +216,10 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (state == STATES.DEAD && curTime <= 0)
 		{
-			//GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+			if (GetComponent<ITEM_DropLoot>())
+			{
+				GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+			}
 			Destroy(transform.gameObject);
 		}
 
@@ -219,6 +235,20 @@ public class ACT_Enemy : MonoBehaviour
             if (TimeThresh < 0.0f)
                 TimeThresh = 0.0f;
         }
+
+		if (kamikazeActivated)
+		{
+			if (kamikazeTimer > 0.0f)
+			{
+				kamikazeTimer -= Time.deltaTime;
+			}
+
+			if (kamikazeTimer <= 0.0f)
+			{
+				Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+				Destroy(gameObject);
+			}
+		}
 
         if (target != null)
             distanceToTarget = Mathf.Abs(target.transform.position.x - transform.position.x);
@@ -423,11 +453,23 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
-					if (CheckThresholds())
+					CheckThresholds();
+					if (currBehavior)
 					{
 						currBehavior.PerformBehavior();
+						if (!kamikazeActivated)
+						{
+							for (int i = 0; i < behaviorID.Length; i++)
+							{
+								if (behaviorID[i] == 5)
+								{
+									kamikazeActivated = true;
+									kamikazeTimer = 3.0f;
+									explosion.GetComponent<PROJ_Explosion>().power = 10;
+								}
+							}
+						}
 					}
-                    
 					break;
 				}
 			case STATES.HURT:
@@ -447,23 +489,32 @@ public class ACT_Enemy : MonoBehaviour
 		} 
 	}
 
-	public virtual bool CheckThresholds()
+	public virtual void CheckThresholds()
 	{
 		if (Act_currHP < hpThresh)
 		{
 			currBehavior = behaviors[0];
-			return true;
 		}
-		else if (behaviorSize > 1 && MNGR_Game.isNight)
+		else if (behaviorSize > 1 && nightThresh && MNGR_Game.isNight)
 		{
 			currBehavior = behaviors[1];
-			return true;
 		}
-		return false;
+		else if (behaviorSize > 2 && distanceToTarget < distThresh)
+		{
+			currBehavior = behaviors[2];
+		}
+		else
+			currBehavior = basicBehavior;
 	}
 
 	public virtual void NewState()
 	{
+		if (kamikazeActivated)
+		{
+			state = STATES.SPECIAL;
+			curTime = stateTime[(int)state];
+			return;
+		}
         if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
         {
             randomState = (int)Random.Range(0.0f, 4.999f);

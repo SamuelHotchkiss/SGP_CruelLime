@@ -3,7 +3,14 @@ using System.Collections;
 
 public class BHR_Spawner : BHR_Base
 {
-    public bool Spw_SpawnAllCritters = true;
+    public bool Spw_SpawnAllCritters;
+
+	void Start()
+	{
+		Spw_SpawnAllCritters = true;
+	}
+
+
 	// Update is called once per frame
 	void Update () 
     {
