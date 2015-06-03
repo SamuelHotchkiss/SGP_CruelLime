@@ -171,15 +171,8 @@ public class ACT_CHAR_Base : ACT_Base
         damageMod = 1.0f;
     }
 
-    protected void ChargeSpecial(bool isCharging)
+    virtual protected void ChargeSpecial(bool isCharging)
     {
-        if (!isCharging)
-            return;
-
-        if (chargeTimer <= 0)
-        {
-            MNGR_Item.AttachModifier(2, GameObject.FindGameObjectWithTag("Player"));
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().color = Color.blue;
-        }
+        
     }
 }
