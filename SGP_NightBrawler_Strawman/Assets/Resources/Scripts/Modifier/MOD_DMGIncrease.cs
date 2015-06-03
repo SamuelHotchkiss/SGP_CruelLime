@@ -6,6 +6,8 @@ public class MOD_DMGIncrease : MOD_Base
 	// Use this for initialization
 	public override void Start () 
     {
+        myColor = Color.red;
+
         buffState = MNGR_Item.BuffStates.BUFFED;
         base.Start();
         Mod_PartyWide = true;       //This Effect wil affect the whole party

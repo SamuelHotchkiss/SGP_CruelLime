@@ -27,6 +27,7 @@ public class ACT_CHAR_Base : ACT_Base
 	public STATES state;
 
     public float damageMod;             // S: lessens or increases damage taken
+    protected float chargeTimer;
 
 	public float cooldownTmrBase;
     public float cooldownTmr;
@@ -170,5 +171,10 @@ public class ACT_CHAR_Base : ACT_Base
     public void RestoreDefense()
     {
         damageMod = 1.0f;
+    }
+
+    virtual protected void ChargeSpecial(bool isCharging)
+    {
+        
     }
 }

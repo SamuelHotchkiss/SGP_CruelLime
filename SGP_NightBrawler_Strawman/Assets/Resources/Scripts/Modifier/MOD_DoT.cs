@@ -8,6 +8,8 @@ public class MOD_DoT : MOD_Base
     // Use this for initialization
     public override void Start()
     {
+        myColor = Color.green;
+
         buffState = MNGR_Item.BuffStates.DEBUFFED;
         base.Start();
         Mod_PartyWide = false;       //This Effect wil affect the whole party
