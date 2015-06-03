@@ -27,8 +27,8 @@ public class CHAR_ForceMage : ACT_CHAR_Base
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
         ProjFilePaths = new string[3];
-        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Fireball";
-        ProjFilePaths[1] = "Prefabs/Projectile/PROJ_FireballStrong";
+        ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Force_Knockback";
+        ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Force_Knockback";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Null";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
