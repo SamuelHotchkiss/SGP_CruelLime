@@ -44,7 +44,7 @@ public class MNGR_GameData
         // Temporary to be removed later
         currentParty[0] = theCharacters[0];
         currentParty[1] = theCharacters[3];
-        currentParty[2] = theCharacters[6];
+        currentParty[2] = theCharacters[8];
     }
 
     // Reads in GameManager's values so they can be saved out to a file

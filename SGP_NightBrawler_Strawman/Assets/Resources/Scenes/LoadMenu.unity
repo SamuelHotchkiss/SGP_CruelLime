@@ -1068,6 +1068,16 @@ MonoBehaviour:
   - {fileID: 1976877164}
   - {fileID: 1242873335}
   Menu_SelectedSound: {fileID: 8300000, guid: 42da1cc381d4eee4ba3bf1e8b4da2d8d, type: 3}
+  portraitNames:
+  - Port_Sword
+  - Port_Lancer
+  - Port_Defender
+  - Port_Archer
+  - Port_Ninja
+  - Port_Poisoner
+  - Port_Wizard
+  - Port_ForceMage
+  - Port_Spellslinger
 --- !u!4 &525806977
 Transform:
   m_ObjectHideFlags: 0
@@ -2596,6 +2606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c689c493eb4698946a807d42f3087ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadMan: {fileID: 525806976}
   profileNum: 2
   lvlName: {fileID: 1242873336}
   cashAmount: {fileID: 627638471}
@@ -2607,6 +2618,10 @@ MonoBehaviour:
   - {fileID: 1833753567}
   - {fileID: 1568971808}
   - {fileID: 412143370}
+  portraits:
+  - {fileID: 68599827}
+  - {fileID: 178751826}
+  - {fileID: 2085572848}
 --- !u!114 &1242873336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3561,6 +3576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c689c493eb4698946a807d42f3087ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadMan: {fileID: 525806976}
   profileNum: 0
   lvlName: {fileID: 1946181684}
   cashAmount: {fileID: 830217841}
@@ -3572,6 +3588,10 @@ MonoBehaviour:
   - {fileID: 815198446}
   - {fileID: 1585857002}
   - {fileID: 380209199}
+  portraits:
+  - {fileID: 1328790235}
+  - {fileID: 265857308}
+  - {fileID: 695249916}
 --- !u!1 &1976877162
 GameObject:
   m_ObjectHideFlags: 0
@@ -3622,6 +3642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c689c493eb4698946a807d42f3087ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadMan: {fileID: 525806976}
   profileNum: 1
   lvlName: {fileID: 1976877165}
   cashAmount: {fileID: 1000301553}
@@ -3633,6 +3654,10 @@ MonoBehaviour:
   - {fileID: 665146258}
   - {fileID: 910002185}
   - {fileID: 68796571}
+  portraits:
+  - {fileID: 1977750185}
+  - {fileID: 1044945904}
+  - {fileID: 206164378}
 --- !u!114 &1976877165
 MonoBehaviour:
   m_ObjectHideFlags: 0
