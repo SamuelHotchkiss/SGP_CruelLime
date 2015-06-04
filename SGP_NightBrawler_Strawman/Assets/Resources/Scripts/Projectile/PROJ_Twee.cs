@@ -15,6 +15,7 @@ public class PROJ_Twee : PROJ_PiercingArrow
 
         if (playerloc > transform.position.x)
             dir = -dir;
+        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     // Update is called once per frame
@@ -39,6 +40,8 @@ public class PROJ_Twee : PROJ_PiercingArrow
             transform.localEulerAngles = newAng;
 
             lifetime = 5.0f;
+            GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<BoxCollider2D>().isTrigger = false; //was a cool idea but physics layers, so eh.
         }
 
         if (lifetime > 0.0f)
@@ -46,7 +49,6 @@ public class PROJ_Twee : PROJ_PiercingArrow
             lifetime -= Time.deltaTime;
             if (lifetime < 0.0f)
             {
-                //DestroyObject(gameObject);
                 ProjectileExpired();
             }
         }
