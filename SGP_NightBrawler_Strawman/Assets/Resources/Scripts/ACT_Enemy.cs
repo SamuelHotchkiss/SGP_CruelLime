@@ -33,6 +33,7 @@ public class ACT_Enemy : MonoBehaviour
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
 	public bool Act_ModIsBuff;
     public bool Act_IsIntelligent;  //Is this Enemy inanimate.
+    public bool Act_SpawnProjOnDed;
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
@@ -166,8 +167,11 @@ public class ACT_Enemy : MonoBehaviour
         Act_currPower = Act_basePower;
         Act_currSpeed = Act_baseSpeed;
 
-								// IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
-		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 1.2f, 0.3f, 1.0f, 1.0f };
+        if (stateTime.Length != 8)
+        {
+                                    // IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
+            stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 1.2f, 0.3f, 1.0f, 1.0f };
+        }
 		
 		behaviors = new BHR_Base[behaviorSize];
         Act_facingRight = false;
@@ -220,20 +224,30 @@ public class ACT_Enemy : MonoBehaviour
 			{
 				GetComponent<ITM_DropLoot>().DropCoin(transform.position);
 			}
+
 			Destroy(transform.gameObject);
+
+            if (Act_SpawnProjOnDed)
+            {
+                PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+                clone.owner = gameObject;
+                clone.Initialize();
+            }
+
 		}
 
         if (curTime <= 0.0f)
             NewState();
 
-        if (TimeThresh >= 0.0f)
+        if (TimeThresh > 0.0f)
         {
-            if (TimeThresh == 0.0f)
-                Destroy(gameObject);
-
             TimeThresh -= Time.deltaTime;
+
             if (TimeThresh < 0.0f)
                 TimeThresh = 0.0f;
+
+            if (TimeThresh == 0.0f)
+                Destroy(gameObject);
         }
 
 		if (kamikazeActivated)
@@ -480,6 +494,10 @@ public class ACT_Enemy : MonoBehaviour
                         vel *= 0.9f;
                         GetComponent<Rigidbody2D>().velocity = vel;
                     }
+                    else if (curTime <= 0.0f)
+                    {
+                        state = STATES.IDLE;
+                    }
 					break;
 				}
 			case STATES.DEAD:
@@ -509,21 +527,24 @@ public class ACT_Enemy : MonoBehaviour
 
 	public virtual void NewState()
 	{
-		if (kamikazeActivated)
-		{
-			state = STATES.SPECIAL;
-			curTime = stateTime[(int)state];
-			return;
-		}
-        if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
+        if (Act_IsIntelligent) // L: dummies dont change states.
         {
-            randomState = (int)Random.Range(0.0f, 4.999f);
+            if (kamikazeActivated)
+            {
+                state = STATES.SPECIAL;
+                curTime = stateTime[(int)state];
+                return;
+            }
+            if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
+            {
+                randomState = (int)Random.Range(0.0f, 4.999f);
 
-			if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
-				randomState = (int)Random.Range(0.0f, 4.999f);
+                if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
+                    randomState = (int)Random.Range(0.0f, 4.999f);
 
-            state = (STATES)randomState;
-            curTime = stateTime[(int)state];
+                state = (STATES)randomState;
+                curTime = stateTime[(int)state];
+            }
         }
 	}
 

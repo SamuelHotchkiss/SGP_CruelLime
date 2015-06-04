@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &140330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 425244}
+  - 212: {fileID: 21250082}
+  - 61: {fileID: 6139194}
+  - 50: {fileID: 5007048}
+  - 114: {fileID: 11472014}
+  m_Layer: 0
+  m_Name: ENY_Twee
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &425244
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.3990307, y: -2.58019543, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!50 &5007048
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140330}
+  m_Mass: 9.99999975e-05
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+--- !u!61 &6139194
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140330}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: .5}
+--- !u!114 &11472014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
+  Act_ID: 0
+  Act_baseHP: 50
+  Act_basePower: 0
+  Act_baseSpeed: 0
+  Act_currHP: 50
+  Act_currPower: 0
+  Act_currSpeed: 0
+  Act_facingRight: 0
+  Act_HasMod: 0
+  Act_ModIsBuff: 0
+  Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 1
+  Act_baseAttackSpeed: 0
+  Act_currAttackSpeed: 0
+  damageMod: 0
+  state: 0
+  randomState: 0
+  curTime: 0
+  stateTime:
+  - 2
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  hpThresh: 0
+  nightThresh: 0
+  TimeThresh: 0
+  speedThresh: 0
+  distThresh: 0
+  coolThresh: 0
+  behaviorSize: 0
+  behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  behaviors: []
+  currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
+  Spw_Critter: {fileID: 0}
+  Spw_CritterThreshold: 0
+  Spw_CrittersCreated: 0
+  Spw_SpawnCoolDown: 0
+  Spw_BaseSpawnCoolDown: 0
+  Spw_SpawnPerSec: 0
+  Spw_baseSpawnPerSec: 0
+  Spw_SpawnPositionOffset: {x: 0, y: 0, z: 0}
+  Spw_Force: {x: 0, y: 0}
+  Knck_Cooldown: 0
+  Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
+  target: {fileID: 0}
+  distanceToTarget: 0
+  maxDistance: 0
+  projectile: {fileID: 11450448, guid: f48c1599b48e9dd42af2f7a8e60d5120, type: 2}
+  isMelee: 0
+  paused: 0
+--- !u!212 &21250082
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140330}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 5dea1733c13e3514faa717a00bec7659, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 140330}
+  m_IsPrefabParent: 1
