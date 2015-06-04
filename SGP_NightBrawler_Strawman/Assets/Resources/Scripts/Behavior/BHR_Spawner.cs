@@ -14,6 +14,7 @@ public class BHR_Spawner : BHR_Base
 	// Update is called once per frame
 	void Update () 
     {
+		base.Update();
         if (owner != null)
         {
             owner.Spw_SpawnCoolDown -= Time.deltaTime;

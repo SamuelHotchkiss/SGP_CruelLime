@@ -68,6 +68,7 @@ public class ACT_Enemy : MonoBehaviour
 /// <Behavior Variables>
 	public List<GameObject> squad = new List<GameObject>();
 	public float maxBuffRange;
+
 	//public MOD_Base buff;         // S: shouldn't be needed anymore
 	public int buffIndex;
 
@@ -81,13 +82,20 @@ public class ACT_Enemy : MonoBehaviour
     public float Spw_baseSpawnPerSec;       //Keeps track of Spawn PerSec.
     public Vector3 Spw_SpawnPositionOffset; //Where to spawn the critters in comparation with the host Position.
     public Vector2 Spw_Force;               //Add a force to the critters.
+
     //KnockBack
     public float Knck_Cooldown;         //How long it takes to reuse the knockback.
     public float Knck_baseCooldown;     //Keeps track of the initial cooldown. 
 
+	// Kamikaze
 	public bool kamikazeActivated = false;
 	public float kamikazeTimer;
 	public GameObject explosion;
+
+	// Divider
+	public bool dividerActivated;
+	public int numQuotient;
+	public int numGeneration;
 
 /// <Behavior Variables>
 
@@ -221,20 +229,37 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (state == STATES.DEAD && curTime <= 0)
 		{
-			if (GetComponent<ITM_DropLoot>())
+			if (dividerActivated)
 			{
-				GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+				if (basicBehavior)
+				{
+					basicBehavior.PerformBehavior();
+				}
+				if (numGeneration == 0)
+				{
+					if (GetComponent<ITM_DropLoot>())
+					{
+						GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+					}
+				}
+				Destroy(transform.gameObject);
 			}
+			else
+			{
+				if (GetComponent<ITM_DropLoot>())
+				{
+					GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+				}
 
-			Destroy(transform.gameObject);
+				Destroy(transform.gameObject);
 
-            if (Act_SpawnProjOnDed)
-            {
-                PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
-                clone.owner = gameObject;
-                clone.Initialize();
-            }
-
+				if (Act_SpawnProjOnDed)
+				{
+					PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+					clone.owner = gameObject;
+					clone.Initialize();
+				}
+			}
 		}
 
         if (curTime <= 0.0f)
@@ -469,6 +494,10 @@ public class ACT_Enemy : MonoBehaviour
 			case STATES.SPECIAL:
 				{
 					CheckThresholds();
+					if (dividerActivated)
+					{
+						break;
+					}
 					if (currBehavior)
 					{
 						currBehavior.PerformBehavior();
@@ -540,8 +569,8 @@ public class ACT_Enemy : MonoBehaviour
             {
                 randomState = (int)Random.Range(0.0f, 4.999f);
 
-                if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
-                    randomState = (int)Random.Range(0.0f, 4.999f);
+			if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
+				randomState = Random.Range(0, 6);
 
                 state = (STATES)randomState;
                 curTime = stateTime[(int)state];

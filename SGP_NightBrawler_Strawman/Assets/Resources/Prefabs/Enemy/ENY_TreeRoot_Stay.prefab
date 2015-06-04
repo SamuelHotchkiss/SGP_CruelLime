@@ -90,7 +90,15 @@ MonoBehaviour:
   state: 0
   randomState: 0
   curTime: 0
-  stateTime: []
+  stateTime:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   hpThresh: 0
   nightThresh: 0
   TimeThresh: -1
@@ -119,6 +127,9 @@ MonoBehaviour:
   kamikazeActivated: 0
   kamikazeTimer: 0
   explosion: {fileID: 0}
+  dividerActivated: 0
+  numQuotient: 0
+  numGeneration: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0

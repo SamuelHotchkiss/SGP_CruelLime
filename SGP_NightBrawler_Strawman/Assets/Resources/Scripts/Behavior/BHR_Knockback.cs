@@ -7,6 +7,8 @@ public class BHR_Knockback : BHR_Base
 	// Update is called once per frame
 	void Update () 
     {
+		base.Update();
+
         owner.Knck_Cooldown -= Time.deltaTime;
 
         if (owner.Act_facingRight)
