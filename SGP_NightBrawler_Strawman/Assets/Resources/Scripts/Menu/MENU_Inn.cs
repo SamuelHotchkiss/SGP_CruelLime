@@ -17,7 +17,7 @@ public class MENU_Inn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Inn_CurrCoin.text = MNGR_Game.wallet.ToString();
+        Inn_CurrCoin.text = "X" + MNGR_Game.wallet.ToString();
 	}
 
     public void RestTheParty()
@@ -38,6 +38,7 @@ public class MENU_Inn : MonoBehaviour {
 
             MNGR_Game.wallet -= Inn_RestCost;
             MNGR_Game.isNight = !MNGR_Game.isNight;
+            MNGR_Game.UpdateHoard();
             Debug.Log("GOOD REST");
         }
         else
@@ -57,6 +58,7 @@ public class MENU_Inn : MonoBehaviour {
             Debug.Log(MNGR_Game.currentParty[_ChrIndex].Act_currHP.ToString());
 
             MNGR_Game.isNight = !MNGR_Game.isNight;
+            MNGR_Game.UpdateHoard();
         }
         else
             Debug.Log("NO MONEY MO PROBLEMS!");
