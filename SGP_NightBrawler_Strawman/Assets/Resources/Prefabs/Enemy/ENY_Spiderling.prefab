@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.0699997, y: -3.50999999, z: 50}
+  m_LocalPosition: {x: -2.81999969, y: -.430000067, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,9 +59,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.00867080688, y: -.385868549}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .895942509, y: .299495697}
+  m_Size: {x: 1, y: 1.07123291}
 --- !u!114 &11421630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,7 +120,6 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
-  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -156,9 +155,6 @@ MonoBehaviour:
   kamikazeActivated: 0
   kamikazeTimer: 3
   explosion: {fileID: 179554, guid: ad1a8d0bc22064f439c1c889b33506cc, type: 2}
-  dividerActivated: 0
-  numQuotient: 0
-  numGeneration: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
