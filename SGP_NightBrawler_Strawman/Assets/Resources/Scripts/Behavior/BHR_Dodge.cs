@@ -8,6 +8,11 @@ public class BHR_Dodge : BHR_Base
 		
 	}
 
+	void Update()
+	{
+		base.Update();
+	}
+
 	public override void PerformBehavior()
 	{
 		if (owner.target.GetComponent<PlayerController>().nextState == ACT_CHAR_Base.STATES.ATTACK_1 ||
