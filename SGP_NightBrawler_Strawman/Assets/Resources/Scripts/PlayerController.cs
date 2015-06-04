@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         isAlive = true;
-        //MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
+        MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
         party = new ACT_CHAR_Base[3];
 
         //party[0] = new CHAR_Swordsman();
