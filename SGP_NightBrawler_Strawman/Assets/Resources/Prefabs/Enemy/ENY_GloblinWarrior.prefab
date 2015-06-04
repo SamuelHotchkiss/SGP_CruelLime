@@ -97,8 +97,10 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -114,6 +116,7 @@ MonoBehaviour:
   behaviors:
   - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -128,6 +131,9 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -161,7 +167,8 @@ MonoBehaviour:
   xRange: 50
   yRange: 100
   Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
-  potionID: 0
+  potionChance: 0
+  potions: []
 --- !u!212 &21219372
 SpriteRenderer:
   m_ObjectHideFlags: 1
