@@ -19,7 +19,8 @@ public class PROJ_Base : MonoBehaviour
         if(owner.tag == "Player")
         {
             //owner = GameObject.FindGameObjectWithTag("Player");
-            gameObject.layer = 10;
+            if (gameObject.layer == 0) // dont change the layer if it's already set to something.
+                gameObject.layer = 10;
 
             PlayerController player = owner.GetComponent<PlayerController>();
             int target = player.currChar;
@@ -40,7 +41,8 @@ public class PROJ_Base : MonoBehaviour
         }
         else if (owner.tag == "Enemy")
         {
-            gameObject.layer = 11;
+            if (gameObject.layer == 0) // dont change the layer if it's already set to something.
+                gameObject.layer = 11;
 
             bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
