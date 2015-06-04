@@ -52,8 +52,10 @@ public class Encounters : MonoBehaviour {
         Enc_SpawnTimer -= Time.deltaTime;
         if (Enc_SpawnTimer <= 0.0f && Enc_SpawnNum > 0 && Enc_IsActive)
         {
+
+
             int RandLoc = Random.Range(1, 4);
-            int RandEnemy = Random.Range(0, (Enc_SpawnEnemies.Length - 1));
+            int RandEnemy = Random.Range(0, Enc_SpawnEnemies.Length);
             switch (RandLoc)
             {
                 case 1:
