@@ -169,6 +169,9 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+
         damageMod = 1.0f;
 
         Act_currAttackSpeed = Act_baseAttackSpeed;
@@ -208,6 +211,8 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		
+
         if (myBuffs.Count == 0)
             buffState = MNGR_Item.BuffStates.NEUTRAL;
 
