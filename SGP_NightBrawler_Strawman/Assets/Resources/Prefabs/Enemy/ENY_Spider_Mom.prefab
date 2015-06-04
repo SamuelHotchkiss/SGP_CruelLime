@@ -85,6 +85,7 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -99,7 +100,7 @@ MonoBehaviour:
   distThresh: 2
   coolThresh: 0
   behaviorSize: 3
-  behaviorID: 080000000000000004000000
+  behaviorID: 090000000000000004000000
   behaviors:
   - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
   - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
@@ -123,6 +124,9 @@ MonoBehaviour:
   kamikazeActivated: 0
   kamikazeTimer: 3
   explosion: {fileID: 0}
+  dividerActivated: 1
+  numQuotient: 2
+  numGeneration: 4
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -156,7 +160,8 @@ MonoBehaviour:
   xRange: 50
   yRange: 100
   Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
-  potionID: 0
+  potionChance: 0
+  potions: []
 --- !u!212 &21279706
 SpriteRenderer:
   m_ObjectHideFlags: 1

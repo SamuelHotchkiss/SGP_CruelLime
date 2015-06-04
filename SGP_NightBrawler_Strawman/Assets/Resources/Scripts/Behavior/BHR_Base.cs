@@ -10,6 +10,15 @@ public class BHR_Base : MonoBehaviour
     {
         owner.GetComponent<ACT_Enemy>();
     }
+
+	public void Update()
+	{
+		if (owner == null)
+		{
+			Destroy(gameObject);
+		}
+	}
+
 	public virtual void PerformBehavior()
 	{
 
