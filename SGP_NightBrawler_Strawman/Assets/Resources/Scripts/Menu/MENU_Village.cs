@@ -31,16 +31,7 @@ public class MENU_Village : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         Vll_CurrCanvas = 0;
-
-        //REMOVE THIS PLZ WEN BUILD IS BEEN MADE
-        //MNGR_Game.currentParty[0] = new CHAR_Swordsman();
-        //MNGR_Game.currentParty[0].Act_currHP = 0;
-        //MNGR_Game.currentParty[1] = new CHAR_Archer();
-        //MNGR_Game.currentParty[1].Act_currHP = 40;
-        //MNGR_Game.currentParty[2] = new CHAR_Wizard();
-        //MNGR_Game.currentParty[2].Act_currHP = 30;
-        //MNGR_Game.wallet = 5000;
-        //REMOVE THIS PLZ WEN BUILD IS BEEN MADE
+        MNGR_Game.HordeDelay++;
 
         for (int i = 1; i < Vll_Shops.Length; i++)
             Vll_Shops[i].SetActive(false);
@@ -48,6 +39,10 @@ public class MENU_Village : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (MNGR_Game.hordePosition == 3 && MNGR_Game.playerPosition == 1)
+            ChangeSceneButton("WorldMap");
+
         MENU_Controller OpenShops = Vll_Shops[0].GetComponent<MENU_Controller>();
         if (Vll_CurrCanvas == 0)
         {
@@ -71,6 +66,7 @@ public class MENU_Village : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.N))
                 MNGR_Game.isNight = !MNGR_Game.isNight; 
+
         }
 	}
 
@@ -87,7 +83,7 @@ public class MENU_Village : MonoBehaviour {
 		AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
 		Menu_Levelname = levelname;
 		StartCoroutine(WaitForSound(0));
-		MNGR_Game.playerPosition++;
+        MNGR_Game.UpdateWorld();
 	}
 
 	IEnumerator WaitForSound(int _selection)
@@ -100,8 +96,6 @@ public class MENU_Village : MonoBehaviour {
 				break;
 			case 1:
 				Application.Quit();
-				break;
-			default:
 				break;
 		}
 	}

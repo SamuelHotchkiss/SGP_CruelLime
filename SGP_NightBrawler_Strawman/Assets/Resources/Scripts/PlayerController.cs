@@ -477,10 +477,9 @@ public class PlayerController : MonoBehaviour
 
         MNGR_Save.saveFiles[MNGR_Save.currSave].CopyGameManager();
         MNGR_Save.SaveProfiles();
-
-        MNGR_Game.hordePosition++;
         MNGR_Game.isNight = !MNGR_Game.isNight;
 
+        MNGR_Game.UpdateHoard();
         Application.LoadLevel("WorldMap");
     }
 
