@@ -85,8 +85,10 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -102,6 +104,7 @@ MonoBehaviour:
   behaviors:
   - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 0
   buffIndex: 1
@@ -116,13 +119,15 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 5
   projectile: {fileID: 11416326, guid: 47be1f86c76fd6c4ca3df9930167ea68, type: 2}
   isMelee: 0
   paused: 0
-  coins: {fileID: 178380, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
 --- !u!114 &11452808
 MonoBehaviour:
   m_ObjectHideFlags: 1

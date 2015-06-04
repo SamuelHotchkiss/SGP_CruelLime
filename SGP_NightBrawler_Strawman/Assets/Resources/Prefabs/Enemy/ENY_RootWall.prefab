@@ -165,7 +165,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.448342443, y: .374052405, z: 0}
+  m_LocalPosition: {x: -20.7251949, y: -3.90474606, z: 2.4453125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 427948}
@@ -338,18 +338,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
-  Act_baseHP: 10
+  Act_baseHP: 1
   Act_basePower: 5
   Act_baseSpeed: 0
-  Act_currHP: 10
+  Act_currHP: 1
   Act_currPower: 10
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -364,6 +368,10 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
@@ -392,18 +400,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
-  Act_baseHP: 10
+  Act_baseHP: 1
   Act_basePower: 5
   Act_baseSpeed: 0
-  Act_currHP: 10
+  Act_currHP: 1
   Act_currPower: 10
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -418,6 +430,10 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
@@ -446,18 +462,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
-  Act_baseHP: 10
+  Act_baseHP: 1
   Act_basePower: 5
   Act_baseSpeed: 0
-  Act_currHP: 10
+  Act_currHP: 1
   Act_currPower: 10
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -472,6 +492,10 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
@@ -500,18 +524,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
-  Act_baseHP: 10
+  Act_baseHP: 1
   Act_basePower: 5
   Act_baseSpeed: 0
-  Act_currHP: 10
+  Act_currHP: 1
   Act_currPower: 10
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -526,6 +554,10 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
@@ -554,18 +586,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
   Act_ID: 0
-  Act_baseHP: 10
+  Act_baseHP: 1
   Act_basePower: 5
   Act_baseSpeed: 0
-  Act_currHP: 10
+  Act_currHP: 1
   Act_currPower: 10
   Act_currSpeed: 0
   Act_facingRight: 0
   Act_HasMod: 0
+  Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -580,6 +616,10 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
+  squad: []
+  maxBuffRange: 0
+  buffIndex: 0
   Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
