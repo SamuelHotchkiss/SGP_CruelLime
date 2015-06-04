@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11477730}
   m_Layer: 0
   m_Name: ENY_TreeRoot_Stay
-  m_TagString: Enemy
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,12 +83,22 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
-  stateTime: []
+  stateTime:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   hpThresh: 0
   nightThresh: 0
   TimeThresh: -1
@@ -99,6 +109,7 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -113,13 +124,18 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
+  dividerActivated: 0
+  numQuotient: 0
+  numGeneration: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
   projectile: {fileID: 0}
   isMelee: 0
   paused: 0
-  coins: {fileID: 0}
 --- !u!212 &21292158
 SpriteRenderer:
   m_ObjectHideFlags: 1
