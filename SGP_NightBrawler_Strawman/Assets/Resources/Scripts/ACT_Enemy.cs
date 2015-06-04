@@ -33,6 +33,7 @@ public class ACT_Enemy : MonoBehaviour
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
 	public bool Act_ModIsBuff;
     public bool Act_IsIntelligent;  //Is this Enemy inanimate.
+    public bool Act_SpawnProjOnDed;
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
@@ -82,6 +83,10 @@ public class ACT_Enemy : MonoBehaviour
     //KnockBack
     public float Knck_Cooldown;         //How long it takes to reuse the knockback.
     public float Knck_baseCooldown;     //Keeps track of the initial cooldown. 
+
+	public bool kamikazeActivated = false;
+	public float kamikazeTimer;
+	public GameObject explosion;
 
 /// <Behavior Variables>
 
@@ -212,25 +217,49 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (state == STATES.DEAD && curTime <= 0)
 		{
-			if (GetComponent<ITEM_DropLoot>())
+			if (GetComponent<ITM_DropLoot>())
 			{
-				GetComponent<ITEM_DropLoot>().DropCoin(transform.position);
+				GetComponent<ITM_DropLoot>().DropCoin(transform.position);
 			}
+
 			Destroy(transform.gameObject);
+
+            if (Act_SpawnProjOnDed)
+            {
+                PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+                clone.owner = gameObject;
+                clone.Initialize();
+            }
+
 		}
 
         if (curTime <= 0.0f)
             NewState();
 
-        if (TimeThresh >= 0.0f)
+        if (TimeThresh > 0.0f)
         {
-            if (TimeThresh == 0.0f)
-                Destroy(gameObject);
-
             TimeThresh -= Time.deltaTime;
+
             if (TimeThresh < 0.0f)
                 TimeThresh = 0.0f;
+
+            if (TimeThresh == 0.0f)
+                Destroy(gameObject);
         }
+
+		if (kamikazeActivated)
+		{
+			if (kamikazeTimer > 0.0f)
+			{
+				kamikazeTimer -= Time.deltaTime;
+			}
+
+			if (kamikazeTimer <= 0.0f)
+			{
+				Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+				Destroy(gameObject);
+			}
+		}
 
         if (target != null)
             distanceToTarget = Mathf.Abs(target.transform.position.x - transform.position.x);
@@ -439,6 +468,18 @@ public class ACT_Enemy : MonoBehaviour
 					if (currBehavior)
 					{
 						currBehavior.PerformBehavior();
+						if (!kamikazeActivated)
+						{
+							for (int i = 0; i < behaviorID.Length; i++)
+							{
+								if (behaviorID[i] == 5)
+								{
+									kamikazeActivated = true;
+									kamikazeTimer = 3.0f;
+									explosion.GetComponent<PROJ_Explosion>().power = 10;
+								}
+							}
+						}
 					}
 					break;
 				}
@@ -479,6 +520,12 @@ public class ACT_Enemy : MonoBehaviour
 
 	public virtual void NewState()
 	{
+		if (kamikazeActivated)
+		{
+			state = STATES.SPECIAL;
+			curTime = stateTime[(int)state];
+			return;
+		}
         if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
         {
             randomState = (int)Random.Range(0.0f, 4.999f);

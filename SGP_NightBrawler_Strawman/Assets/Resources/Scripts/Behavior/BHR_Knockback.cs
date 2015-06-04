@@ -24,7 +24,7 @@ public class BHR_Knockback : BHR_Base
                 owner.target.GetComponent<PlayerController>().ApplyKnockBack(Force);
                 //KnockBack Should not Deal full Damage the push ist self is bad enough 
                 owner.target.GetComponent<PlayerController>().party[owner.target.GetComponent<PlayerController>().currChar].ChangeHP(-owner.Act_currPower / 5);     
-                Debug.Log("KnockBack Activated!");
+                // Debug.Log("KnockBack Activated!");
                 owner.Knck_Cooldown = owner.Knck_baseCooldown;
             } 
         }

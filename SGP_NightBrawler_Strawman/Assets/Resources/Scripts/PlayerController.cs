@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		MNGR_Game.Initialize();
-
         isAlive = true;
         MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
         party = new ACT_CHAR_Base[3];
@@ -60,9 +58,6 @@ public class PlayerController : MonoBehaviour
         //party[0] = new CHAR_Swordsman();
         //party[1] = new CHAR_Archer();
         //party[2] = new CHAR_Wizard();
-
-        // degubbin'
-        MNGR_Game.Initialize();
 
         party = MNGR_Game.currentParty;
 
@@ -152,6 +147,7 @@ public class PlayerController : MonoBehaviour
                 CheckSpecialInput(currentState);
                 CheckSwitchInput(currentState);
                 CheckUseInput(currentState);
+				CheckHealInput(currentState);
                 CheckDodgeInput(currentState);
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
@@ -323,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
+    public void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
     {
         ACT_CHAR_Base.STATES old = party[currChar].state;
 
@@ -351,7 +347,7 @@ public class PlayerController : MonoBehaviour
                 maxTmr[(int)_next] = GetAtkSpeed();
             }
             // either way set the timer to the current state's max
-            if (_next != old)
+            //if (_next != old)
                 curTmr = maxTmr[(int)_next];
         }
         else
@@ -417,7 +413,7 @@ public class PlayerController : MonoBehaviour
 
     // L: called in animation manager when we're displaying the right sprite to attack at
     // _index allows us to choose which projectile.
-    public bool SpawnProj(bool _right = true, int _index = 0)
+    public bool SpawnProj(bool _right = true, int _index = 0, float _damMult = 1.0f)
     {
         /*int num = 1;
 
@@ -429,7 +425,7 @@ public class PlayerController : MonoBehaviour
         Object test = Projs[_index];
         GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
         clone.GetComponent<PROJ_Base>().owner = gameObject;
-        clone.GetComponent<PROJ_Base>().Initialize(_right);
+        clone.GetComponent<PROJ_Base>().Initialize(_right, _damMult);
 
         // this makes me puke a little inside.
         if (party[currChar].characterIndex == 6 && _index == 1)
@@ -586,7 +582,6 @@ public class PlayerController : MonoBehaviour
     }
     void CheckUseInput(ACT_CHAR_Base.STATES _cur)
     {
-        // currently does nothing
         if ((Input.GetButton("Use") || Input.GetButton("Pad_Use"))
             && party[currChar].state != ACT_CHAR_Base.STATES.USE)
         {
@@ -594,11 +589,28 @@ public class PlayerController : MonoBehaviour
             {
                 MNGR_Game.usedItem = true;
                 MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
+				MNGR_Game.equippedItem = -1;
             }
 
             ChangeState(ACT_CHAR_Base.STATES.USE);
         }
     }
+
+	void CheckHealInput(ACT_CHAR_Base.STATES _cur)
+	{
+		if ((Input.GetButton("Heal") || Input.GetButton("Pad_Heal"))
+			&& party[currChar].state != ACT_CHAR_Base.STATES.USE)
+		{
+			if (MNGR_Game.theInventory.containers[0].count > 0)
+			{
+				MNGR_Item.AttachModifier(3, gameObject);
+				MNGR_Game.theInventory.containers[0].count--;
+			}
+
+			ChangeState(ACT_CHAR_Base.STATES.USE);
+		}
+	}
+
     void CheckDodgeInput(ACT_CHAR_Base.STATES _cur)
     {
         if (Input.GetButtonDown("Dodge") && (Mathf.Abs(horz) != 0 || Mathf.Abs(vert) != 0))

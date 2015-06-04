@@ -9,6 +9,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
         name = "Wizard"; // unfortunately the postal service has him listed as "Lizard" and keeps sending him crickets... neither are happy about it
 		characterIndex = 6;
 		cooldownTmr = 0;
+        cooldownTmrBase = 3.0f;
 
 		Act_baseHP = 50;
         Act_currHP = Act_baseHP;

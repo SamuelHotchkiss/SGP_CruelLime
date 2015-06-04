@@ -23,6 +23,9 @@ public class MNGR_GameData
         isNight = false;
         hordePosition = playerPosition = wallet = 0;
 
+		// delete later
+		wallet = 1000;
+
         theCharacters = new ACT_CHAR_Base[9];
         currentParty = new ACT_CHAR_Base[3];
 

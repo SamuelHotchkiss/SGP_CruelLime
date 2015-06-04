@@ -7,6 +7,8 @@ public class MENU_World : MonoBehaviour
 {
     int playIndex, hordeIndex;
 
+    public int testStart;           // S: for testing purposes, this way you can load whatever level you want
+
     public Button[] levels, hordeSteps;
 	public Text[] characterHP, inventoryCounts;
     public Text playerPos, hordePos;
@@ -25,6 +27,8 @@ public class MENU_World : MonoBehaviour
     {
 		//MNGR_Game.playerPosition = 2;
 		//MNGR_Game.hordePosition = 5;
+        //MNGR_Game.playerPosition = testStart;
+        MNGR_Game.Initialize();
 
         if (MNGR_Game.playerPosition > 2)
             MNGR_Game.playerPosition = 2;
@@ -74,6 +78,24 @@ public class MENU_World : MonoBehaviour
 				inventoryImages[i].gameObject.SetActive(true);
 		}
 	}
+
+    // S: for use in testing
+    public void SetLevel(int i)
+    {
+        MNGR_Game.playerPosition = i;
+
+        playIndex = MNGR_Game.playerPosition;
+        hordeIndex = MNGR_Game.hordePosition;
+
+        playerPos.text = "Player Position: " + levels[playIndex].GetComponentInChildren<Text>().text;
+        hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();
+
+        Vector3 playMarker = new Vector3(levels[playIndex].transform.position.x, levels[playIndex].transform.position.y + 73.0f, 0);
+        Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 73.0f, 0);
+
+        playerArrow.transform.position = playMarker;
+        hordeArrow.transform.position = hordeMarker;
+    }
 
     public void StartLevel()
     {
@@ -153,4 +175,27 @@ public class MENU_World : MonoBehaviour
 
         Application.LoadLevel(lvlName);
     }
+
+	public void UsePotion(int _index)
+	{
+		if (MNGR_Game.equippedItem != -1)
+			MNGR_Game.theInventory.containers[MNGR_Game.equippedItem].count++;
+
+		MNGR_Game.theInventory.containers[_index].count--;
+		MNGR_Game.equippedItem = _index;
+
+		if (MNGR_Game.theInventory.containers[_index].count <= 0)
+			inventoryImages[_index].gameObject.SetActive(false);
+
+		for (int i = 0; i < inventoryCounts.Length; i++)
+		{
+			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
+			if (MNGR_Game.theInventory.containers[i].count < 1)
+				inventoryImages[i].gameObject.SetActive(false);
+			else
+				inventoryImages[i].gameObject.SetActive(true);
+		}
+
+		GameObject.Find("Held_Item").gameObject.GetComponent<Image>().sprite = inventoryImages[_index].sprite;
+	}
 }

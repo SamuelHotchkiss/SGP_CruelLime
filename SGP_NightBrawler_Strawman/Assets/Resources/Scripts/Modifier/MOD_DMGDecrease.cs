@@ -7,6 +7,8 @@ public class MOD_DMGDecrease : MOD_Base
 
     public override void Start()
     {
+        myColor = Color.magenta;
+
         buffState = MNGR_Item.BuffStates.DEBUFFED;
         base.Start();
         Mod_PartyWide = false;       //This Effect wil affect the whole party

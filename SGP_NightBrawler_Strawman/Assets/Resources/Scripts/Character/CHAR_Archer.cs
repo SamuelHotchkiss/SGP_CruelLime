@@ -11,6 +11,7 @@ public class CHAR_Archer : ACT_CHAR_Base
 
         characterIndex = 3;
         cooldownTmr = 0;
+        cooldownTmrBase = 3.0f;
 
         Act_baseHP = 75;
         Act_currHP = Act_baseHP;
@@ -71,8 +72,8 @@ public class CHAR_Archer : ACT_CHAR_Base
             ret.spriteIndex = attack1Sprites[2];
         else if (_curTmr >= 0)
             ret.spriteIndex = attack1Sprites[3];
-        //if (_curTmr < _maxTmr * 0.5f)
-           // ret.spawnproj = true;
+        if (_curTmr < _maxTmr * 0.5f)
+            ret.spawnproj = true;
 
         return ret;
     }

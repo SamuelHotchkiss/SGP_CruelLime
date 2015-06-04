@@ -17,8 +17,31 @@ public class MOD_Base : MonoBehaviour
     public ACT_Enemy enemy;
 
     public bool isPlayer;
+    public Color myColor, originalColor;
 
-    // Use this for initialization
+
+
+	/*--- Legend ---
+	 ===============
+	0 = MOD_CDDecrease
+	1 = MOD_DMGIncrease
+	2 = MOD_DMGProtection
+	3 = MOD_HPInstant
+	4 = MOD_HPRegen
+	5 = MOD_SPDIncrease
+	 * 
+	=== Debuffs IDs === 
+	 * 
+	6 = MOD_DMGDecrease
+	7 = MOD_DMGIncomingIncrease
+	8 = MOD_DoT
+	9 = MOD_Slowed
+	10 = MOD_Stunned
+	 ===============*/
+
+
+
+	// Use this for initialization
     public virtual void Start()
     {
         Mod_ModIndexNum = -1;           //Base class
@@ -66,6 +89,9 @@ public class MOD_Base : MonoBehaviour
             }
         }
         #endregion
+
+        originalColor = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = myColor;
     }
 
     // Update is called once per frame
@@ -141,11 +167,13 @@ public class MOD_Base : MonoBehaviour
             for (int i = 0; i < player.party.Length; i++)
                 player.party[i].Act_HasMod = false;
 
+        player.GetComponent<SpriteRenderer>().color = originalColor;
         player.myBuffs.Remove(this);
     }
 
     public virtual void EndModifyEnemy()    //Reset the character's HasMod Veriables.
     {
+        enemy.GetComponent<SpriteRenderer>().color = originalColor;
         enemy.myBuffs.Remove(this);
     }
     
