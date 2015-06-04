@@ -15,7 +15,8 @@ public class PROJ_PiercingArrow : PROJ_Base
 
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy"
+            || collision.gameObject.tag == "Obstacle")
         {
             collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
 

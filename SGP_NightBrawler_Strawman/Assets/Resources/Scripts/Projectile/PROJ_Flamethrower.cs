@@ -52,7 +52,8 @@ public class PROJ_Flamethrower : PROJ_Base
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy"
+            || other.tag == "Obstacle")
         {
             Debug.Log("BURN!");
 

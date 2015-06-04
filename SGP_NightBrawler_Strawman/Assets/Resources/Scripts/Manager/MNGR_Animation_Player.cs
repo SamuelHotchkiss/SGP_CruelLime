@@ -140,10 +140,12 @@ public class MNGR_Animation_Player : MonoBehaviour
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 2, info.damMult);
 
-                bool curCol = currentController.GetComponent<BoxCollider2D>().enabled;
+                if (gameObject.layer != info.physicsLayer)
+                    gameObject.layer = info.physicsLayer;
+                /*bool curCol = currentController.GetComponent<BoxCollider2D>().enabled;
                 if (curCol != info.enableCollision)
                     currentController.GetComponent<BoxCollider2D>().enabled = info.enableCollision;
-                //lastpos = transform.position;
+                */
                 break;
             case ACT_CHAR_Base.STATES.HURT:
                 GetComponent<SpriteRenderer>().sprite = sprites[hurtSprites[0]];
@@ -191,6 +193,7 @@ public class MNGR_Animation_Player : MonoBehaviour
         if (lastState == ACT_CHAR_Base.STATES.SPECIAL)
         {
             currentController.GetComponent<BoxCollider2D>().enabled = true;
+            gameObject.layer = 8;
         }
 
         if (_newstate == ACT_CHAR_Base.STATES.IDLE)
