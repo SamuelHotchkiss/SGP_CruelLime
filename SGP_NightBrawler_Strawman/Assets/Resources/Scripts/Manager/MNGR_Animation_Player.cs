@@ -45,6 +45,8 @@ public class MNGR_Animation_Player : MonoBehaviour
 
     void Update()
     {
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+
         // S: Should prevent this from running if player is dead
         if (!currentController.isAlive)
             return;
