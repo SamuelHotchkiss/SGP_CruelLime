@@ -166,8 +166,8 @@ public class CHAR_Lancer : ACT_CHAR_Base
             else if (_curTmr >= 0)
                 ret.spriteIndex = specialSprites[3];
 
-            ret.enableCollision = false;
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.IDLE);
+            ret.physicsLayer = 17;
+            //ret.enableCollision = false;
         }
 
         return ret;

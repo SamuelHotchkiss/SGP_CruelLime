@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148008}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 12.25, y: -.430000067, z: 50}
+  m_LocalPosition: {x: 39.3499985, y: -.200000003, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,6 +85,7 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -123,6 +124,9 @@ MonoBehaviour:
   kamikazeActivated: 0
   kamikazeTimer: 3
   explosion: {fileID: 0}
+  dividerActivated: 0
+  numQuotient: 2
+  numGeneration: 4
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -156,7 +160,8 @@ MonoBehaviour:
   xRange: 50
   yRange: 100
   Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
-  potionID: 0
+  potionChance: 0
+  potions: []
 --- !u!212 &21279706
 SpriteRenderer:
   m_ObjectHideFlags: 1

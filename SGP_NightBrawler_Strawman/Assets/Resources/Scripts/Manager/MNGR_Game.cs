@@ -10,6 +10,7 @@ public static class MNGR_Game
 	public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
 	public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];
 
+    public static string currentLevel;
 	public static bool usedItem;
 	public static int equippedItem;
 
@@ -26,6 +27,8 @@ public static class MNGR_Game
 
         theMan = true;
 
+        currentLevel = "NEW GAME";
+
 		theCharacters[0] = new CHAR_Swordsman();
 		theCharacters[1] = new CHAR_Lancer();
 		theCharacters[2] = new CHAR_Defender();
@@ -37,9 +40,9 @@ public static class MNGR_Game
 		theCharacters[8] = new CHAR_Spellslinger();
 
         // Temporary to be removed later
-        currentParty[0] = theCharacters[1];
+        currentParty[0] = theCharacters[0];
 		currentParty[1] = theCharacters[3];
-		currentParty[2] = theCharacters[7];
+		currentParty[2] = theCharacters[6];
 
 		usedItem = false;
 		equippedItem = -1;

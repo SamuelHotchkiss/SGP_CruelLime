@@ -11,15 +11,17 @@ public class ACT_CHAR_Base : ACT_Base
         public Vector3 newpos;
         public bool spawnproj;
         public bool enableCollision;
+        public int physicsLayer;
         public float damMult;
         public AttackInfo(int _sprdex, Vector2 _vel = default(Vector2), Vector3 _pos = default(Vector3),
-            bool _spawn = false, bool _enabCol = true, float _damMult = 1.0f)
+            bool _spawn = false, bool _enabCol = true, int _phylay = 8, float _damMult = 1.0f)
         {
             spriteIndex = _sprdex;
             velocity = _vel;
             newpos = _pos;
             spawnproj = _spawn;
             enableCollision = _enabCol;
+            physicsLayer = _phylay;
             damMult = _damMult;
         }
     }
@@ -91,9 +93,10 @@ public class ACT_CHAR_Base : ACT_Base
         }
 	}
 
+    // Not to be confused with ActivateWok.
     public virtual AttackInfo ActivateWalk(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.8f)
             ret.spriteIndex = walkSprites[0];
@@ -110,7 +113,7 @@ public class ACT_CHAR_Base : ACT_Base
     }
     public virtual AttackInfo ActivateDodge(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0);
 
         ret.spriteIndex = walkSprites[1];
 
@@ -118,25 +121,25 @@ public class ACT_CHAR_Base : ACT_Base
     }
     public virtual AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0);
 
         return ret;
     }
     public virtual AttackInfo ActivateAttack2(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0);
 
         return ret;
     }
     public virtual AttackInfo ActivateAttack3(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0);
 
         return ret;
     }
     public virtual AttackInfo ActivateSpecial(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0);
 
         return ret;
 	}

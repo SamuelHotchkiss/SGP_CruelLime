@@ -10,8 +10,9 @@ public class BHR_Ranged : BHR_Base
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+	{
+		base.Update();
 	}
 	public override void PerformBehavior()
 	{

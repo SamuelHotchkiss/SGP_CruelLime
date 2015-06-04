@@ -26,10 +26,10 @@ public static class MNGR_Save
     {
         BinaryFormatter bff = new BinaryFormatter();
 
-        if (!Directory.Exists(Application.dataPath + "GameSaves"))
-            Directory.CreateDirectory(Application.dataPath +"GameSaves");
+        if (!Directory.Exists(Application.persistentDataPath + "GameSaves"))
+            Directory.CreateDirectory(Application.persistentDataPath +"GameSaves");
 
-        FileStream file = File.Create(Application.dataPath + "GameSaves/savedGames.SAVES");
+        FileStream file = File.Create(Application.persistentDataPath + "GameSaves/savedGames.SAVES");
         bff.Serialize(file, saveFiles);
         file.Close();
     }
@@ -41,10 +41,10 @@ public static class MNGR_Save
 
         BinaryFormatter bff = new BinaryFormatter();
 
-        if (!Directory.Exists(Application.dataPath + "Options"))
-            Directory.CreateDirectory(Application.dataPath + "Options");
+        if (!Directory.Exists(Application.persistentDataPath + "Options"))
+            Directory.CreateDirectory(Application.persistentDataPath + "Options");
 
-        FileStream file = File.Create(Application.dataPath + "Options/options.OPTIONS");
+        FileStream file = File.Create(Application.persistentDataPath + "Options/options.OPTIONS");
 
         bff.Serialize(file, optionsFile);
         file.Close();
@@ -53,10 +53,10 @@ public static class MNGR_Save
     // Loads in the save files from an exterior file
     public static void LoadProfiles()
     {
-        if (File.Exists(Application.dataPath + "GameSaves/savedGames.SAVES"))
+        if (File.Exists(Application.persistentDataPath + "GameSaves/savedGames.SAVES"))
         {
             BinaryFormatter bff = new BinaryFormatter();
-            FileStream file = File.Open(Application.dataPath + "GameSaves/savedGames.SAVES", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "GameSaves/savedGames.SAVES", FileMode.Open);
             saveFiles = (List<MNGR_GameData>)bff.Deserialize(file);
             file.Close();
         }
@@ -67,10 +67,10 @@ public static class MNGR_Save
     // Loads in saved options
     public static void LoadOptions()
     {
-        if (File.Exists(Application.dataPath + "Options/options.OPTIONS"))
+        if (File.Exists(Application.persistentDataPath + "Options/options.OPTIONS"))
         {
             BinaryFormatter bff = new BinaryFormatter();
-            FileStream file = File.Open(Application.dataPath + "Options/options.OPTIONS", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "Options/options.OPTIONS", FileMode.Open);
             optionsFile = (MNGR_OptionsData)bff.Deserialize(file);
             file.Close();
         }
