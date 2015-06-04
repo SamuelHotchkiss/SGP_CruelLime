@@ -12,6 +12,7 @@ public class ACT_Enemy : MonoBehaviour
         for (int i = 0; i < myBuffs.Count; i++)
         {
             myBuffs[i].EndModifyEnemy();
+
         }
         myBuffs.Clear();
     }
