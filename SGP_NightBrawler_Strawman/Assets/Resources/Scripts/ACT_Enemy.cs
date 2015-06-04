@@ -33,6 +33,7 @@ public class ACT_Enemy : MonoBehaviour
 	public bool Act_HasMod;         //Does the Actor has a Modification acting on it
 	public bool Act_ModIsBuff;
     public bool Act_IsIntelligent;  //Is this Enemy inanimate.
+    public bool Act_SpawnProjOnDed;
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
@@ -220,20 +221,30 @@ public class ACT_Enemy : MonoBehaviour
 			{
 				GetComponent<ITM_DropLoot>().DropCoin(transform.position);
 			}
+
 			Destroy(transform.gameObject);
+
+            if (Act_SpawnProjOnDed)
+            {
+                PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+                clone.owner = gameObject;
+                clone.Initialize();
+            }
+
 		}
 
         if (curTime <= 0.0f)
             NewState();
 
-        if (TimeThresh >= 0.0f)
+        if (TimeThresh > 0.0f)
         {
-            if (TimeThresh == 0.0f)
-                Destroy(gameObject);
-
             TimeThresh -= Time.deltaTime;
+
             if (TimeThresh < 0.0f)
                 TimeThresh = 0.0f;
+
+            if (TimeThresh == 0.0f)
+                Destroy(gameObject);
         }
 
 		if (kamikazeActivated)
