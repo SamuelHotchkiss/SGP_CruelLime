@@ -77,7 +77,8 @@ public class PROJ_Base : MonoBehaviour
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("HIT!");
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy"
+            || collision.gameObject.tag == "Obstacle")
         {
             if (gameObject != null)
                 ProjectileExpired();

@@ -67,7 +67,7 @@ GameObject:
   - 4: {fileID: 470536}
   m_Layer: 0
   m_Name: ENY_RootWall
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,6 +351,7 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -383,6 +384,9 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -413,6 +417,7 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -445,6 +450,9 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -475,6 +483,7 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -507,6 +516,9 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -537,6 +549,7 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -569,6 +582,9 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -599,6 +615,7 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   damageMod: 0
@@ -631,6 +648,9 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
