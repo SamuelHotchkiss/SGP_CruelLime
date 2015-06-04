@@ -15,7 +15,10 @@ public class MENU_LoadText : MonoBehaviour
     // Use this for initialization
     public void WriteText()
     {
-        lvlName.text = MNGR_Save.saveFiles[profileNum].currentLevel;
+        if (!MNGR_Save.saveFiles[profileNum].isNew)
+            lvlName.text = MNGR_Save.saveFiles[profileNum].currentLevel;
+        else
+            lvlName.text = "NEW GAME";
 
         cashAmount.text = "C o i n s : " + MNGR_Save.saveFiles[profileNum].wallet.ToString();
 
