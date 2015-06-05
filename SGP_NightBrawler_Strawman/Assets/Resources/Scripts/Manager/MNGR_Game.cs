@@ -41,7 +41,7 @@ public static class MNGR_Game
 
         // Temporary to be removed later
         currentParty[0] = theCharacters[0];
-		currentParty[1] = theCharacters[3];
+		currentParty[1] = theCharacters[4];
 		currentParty[2] = theCharacters[6];
 
 		usedItem = false;
