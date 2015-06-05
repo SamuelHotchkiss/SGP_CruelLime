@@ -140,6 +140,8 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
+					if (GameObject.FindGameObjectWithTag("Decoy"))
+						GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
                     ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
                     horz = 0.0f;
                     vert = 0.0f;
@@ -560,6 +562,8 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
             && party[currChar].cooldownTmr == 0)
         {
+			if (GameObject.FindGameObjectWithTag("Decoy"))
+				GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
             ChangeState(ACT_CHAR_Base.STATES.SPECIAL);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 

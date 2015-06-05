@@ -12,6 +12,7 @@ public class PROJ_Base : MonoBehaviour
 
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
+	public bool right;
 
     public virtual void Initialize(bool _r = true, float _damMult = 1.0f)
     {
@@ -29,7 +30,7 @@ public class PROJ_Base : MonoBehaviour
             power = (int)(_damMult * (float)power);
 
             //bool right = player.party[target].Act_facingRight;
-            bool right = _r;
+            right = _r;
 
             if (right)
                 velocity = new Vector2(1, 0);// * speed;
