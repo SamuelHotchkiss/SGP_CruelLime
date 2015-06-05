@@ -140,18 +140,6 @@ public class MENU_World : MonoBehaviour
         MNGR_Game.isNight = !MNGR_Game.isNight;
     }
 
-    // buys instant HP potions
-    public void BuyPotion()
-    {
-
-    }
-
-    // opens up revive menu
-    public void Revive()
-    {
-
-    }
-
     // Go back to Main Menu
     public void Return()
     {
