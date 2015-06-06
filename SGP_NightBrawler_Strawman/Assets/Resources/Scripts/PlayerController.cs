@@ -131,6 +131,9 @@ public class PlayerController : MonoBehaviour
             ChangeState(ACT_CHAR_Base.STATES.DYING);
         }
 
+        if (Input.touchCount > 1 && Input.GetTouch(Input.touches.Length - 1).phase == TouchPhase.Began)
+            WhichSide(Input.GetTouch(Input.touches.Length - 1));
+
         // The meat of The Situation.
         switch (currentState)
         {
@@ -516,29 +519,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Pad_Vertical") != 0)
             vert = Input.GetAxis("Pad_Vertical");
 
-        float deadZone = 1.0f;
-
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved
-            && Input.GetTouch(0).deltaPosition.magnitude > deadZone)
-        {
-            Vector2 virtualJoy = Input.GetTouch(0).deltaPosition;
-
-            horz = virtualJoy.x;
-            vert = virtualJoy.y;
-
-            if ((Mathf.Abs(horz)) < deadZone)
-                horz = 0;
-            if ((Mathf.Abs(vert)) < deadZone)
-                vert = 0;
-
-            if (horz > 0) { horz = 1; }
-            else if (horz < 0) { horz = -1; }
-            if (vert > 0) { vert = 1; }
-            else if (vert < 0) { vert = -1; }
-        }
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-            horz = vert = 0;
-
         // but cap it off at 1
         if (horz > 1.0f) horz = 1.0f;
         else if (horz < -1.0f) horz = -1.0f;
@@ -708,7 +688,62 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void WhichSide(Touch theTouch)
+    {
+        if (theTouch.position.x > (Screen.width / 2))
+        {
+            if(currentState == ACT_CHAR_Base.STATES.IDLE
+                || currentState == ACT_CHAR_Base.STATES.WALKING)
+            {
+                ChangeState(ACT_CHAR_Base.STATES.ATTACK_1, true);
+            }
+            else if (currentState == ACT_CHAR_Base.STATES.ATTACK_1)
+                ChangeState(ACT_CHAR_Base.STATES.ATTACK_2, false);
+            else if (currentState == ACT_CHAR_Base.STATES.ATTACK_2)
+                ChangeState(ACT_CHAR_Base.STATES.ATTACK_3, false);
+        }
+        else
+        {
+            TouchMove(theTouch);
+        }
+    }
 
+    void TouchMove(Touch theTouch)
+    {
+        float deadZone = 1.0f;
 
+        if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Moved
+            && theTouch.deltaPosition.magnitude > deadZone)
+        {
+            Vector2 virtualJoy = theTouch.deltaPosition;
+
+            horz = virtualJoy.x;
+            vert = virtualJoy.y;
+
+            if ((Mathf.Abs(horz)) < deadZone)
+                horz = 0;
+            if ((Mathf.Abs(vert)) < deadZone)
+                vert = 0;
+
+            if (horz > 0) { horz = 1; }
+            else if (horz < 0) { horz = -1; }
+            if (vert > 0) { vert = 1; }
+            else if (vert < 0) { vert = -1; }
+        }
+        if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Ended)
+            horz = vert = 0;
+
+        // we have movement, time to make movement happen.
+        if (horz != 0 || vert != 0)
+        {
+            if (horz > 0) party[currChar].Act_facingRight = true;
+            else if (horz < 0) party[currChar].Act_facingRight = false;
+
+            if (currentState == ACT_CHAR_Base.STATES.IDLE)
+            {
+                ChangeState(ACT_CHAR_Base.STATES.WALKING);
+            }
+        }
+    }
 
 }

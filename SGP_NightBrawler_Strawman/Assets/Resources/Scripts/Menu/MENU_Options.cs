@@ -30,6 +30,12 @@ public class MENU_Options : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(delegate { ChangeSFXVolume(sfxSlider.value); });
         musicSlider.onValueChanged.AddListener(delegate { ChangeMusicVolume(musicSlider.value); });
         fullscreenToggle.onValueChanged.AddListener(delegate { ChangeFullscreen(fullscreenToggle.isOn); });
+
+        if (MNGR_Game.AmIMobile())
+        {
+            fullscreenToggle.gameObject.SetActive(false);
+            screenButton.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
