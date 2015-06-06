@@ -404,7 +404,7 @@ public class ACT_Enemy : MonoBehaviour
                     {
                         if (isMelee)
                         {
-                            SetCurrSpeed(Act_baseSpeed + 5);
+                            SetCurrSpeed(Act_baseSpeed + 1);
                             if (target.transform.position.x > transform.position.x)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
@@ -435,7 +435,7 @@ public class ACT_Enemy : MonoBehaviour
                         }
                         else
                         {
-                            SetCurrSpeed(Act_baseSpeed + 5);
+                            SetCurrSpeed(Act_baseSpeed + 1);
                             if (target.transform.position.x > transform.position.x)
                             {
                                 if (distanceToTarget < maxDistance)
