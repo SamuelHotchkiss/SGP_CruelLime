@@ -48,17 +48,17 @@ public class CameraFollower : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D Col)
     {
+
         if (Col.gameObject.tag == "Bounds")
-        {
             Cam_Collision = false;
-            Debug.Log("Say What!");
-        }
+        else if (Col.gameObject.tag == "Player")
+            Cam_Collision = true;
+
     }
 
     void OnTriggerExit2D(Collider2D Col)
     {
         if (Col.tag == "Player")
             Cam_Collision = true;
-                
     }
 }

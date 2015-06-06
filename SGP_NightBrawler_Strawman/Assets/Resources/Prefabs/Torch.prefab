@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21292860}
   - 50: {fileID: 5003022}
   - 61: {fileID: 6115584}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ GameObject:
   - 61: {fileID: 6132208}
   - 114: {fileID: 11474640}
   - 114: {fileID: 11487586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Torch
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - 4: {fileID: 436498}
   - 212: {fileID: 21208942}
   - 95: {fileID: 9576524}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30, y: -5, z: 1.51999998}
+  m_LocalPosition: {x: 28, y: -4, z: 1.51999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 436498}
@@ -203,8 +203,10 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -219,6 +221,7 @@ MonoBehaviour:
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors: []
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -233,13 +236,18 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
+  dividerActivated: 0
+  numQuotient: 0
+  numGeneration: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
   projectile: {fileID: 0}
   isMelee: 0
   paused: 0
-  coins: {fileID: 0}
 --- !u!212 &21208942
 SpriteRenderer:
   m_ObjectHideFlags: 1
