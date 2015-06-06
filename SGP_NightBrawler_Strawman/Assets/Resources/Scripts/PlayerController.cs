@@ -139,10 +139,10 @@ public class PlayerController : MonoBehaviour
             ChangeState(ACT_CHAR_Base.STATES.DYING);
         }
 
-        if (Input.touchCount > 1 && Input.GetTouch(Input.touchCount - 1).phase == TouchPhase.Began)
-            WhichSide(Input.GetTouch(Input.touchCount - 1));
-        else if (Input.touchCount > 0)
-            WhichSide(Input.GetTouch(0));
+        //if (Input.touchCount > 1 && Input.GetTouch(Input.touchCount - 1).phase == TouchPhase.Began)
+        //    WhichSide(Input.GetTouch(Input.touchCount - 1));
+        //else if (Input.touchCount > 0)
+        //    WhichSide(Input.GetTouch(0));
 
         // The meat of The Situation.
         switch (currentState)
@@ -702,6 +702,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+#if false
     void WhichSide(Touch theTouch)
     {
         if (theTouch.position.x > (Screen.width / 2))
@@ -770,5 +771,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+#endif
 
 }
