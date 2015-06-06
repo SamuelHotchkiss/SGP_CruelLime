@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public float[] maxTmr;
     public float curTmr;
     public bool loop;
-    ACT_CHAR_Base.STATES currentState;
+    public ACT_CHAR_Base.STATES currentState;
     public ACT_CHAR_Base.STATES nextState;
 
     // L: just works better this way
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     public bool isAlive;
 
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
         isAlive = true;
         MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
@@ -70,23 +70,17 @@ public class PlayerController : MonoBehaviour
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
         Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
 
-        // Slick as doody
-        //maxTmr = party[currChar].StateTmrs;
 
-        // Ok, not as slick as doody.  more like a wet floor.
-        maxTmr = new float[party[currChar].StateTmrs.Length];
-        for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
-        {
-            maxTmr[i] = party[currChar].StateTmrs[i];
-        }
+        InitializeTimers();
 
-        curTmr = maxTmr[(int)party[currChar].state];
         loop = true;
         //current error value.  will not change states if set to this.
-        nextState = ACT_CHAR_Base.STATES.IDLE;
+        //nextState = ACT_CHAR_Base.STATES.IDLE;
+        ChangeState(ACT_CHAR_Base.STATES.IDLE);
 
         // Initialize other components
-        GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
+        if (GameObject.Find("GUI_Manager") != null)
+            GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
         GetComponent<MNGR_Animation_Player>().Initialize();
 
         horz = 0.0f;
@@ -108,8 +102,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    protected void InitializeTimers()
+    {
+        // Slick as doody
+        //maxTmr = party[currChar].StateTmrs;
+
+        // Ok, not as slick as doody.  more like a wet floor.
+        maxTmr = new float[party[currChar].StateTmrs.Length];
+        for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
+        {
+            maxTmr[i] = party[currChar].StateTmrs[i];
+        }
+
+        curTmr = maxTmr[(int)party[currChar].state];
+
+    }
+
     // aka The Situation.
-    void Update()
+    protected virtual void Update()
     {
         // S: Should prevent this from running if player is dead
         if (!isAlive)
@@ -146,6 +156,8 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
+					if (GameObject.FindGameObjectWithTag("Decoy"))
+						GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
                     ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
                     horz = 0.0f;
                     vert = 0.0f;
@@ -289,7 +301,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Just put it in a function
-    void UpdateTimers(ACT_CHAR_Base.STATES _cur)
+    protected virtual void UpdateTimers(ACT_CHAR_Base.STATES _cur)
     {
         // Update the state timer
         if (curTmr > 0)
@@ -325,7 +337,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
+    public virtual void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
     {
         ACT_CHAR_Base.STATES old = party[currChar].state;
 
@@ -566,6 +578,8 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
             && party[currChar].cooldownTmr == 0)
         {
+			if (GameObject.FindGameObjectWithTag("Decoy"))
+				GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
             ChangeState(ACT_CHAR_Base.STATES.SPECIAL);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 

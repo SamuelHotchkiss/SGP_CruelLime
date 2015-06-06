@@ -62,4 +62,33 @@ public static class MNGR_Item
                 break;
         }
     }
+
+    public static int PotionCost(int ID)
+    {
+        ////Buffs IDs
+        //[0] = MOD_CDDecrease;
+        //[1] = MOD_DMGIncrease();
+        //[2] = MOD_DMGProtection();
+        //[3] = MOD_HPInstant();
+        //[4] = MOD_HPRegen();
+        //[5] = MOD_SPDIncrease();
+
+        switch (ID)
+        {
+            case 0:
+                return 50;
+            case 1:
+                return 45;
+            case 2:
+                return 55;
+            case 3:
+                return 15;
+            case 4:
+                return 35;
+            case 5:
+                return 25;
+        }
+
+        return 0;
+    }
 }

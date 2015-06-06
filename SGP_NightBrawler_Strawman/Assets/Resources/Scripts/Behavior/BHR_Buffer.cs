@@ -24,7 +24,7 @@ public class BHR_Buffer : BHR_Base
 
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 		for (int i = 0; i < enemies.Length; i++)
-			if (Mathf.Abs(enemies[i].transform.position.x - transform.position.x) < owner.GetComponent<ACT_Enemy>().maxBuffRange)
+			if (Mathf.Abs(enemies[i].transform.position.x - owner.transform.position.x) < owner.GetComponent<ACT_Enemy>().maxBuffRange)
 				owner.GetComponent<ACT_Enemy>().squad.Add(enemies[i]);
 
 		for (int i = 0; i < owner.GetComponent<ACT_Enemy>().squad.Count; i++)
