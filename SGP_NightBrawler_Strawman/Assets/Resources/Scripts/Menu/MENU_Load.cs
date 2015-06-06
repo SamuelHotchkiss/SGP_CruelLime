@@ -13,7 +13,6 @@ public class MENU_Load : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         MNGR_Save.LoadProfiles();
 
         for (int i = 0; i < 3; i++)

@@ -11,8 +11,8 @@ PlayerSettings:
   targetIOSGraphics: -1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: SGP_NightBrawler
+  companyName: CruelLime
+  productName: NightBrawler
   cloudProjectId: 
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -75,7 +75,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.Company.ProductName
+  bundleIdentifier: com.CruelLime.NightBrawler
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -83,7 +83,7 @@ PlayerSettings:
   xboxOneDisableKinectGpuReservation: 0
   productGUID: a304851f5c5a5974c843d5abb22de717
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 9
+  AndroidMinSdkVersion: 19
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   apiCompatibilityLevel: 2
@@ -139,7 +139,10 @@ PlayerSettings:
     m_Icons:
     - m_Icon: {fileID: 2800000, guid: 729351dd8f474e046b3b24d6a224a872, type: 3}
       m_Size: 128
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: Android
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   actionOnDotNetUnhandledException: 1
