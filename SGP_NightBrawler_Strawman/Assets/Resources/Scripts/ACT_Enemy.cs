@@ -3,6 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
+	public GUIStyle BlackBar;
+	public GUIStyle HealthBar;
+	public Camera cam;
+
     // S: for use with buffs and debuffs ////////////////////////////////
     public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
 
@@ -170,6 +174,9 @@ public class ACT_Enemy : MonoBehaviour
 	void Start () 
 	{
 		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+
+		if (HealthBar.name == "Health")
+			cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         damageMod = 1.0f;
 
@@ -600,4 +607,16 @@ public class ACT_Enemy : MonoBehaviour
     {
         damageMod = 1.0f;
     }
+
+	public void OnGUI()
+	{
+		if (cam != null)
+		{
+			Vector2 targetPos;
+			targetPos = cam.WorldToScreenPoint(transform.position);
+
+			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 150, 100, 6), "", BlackBar);
+			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 150, 100 * ((float)Act_currHP / (float)Act_baseHP), 6), "", HealthBar);
+		}
+	}
 }
