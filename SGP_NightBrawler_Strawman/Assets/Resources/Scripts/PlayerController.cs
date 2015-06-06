@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
+    bool debug = false;
     // S: for use with buffs and debuffs ////////////////////////////////
     public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
 
@@ -119,6 +120,9 @@ public class PlayerController : MonoBehaviour
     // aka The Situation.
     protected virtual void Update()
     {
+        if (GetComponent<Rigidbody2D>().velocity.magnitude > 5)
+            debug = true;
+
         // S: Should prevent this from running if player is dead
         if (!isAlive)
             return;
@@ -139,10 +143,11 @@ public class PlayerController : MonoBehaviour
             ChangeState(ACT_CHAR_Base.STATES.DYING);
         }
 
-        //if (Input.touchCount > 1 && Input.GetTouch(Input.touchCount - 1).phase == TouchPhase.Began)
-        //    WhichSide(Input.GetTouch(Input.touchCount - 1));
-        //else if (Input.touchCount > 0)
-        //    WhichSide(Input.GetTouch(0));
+        if (Input.touchCount > 1 && Input.GetTouch(Input.touchCount - 1).phase == TouchPhase.Began)
+            WhichSide(Input.GetTouch(Input.touchCount - 1));
+        else if (Input.touchCount > 0)
+            WhichSide(Input.GetTouch(0));
+
 
         // The meat of The Situation.
         switch (currentState)
@@ -152,7 +157,8 @@ public class PlayerController : MonoBehaviour
             //loop = true;
             //break;
             case ACT_CHAR_Base.STATES.WALKING:
-                CheckMoveInput(currentState);
+                if (!MNGR_Game.AmIMobile())
+                    CheckMoveInput(currentState);
 
                 if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
@@ -167,6 +173,7 @@ public class PlayerController : MonoBehaviour
                 CheckUseInput(currentState);
                 CheckHealInput(currentState);
                 CheckDodgeInput(currentState);
+
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
                 break;
@@ -520,9 +527,9 @@ public class PlayerController : MonoBehaviour
     void CheckMoveInput(ACT_CHAR_Base.STATES _cur)
     {
         // Get axis movement
-        //if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0)
             horz = Input.GetAxis("Horizontal");
-        //if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Vertical") != 0)
             vert = Input.GetAxis("Vertical");
 
         // add gamepad axis movement
@@ -530,6 +537,9 @@ public class PlayerController : MonoBehaviour
             horz = Input.GetAxis("Pad_Horizontal");
         if (Input.GetAxis("Pad_Vertical") != 0)
             vert = Input.GetAxis("Pad_Vertical");
+
+        if (horz != 0 || vert != 0)
+            debug = true;
 
         // but cap it off at 1
         if (horz > 1.0f) horz = 1.0f;
@@ -549,8 +559,8 @@ public class PlayerController : MonoBehaviour
             && Input.GetAxis("Pad_Horizontal") == 0 && Input.GetAxis("Pad_Vertical") == 0
             /*&& party[currChar].state == ACT_CHAR_Base.STATES.WALKING*/)
         {
-            //horz = 0.0f;
-            //vert = 0.0f;
+            horz = 0.0f;
+            vert = 0.0f;
         }
 
         // manual deadzones
@@ -702,7 +712,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-#if false
     void WhichSide(Touch theTouch)
     {
         if (theTouch.position.x > (Screen.width / 2))
@@ -732,10 +741,10 @@ public class PlayerController : MonoBehaviour
         if (currentState == ACT_CHAR_Base.STATES.IDLE
             || currentState == ACT_CHAR_Base.STATES.WALKING)
         {
-
             if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Moved
                 && theTouch.deltaPosition.magnitude > deadZone)
             {
+                //debug = true;
                 Vector2 virtualJoy = theTouch.deltaPosition;
 
                 horz = virtualJoy.x;
@@ -758,6 +767,15 @@ public class PlayerController : MonoBehaviour
                 && currentState == ACT_CHAR_Base.STATES.WALKING)
                 ChangeState(ACT_CHAR_Base.STATES.IDLE);
 
+            //less vertical movement because we're 2.5d
+            if (theTouch.phase != TouchPhase.Stationary)
+            {
+                vert *= 0.85f;
+
+                horz *= party[currChar].Act_currSpeed * 0.25f;
+                vert *= party[currChar].Act_currSpeed * 0.25f;
+            }
+
             // we have movement, time to make movement happen.
             if (horz != 0 || vert != 0)
             {
@@ -769,8 +787,10 @@ public class PlayerController : MonoBehaviour
                     ChangeState(ACT_CHAR_Base.STATES.WALKING);
                 }
             }
+
+            if (horz > 5 || vert > 5)
+                debug = true;
         }
     }
-#endif
 
 }
