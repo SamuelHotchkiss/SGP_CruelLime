@@ -98,8 +98,6 @@ public class PlayerController : MonoBehaviour
                 GameObject.Find("_Horde").SetActive(false);
         }
 
-        Input.simulateMouseWithTouches = false;
-
     }
 
     protected void InitializeTimers()
