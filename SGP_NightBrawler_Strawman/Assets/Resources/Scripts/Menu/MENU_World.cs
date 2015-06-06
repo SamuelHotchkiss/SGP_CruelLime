@@ -79,6 +79,8 @@ public class MENU_World : MonoBehaviour
 			else
 				inventoryImages[i].gameObject.SetActive(true);
 		}
+
+        Input.simulateMouseWithTouches = true;
 	}
 
     // S: for use in testing
@@ -102,6 +104,7 @@ public class MENU_World : MonoBehaviour
     public void StartLevel()
     {
         string lvlName = levels[playIndex].name;
+        Input.simulateMouseWithTouches = false;
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);
 
