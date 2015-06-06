@@ -169,7 +169,8 @@ public class ACT_Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+        if (GetComponent<SpriteRenderer>() != null && GameObject.Find("Reference_Point") != null)
+		    GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
 
         damageMod = 1.0f;
 
