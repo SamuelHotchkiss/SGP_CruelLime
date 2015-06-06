@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OBS_Pitfall : MonoBehaviour {
+public class OBS_Pitfall : MonoBehaviour 
+{
 
     public GameObject dest;
 
     float orgMag;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         orgMag = 0.0f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	
 	}
 
@@ -70,6 +73,11 @@ public class OBS_Pitfall : MonoBehaviour {
                 }
                 Start();
                 _col.transform.position = dest.transform.position;
+                if (GameObject.Find("_Horde") != null)
+                {
+                    Horde hordey = GameObject.Find("_Horde").GetComponent<Horde>();
+                    hordey.transform.position = hordey.OGLoc;
+                }
             }
             
         }

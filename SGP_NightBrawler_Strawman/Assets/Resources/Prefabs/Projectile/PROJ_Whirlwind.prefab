@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 454080}
   - 114: {fileID: 11457290}
   - 58: {fileID: 5880812}
+  - 212: {fileID: 21210966}
   m_Layer: 0
   m_Name: PROJ_Whirlwind
   m_TagString: Untagged
@@ -58,11 +59,38 @@ MonoBehaviour:
   power: 0
   distance: 0
   speed: 0
-  range: 0
-  timer: 1
-  radius: 0
+  range: 20
+  right: 0
+  timerMax: .75
   forcestr: 8
   forcedir: {x: 0, y: 0}
+  sprites: []
+--- !u!212 &21210966
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154650}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f682c3cc73838d940bbb7d12612ad885, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

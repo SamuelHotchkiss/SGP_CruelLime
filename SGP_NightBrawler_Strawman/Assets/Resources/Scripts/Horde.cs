@@ -11,12 +11,14 @@ public class Horde : MonoBehaviour
 	public float timer;
 	public float offset;
 	public float distanceToPlayer;
+    public Vector3 OGLoc;
 
 	// Use this for initialization
 	void Start () 
 	{
 		timer = fireRate;
 		player = GameObject.FindGameObjectWithTag("Player");
+        OGLoc = transform.position;
 	}
 	
 	// Update is called once per frame
