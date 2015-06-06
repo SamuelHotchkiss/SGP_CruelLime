@@ -83,6 +83,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlackBar:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: a62a4475fa805984c90266d6f6f126d0, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  HealthBar:
+    m_Name: Health
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: 40e55f1839d9e044fa3991a412f7935c, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  cam: {fileID: 0}
   buffState: 1
   myBuffs: []
   Act_ID: 2
@@ -96,8 +215,10 @@ MonoBehaviour:
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
+  Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
+  damageMod: 0
   state: 0
   randomState: 0
   curTime: 0
@@ -114,6 +235,7 @@ MonoBehaviour:
   - {fileID: 11460826, guid: 486977f37d9a375499b85ac474a2e3b5, type: 2}
   - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
   currBehavior: {fileID: 0}
+  basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 10
   buffIndex: 1
@@ -128,13 +250,18 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
+  kamikazeActivated: 0
+  kamikazeTimer: 0
+  explosion: {fileID: 0}
+  dividerActivated: 0
+  numQuotient: 0
+  numGeneration: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
   projectile: {fileID: 11453502, guid: 99fbcfdf35f81884cbb94723eed2690e, type: 2}
   isMelee: 1
   paused: 0
-  coins: {fileID: 178380, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
 --- !u!114 &11452948
 MonoBehaviour:
   m_ObjectHideFlags: 1

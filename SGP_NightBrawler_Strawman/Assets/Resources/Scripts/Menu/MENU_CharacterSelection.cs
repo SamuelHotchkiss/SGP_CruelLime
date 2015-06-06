@@ -159,14 +159,6 @@ public class MENU_CharacterSelection : MonoBehaviour
             charType = (_btnIndex / 3);
 
             MNGR_Game.currentParty[charType] = MNGR_Game.theCharacters[_btnIndex];
-            /*for (int i = charType; i < charType + 3; i++) // And this trooper's name was Threes.
-            {
-                MENU_ButtonGraphic btn = ButtonGraphics[i].GetComponent<MENU_ButtonGraphic>();
-                if (btn.chosenParty[charType].characterIndex == btn.party[i].characterIndex)
-                    btn.selected = true;
-                else
-                    btn.selected = false;
-            }*/
         }
     }
 

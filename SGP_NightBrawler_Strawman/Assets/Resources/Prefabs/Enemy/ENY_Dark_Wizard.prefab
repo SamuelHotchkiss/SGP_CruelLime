@@ -1,45 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &187980
+--- !u!1 &110510
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 413866}
-  - 114: {fileID: 11444630}
-  - 50: {fileID: 5049250}
-  - 212: {fileID: 21219024}
-  - 114: {fileID: 11463364}
-  - 61: {fileID: 6196890}
-  - 114: {fileID: 11423716}
-  - 114: {fileID: 11421630}
+  - 4: {fileID: 429320}
+  - 114: {fileID: 11441190}
+  - 50: {fileID: 5059902}
+  - 212: {fileID: 21254476}
+  - 61: {fileID: 6192494}
+  - 114: {fileID: 11420344}
   m_Layer: 9
-  m_Name: ENY_Spiderling
+  m_Name: ENY_Dark_Wizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &413866
+--- !u!4 &429320
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
+  m_GameObject: {fileID: 110510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.81999969, y: -.430000067, z: 50}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.23000002, y: -1.96000004, z: 50}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5049250
+--- !u!50 &5059902
 Rigidbody2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
+  m_GameObject: {fileID: 110510}
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
@@ -49,36 +47,25 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!61 &6196890
+--- !u!61 &6192494
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
+  m_GameObject: {fileID: 110510}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: .198439121, y: .109047472}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.07123291}
---- !u!114 &11421630
+  m_Size: {x: 1.45735323, y: .499515176}
+--- !u!114 &11420344
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11423716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
+  m_GameObject: {fileID: 110510}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e78af9ebfa847b44ad03142f7d4a67b, type: 3}
@@ -89,19 +76,14 @@ MonoBehaviour:
   xRange: 50
   yRange: 100
   Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
-  potionChance: .949999988
-  potions:
-  - {fileID: 11414944, guid: 7d56183dea71bf94f921cc4225a1ec63, type: 2}
-  - {fileID: 11462466, guid: 0bae022e386ec06429c900f01aeeabda, type: 2}
-  - {fileID: 11486726, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
-  - {fileID: 11459908, guid: 1619fa185b2eb29468d703c303316561, type: 2}
-  - {fileID: 11417508, guid: e7746a755474aaa4c8a26596a35ea06c, type: 2}
---- !u!114 &11444630
+  potionChance: 0
+  potions: []
+--- !u!114 &11441190
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
+  m_GameObject: {fileID: 110510}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
@@ -228,13 +210,13 @@ MonoBehaviour:
   cam: {fileID: 0}
   buffState: 1
   myBuffs: []
-  Act_ID: 3
-  Act_baseHP: 15
-  Act_basePower: 1
-  Act_baseSpeed: 35
-  Act_currHP: 15
-  Act_currPower: 1
-  Act_currSpeed: 35
+  Act_ID: 4
+  Act_baseHP: 1
+  Act_basePower: 50
+  Act_baseSpeed: 10
+  Act_currHP: 100
+  Act_currPower: 50
+  Act_currSpeed: 10
   Act_facingRight: 0
   Act_HasMod: 0
   Act_ModIsBuff: 0
@@ -248,20 +230,22 @@ MonoBehaviour:
   curTime: 0
   stateTime: []
   hpThresh: 0
-  nightThresh: 0
+  nightThresh: 1
   TimeThresh: -1
   speedThresh: 0
-  distThresh: 0
+  distThresh: 2
   coolThresh: 0
-  behaviorSize: 1
-  behaviorID: 05000000
-  behaviors: []
+  behaviorSize: 2
+  behaviorID: 0000000004000000
+  behaviors:
+  - {fileID: 0}
+  - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
   currBehavior: {fileID: 0}
-  basicBehavior: {fileID: 11434622, guid: f672c8740bb85e3408c3ccd490431f6a, type: 2}
+  basicBehavior: {fileID: 0}
   squad: []
-  maxBuffRange: 0
-  buffIndex: 0
-  Spw_Critter: {fileID: 107682, guid: 9fe8dcee92297f94eba77c7076388eb8, type: 2}
+  maxBuffRange: 5
+  buffIndex: 1
+  Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
   Spw_SpawnCoolDown: 0
@@ -274,33 +258,22 @@ MonoBehaviour:
   Knck_baseCooldown: 0
   kamikazeActivated: 0
   kamikazeTimer: 3
-  explosion: {fileID: 179554, guid: ad1a8d0bc22064f439c1c889b33506cc, type: 2}
+  explosion: {fileID: 0}
   dividerActivated: 0
-  numQuotient: 0
-  numGeneration: 0
+  numQuotient: 2
+  numGeneration: 4
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
-  projectile: {fileID: 11496520, guid: 1f0a5c4c4a5e1d14ba47c8d8efeb8f08, type: 2}
+  projectile: {fileID: 11452890, guid: 0ea8ef51b2608cc43a6684c18f4fa325, type: 2}
   isMelee: 0
   paused: 0
---- !u!114 &11463364
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!212 &21219024
+--- !u!212 &21254476
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187980}
+  m_GameObject: {fileID: 110510}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -319,7 +292,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 024f967f048901a42b831a4bd8753d56, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 692e13209381fbb4e99027e3c37f8d84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -330,5 +303,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 187980}
+  m_RootGameObject: {fileID: 110510}
   m_IsPrefabParent: 1
