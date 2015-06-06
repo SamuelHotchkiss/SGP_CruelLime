@@ -27,8 +27,8 @@ public class ACT_CHAR_Base : ACT_Base
     }
                         //      0,      1,      2,
 	public enum STATES { IDLE = 0, WALKING, DASHING, 
-        /*  3,          4,      5,      6,      7,      8,   9*/
-		ATTACK_1, ATTACK_2, ATTACK_3, SPECIAL, HURT, DYING, USE };
+        /*  3,          4,      5,      6,      7,      8,   9,   10*/
+		ATTACK_1, ATTACK_2, ATTACK_3, SPECIAL, HURT, DYING, USE, DANCE };
 	public STATES state;
 
     public float damageMod;             // S: lessens or increases damage taken
@@ -47,11 +47,14 @@ public class ACT_CHAR_Base : ACT_Base
 
     // taken from the animation manager.  debating whether or not to do this with all sprites.
     // debate over.  prosecution wins.
+    public int[] idleSprites;
     public int[] walkSprites;
     public int[] attack1Sprites;
     public int[] attack2Sprites;
     public int[] attack3Sprites;
-    public int[] specialSprites;       
+    public int[] specialSprites;
+    public int[] hurtSprites;
+    public int[] deadSprites;       
 
     public string name;
 
@@ -69,7 +72,6 @@ public class ACT_CHAR_Base : ACT_Base
         Act_currSpeed = Act_baseSpeed;
         Act_currAspeed = Act_baseAspeed;
 
-        walkSprites = new int[] { 5, 6, 7, 8, 9 };
 	}
 	
 	// Update is called once per frame
@@ -93,7 +95,23 @@ public class ACT_CHAR_Base : ACT_Base
         }
 	}
 
-    // Not to be confused with ActivateWok.
+    // L: kind of an oxy-moron.
+    public virtual AttackInfo ActivateIdle(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0);
+
+        if (_curTmr > _maxTmr * 0.6f)
+            ret.spriteIndex = idleSprites[0];
+        else if (_curTmr > _maxTmr * 0.5f)
+            ret.spriteIndex = idleSprites[1];
+        else if (_curTmr > _maxTmr * 0.1f)
+            ret.spriteIndex = idleSprites[2];
+        else if (_curTmr >= 0)
+            ret.spriteIndex = idleSprites[1];
+
+        return ret;
+    }
+    // L: Not to be confused with ActivateWok.
     public virtual AttackInfo ActivateWalk(float _curTmr, float _maxTmr)
     {
         AttackInfo ret = new AttackInfo(0);
@@ -143,6 +161,31 @@ public class ACT_CHAR_Base : ACT_Base
 
         return ret;
 	}
+    public virtual AttackInfo ActivateHurt(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0);
+
+        ret.spriteIndex = hurtSprites[0];
+
+        return ret;
+    }
+    public virtual AttackInfo ActivateDying(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0);
+
+        if (_curTmr > _maxTmr * 0.5f)
+        ret.spriteIndex = deadSprites[0];
+        else if (_curTmr >= 0)
+            ret.spriteIndex = deadSprites[1];
+
+        return ret;
+    }
+    public virtual AttackInfo ActivateDance(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0);
+
+        return ret;
+    }
 
     public void ChangeHP(int Dmg, bool Flinch = true)                           //Applies current HP by set amount can be use to Heal as well
 	{                                                                           //Damage needs to be negative.

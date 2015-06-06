@@ -1119,7 +1119,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!1001 &986204066
 Prefab:
   m_ObjectHideFlags: 0
@@ -1283,7 +1283,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 38
+  m_RootOrder: 36
 --- !u!58 &1014775284
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2138,7 +2138,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!1 &1566420044 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 184638, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
@@ -2203,7 +2203,7 @@ GameObject:
   - 81: {fileID: 1576459717}
   - 114: {fileID: 1576459722}
   - 50: {fileID: 1576459723}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Main Camera
   m_TagString: Camara
   m_Icon: {fileID: 0}
@@ -2275,7 +2275,7 @@ Transform:
   m_Children:
   - {fileID: 1625116813}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!114 &1576459722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2451,6 +2451,26 @@ Prefab:
     - target: {fileID: 461742, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178330, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 102898, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 134678, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 184638, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 173778, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
@@ -2761,7 +2781,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 29
 --- !u!1 &1950815575
 GameObject:
   m_ObjectHideFlags: 0
