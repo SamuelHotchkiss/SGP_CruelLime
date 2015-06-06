@@ -10,12 +10,13 @@ public static class MNGR_Game
 	public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
 	public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];
 
+    public static string currentLevel;
 	public static bool usedItem;
 	public static int equippedItem;
 
 	public static MNGR_Inventory theInventory = new MNGR_Inventory();
 	public static bool isNight;
-	public static int hordePosition, playerPosition, wallet;
+	public static int hordePosition, HordeDelay, playerPosition, wallet;
 	public static bool paused;
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
     public static string NextLevel;     // used by CharacterSelection scene, determines which level to load when exiting that scene.
@@ -26,6 +27,8 @@ public static class MNGR_Game
             return;
 
         theMan = true;
+
+        currentLevel = "NEW GAME";
 
 		theCharacters[0] = new CHAR_Swordsman();
 		theCharacters[1] = new CHAR_Lancer();
@@ -38,11 +41,32 @@ public static class MNGR_Game
 		theCharacters[8] = new CHAR_Spellslinger();
 
         // Temporary to be removed later
-        currentParty[0] = theCharacters[1];
-		currentParty[1] = theCharacters[3];
-		currentParty[2] = theCharacters[7];
+        currentParty[0] = theCharacters[0];
+		currentParty[1] = theCharacters[4];
+		currentParty[2] = theCharacters[6];
 
 		usedItem = false;
 		equippedItem = -1;
 	}
+
+    public static void UpdateWorld()
+    {
+        UpdatePlayer();
+        UpdateHoard();
+    }
+
+     public static void UpdatePlayer()
+    {
+        MNGR_Game.playerPosition++;
+    }
+
+    public static void UpdateHoard()
+    {
+        //Once we have all the villages set we need to change this. 
+        if (MNGR_Game.hordePosition != 3 || HordeDelay == 0)
+            MNGR_Game.hordePosition++;
+        else
+            MNGR_Game.HordeDelay--;
+    }
+        
 }

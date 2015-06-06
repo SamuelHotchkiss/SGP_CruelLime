@@ -1033,7 +1033,9 @@ GameObject:
   - 95: {fileID: 976442098}
   - 114: {fileID: 976442097}
   - 58: {fileID: 976442096}
-  m_Layer: 0
+  - 114: {fileID: 976442101}
+  - 50: {fileID: 976442102}
+  m_Layer: 13
   m_Name: flame_sprite_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,6 +1122,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &976442101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976442095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98a7334254775d40af81d8e2403fbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionPickUp: {fileID: 0}
+  player: {fileID: 0}
+  ParentObjectPos: {x: 0, y: 0, z: 0}
+  Timer: 30
+--- !u!50 &976442102
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976442095}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!1001 &986204066
 Prefab:
   m_ObjectHideFlags: 0
@@ -1210,7 +1242,9 @@ GameObject:
   - 95: {fileID: 1014775281}
   - 114: {fileID: 1014775280}
   - 58: {fileID: 1014775284}
-  m_Layer: 0
+  - 114: {fileID: 1014775285}
+  - 50: {fileID: 1014775286}
+  m_Layer: 13
   m_Name: flame_sprite_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1297,6 +1331,36 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .5
+--- !u!114 &1014775285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1014775279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98a7334254775d40af81d8e2403fbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionPickUp: {fileID: 0}
+  player: {fileID: 0}
+  ParentObjectPos: {x: 0, y: 0, z: 0}
+  Timer: 30
+--- !u!50 &1014775286
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1014775279}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!1001 &1032156264
 Prefab:
   m_ObjectHideFlags: 0
@@ -2052,7 +2116,9 @@ GameObject:
   - 95: {fileID: 1564124010}
   - 114: {fileID: 1564124009}
   - 58: {fileID: 1564124008}
-  m_Layer: 0
+  - 114: {fileID: 1564124013}
+  - 50: {fileID: 1564124014}
+  m_Layer: 13
   m_Name: flame_sprite_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2139,6 +2205,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1564124013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1564124007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98a7334254775d40af81d8e2403fbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionPickUp: {fileID: 0}
+  player: {fileID: 0}
+  ParentObjectPos: {x: 0, y: 0, z: 0}
+  Timer: 30
+--- !u!50 &1564124014
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1564124007}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!1 &1566420044 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 184638, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
@@ -2203,7 +2299,7 @@ GameObject:
   - 81: {fileID: 1576459717}
   - 114: {fileID: 1576459722}
   - 50: {fileID: 1576459723}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: Camara
   m_Icon: {fileID: 0}
@@ -2452,26 +2548,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 178330, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
-      propertyPath: m_Layer
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 102898, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
-      propertyPath: m_Layer
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 134678, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
-      propertyPath: m_Layer
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 184638, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
-      propertyPath: m_Layer
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 173778, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
-      propertyPath: m_Layer
-      value: 16
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
   m_IsPrefabParent: 0
@@ -2677,6 +2753,33 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 4081147}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!1 &1837411819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1837411820}
+  m_Layer: 0
+  m_Name: Reference_Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1837411820
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837411819}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7, y: 13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 50
 --- !u!114 &1882058641 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11422794, guid: 326d4ddd09f95b7409022328fa4d11e7,
@@ -2695,7 +2798,9 @@ GameObject:
   - 95: {fileID: 1921509209}
   - 114: {fileID: 1921509208}
   - 58: {fileID: 1921509207}
-  m_Layer: 0
+  - 114: {fileID: 1921509212}
+  - 50: {fileID: 1921509213}
+  m_Layer: 13
   m_Name: flame_sprite_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2781,7 +2886,37 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 30
+--- !u!114 &1921509212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1921509206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98a7334254775d40af81d8e2403fbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionPickUp: {fileID: 0}
+  player: {fileID: 0}
+  ParentObjectPos: {x: 0, y: 0, z: 0}
+  Timer: 30
+--- !u!50 &1921509213
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1921509206}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!1 &1950815575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2794,7 +2929,9 @@ GameObject:
   - 95: {fileID: 1950815578}
   - 114: {fileID: 1950815577}
   - 58: {fileID: 1950815576}
-  m_Layer: 0
+  - 114: {fileID: 1950815581}
+  - 50: {fileID: 1950815582}
+  m_Layer: 13
   m_Name: flame_sprite_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2881,6 +3018,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!114 &1950815581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1950815575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98a7334254775d40af81d8e2403fbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionPickUp: {fileID: 0}
+  player: {fileID: 0}
+  ParentObjectPos: {x: 0, y: 0, z: 0}
+  Timer: 30
+--- !u!50 &1950815582
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1950815575}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!114 &1976806936 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11466212, guid: 326d4ddd09f95b7409022328fa4d11e7,
@@ -2906,11 +3073,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 418556, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9
+      value: 8.31000042
       objectReference: {fileID: 0}
     - target: {fileID: 418556, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.4000001
+      value: -3.3900001
       objectReference: {fileID: 0}
     - target: {fileID: 418556, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2934,11 +3101,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 418556, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
       propertyPath: m_RootOrder
-      value: 27
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 145130, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
       propertyPath: m_Name
       value: Entrance 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 414530, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.98000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 414530, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.00800000038
+      objectReference: {fileID: 0}
+    - target: {fileID: 414530, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -.0500000007
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8e739f1af370a48b4090c483d4e7b0, type: 2}

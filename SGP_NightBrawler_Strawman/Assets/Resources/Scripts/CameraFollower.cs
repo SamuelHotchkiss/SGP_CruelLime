@@ -21,20 +21,20 @@ public class CameraFollower : MonoBehaviour
 	{
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
+        float Ypos;
+        Ypos = Mathf.Lerp(transform.position.y, Cam_CurrTarget.transform.position.y, 0.1f);
+        if (Ypos < -1.5f)
+               Ypos = -1.5f;
+
         if (Cam_Collision)
         {
             float Xpos;
-            float Ypos;
             Xpos = Mathf.Lerp(transform.position.x, Cam_CurrTarget.transform.position.x, 0.1f);
-            Ypos = Mathf.Lerp(transform.position.y, Cam_CurrTarget.transform.position.y, 0.1f);
-
-            if (Ypos < -1.5f)
-                Ypos = -1.5f;
-            else if (Ypos > 1.5f)
-                Ypos = 1.5f;
-
             transform.position = new Vector3(Xpos, Ypos, -10);
         }
+        else
+            transform.position = new Vector3(transform.position.x, Ypos, -10);
+            
 
         for (int i = 0; i < Cam_Egdes.Length; i++)
         {

@@ -10,6 +10,7 @@ TagManager:
   - Bounds
   - Camara
   - Obstacle
+  - Decoy
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4160771137
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 735197011
     locked: 0

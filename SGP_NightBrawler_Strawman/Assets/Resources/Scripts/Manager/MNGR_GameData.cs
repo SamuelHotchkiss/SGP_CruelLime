@@ -11,12 +11,14 @@ public class MNGR_GameData
 
 	public MNGR_Inventory inventory;
 
+    public string currentLevel;
     public bool isNew, isNight;
     public int hordePosition, playerPosition, wallet;
 
     // Initializes GameData's value when new is called
     public MNGR_GameData()
     {
+        currentLevel = "NEW GAME";
 		inventory = new MNGR_Inventory();
 
         isNew = true;
@@ -48,6 +50,7 @@ public class MNGR_GameData
     // Reads in GameManager's values so they can be saved out to a file
     public void CopyGameManager()
     {
+        currentLevel = MNGR_Game.currentLevel;
         theCharacters = MNGR_Game.theCharacters;
         isNight = MNGR_Game.isNight;
         hordePosition = MNGR_Game.hordePosition;
@@ -61,6 +64,7 @@ public class MNGR_GameData
     // Assigns GameManager's values to this GameData's values so they can be loaded in
     public void AssignGameManager()
     {
+        MNGR_Game.currentLevel = currentLevel;
         MNGR_Game.theCharacters = theCharacters;
         MNGR_Game.isNight = isNight;
         MNGR_Game.hordePosition = hordePosition;

@@ -59,4 +59,6 @@ public class MENU_Shop : MonoBehaviour
 		else
 			Debug.Log("You can't carry any more of that item!");
 	}
+
+
 }

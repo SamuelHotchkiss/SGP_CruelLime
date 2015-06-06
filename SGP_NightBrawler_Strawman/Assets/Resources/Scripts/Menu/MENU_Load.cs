@@ -7,10 +7,13 @@ public class MENU_Load : MonoBehaviour
 {
     public MENU_LoadText[] profiles;
     public AudioClip Menu_SelectedSound;    //Clip of sound that will play wen a button is press.
+    public string[] portraitNames = { "Port_Sword", "Port_Lancer", "Port_Defender", "Port_Archer", "Port_Ninja", 
+                                        "Port_Poisoner", "Port_Wizard", "Port_ForceMage", "Port_Spellslinger"};
 
     // Use this for initialization
     void Start()
     {
+
         MNGR_Save.LoadProfiles();
 
         for (int i = 0; i < 3; i++)
