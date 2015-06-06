@@ -16,6 +16,8 @@ public class PROJ_Base : MonoBehaviour
 
     public virtual void Initialize(bool _r = true, float _damMult = 1.0f)
     {
+		if (owner == null)
+			return;
         // Are you my mommy?
         if(owner.tag == "Player")
         {

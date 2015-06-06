@@ -9,10 +9,10 @@ public class BHR_Blockade : BHR_Base {
 	}
 	
 	// Update is called once per frame
-    //public void Update () 
-    //{
-    //    base.Update();
-    //}
+	public override void Update () 
+	{
+		base.Update();
+	}
 
 	public override void PerformBehavior()
 	{

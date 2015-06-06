@@ -7,6 +7,8 @@ public static class MNGR_Game
 {
     static bool theMan = false;
 
+    static bool isMobile = false;   // S: cannot be altered by outside sources, ONLY change if porting to Android
+
 	public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
 	public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];
 
@@ -19,6 +21,7 @@ public static class MNGR_Game
 	public static int hordePosition, HordeDelay, playerPosition, wallet;
 	public static bool paused;
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
+    public static string NextLevel;     // used by CharacterSelection scene, determines which level to load when exiting that scene.
 
 	public static void Initialize() // S: for debugging purposes
 	{
@@ -66,6 +69,12 @@ public static class MNGR_Game
             MNGR_Game.hordePosition++;
         else
             MNGR_Game.HordeDelay--;
+    }
+
+    // S: allows other scripts to view the isMoblie variable
+    public static bool AmIMobile()
+    {
+        return isMobile;
     }
         
 }

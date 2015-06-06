@@ -13,7 +13,7 @@ public class MENU_Load : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        MNGR_Game.Initialize();
         MNGR_Save.LoadProfiles();
 
         for (int i = 0; i < 3; i++)
@@ -67,7 +67,9 @@ public class MENU_Load : MonoBehaviour
                 Application.LoadLevel("MainMenu");
                 break;
             case 1:
-                Application.LoadLevel("WorldMap");
+                //Application.LoadLevel("WorldMap");
+                MNGR_Game.NextLevel = "WorldMap";
+                Application.LoadLevel("CharacterSelect");
                 break;
             case 2:
                 Application.LoadLevel(Application.loadedLevelName); // reloads the LoadMenu scene

@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public float[] maxTmr;
     public float curTmr;
     public bool loop;
-    ACT_CHAR_Base.STATES currentState;
+    public ACT_CHAR_Base.STATES currentState;
     public ACT_CHAR_Base.STATES nextState;
 
     // L: just works better this way
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     public bool isAlive;
 
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
         isAlive = true;
         MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
@@ -70,23 +70,17 @@ public class PlayerController : MonoBehaviour
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
         Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
 
-        // Slick as doody
-        //maxTmr = party[currChar].StateTmrs;
 
-        // Ok, not as slick as doody.  more like a wet floor.
-        maxTmr = new float[party[currChar].StateTmrs.Length];
-        for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
-        {
-            maxTmr[i] = party[currChar].StateTmrs[i];
-        }
+        InitializeTimers();
 
-        curTmr = maxTmr[(int)party[currChar].state];
         loop = true;
         //current error value.  will not change states if set to this.
-        nextState = ACT_CHAR_Base.STATES.IDLE;
+        //nextState = ACT_CHAR_Base.STATES.IDLE;
+        ChangeState(ACT_CHAR_Base.STATES.IDLE);
 
         // Initialize other components
-        GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
+        if (GameObject.Find("GUI_Manager") != null)
+            GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
         GetComponent<MNGR_Animation_Player>().Initialize();
 
         horz = 0.0f;
@@ -103,10 +97,27 @@ public class PlayerController : MonoBehaviour
             else
                 GameObject.Find("_Horde").SetActive(false);
         }
+
+    }
+
+    protected void InitializeTimers()
+    {
+        // Slick as doody
+        //maxTmr = party[currChar].StateTmrs;
+
+        // Ok, not as slick as doody.  more like a wet floor.
+        maxTmr = new float[party[currChar].StateTmrs.Length];
+        for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
+        {
+            maxTmr[i] = party[currChar].StateTmrs[i];
+        }
+
+        curTmr = maxTmr[(int)party[currChar].state];
+
     }
 
     // aka The Situation.
-    void Update()
+    protected virtual void Update()
     {
         // S: Should prevent this from running if player is dead
         if (!isAlive)
@@ -128,6 +139,11 @@ public class PlayerController : MonoBehaviour
             ChangeState(ACT_CHAR_Base.STATES.DYING);
         }
 
+        //if (Input.touchCount > 1 && Input.GetTouch(Input.touchCount - 1).phase == TouchPhase.Began)
+        //    WhichSide(Input.GetTouch(Input.touchCount - 1));
+        //else if (Input.touchCount > 0)
+        //    WhichSide(Input.GetTouch(0));
+
         // The meat of The Situation.
         switch (currentState)
         {
@@ -140,8 +156,8 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
-					if (GameObject.FindGameObjectWithTag("Decoy"))
-						GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
+                    if (GameObject.FindGameObjectWithTag("Decoy"))
+                        GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
                     ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
                     horz = 0.0f;
                     vert = 0.0f;
@@ -149,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 CheckSpecialInput(currentState);
                 CheckSwitchInput(currentState);
                 CheckUseInput(currentState);
-				CheckHealInput(currentState);
+                CheckHealInput(currentState);
                 CheckDodgeInput(currentState);
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
@@ -285,7 +301,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Just put it in a function
-    void UpdateTimers(ACT_CHAR_Base.STATES _cur)
+    protected virtual void UpdateTimers(ACT_CHAR_Base.STATES _cur)
     {
         // Update the state timer
         if (curTmr > 0)
@@ -321,7 +337,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
+    public virtual void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
     {
         ACT_CHAR_Base.STATES old = party[currChar].state;
 
@@ -350,7 +366,7 @@ public class PlayerController : MonoBehaviour
             }
             // either way set the timer to the current state's max
             //if (_next != old)
-                curTmr = maxTmr[(int)_next];
+            curTmr = maxTmr[(int)_next];
         }
         else
             nextState = _next;
@@ -504,9 +520,9 @@ public class PlayerController : MonoBehaviour
     void CheckMoveInput(ACT_CHAR_Base.STATES _cur)
     {
         // Get axis movement
-        if (Input.GetAxis("Horizontal") != 0)
+        //if (Input.GetAxis("Horizontal") != 0)
             horz = Input.GetAxis("Horizontal");
-        if (Input.GetAxis("Vertical") != 0)
+        //if (Input.GetAxis("Vertical") != 0)
             vert = Input.GetAxis("Vertical");
 
         // add gamepad axis movement
@@ -533,8 +549,8 @@ public class PlayerController : MonoBehaviour
             && Input.GetAxis("Pad_Horizontal") == 0 && Input.GetAxis("Pad_Vertical") == 0
             /*&& party[currChar].state == ACT_CHAR_Base.STATES.WALKING*/)
         {
-            horz = 0.0f;
-            vert = 0.0f;
+            //horz = 0.0f;
+            //vert = 0.0f;
         }
 
         // manual deadzones
@@ -562,8 +578,8 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
             && party[currChar].cooldownTmr == 0)
         {
-			if (GameObject.FindGameObjectWithTag("Decoy"))
-				GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
+            if (GameObject.FindGameObjectWithTag("Decoy"))
+                GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
             ChangeState(ACT_CHAR_Base.STATES.SPECIAL);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
@@ -592,27 +608,27 @@ public class PlayerController : MonoBehaviour
             {
                 MNGR_Game.usedItem = true;
                 MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
-				MNGR_Game.equippedItem = -1;
+                MNGR_Game.equippedItem = -1;
             }
 
             ChangeState(ACT_CHAR_Base.STATES.USE);
         }
     }
 
-	void CheckHealInput(ACT_CHAR_Base.STATES _cur)
-	{
-		if ((Input.GetButton("Heal") || Input.GetButton("Pad_Heal"))
-			&& party[currChar].state != ACT_CHAR_Base.STATES.USE)
-		{
-			if (MNGR_Game.theInventory.containers[0].count > 0)
-			{
-				MNGR_Item.AttachModifier(3, gameObject);
-				MNGR_Game.theInventory.containers[0].count--;
-			}
+    void CheckHealInput(ACT_CHAR_Base.STATES _cur)
+    {
+        if ((Input.GetButton("Heal") || Input.GetButton("Pad_Heal"))
+            && party[currChar].state != ACT_CHAR_Base.STATES.USE)
+        {
+            if (MNGR_Game.theInventory.containers[0].count > 0)
+            {
+                MNGR_Item.AttachModifier(3, gameObject);
+                MNGR_Game.theInventory.containers[0].count--;
+            }
 
-			ChangeState(ACT_CHAR_Base.STATES.USE);
-		}
-	}
+            ChangeState(ACT_CHAR_Base.STATES.USE);
+        }
+    }
 
     void CheckDodgeInput(ACT_CHAR_Base.STATES _cur)
     {
@@ -686,7 +702,75 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+#if false
+    void WhichSide(Touch theTouch)
+    {
+        if (theTouch.position.x > (Screen.width / 2))
+        {
+            horz = vert = 0;
 
+            if (currentState == ACT_CHAR_Base.STATES.IDLE
+                || currentState == ACT_CHAR_Base.STATES.WALKING)
+            {
+                ChangeState(ACT_CHAR_Base.STATES.ATTACK_1, true);
+            }
+            else if (currentState == ACT_CHAR_Base.STATES.ATTACK_1)
+                ChangeState(ACT_CHAR_Base.STATES.ATTACK_2, false);
+            else if (currentState == ACT_CHAR_Base.STATES.ATTACK_2)
+                ChangeState(ACT_CHAR_Base.STATES.ATTACK_3, false);
+        }
+        else
+        {
+            TouchMove(theTouch);
+        }
+    }
 
+    void TouchMove(Touch theTouch)
+    {
+        float deadZone = 1.0f;
+
+        if (currentState == ACT_CHAR_Base.STATES.IDLE
+            || currentState == ACT_CHAR_Base.STATES.WALKING)
+        {
+
+            if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Moved
+                && theTouch.deltaPosition.magnitude > deadZone)
+            {
+                Vector2 virtualJoy = theTouch.deltaPosition;
+
+                horz = virtualJoy.x;
+                vert = virtualJoy.y;
+
+                if ((Mathf.Abs(horz)) < deadZone)
+                    horz = 0;
+                if ((Mathf.Abs(vert)) < deadZone)
+                    vert = 0;
+
+                if (horz > 0) { horz = 1; }
+                else if (horz < 0) { horz = -1; }
+                if (vert > 0) { vert = 1; }
+                else if (vert < 0) { vert = -1; }
+            }
+            if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Ended)
+                horz = vert = 0;
+
+            if (horz == 0.0f && vert == 0.0f
+                && currentState == ACT_CHAR_Base.STATES.WALKING)
+                ChangeState(ACT_CHAR_Base.STATES.IDLE);
+
+            // we have movement, time to make movement happen.
+            if (horz != 0 || vert != 0)
+            {
+                if (horz > 0) party[currChar].Act_facingRight = true;
+                else if (horz < 0) party[currChar].Act_facingRight = false;
+
+                if (currentState == ACT_CHAR_Base.STATES.IDLE)
+                {
+                    ChangeState(ACT_CHAR_Base.STATES.WALKING);
+                }
+            }
+        }
+    }
+#endif
 
 }
