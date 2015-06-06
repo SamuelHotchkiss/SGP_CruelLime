@@ -72,9 +72,17 @@ public class MENU_Village : MonoBehaviour {
 
     public void OpenMenus(int _ShopID)
     {
-        Vll_Shops[_ShopID].SetActive(true);
-        Vll_Shops[Vll_CurrCanvas].SetActive(false);
-        Vll_CurrCanvas = _ShopID;
+        if (_ShopID == 6) // going to character select
+        {
+            MNGR_Game.NextLevel = "Village";
+            Application.LoadLevel("CharacterSelect");
+        }
+        else
+        {
+            Vll_Shops[_ShopID].SetActive(true);
+            Vll_Shops[Vll_CurrCanvas].SetActive(false);
+            Vll_CurrCanvas = _ShopID;
+        }
     }
 
 	public void ChangeSceneButton(string levelname)

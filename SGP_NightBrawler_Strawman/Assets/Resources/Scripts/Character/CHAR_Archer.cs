@@ -31,13 +31,19 @@ public class CHAR_Archer : ACT_CHAR_Base
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_ArrowThree";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_ArrowPierce";
 
-        //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE
-        StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.5f, 0.4f, 0.7f, 0.7f, 0.1f, 1.0f, 1.0f };
+        //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
+        StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.5f, 0.4f, 0.7f, 0.7f, 0.1f, 1.0f, 1.0f, 0.8f };
 
         attack1Sprites = new int[] { 10, 11, 12, 13 };
         attack2Sprites = new int[] { 15, 16, 17 };
         attack3Sprites = new int[] { 20, 21, 22, 23 };
         specialSprites = new int[] { 10, 11, 12, 13 };
+
+        // These should always be the same, Start() just doesn't work well enough in ACT_CHAR_Base
+        idleSprites = new int[] { 0, 1, 2 };
+        walkSprites = new int[] { 5, 6, 7, 8, 9 };
+        hurtSprites = new int[] { 30 };
+        deadSprites = new int[] { 30, 31 };
     }
 
     // Use this for initialization
@@ -129,4 +135,18 @@ public class CHAR_Archer : ACT_CHAR_Base
 
         return ret;
     }
+
+    public override AttackInfo ActivateDance(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0);
+
+        if (_curTmr > _maxTmr * 0.5f)
+            ret.spriteIndex = idleSprites[2];
+        else if (_curTmr >= 0.0)
+            ret.spriteIndex = hurtSprites[0];
+
+        return ret;
+    }
+
+
 }

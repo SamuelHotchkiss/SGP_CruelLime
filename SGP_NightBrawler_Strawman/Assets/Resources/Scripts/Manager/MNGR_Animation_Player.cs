@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MNGR_Animation_Player : MonoBehaviour
@@ -8,27 +9,30 @@ public class MNGR_Animation_Player : MonoBehaviour
     Sprite[] sprites;
     //Sprite lastSprite;
     ACT_CHAR_Base currentCharacter;
-        ACT_CHAR_Base.AttackInfo info;
+    ACT_CHAR_Base.AttackInfo info;
     PlayerController currentController;
     ACT_CHAR_Base.STATES lastState;
     ACT_CHAR_Base.STATES curState;
     //Vector3 lastpos;
     bool lastRight;
 
-    // these contain the sprite IDs used for each animaiton
-    int[] idleSprites;
-    int[] hurtSprites;
-    int[] deadSprites;
     public bool SpawnProj;
 
     public void Initialize()
     {
-
+        MNGR_Game.Initialize();
         filepaths = new string[] { "Sprites/Player/Swordsman", "Sprites/Player/Lancer",
             "Sprites/Player/Defender", "Sprites/Player/Archer", "Sprites/Player/Ninja",
             "Sprites/Player/Poisoner", "Sprites/Player/Wizard", "Sprites/Player/ForceMage",
             "Sprites/Player/Spellslinger"};
-        currentController = GetComponent<PlayerController>();
+        if (GetComponent<PlayerController>() != null)
+        {
+            currentController = GetComponent<PlayerController>();
+        }
+        else
+        {
+            currentController = GetComponent<MENU_ButtonGraphic>();
+        }
         currentCharacter = currentController.party[currentController.currChar];
         lastState = currentCharacter.state;
         curState = currentCharacter.state;
@@ -36,26 +40,35 @@ public class MNGR_Animation_Player : MonoBehaviour
         //lastpos = transform.position;
         lastRight = currentCharacter.Act_facingRight;
 
-        // Works for swordsman...
-        idleSprites = new int[] { 0, 1, 2 };
-        hurtSprites = new int[] { 30 };
-        deadSprites = new int[] { 30, 31 };
         SpawnProj = true;
     }
 
     void Update()
     {
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+        if (GetComponent<SpriteRenderer>() != null && GameObject.Find("Reference_Point") != null)
+    		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
 
         // S: Should prevent this from running if player is dead
         if (!currentController.isAlive)
             return;
 
         // change this script's character if the party changes its character, but don't waste the time otherwise.
-        if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
+        if (GetComponent<PlayerController>() != null)
         {
-            currentCharacter = GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar];
-            sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
+            if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
+            {
+                currentCharacter = GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar];
+                sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
+            }
+        }
+        else
+        {
+            if (currentCharacter != GetComponent<MENU_ButtonGraphic>().party[GetComponent<MENU_ButtonGraphic>().currChar])
+            {
+                currentCharacter = GetComponent<MENU_ButtonGraphic>().party[GetComponent<MENU_ButtonGraphic>().currChar];
+                sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
+            }
+
         }
         // change this script's state if the character changes his state, but don't waste the time otherwise.
         if (curState != currentCharacter.state)
@@ -72,62 +85,54 @@ public class MNGR_Animation_Player : MonoBehaviour
         {
             case ACT_CHAR_Base.STATES.IDLE:
 
-                if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.6f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.5f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
-                else if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.1f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[2]];
-                else if (currentController.curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
+                info = currentCharacter.ActivateIdle(currentController.curTmr, currentController.maxTmr[(int)curState]);
+
+                SetSprite(info.spriteIndex);
                 break;
             case ACT_CHAR_Base.STATES.WALKING:
 
                 info = currentCharacter.ActivateWalk(currentController.curTmr, currentController.maxTmr[(int)curState]);
 
-                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
+                SetSprite(info.spriteIndex);
                 break;
             case ACT_CHAR_Base.STATES.DASHING:
 
                 info = currentCharacter.ActivateDodge(currentController.curTmr, currentController.maxTmr[(int)curState]);
 
                 //if (currentCharacter.Act_facingRight)
-                    //transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                //transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 //else
-                    //transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                //transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
-                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
+                SetSprite(info.spriteIndex);
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_1:
 
                 info = currentCharacter.ActivateAttack1(currentController.curTmr, currentController.maxTmr[(int)curState]);
-                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
+                SetSprite(info.spriteIndex);
 
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight);
-                //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_2:
 
                 info = currentCharacter.ActivateAttack2(currentController.curTmr, currentController.maxTmr[(int)curState]);
-                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
+                SetSprite(info.spriteIndex);
 
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight);
-                //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.ATTACK_3:
 
                 info = currentCharacter.ActivateAttack3(currentController.curTmr, currentController.maxTmr[(int)curState]);
-                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
+                SetSprite(info.spriteIndex);
 
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 1);
-                //lastpos = transform.position;
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
                 info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
-                GetComponent<SpriteRenderer>().sprite = sprites[info.spriteIndex];
+                SetSprite(info.spriteIndex);
 
                 if (info.velocity.magnitude != 0)
                 {
@@ -140,36 +145,45 @@ public class MNGR_Animation_Player : MonoBehaviour
 
                 if (gameObject.layer != info.physicsLayer)
                     gameObject.layer = info.physicsLayer;
-                /*bool curCol = currentController.GetComponent<BoxCollider2D>().enabled;
-                if (curCol != info.enableCollision)
-                    currentController.GetComponent<BoxCollider2D>().enabled = info.enableCollision;
-                */
                 break;
             case ACT_CHAR_Base.STATES.HURT:
-                GetComponent<SpriteRenderer>().sprite = sprites[hurtSprites[0]];
+
+                info = currentCharacter.ActivateHurt(currentController.curTmr, currentController.maxTmr[(int)curState]);
+
+                SetSprite(info.spriteIndex);
                 break;
             case ACT_CHAR_Base.STATES.DYING:
-                if (currentController.curTmr > currentController.maxTmr[(int)curState] * 0.5f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[deadSprites[0]];
-                else if (currentController.curTmr >= 0)
-                    GetComponent<SpriteRenderer>().sprite = sprites[deadSprites[1]];
+
+                info = currentCharacter.ActivateDying(currentController.curTmr, currentController.maxTmr[(int)curState]);
+
+                SetSprite(info.spriteIndex);
                 break;
             case ACT_CHAR_Base.STATES.USE:
                 // Special FX because Logan didn't actually animate these
                 break;
+
+            case ACT_CHAR_Base.STATES.DANCE:
+                info = currentCharacter.ActivateDance(currentController.curTmr, currentController.maxTmr[(int)curState]);
+
+                SetSprite(info.spriteIndex);
+
+                break;
             default:
-                GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
+                SetSprite(0);
                 break;
         }
 
-        if (currentCharacter.invulTmr > 0.0f)
-            GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
-        else if (!GetComponent<SpriteRenderer>().enabled)
-            GetComponent<SpriteRenderer>().enabled = true;
+        if (GetComponent<SpriteRenderer>() != null) // Flexibility!
+        {
+            if (currentCharacter.invulTmr > 0.0f)
+                GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
+            else if (!GetComponent<SpriteRenderer>().enabled)
+                GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
     // handled in one easy-to-access function
-    void ChangeState(ACT_CHAR_Base.STATES _newstate)
+    protected void ChangeState(ACT_CHAR_Base.STATES _newstate)
     {
         // this allows us to know exactly which transition we're in.  Very useful.
         lastState = curState;
@@ -236,6 +250,15 @@ public class MNGR_Animation_Player : MonoBehaviour
         curState = _newstate;
 
     }
+
+    void SetSprite(int _ID)
+    {
+        if (GetComponent<SpriteRenderer>() != null)
+            GetComponent<SpriteRenderer>().sprite = sprites[_ID];
+        else
+            GetComponent<Image>().sprite = sprites[_ID];
+    }
+
 
 
 }

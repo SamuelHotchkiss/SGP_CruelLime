@@ -11,7 +11,7 @@ public class BHR_Base : MonoBehaviour
         owner.GetComponent<ACT_Enemy>();
     }
 
-	public void Update()
+	public virtual void Update()
 	{
 		if (owner == null)
 		{
