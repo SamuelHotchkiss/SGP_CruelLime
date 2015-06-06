@@ -317,7 +317,6 @@ public class ACT_Enemy : MonoBehaviour
                     {
                         if (isMelee)
                         {
-                            Act_currSpeed = 1;
                             if (target.transform.position.x > transform.position.x)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
@@ -348,7 +347,6 @@ public class ACT_Enemy : MonoBehaviour
                         }
                         else
                         {
-                            Act_currSpeed = 2;
                             if (target.transform.position.x > transform.position.x)
                             {
                                 if (distanceToTarget < maxDistance)
@@ -406,7 +404,7 @@ public class ACT_Enemy : MonoBehaviour
                     {
                         if (isMelee)
                         {
-                            Act_currSpeed = 2;
+                            SetCurrSpeed(Act_baseSpeed + 1);
                             if (target.transform.position.x > transform.position.x)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
@@ -437,7 +435,7 @@ public class ACT_Enemy : MonoBehaviour
                         }
                         else
                         {
-                            Act_currSpeed = 2;
+                            SetCurrSpeed(Act_baseSpeed + 1);
                             if (target.transform.position.x > transform.position.x)
                             {
                                 if (distanceToTarget < maxDistance)
@@ -569,6 +567,7 @@ public class ACT_Enemy : MonoBehaviour
 	{
         if (Act_IsIntelligent) // L: dummies dont change states.
         {
+            RestoreToBaseSpeed();
             if (kamikazeActivated)
             {
                 state = STATES.SPECIAL;

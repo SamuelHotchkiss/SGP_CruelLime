@@ -63,7 +63,7 @@ public class ACT_BOS_Ent : ACT_Enemy
         {
             if (Ent_HealCooldown <= 0.0f)
             {
-                ChangeHP(5);
+                ChangeHP(2);
                 Ent_HealCooldown = 0.05f;
             }
             if (Act_currHP > (int)(Act_baseHP * Ent_NewMaxRegen))
@@ -105,7 +105,12 @@ public class ACT_BOS_Ent : ACT_Enemy
                 break;
             case STATES.HURT:
                 //Animations??
-                Ent_HealHP = false;
+                if (Ent_HealHP)
+                {
+                    Ent_HealHP = false;
+                    Ent_WallUp = false;
+                    Ent_NewMaxRegen -= 0.25f;
+                }
                 Knck_Cooldown = 0.0f;
                 break;
             case STATES.DEAD:
