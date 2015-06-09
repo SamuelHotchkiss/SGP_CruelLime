@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    bool debug = false;
     // S: for use with buffs and debuffs ////////////////////////////////
     public MNGR_Item.BuffStates buffState = MNGR_Item.BuffStates.NEUTRAL;
 
@@ -48,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
     // S: check if we're alive
     public bool isAlive;
+    public Image leftSwitch, rightSwitch, healTouch, powerTouch;
+    float specTime = 0.5f;
 
     // Use this for initialization
     protected virtual void Start()
@@ -120,9 +121,6 @@ public class PlayerController : MonoBehaviour
     // aka The Situation.
     protected virtual void Update()
     {
-        if (GetComponent<Rigidbody2D>().velocity.magnitude > 5)
-            debug = true;
-
         // S: Should prevent this from running if player is dead
         if (!isAlive)
             return;
@@ -383,7 +381,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void SwitchNextPartyMember(bool _forward)
+    public void SwitchNextPartyMember(bool _forward)
     {
         int loopz = 0;
         int next = 1;
@@ -541,9 +539,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Pad_Vertical") != 0)
             vert = Input.GetAxis("Pad_Vertical");
 
-        if (horz != 0 || vert != 0)
-            debug = true;
-
         // but cap it off at 1
         if (horz > 1.0f) horz = 1.0f;
         else if (horz < -1.0f) horz = -1.0f;
@@ -588,10 +583,8 @@ public class PlayerController : MonoBehaviour
     }
     void CheckSpecialInput(ACT_CHAR_Base.STATES _cur)
     {
-        if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel")
-            || (Input.touchCount > 0 && Input.GetTouch(Input.touchCount - 1).phase != TouchPhase.Began
-            && Input.GetTouch(Input.touchCount - 1).position.x > (Screen.width / 2))
-            && party[currChar].cooldownTmr == 0))
+        if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
+            && party[currChar].cooldownTmr == 0)
         {
             if (GameObject.FindGameObjectWithTag("Decoy"))
                 GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
@@ -599,6 +592,24 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
             party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
+        }
+        // S: touch stuff
+        else if ((Input.touchCount > 0 && Input.GetTouch(Input.touchCount - 1).phase != TouchPhase.Began
+            && Input.GetTouch(Input.touchCount - 1).position.x > (Screen.width / 2)
+            && party[currChar].cooldownTmr == 0))
+        {
+            if (specTime > 0)
+                specTime -= Time.deltaTime;
+            else
+            {
+                if (GameObject.FindGameObjectWithTag("Decoy"))
+                    GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
+                ChangeState(ACT_CHAR_Base.STATES.SPECIAL);
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+                party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
+                specTime = 0.5f;
+            }
         }
     }
     void CheckSwitchInput(ACT_CHAR_Base.STATES _cur)
@@ -719,7 +730,12 @@ public class PlayerController : MonoBehaviour
 
     void WhichSide(Touch theTouch)
     {
-        if (theTouch.position.x > (Screen.width / 2) && theTouch.phase == TouchPhase.Began)
+        if (theTouch.position.y < (Screen.height / 4) && theTouch.phase == TouchPhase.Began)
+        {
+            ActivateBottom(theTouch);
+        }
+        else if (theTouch.position.x > (Screen.width / 2) && theTouch.phase == TouchPhase.Ended
+            && currentState != ACT_CHAR_Base.STATES.SPECIAL)
         {
             horz = vert = 0;
 
@@ -744,10 +760,47 @@ public class PlayerController : MonoBehaviour
     void TouchMove(Touch theTouch)
     {
         float deadZone = 1.0f;
+        Vector2 dashPoint = new Vector2((Screen.width / 8), (Screen.height / 2));
 
         if (currentState == ACT_CHAR_Base.STATES.IDLE
             || currentState == ACT_CHAR_Base.STATES.WALKING)
         {
+            //if (theTouch.tapCount == 2 && !notjoydash)
+            //{
+            //    if (!notjoydash)
+            //    {
+
+            //        // buffered input #PutsOnShadesYEEEAAAAAHH
+            //        notjoydash = true;
+            //        // special stuff when first initializing the dodge
+            //        if (currentState != ACT_CHAR_Base.STATES.DASHING)
+            //        {
+            //            ChangeState(ACT_CHAR_Base.STATES.DASHING);
+            //            nextState = ACT_CHAR_Base.STATES.IDLE;
+            //        }
+
+            //        Vector2 doubleTap = theTouch.position;
+            //        float top = dashPoint.y + 25.0f;
+            //        float bottom = dashPoint.y - 100.0f;
+
+            //        if (doubleTap.x > dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
+            //            horz = 30.0f;
+            //        else if (doubleTap.x < dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
+            //            horz = -30.0f;
+            //        else if (doubleTap.y > top)
+            //            vert = 30.0f;
+            //        else if (doubleTap.y < bottom)
+            //            vert = -30.0f;
+            //    }
+            //    else if (horz == 0 && vert == 0)
+            //    {
+            //        notjoydash = true;
+            //    }
+            //    else if (notjoydash)
+            //        horz = vert = 0;
+            //}
+            //else
+            //{
             if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Moved
                 && theTouch.deltaPosition.magnitude > deadZone)
             {
@@ -761,8 +814,6 @@ public class PlayerController : MonoBehaviour
                     horz = 0;
                 if ((Mathf.Abs(vert)) < deadZone)
                     vert = 0;
-
-
             }
             else if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Ended)
                 horz = vert = 0;
@@ -782,21 +833,64 @@ public class PlayerController : MonoBehaviour
             horz *= party[currChar].Act_currSpeed * 0.25f;
             vert *= party[currChar].Act_currSpeed * 0.25f;
 
-            // we have movement, time to make movement happen.
-            if (horz != 0 || vert != 0)
-            {
-                if (horz > 0) party[currChar].Act_facingRight = true;
-                else if (horz < 0) party[currChar].Act_facingRight = false;
-
-                if (currentState == ACT_CHAR_Base.STATES.IDLE)
-                {
-                    ChangeState(ACT_CHAR_Base.STATES.WALKING);
-                }
-            }
-
-            if (horz > 5 || vert > 5)
-                debug = true;
         }
+
+        // we have movement, time to make movement happen.
+        if (horz != 0 || vert != 0)
+        {
+            if (horz > 0) party[currChar].Act_facingRight = true;
+            else if (horz < 0) party[currChar].Act_facingRight = false;
+
+            if (currentState == ACT_CHAR_Base.STATES.IDLE)
+            {
+                ChangeState(ACT_CHAR_Base.STATES.WALKING);
+            }
+        }
+
+        //}
     }
 
+    void ActivateBottom(Touch theTouch)
+    {
+        Vector2 touchPos = theTouch.position;
+
+        //touchPos.y = Screen.height - theTouch.position.y;
+        //touchPos.x = Screen.width - theTouch.position.x;
+
+        if ((leftSwitch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
+            SwitchNextPartyMember(false);
+        else if ((rightSwitch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
+            SwitchNextPartyMember(true);
+        else if ((healTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
+        {
+            if (party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                if (MNGR_Game.theInventory.containers[0].count > 0)
+                {
+                    MNGR_Item.AttachModifier(3, gameObject);
+                    MNGR_Game.theInventory.containers[0].count--;
+                }
+
+                ChangeState(ACT_CHAR_Base.STATES.USE);
+                healTouch.color = Color.green;
+                //Debug.Log("UseHealPotion");
+            }
+        }
+        else if ((powerTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
+        {
+            if (party[currChar].state != ACT_CHAR_Base.STATES.USE)
+            {
+                if (!MNGR_Game.usedItem)
+                {
+                    MNGR_Game.usedItem = true;
+                    MNGR_Item.AttachModifier(MNGR_Game.equippedItem, gameObject);
+                    MNGR_Game.equippedItem = -1;
+                }
+
+                ChangeState(ACT_CHAR_Base.STATES.USE);
+                powerTouch.color = Color.green;
+                //Debug.Log("UsePowerUP");
+            }
+        }
+    }
 }
