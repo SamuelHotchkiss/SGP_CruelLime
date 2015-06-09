@@ -7,7 +7,7 @@ public static class MNGR_Game
 {
     static bool theMan = false;
 
-    static bool isMobile = false;   // S: cannot be altered by outside sources, ONLY change if porting to Android
+    static bool isMobile = true;   // S: cannot be altered by outside sources, ONLY change if porting to Android
 
 	public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
 	public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];
@@ -23,7 +23,7 @@ public static class MNGR_Game
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
     public static string NextLevel;     // used by CharacterSelection scene, determines which level to load when exiting that scene.
 
-	public static void Initialize() // S: for debugging purposes
+	public static void Initialize()
 	{
         if (theMan)
             return;
@@ -44,7 +44,7 @@ public static class MNGR_Game
 
         // Temporary to be removed later
         currentParty[0] = theCharacters[0];
-		currentParty[1] = theCharacters[4];
+		currentParty[1] = theCharacters[3];
 		currentParty[2] = theCharacters[6];
 
 		usedItem = false;

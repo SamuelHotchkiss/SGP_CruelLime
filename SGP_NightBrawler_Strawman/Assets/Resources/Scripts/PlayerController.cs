@@ -755,26 +755,25 @@ public class PlayerController : MonoBehaviour
                 if ((Mathf.Abs(vert)) < deadZone)
                     vert = 0;
 
-                if (horz > 0) { horz = 1; }
-                else if (horz < 0) { horz = -1; }
-                if (vert > 0) { vert = 1; }
-                else if (vert < 0) { vert = -1; }
+
             }
-            if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Ended)
+            else if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Ended)
                 horz = vert = 0;
 
             if (horz == 0.0f && vert == 0.0f
                 && currentState == ACT_CHAR_Base.STATES.WALKING)
                 ChangeState(ACT_CHAR_Base.STATES.IDLE);
 
-            //less vertical movement because we're 2.5d
-            if (theTouch.phase != TouchPhase.Stationary)
-            {
-                vert *= 0.85f;
+            if (horz > 1) { horz = 1; }
+            else if (horz < -1) { horz = -1; }
+            if (vert > 1) { vert = 1; }
+            else if (vert < -1) { vert = -1; }
 
-                horz *= party[currChar].Act_currSpeed * 0.25f;
-                vert *= party[currChar].Act_currSpeed * 0.25f;
-            }
+            //less vertical movement because we're 2.5d
+            vert *= 0.85f;
+
+            horz *= party[currChar].Act_currSpeed * 0.25f;
+            vert *= party[currChar].Act_currSpeed * 0.25f;
 
             // we have movement, time to make movement happen.
             if (horz != 0 || vert != 0)
