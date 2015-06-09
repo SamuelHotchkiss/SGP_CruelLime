@@ -53,7 +53,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	public STATES state;
 	public int randomState;
-	public float curTime;
+	public float currTime;
 	public float[] stateTime;
 
     public int hpThresh;
@@ -150,7 +150,7 @@ public class ACT_Enemy : MonoBehaviour
         if (Dmg < 0)
         {
             state = STATES.HURT;
-            curTime = stateTime[(int)state];
+            currTime = stateTime[(int)state];
         }
 		if (Act_currHP > Act_baseHP)
 			Act_currHP = Act_baseHP;
@@ -158,7 +158,7 @@ public class ACT_Enemy : MonoBehaviour
         {
             Act_currHP = 0;
             state = STATES.DEAD;
-            curTime = stateTime[(int)state];
+            currTime = stateTime[(int)state];
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
 	}
@@ -249,10 +249,10 @@ public class ACT_Enemy : MonoBehaviour
             target == null && Act_IsIntelligent)
             target = GameObject.FindGameObjectWithTag("Player");
 
-		curTime -= Time.deltaTime;
+		currTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
 
-		if (state == STATES.DEAD && curTime <= 0)
+		if (state == STATES.DEAD && currTime <= 0)
 		{
 			if (dividerActivated)
 			{
@@ -287,7 +287,7 @@ public class ACT_Enemy : MonoBehaviour
 			}
 		}
 
-        if (curTime <= 0.0f)
+        if (currTime <= 0.0f)
             NewState();
 
         if (TimeThresh > 0.0f)
@@ -544,7 +544,7 @@ public class ACT_Enemy : MonoBehaviour
                         vel *= 0.9f;
                         GetComponent<Rigidbody2D>().velocity = vel;
                     }
-                    else if (curTime <= 0.0f)
+                    else if (currTime <= 0.0f)
                     {
                         state = STATES.IDLE;
                     }
@@ -583,7 +583,7 @@ public class ACT_Enemy : MonoBehaviour
             if (kamikazeActivated)
             {
                 state = STATES.SPECIAL;
-                curTime = stateTime[(int)state];
+                currTime = stateTime[(int)state];
                 return;
             }
             if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
@@ -594,7 +594,7 @@ public class ACT_Enemy : MonoBehaviour
 				randomState = Random.Range(0, 5);
 
                 state = (STATES)randomState;
-                curTime = stateTime[(int)state];
+                currTime = stateTime[(int)state];
             }
         }
 	}
@@ -606,7 +606,7 @@ public class ACT_Enemy : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = _Force;
 
         state = STATES.HURT;
-        curTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
+        currTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
 
     }
 
