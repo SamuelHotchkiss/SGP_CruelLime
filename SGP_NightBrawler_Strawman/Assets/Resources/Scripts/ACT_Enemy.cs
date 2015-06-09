@@ -76,7 +76,7 @@ public class ACT_Enemy : MonoBehaviour
 	//public MOD_Base buff;         // S: shouldn't be needed anymore
 	public int buffIndex;
 
-    //Spawner
+    // Spawner
     public GameObject Spw_Critter;          //The Critter to spawn.
     public int Spw_CritterThreshold;        //The point to stop creating creatures.
     public int Spw_CrittersCreated;         //How many critters have been created.
@@ -100,6 +100,11 @@ public class ACT_Enemy : MonoBehaviour
 	public bool dividerActivated;
 	public int numQuotient;
 	public int numGeneration;
+
+	// Vision
+	public float visionTimer;
+	public float visionTimerBase;
+	public bool look = false;
 
 /// <Behavior Variables>
 
@@ -218,6 +223,16 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if (look)
+		{
+			visionTimer -= Time.deltaTime;
+
+			if (visionTimer < 0.0f)
+			{
+				look = false;
+			}
+		}
+
         if (myBuffs.Count == 0)
             buffState = MNGR_Item.BuffStates.NEUTRAL;
 
@@ -511,14 +526,11 @@ public class ACT_Enemy : MonoBehaviour
 						currBehavior.PerformBehavior();
 						if (!kamikazeActivated)
 						{
-							for (int i = 0; i < behaviorID.Length; i++)
+							if (currBehavior.ID == 5)
 							{
-								if (behaviorID[i] == 5)
-								{
-									kamikazeActivated = true;
-									kamikazeTimer = 3.0f;
-									explosion.GetComponent<PROJ_Explosion>().power = 10;
-								}
+								kamikazeActivated = true;
+								kamikazeTimer = 3.0f;
+								explosion.GetComponent<PROJ_Explosion>().power = 10;
 							}
 						}
 					}
@@ -576,10 +588,10 @@ public class ACT_Enemy : MonoBehaviour
             }
             if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
             {
-                randomState = (int)Random.Range(0.0f, 4.999f);
+                randomState = Random.Range(0, 5);
 
 			if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
-				randomState = Random.Range(0, 6);
+				randomState = Random.Range(0, 5);
 
                 state = (STATES)randomState;
                 curTime = stateTime[(int)state];

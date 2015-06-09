@@ -4,8 +4,9 @@ using System.Collections;
 public class BHR_Kamikaze : BHR_Base
 {
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		ID = 5;
 	}
 	
 	// Update is called once per frame
