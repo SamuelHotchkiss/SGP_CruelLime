@@ -143,10 +143,13 @@ public class PlayerController : MonoBehaviour
             ChangeState(ACT_CHAR_Base.STATES.DYING);
         }
 
+        // S: touch controls are different
         if (Input.touchCount > 1 && Input.GetTouch(Input.touchCount - 1).phase == TouchPhase.Began)
             WhichSide(Input.GetTouch(Input.touchCount - 1));
         else if (Input.touchCount > 0)
             WhichSide(Input.GetTouch(0));
+        else if (currentState != ACT_CHAR_Base.STATES.SPECIAL)
+            horz = vert = 0;
 
 
         // The meat of The Situation.
@@ -585,8 +588,10 @@ public class PlayerController : MonoBehaviour
     }
     void CheckSpecialInput(ACT_CHAR_Base.STATES _cur)
     {
-        if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel"))
-            && party[currChar].cooldownTmr == 0)
+        if ((Input.GetButton("Special/Cancel") || Input.GetButtonDown("Pad_Special/Cancel")
+            || (Input.touchCount > 0 && Input.GetTouch(Input.touchCount - 1).phase != TouchPhase.Began
+            && Input.GetTouch(Input.touchCount - 1).position.x > (Screen.width / 2))
+            && party[currChar].cooldownTmr == 0))
         {
             if (GameObject.FindGameObjectWithTag("Decoy"))
                 GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
@@ -714,7 +719,7 @@ public class PlayerController : MonoBehaviour
 
     void WhichSide(Touch theTouch)
     {
-        if (theTouch.position.x > (Screen.width / 2))
+        if (theTouch.position.x > (Screen.width / 2) && theTouch.phase == TouchPhase.Began)
         {
             horz = vert = 0;
 
@@ -728,10 +733,12 @@ public class PlayerController : MonoBehaviour
             else if (currentState == ACT_CHAR_Base.STATES.ATTACK_2)
                 ChangeState(ACT_CHAR_Base.STATES.ATTACK_3, false);
         }
-        else
+        else if (theTouch.position.x < (Screen.width / 2))
         {
             TouchMove(theTouch);
         }
+        else if (currentState != ACT_CHAR_Base.STATES.SPECIAL)
+            horz = vert = 0;
     }
 
     void TouchMove(Touch theTouch)
