@@ -5,6 +5,12 @@ public class BHR_Knockback : BHR_Base
 {
     private int Knck_Direction;
 	// Update is called once per frame
+
+	void Start()
+	{
+		ID = 6;
+	}
+
 	void Update () 
     {
 		base.Update();

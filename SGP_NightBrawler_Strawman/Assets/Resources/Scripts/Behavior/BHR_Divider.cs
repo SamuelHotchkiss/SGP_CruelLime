@@ -6,7 +6,7 @@ public class BHR_Divider : BHR_Base
 	// Use this for initialization
 	void Start () 
 	{
-	
+		ID = 9;
 	}
 	
 	// Update is called once per frame

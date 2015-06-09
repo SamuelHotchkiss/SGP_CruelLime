@@ -5,8 +5,9 @@ public class BHR_Debuffer : BHR_Base
 {
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		ID = 3;
 	}
 	
 	// Update is called once per frame

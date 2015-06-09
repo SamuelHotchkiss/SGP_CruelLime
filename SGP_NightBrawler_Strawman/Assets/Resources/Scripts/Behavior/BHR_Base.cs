@@ -4,6 +4,7 @@ using System.Collections;
 public class BHR_Base : MonoBehaviour
 {
     public ACT_Enemy owner;
+	public int ID;
 
 	// Use this for initialization
     void Start()
