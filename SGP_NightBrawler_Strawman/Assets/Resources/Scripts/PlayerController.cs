@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     // S: check if we're alive
     public bool isAlive;
     public Image leftSwitch, rightSwitch, healTouch, powerTouch, pauseTouch;
-    float specTime = 0.5f;
+    float specTime = 0.75f;
     // S: to be removed later
     public GameObject theCanvas;
 
@@ -492,7 +492,7 @@ public class PlayerController : MonoBehaviour
         float ratio = party[currChar].Act_currAspeed * party[currChar].Act_currSpeed;
 
         if (limiter - ratio < 0.2f)
-            ratio = 0.2f;
+            ratio = limiter - 0.2f;
 
         return party[currChar].StateTmrs[(int)party[currChar].state] * (limiter - ratio);
     }
@@ -619,7 +619,8 @@ public class PlayerController : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
                     party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
-                    specTime = 0.5f;
+                    //if(Input.GetTouch(Input.touchCount - 1).phase == TouchPhase.Ended)
+                        specTime = 0.75f;
                 }
             }
         }

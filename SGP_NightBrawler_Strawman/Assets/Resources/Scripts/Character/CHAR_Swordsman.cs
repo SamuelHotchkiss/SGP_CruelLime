@@ -59,7 +59,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
     public override AttackInfo ActivateDodge(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         ret.spriteIndex = walkSprites[4];
 
@@ -67,7 +67,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
     }
     public override AttackInfo ActivateAttack1(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.75f)
             ret.spriteIndex = attack1Sprites[0];
@@ -84,7 +84,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
     }
     public override AttackInfo ActivateAttack2(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.66f)
             ret.spriteIndex = attack2Sprites[0];
@@ -101,7 +101,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
     }
     public override AttackInfo ActivateAttack3(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.75f)
             ret.spriteIndex = attack3Sprites[0];
@@ -121,7 +121,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
     public override AttackInfo ActivateSpecial(float _curTmr, float _maxTmr)
     {
-        AttackInfo ret = new AttackInfo();
+        AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.95f)
             ret.spriteIndex = specialSprites[0];
