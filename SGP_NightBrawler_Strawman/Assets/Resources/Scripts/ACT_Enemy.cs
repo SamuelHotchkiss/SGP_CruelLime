@@ -193,7 +193,7 @@ public class ACT_Enemy : MonoBehaviour
         }
 		
 		behaviors = new BHR_Base[behaviorSize];
-        Act_facingRight = false;
+        //Act_facingRight = false;
 
 		for (int i = 0; i < behaviorSize; i++)
 		{
@@ -206,7 +206,7 @@ public class ACT_Enemy : MonoBehaviour
 		{
 			basicBehavior = behaviors[0];
 		}
-        //target = null;
+
 		if (Act_IsIntelligent)
 		{
 			target = GameObject.FindGameObjectWithTag("Player");
@@ -576,10 +576,10 @@ public class ACT_Enemy : MonoBehaviour
             }
             if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
             {
-                randomState = (int)Random.Range(0.0f, 4.999f);
+                randomState = Random.Range(0, 4);
 
 			if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
-				randomState = Random.Range(0, 6);
+				randomState = Random.Range(0, 4);
 
                 state = (STATES)randomState;
                 curTime = stateTime[(int)state];

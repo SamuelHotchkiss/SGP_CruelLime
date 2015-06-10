@@ -3,7 +3,9 @@ using System.Collections;
 
 public class BHR_Knockback : BHR_Base
 {
-    private int Knck_Direction;
+    public int Knck_Direction;
+    public bool Knck_MirrorDirection;
+
 	// Update is called once per frame
 	void Update () 
     {
@@ -11,10 +13,20 @@ public class BHR_Knockback : BHR_Base
 
         owner.Knck_Cooldown -= Time.deltaTime;
 
-        if (owner.Act_facingRight)
-            Knck_Direction = 1;
+        if (!Knck_MirrorDirection)
+        {
+            if (owner.Act_facingRight)
+                Knck_Direction = 1;
+            else
+                Knck_Direction = -1; 
+        }
         else
-            Knck_Direction = -1;
+        {
+            if (owner.Act_facingRight)
+                Knck_Direction = -1;
+            else
+                Knck_Direction = 1; 
+        }
 	}
 	public override void PerformBehavior()
 	{

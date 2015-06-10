@@ -60,6 +60,8 @@ public class PROJ_Debuff : PROJ_Base {
 			{
 				MNGR_Item.AttachModifier(debuff_ID, collision.gameObject);
 			}
+
+            ProjectileExpired();
 		}
 
 		
