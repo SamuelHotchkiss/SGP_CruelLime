@@ -478,7 +478,7 @@ public class PlayerController : MonoBehaviour
         float ratio = party[currChar].Act_currAspeed * party[currChar].Act_currSpeed;
 
         if (limiter - ratio < 0.2f)
-            ratio = 0.2f;
+            ratio = limiter - 0.2f;
 
         return party[currChar].StateTmrs[(int)party[currChar].state] * (limiter - ratio);
     }
