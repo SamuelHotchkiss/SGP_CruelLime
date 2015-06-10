@@ -62,7 +62,7 @@ public class MENU_Inn : MonoBehaviour
 
             MNGR_Game.wallet -= Inn_RestCost;
             MNGR_Game.isNight = !MNGR_Game.isNight;
-            MNGR_Game.UpdateHoard();
+            MNGR_Game.UpdateHorde();
             Debug.Log("GOOD REST");
         }
         else
@@ -111,7 +111,7 @@ public class MENU_Inn : MonoBehaviour
             CheckDeadPlayers();
 
             MNGR_Game.isNight = !MNGR_Game.isNight;
-            MNGR_Game.UpdateHoard();
+            MNGR_Game.UpdateHorde();
         }
         else
             Debug.Log("NO MONEY MO PROBLEMS!");

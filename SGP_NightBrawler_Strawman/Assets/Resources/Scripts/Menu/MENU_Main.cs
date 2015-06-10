@@ -16,7 +16,6 @@ public class MENU_Main : MonoBehaviour
 
         if (!MNGR_Game.AmIMobile())
         {
-
             if (MNGR_Options.fullscreen)
                 Screen.SetResolution(1920, 1200, true);
             else
