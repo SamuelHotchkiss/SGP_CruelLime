@@ -7,6 +7,7 @@ public class BHR_Spawner : BHR_Base
 
 	void Start()
 	{
+		ID = 8;
 		Spw_SpawnAllCritters = true;
 	}
 

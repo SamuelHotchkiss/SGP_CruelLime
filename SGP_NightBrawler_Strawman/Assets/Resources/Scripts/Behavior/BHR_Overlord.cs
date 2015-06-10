@@ -8,7 +8,7 @@ public class BHR_Overlord : MonoBehaviour {
 	/*--- Legend ---
 	 ===============
 	 *	0 = Base
-	 *	1 = Blockade
+	 *	1 = Vision
 	 *	2 = Buffer
 	 *	3 = Debuffer
 	 *	4 = Dodge
