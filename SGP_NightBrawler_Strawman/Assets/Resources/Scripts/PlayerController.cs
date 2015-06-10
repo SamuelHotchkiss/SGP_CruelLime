@@ -762,92 +762,83 @@ public class PlayerController : MonoBehaviour
         float deadZone = 1.0f;
         Vector2 dashPoint = new Vector2((Screen.width / 8), (Screen.height / 2));
 
+        //if (horz > 20.0f || vert > 20.0f || horz < -20.0f || vert < -20.0f)
+            //horz = vert = 0;
+
         if (currentState == ACT_CHAR_Base.STATES.IDLE
             || currentState == ACT_CHAR_Base.STATES.WALKING)
         {
-            //if (theTouch.tapCount == 2 && !notjoydash)
-            //{
-            //    if (!notjoydash)
-            //    {
-
-            //        // buffered input #PutsOnShadesYEEEAAAAAHH
-            //        notjoydash = true;
-            //        // special stuff when first initializing the dodge
-            //        if (currentState != ACT_CHAR_Base.STATES.DASHING)
-            //        {
-            //            ChangeState(ACT_CHAR_Base.STATES.DASHING);
-            //            nextState = ACT_CHAR_Base.STATES.IDLE;
-            //        }
-
-            //        Vector2 doubleTap = theTouch.position;
-            //        float top = dashPoint.y + 25.0f;
-            //        float bottom = dashPoint.y - 100.0f;
-
-            //        if (doubleTap.x > dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
-            //            horz = 30.0f;
-            //        else if (doubleTap.x < dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
-            //            horz = -30.0f;
-            //        else if (doubleTap.y > top)
-            //            vert = 30.0f;
-            //        else if (doubleTap.y < bottom)
-            //            vert = -30.0f;
-            //    }
-            //    else if (horz == 0 && vert == 0)
-            //    {
-            //        notjoydash = true;
-            //    }
-            //    else if (notjoydash)
-            //        horz = vert = 0;
-            //}
-            //else
-            //{
-            if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Moved
-                && theTouch.deltaPosition.magnitude > deadZone)
+            if (theTouch.tapCount == 2 && horz == 0 && vert == 0)
             {
-                //debug = true;
-                Vector2 virtualJoy = theTouch.deltaPosition;
+                    // special stuff when first initializing the dodge
+                    if (currentState != ACT_CHAR_Base.STATES.DASHING)
+                    {
+                        ChangeState(ACT_CHAR_Base.STATES.DASHING);
+                        nextState = ACT_CHAR_Base.STATES.IDLE;
+                    }
 
-                horz = virtualJoy.x;
-                vert = virtualJoy.y;
+                    Vector2 doubleTap = theTouch.position;
+                    float top = dashPoint.y + 25.0f;
+                    float bottom = dashPoint.y - 100.0f;
 
-                if ((Mathf.Abs(horz)) < deadZone)
-                    horz = 0;
-                if ((Mathf.Abs(vert)) < deadZone)
-                    vert = 0;
+                    if (doubleTap.x > dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
+                        horz = 30.0f;
+                    else if (doubleTap.x < dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
+                        horz = -30.0f;
+                    else if (doubleTap.y > top)
+                        vert = 30.0f;
+                    else if (doubleTap.y < bottom)
+                        vert = -30.0f;
             }
-            else if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Ended)
-                horz = vert = 0;
+            else
+            {
+                if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Moved
+                    && theTouch.deltaPosition.magnitude > deadZone)
+                {
+                    //debug = true;
+                    Vector2 virtualJoy = theTouch.deltaPosition;
 
-            if (horz == 0.0f && vert == 0.0f
-                && currentState == ACT_CHAR_Base.STATES.WALKING)
-                ChangeState(ACT_CHAR_Base.STATES.IDLE);
+                    horz = virtualJoy.x;
+                    vert = virtualJoy.y;
 
-            if (horz > 1) { horz = 1; }
-            else if (horz < -1) { horz = -1; }
-            if (vert > 1) { vert = 1; }
-            else if (vert < -1) { vert = -1; }
+                    if ((Mathf.Abs(horz)) < deadZone)
+                        horz = 0;
+                    if ((Mathf.Abs(vert)) < deadZone)
+                        vert = 0;
+                }
+                else if (Input.touchCount > 0 && theTouch.phase == TouchPhase.Ended)
+                    horz = vert = 0;
 
-            //less vertical movement because we're 2.5d
-            vert *= 0.85f;
+                if (horz == 0.0f && vert == 0.0f
+                    && currentState == ACT_CHAR_Base.STATES.WALKING)
+                    ChangeState(ACT_CHAR_Base.STATES.IDLE);
 
-            horz *= party[currChar].Act_currSpeed * 0.25f;
-            vert *= party[currChar].Act_currSpeed * 0.25f;
+                if (horz > 1) { horz = 1; }
+                else if (horz < -1) { horz = -1; }
+                if (vert > 1) { vert = 1; }
+                else if (vert < -1) { vert = -1; }
+
+                //less vertical movement because we're 2.5d
+                vert *= 0.85f;
+
+                horz *= party[currChar].Act_currSpeed * 0.25f;
+                vert *= party[currChar].Act_currSpeed * 0.25f;
+
+            }
+
+            // we have movement, time to make movement happen.
+            if (horz != 0 || vert != 0)
+            {
+                if (horz > 0) party[currChar].Act_facingRight = true;
+                else if (horz < 0) party[currChar].Act_facingRight = false;
+
+                if (currentState == ACT_CHAR_Base.STATES.IDLE)
+                {
+                    ChangeState(ACT_CHAR_Base.STATES.WALKING);
+                }
+            }
 
         }
-
-        // we have movement, time to make movement happen.
-        if (horz != 0 || vert != 0)
-        {
-            if (horz > 0) party[currChar].Act_facingRight = true;
-            else if (horz < 0) party[currChar].Act_facingRight = false;
-
-            if (currentState == ACT_CHAR_Base.STATES.IDLE)
-            {
-                ChangeState(ACT_CHAR_Base.STATES.WALKING);
-            }
-        }
-
-        //}
     }
 
     void ActivateBottom(Touch theTouch)
