@@ -7,6 +7,12 @@ public class BHR_Knockback : BHR_Base
     public bool Knck_MirrorDirection;
 
 	// Update is called once per frame
+
+	void Start()
+	{
+		ID = 6;
+	}
+
 	void Update () 
     {
 		base.Update();

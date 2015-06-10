@@ -14,29 +14,31 @@ public class PROJ_Explosion : PROJ_Base
     {
         timer = timerMax;
         speed = 0;
-		if (sprites.Length > 0)
-			GetComponent<SpriteRenderer>().sprite = sprites[0];
+        if (sprites.Length > 0)
+            GetComponent<SpriteRenderer>().sprite = sprites[0];
 
         base.Initialize(_r);
         // flip the circle collider if the owner faces the other way
         // just for swordsman now.
-		if (owner == null)
-			return;
+        if (owner == null)
+            return;
 
-		if (owner.tag == "Player")
-		{
-			if (owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].characterIndex == 0)
-			{
-				power = (int)((float)power * 0.75f);
-				power = (int)(_damMult * (float)power);
-				if (!owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight)
-				{
-					Vector2 offset = GetComponent<CircleCollider2D>().offset;
-					offset.x = -offset.x;
-					GetComponent<CircleCollider2D>().offset = offset;
-				}
-			}
-		}
+        if (owner.tag == "Player")
+        {
+            if (gameObject.layer == 0) // dont change the layer if it's already set to something.
+                gameObject.layer = 10;
+            if (owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].characterIndex == 0)
+            {
+                power = (int)((float)power * 0.75f);
+                power = (int)(_damMult * (float)power);
+                if (!owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight)
+                {
+                    Vector2 offset = GetComponent<CircleCollider2D>().offset;
+                    offset.x = -offset.x;
+                    GetComponent<CircleCollider2D>().offset = offset;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -53,7 +55,7 @@ public class PROJ_Explosion : PROJ_Base
                 GetComponent<SpriteRenderer>().sprite = sprites[0];
             else if (timer > timerMax * 0.75)
                 GetComponent<SpriteRenderer>().sprite = sprites[1];
-            else  if (timer > timerMax * 0.625)
+            else if (timer > timerMax * 0.625)
                 GetComponent<SpriteRenderer>().sprite = sprites[2];
             else if (timer > timerMax * 0.5)
                 GetComponent<SpriteRenderer>().sprite = sprites[3];

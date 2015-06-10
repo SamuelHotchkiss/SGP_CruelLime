@@ -53,7 +53,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	public STATES state;
 	public int randomState;
-	public float curTime;
+	public float currTime;
 	public float[] stateTime;
 
     public int hpThresh;
@@ -76,7 +76,7 @@ public class ACT_Enemy : MonoBehaviour
 	//public MOD_Base buff;         // S: shouldn't be needed anymore
 	public int buffIndex;
 
-    //Spawner
+    // Spawner
     public GameObject Spw_Critter;          //The Critter to spawn.
     public int Spw_CritterThreshold;        //The point to stop creating creatures.
     public int Spw_CrittersCreated;         //How many critters have been created.
@@ -100,6 +100,11 @@ public class ACT_Enemy : MonoBehaviour
 	public bool dividerActivated;
 	public int numQuotient;
 	public int numGeneration;
+
+	// Vision
+	public float visionTimer;
+	public float visionTimerBase;
+	public bool look = false;
 
 /// <Behavior Variables>
 
@@ -145,7 +150,7 @@ public class ACT_Enemy : MonoBehaviour
         if (Dmg < 0)
         {
             state = STATES.HURT;
-            curTime = stateTime[(int)state];
+            currTime = stateTime[(int)state];
         }
 		if (Act_currHP > Act_baseHP)
 			Act_currHP = Act_baseHP;
@@ -153,7 +158,7 @@ public class ACT_Enemy : MonoBehaviour
         {
             Act_currHP = 0;
             state = STATES.DEAD;
-            curTime = stateTime[(int)state];
+            currTime = stateTime[(int)state];
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
 	}
@@ -218,6 +223,16 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if (look)
+		{
+			visionTimer -= Time.deltaTime;
+
+			if (visionTimer < 0.0f)
+			{
+				look = false;
+			}
+		}
+
         if (myBuffs.Count == 0)
             buffState = MNGR_Item.BuffStates.NEUTRAL;
 
@@ -234,10 +249,10 @@ public class ACT_Enemy : MonoBehaviour
             target == null && Act_IsIntelligent)
             target = GameObject.FindGameObjectWithTag("Player");
 
-		curTime -= Time.deltaTime;
+		currTime -= Time.deltaTime;
         Act_currAttackSpeed -= Time.deltaTime;
 
-		if (state == STATES.DEAD && curTime <= 0)
+		if (state == STATES.DEAD && currTime <= 0)
 		{
 			if (dividerActivated)
 			{
@@ -272,7 +287,7 @@ public class ACT_Enemy : MonoBehaviour
 			}
 		}
 
-        if (curTime <= 0.0f)
+        if (currTime <= 0.0f)
             NewState();
 
         if (TimeThresh > 0.0f)
@@ -511,14 +526,11 @@ public class ACT_Enemy : MonoBehaviour
 						currBehavior.PerformBehavior();
 						if (!kamikazeActivated)
 						{
-							for (int i = 0; i < behaviorID.Length; i++)
+							if (currBehavior.ID == 5)
 							{
-								if (behaviorID[i] == 5)
-								{
-									kamikazeActivated = true;
-									kamikazeTimer = 3.0f;
-									explosion.GetComponent<PROJ_Explosion>().power = 10;
-								}
+								kamikazeActivated = true;
+								kamikazeTimer = 3.0f;
+								explosion.GetComponent<PROJ_Explosion>().power = 10;
 							}
 						}
 					}
@@ -532,7 +544,7 @@ public class ACT_Enemy : MonoBehaviour
                         vel *= 0.9f;
                         GetComponent<Rigidbody2D>().velocity = vel;
                     }
-                    else if (curTime <= 0.0f)
+                    else if (currTime <= 0.0f)
                     {
                         state = STATES.IDLE;
                     }
@@ -571,18 +583,18 @@ public class ACT_Enemy : MonoBehaviour
             if (kamikazeActivated)
             {
                 state = STATES.SPECIAL;
-                curTime = stateTime[(int)state];
+                currTime = stateTime[(int)state];
                 return;
             }
             if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
             {
-                randomState = Random.Range(0, 4);
+                randomState = Random.Range(0, 5);
 
 			if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
-				randomState = Random.Range(0, 4);
+				randomState = Random.Range(0, 5);
 
                 state = (STATES)randomState;
-                curTime = stateTime[(int)state];
+                currTime = stateTime[(int)state];
             }
         }
 	}
@@ -594,7 +606,7 @@ public class ACT_Enemy : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = _Force;
 
         state = STATES.HURT;
-        curTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
+        currTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
 
     }
 

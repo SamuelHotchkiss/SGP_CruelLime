@@ -4,8 +4,9 @@ using System.Collections;
 public class BHR_Dodge : BHR_Base
 {
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+	{
+		ID = 4;	
 	}
 
 	void Update()

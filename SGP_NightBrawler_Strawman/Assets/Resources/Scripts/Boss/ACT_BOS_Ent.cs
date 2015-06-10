@@ -79,7 +79,7 @@ public class ACT_BOS_Ent : ACT_Enemy
         if (Act_currHP <= 0.0f)
         {
             state = STATES.DEAD;
-            curTime = stateTime[(int)state];
+            currTime = stateTime[(int)state];
         }
         switch (state)
         {
@@ -121,7 +121,7 @@ public class ACT_BOS_Ent : ACT_Enemy
         if (Act_currHP != Act_baseHP && state != STATES.ATTACKING)
         {
             state = STATES.ATTACKING;
-            curTime = stateTime[(int)state];
+            currTime = stateTime[(int)state];
             target = GameObject.FindGameObjectWithTag("Player");
         }
 	}

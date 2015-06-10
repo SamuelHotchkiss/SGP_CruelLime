@@ -23,7 +23,7 @@ public static class MNGR_Game
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
     public static string NextLevel;     // used by CharacterSelection scene, determines which level to load when exiting that scene.
 
-	public static void Initialize() // S: for debugging purposes
+	public static void Initialize()
 	{
         if (theMan)
             return;
@@ -44,7 +44,7 @@ public static class MNGR_Game
 
         // Temporary to be removed later
         currentParty[0] = theCharacters[0];
-		currentParty[1] = theCharacters[4];
+		currentParty[1] = theCharacters[3];
 		currentParty[2] = theCharacters[6];
 
 		usedItem = false;
@@ -54,7 +54,7 @@ public static class MNGR_Game
     public static void UpdateWorld()
     {
         UpdatePlayer();
-        UpdateHoard();
+        UpdateHorde();
     }
 
      public static void UpdatePlayer()
@@ -62,19 +62,17 @@ public static class MNGR_Game
         MNGR_Game.playerPosition++;
     }
 
-    public static void UpdateHoard()
+    public static void UpdateHorde()
     {
         //Once we have all the villages set we need to change this. 
         if (MNGR_Game.hordePosition != 3 || HordeDelay == 0)
             MNGR_Game.hordePosition++;
         else
             MNGR_Game.HordeDelay--;
-    }
-
-    // S: allows other scripts to view the isMoblie variable
+    }  
+    
     public static bool AmIMobile()
     {
         return isMobile;
     }
-        
 }

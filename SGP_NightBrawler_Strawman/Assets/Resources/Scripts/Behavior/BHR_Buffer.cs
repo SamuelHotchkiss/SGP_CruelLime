@@ -8,7 +8,7 @@ public class BHR_Buffer : BHR_Base
 	// Use this for initialization
 	void Start () 
 	{
-	
+		ID = 2;
 	}
 	
 	// Update is called once per frame

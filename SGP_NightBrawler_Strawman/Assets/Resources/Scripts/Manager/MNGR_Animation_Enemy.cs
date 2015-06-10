@@ -110,48 +110,48 @@ public class MNGR_Animation_Enemy : MonoBehaviour
         {
             case ACT_Enemy.STATES.IDLE:
 
-                if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.6f)
+                if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.6f)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.5f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.5f)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.1f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.1f)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[2]];
-                else if (currentCharacter.curTime >= 0)
+                else if (currentCharacter.currTime >= 0)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
                 break;
             case ACT_Enemy.STATES.WALKING:
 
-                if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.8f)
+                if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.8f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[0]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.6f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.6f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.4f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.4f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[2]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.2f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.2f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[3]];
-                else if (currentCharacter.curTime >= 0)
+                else if (currentCharacter.currTime >= 0)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[4]];
                 break;
             case ACT_Enemy.STATES.RUNNING:
 
-                if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.8f)
+                if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.8f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[0]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.6f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.6f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[1]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.4f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.4f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[2]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.2f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.2f)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[3]];
-                else if (currentCharacter.curTime >= 0)
+                else if (currentCharacter.currTime >= 0)
                     GetComponent<SpriteRenderer>().sprite = sprites[walkSprites[4]];
                 break;
             case ACT_Enemy.STATES.ATTACKING:
 
-                if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.5f)
+                if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.5f)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[0]];
-                else if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.4f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.4f)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[1]];
-                else if (currentCharacter.curTime >= 0)
+                else if (currentCharacter.currTime >= 0)
                     GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[2]];
                 break;
             case ACT_Enemy.STATES.SPECIAL:
@@ -181,9 +181,9 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = sprites[hurtSprites[0]];
                 break;
             case ACT_Enemy.STATES.DEAD:
-                if (currentCharacter.curTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.5f)
+                if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.5f)
                     GetComponent<SpriteRenderer>().sprite = sprites[deadSprites[0]];
-                else if (currentCharacter.curTime >= 0)
+                else if (currentCharacter.currTime >= 0)
                     GetComponent<SpriteRenderer>().sprite = sprites[deadSprites[1]];
                 break;
             default:
