@@ -5,6 +5,7 @@ public class UI_HUD : MonoBehaviour {
 
 	public Canvas theCanvas;
 	public GameObject party;
+    public GameObject touchPanel;
 
 	public Image fighterPort;
 	public Image rangerPort;
@@ -40,6 +41,9 @@ public class UI_HUD : MonoBehaviour {
 		mage = party.GetComponent<PlayerController>().party[2];
 
 		gold = theCanvas.transform.GetChild(4).transform.GetChild(1).GetComponent<Text>();
+
+        if (MNGR_Game.AmIMobile())
+            touchPanel.SetActive(true);
 
 		filePaths = new string[11];
 
@@ -124,11 +128,7 @@ public class UI_HUD : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			MNGR_Game.paused = true;
-			party.SetActive(false);
-
-			theCanvas.transform.GetChild(3).gameObject.SetActive(true);
-			Cursor.visible = true;
+            PauseGame();
 		}
 	}
 
@@ -139,5 +139,16 @@ public class UI_HUD : MonoBehaviour {
 
 		theCanvas.transform.GetChild(3).gameObject.SetActive(false);
 		Cursor.visible = false;
+        Input.simulateMouseWithTouches = false;
 	}
+
+    public void PauseGame()
+    {
+        MNGR_Game.paused = true;
+        party.SetActive(false);
+
+        theCanvas.transform.GetChild(3).gameObject.SetActive(true);
+        Cursor.visible = true;
+        Input.simulateMouseWithTouches = true;
+    }
 }
