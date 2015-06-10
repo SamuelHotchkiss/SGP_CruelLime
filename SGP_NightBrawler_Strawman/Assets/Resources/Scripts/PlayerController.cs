@@ -534,9 +534,9 @@ public class PlayerController : MonoBehaviour
     void CheckMoveInput(ACT_CHAR_Base.STATES _cur)
     {
         // Get axis movement
-        if (Input.GetAxis("Horizontal") != 0)
+        //if (Input.GetAxis("Horizontal") != 0)
             horz = Input.GetAxis("Horizontal");
-        if (Input.GetAxis("Vertical") != 0)
+        //if (Input.GetAxis("Vertical") != 0)
             vert = Input.GetAxis("Vertical");
 
         // add gamepad axis movement

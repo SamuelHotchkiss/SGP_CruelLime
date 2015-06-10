@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21219326}
   - 50: {fileID: 5010218}
   - 61: {fileID: 6150950}
-  - 114: {fileID: 11493106}
+  - 114: {fileID: 11461460}
   m_Layer: 9
   m_Name: BOS_Miner
   m_TagString: Enemy
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.5200005, y: .560000002, z: 0}
+  m_LocalPosition: {x: 39.5400009, y: 1.76999998, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +59,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: 1}
---- !u!114 &11493106
+--- !u!114 &11461460
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 156146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b6334afdf77ebb4da966a545bf5dda8, type: 3}
+  m_Script: {fileID: 11500000, guid: 44f6b1436d5cf794687c1746b47684a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BlackBar:
@@ -193,18 +193,18 @@ MonoBehaviour:
   myBuffs: []
   Act_ID: 0
   Act_baseHP: 300
-  Act_basePower: 15
-  Act_baseSpeed: 0
+  Act_basePower: 10
+  Act_baseSpeed: 1
   Act_currHP: 300
-  Act_currPower: 15
-  Act_currSpeed: 0
+  Act_currPower: 10
+  Act_currSpeed: 1
   Act_facingRight: 0
-  Act_HasMod: 1
+  Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
-  Act_baseAttackSpeed: 0
-  Act_currAttackSpeed: 0
+  Act_baseAttackSpeed: .100000001
+  Act_currAttackSpeed: .100000001
   damageMod: 1
   state: 0
   randomState: 0
@@ -212,31 +212,29 @@ MonoBehaviour:
   stateTime: []
   hpThresh: 0
   nightThresh: 0
-  TimeThresh: -1
+  TimeThresh: 0
   speedThresh: 0
   distThresh: 0
   coolThresh: 0
-  behaviorSize: 2
-  behaviorID: 0800000006000000
-  behaviors:
-  - {fileID: 0}
-  - {fileID: 0}
+  behaviorSize: 0
+  behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 0
   buffIndex: 0
-  Spw_Critter: {fileID: 173766, guid: 1dd68da29b7a17f43b786924723b2f59, type: 2}
-  Spw_CritterThreshold: -1
+  Spw_Critter: {fileID: 0}
+  Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
   Spw_SpawnCoolDown: 0
-  Spw_BaseSpawnCoolDown: 1
-  Spw_SpawnPerSec: .300000012
-  Spw_baseSpawnPerSec: .300000012
-  Spw_SpawnPositionOffset: {x: -4, y: 2, z: 0}
-  Spw_Force: {x: -150, y: 0}
+  Spw_BaseSpawnCoolDown: 0
+  Spw_SpawnPerSec: 0
+  Spw_baseSpawnPerSec: 0
+  Spw_SpawnPositionOffset: {x: 0, y: 0, z: 0}
+  Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
-  Knck_baseCooldown: 20
+  Knck_baseCooldown: 0
   kamikazeActivated: 0
   kamikazeTimer: 0
   explosion: {fileID: 0}
@@ -252,12 +250,16 @@ MonoBehaviour:
   projectile: {fileID: 0}
   isMelee: 0
   paused: 0
-  myBehaviours:
-  - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
-  - {fileID: 11434964, guid: db087961c48fd844097f730c19cf0a03, type: 2}
-  Ent_Roots: {fileID: 173766, guid: 1dd68da29b7a17f43b786924723b2f59, type: 2}
-  Ent_RootWall: {fileID: 147398, guid: c3ec7ae0b9e1ab048bb58a4054a9f93f, type: 2}
-  DISTANCE: 0
+  currAttack: 0
+  hasAttack: 0
+  performingAttack: 0
+  attackTimer: 0
+  attackTimerBases: []
+  projectiles:
+  - {fileID: 0}
+  - {fileID: 0}
+  pickaxe: {fileID: 11472220, guid: 9e392b1ede196f94facaf24a9c0895c2, type: 2}
+  waypoints: []
 --- !u!212 &21219326
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -12,6 +12,7 @@ public class ACT_BOS_Miner : ACT_Enemy
 	public float[] attackTimerBases;
 
 	public PROJ_Base[] projectiles;
+	public PROJ_Pickaxe pickaxe;
 	public GameObject[] waypoints;
 
 	// Use this for initialization
@@ -23,8 +24,6 @@ public class ACT_BOS_Miner : ACT_Enemy
 
 									// BEER, PICKAXE, DIRT, DIG, DYNAMITE
 		attackTimerBases = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 0.6f };
-
-		projectiles = new PROJ_Base[3];
 
 		performingAttack = false;
 		hasAttack = false;
@@ -72,8 +71,12 @@ public class ACT_BOS_Miner : ACT_Enemy
 			case STATES.ATTACKING:
 				if (!hasAttack)
 					NewAttack();
-				else
+				else if (!performingAttack)
+				{
+					performingAttack = true;
 					StartCoroutine("PerformAttack", currAttack);
+				}
+
 				break;
 			case STATES.SPECIAL:
 				break;
@@ -119,8 +122,8 @@ public class ACT_BOS_Miner : ACT_Enemy
 		{
 			randomState = Random.Range(0, 5);
 
-			if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
-				randomState = Random.Range(0, 5);
+			//if (randomState != 3) // If we dont get an attack state, reroll once (this increases the enemy attack frequency)
+			//	randomState = Random.Range(0, 5);
 
 			state = (STATES)randomState;
 			currTime = stateTime[(int)state];
@@ -134,10 +137,11 @@ public class ACT_BOS_Miner : ACT_Enemy
 
 		hasAttack = true;
 		currAttack = (ATTACKS)Random.Range(0, 3);
+		currAttack = ATTACKS.PICKAXE;
 		attackTimer = attackTimerBases[(int)currAttack];
 	}
 
-	IEnumerable PerformAttack(ATTACKS _attack)
+	IEnumerator PerformAttack(ATTACKS _attack)
 	{
 		switch (_attack)
 		{
@@ -154,13 +158,16 @@ public class ACT_BOS_Miner : ACT_Enemy
 				}
 			case ATTACKS.PICKAXE:
 				{
-					projectile = projectiles[(int)ATTACKS.PICKAXE];
 
-					PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+					PROJ_Pickaxe clone = (PROJ_Pickaxe)Instantiate(pickaxe, transform.position, new Quaternion(0, 0, 0, 0));
 					clone.owner = gameObject;
-					clone.Initialize();
 					Act_currAttackSpeed = Act_baseAttackSpeed;
 					GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+					yield return new WaitForSeconds(2.5f);
+
+					//attackTimer = 0.0f;
+					performingAttack = false;
+					hasAttack = false;
 					break;
 				}
 			case ATTACKS.DIRT:
