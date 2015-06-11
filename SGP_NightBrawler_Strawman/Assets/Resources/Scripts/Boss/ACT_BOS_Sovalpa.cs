@@ -18,7 +18,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
     public PROJ_Base[] Sov_Attacks;
     public BHR_Base[] Sov_myBehaviours;
     public GameObject[] Sov_WayPoints;
-
+    
     public List<GameObject> Sov_SpawnPoints;
 
     private int Sov_NewHpTresh;
@@ -38,12 +38,8 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
         behaviors = new BHR_Base[behaviorSize];
         Act_facingRight = false;
 
-        for (int i = 0; i < behaviorSize; i++)
-        {
-            behaviors[i] = Instantiate(GameObject.FindGameObjectWithTag("_Overlord").GetComponent<BHR_Overlord>().behaviors[behaviorID[i]]);
-            if (behaviors[i].owner == null)
-                behaviors[i].owner = GetComponent<ACT_BOS_Ent>();
-        }
+        if (numGeneration == 2)
+            Act_Parent = null;
 
         Sov_StunCooldown = 0.0f;
 
@@ -60,17 +56,20 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
         Sov_HpTreshReducer = 0.1f;
         Sov_NewHpTresh = Act_baseHP - (int)(Act_baseHP * Sov_HpTreshReducer);
         projectile = Sov_Attacks[0];
+
+        for (int i = 0; i < Sov_myBehaviours.Length; i++)
+        {
+            if (Sov_myBehaviours[i].owner == null)
+                Sov_myBehaviours[i].owner = GetComponent<ACT_BOS_Sovalpa>(); 
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
+        
         CheckThresholds();
         Act_currAttackSpeed -= Time.deltaTime;
-
-        if (curTime <= 0.0f)
-            state = STATES.WALKING;
-
 
         Sov_StunCooldown -= Time.deltaTime;
 
@@ -79,64 +78,108 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
         else
             nightThresh = false;
 
-        if ((state == STATES.WALKING || state == STATES.RUNNING) && !Sov_WayPointLock)
+        if (Act_currHP <= 0)
         {
-            if (target != null)
+            state = STATES.DEAD;
+            Sov_CallOnMinions = false;
+            numGeneration = 0;
+        }
+
+        if (state != STATES.DEAD)
+        {
+            if ((state == STATES.WALKING || state == STATES.RUNNING) && !Sov_WayPointLock)
             {
-                if (target.transform.position.x > transform.position.x)
+                if (target != null)
                 {
-                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                    vel = new Vector2(Act_currSpeed, vel.y);
-                    GetComponent<Rigidbody2D>().velocity = vel;
-                    Act_facingRight = true;
-                }
-                else
-                {
-                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                    vel = new Vector2(-Act_currSpeed, vel.y);
-                    GetComponent<Rigidbody2D>().velocity = vel;
-                    Act_facingRight = false;
-                }
-                if (target.transform.position.y > transform.position.y)
-                {
-                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                    vel = new Vector2(vel.x, Act_currSpeed);
-                    GetComponent<Rigidbody2D>().velocity = vel;
-                }
-                else
-                {
-                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                    vel = new Vector2(vel.x, -Act_currSpeed);
-                    GetComponent<Rigidbody2D>().velocity = vel;
+                    float Xpos;
+                    float Ypos;
+                    Ypos = Mathf.Lerp(transform.position.y, target.transform.position.y, 0.005f * Act_currSpeed);
+                    Xpos = Mathf.Lerp(transform.position.x, target.transform.position.x, 0.005f * Act_currSpeed);
+
+                    transform.position = new Vector3(Xpos, Ypos);
+
+                    GetComponent<Rigidbody2D>().velocity *= Random.Range(0.1f, 0.9f);
+                    if (target.transform.position.x > transform.position.x)
+                        Act_facingRight = true;
+                    else if (target.transform.position.x < transform.position.x)
+                        Act_facingRight = false;
+
+                    //if (target.transform.position.x > transform.position.x)
+                    //{
+                    //    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                    //    vel = new Vector2(Act_currSpeed, vel.y);
+                    //    GetComponent<Rigidbody2D>().velocity = vel;
+                    //    Act_facingRight = true;
+                    //}
+                    //else
+                    //{
+                    //    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                    //    vel = new Vector2(-Act_currSpeed, vel.y);
+                    //    GetComponent<Rigidbody2D>().velocity = vel;
+                    //    Act_facingRight = false;
+                    //}
+                    //if (target.transform.position.y > transform.position.y)
+                    //{
+                    //    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                    //    vel = new Vector2(vel.x, Act_currSpeed);
+                    //    GetComponent<Rigidbody2D>().velocity = vel;
+                    //}
+                    //else
+                    //{
+                    //    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                    //    vel = new Vector2(vel.x, -Act_currSpeed);
+                    //    GetComponent<Rigidbody2D>().velocity = vel;
+                    //}
+
+
                 }
             }
-        }
-        else if (Sov_WayPointLock)
-        {
-            transform.position = target.transform.position;
-            Act_facingRight = target.GetComponent<Platforms>().Plt_facingRight;
-            state = STATES.ATTACKING;
-        }
-
-        if (Sov_CallOnMinions)
-        {
-            Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_SpawnAtLocation = true;
-            for (int i = 0; i < Sov_SpawnPoints.Count; i++)
+            else if (Sov_WayPointLock)
             {
-                Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_NewLocation = Sov_SpawnPoints[i].transform.position;
+
+                transform.position = target.transform.position;
+                Act_facingRight = target.GetComponent<Platforms>().Plt_facingRight;
+                state = STATES.ATTACKING;
+            }
+
+            if (Sov_CallOnMinions)
+            {
+                Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Update();
+                Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_SpawnAtLocation = true;
+                int RandPoint = Random.Range(0, Sov_SpawnPoints.Count);
+                Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_NewLocation = Sov_SpawnPoints[RandPoint].transform.position;
                 Sov_myBehaviours[1].GetComponent<BHR_Spawner>().PerformBehavior();
-            } 
+                if (!Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_SpawnAllCritters)
+                {
+                    Spw_CrittersCreated = 0;
+                    Sov_CallOnMinions = false;
+                }
+
+            }
+
+            if (Sov_CallOnClones)
+            {
+                if (target.transform.position == transform.position)
+                {
+                    Sov_myBehaviours[2].GetComponent<BHR_Divider>().ModDivide(4, 1, 1, 1, STATES.WALKING);
+                    projectile = Sov_Attacks[0];
+                    Sov_CallOnClones = false;
+                    target = GameObject.FindGameObjectWithTag("Player");
+                }
+            }
+
+
+            float Dis = Vector3.Distance(transform.position, target.transform.position);
+            Distance = Dis;
+            if (Dis <= 1.8f && (Sov_WayPointLock || target.tag == "Player"))
+            {
+                state = STATES.ATTACKING;
+                currTime = stateTime[(int)state];
+            }
+            else if (Dis > 1.8f && target.tag == "Player")
+                state = STATES.WALKING; 
         }
 
-        float Dis = Vector3.Distance(transform.position, target.transform.position);
-        Distance = Dis;
-        if (Dis <= 1.8f && !Sov_WayPointLock)
-        {
-            state = STATES.ATTACKING;
-            curTime = stateTime[(int)state];
-        }
-        else if (Dis > 1.8f && !Sov_WayPointLock)
-            state = STATES.WALKING;
 
         switch (state)
         {
@@ -144,7 +187,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                     RestoreToBaseSpeed();
                     break;
             case STATES.RUNNING:
-                    SetCurrSpeed(Act_baseSpeed + 4);
+                    SetCurrSpeed(Act_baseSpeed + 3);
                     break;
             case STATES.ATTACKING:
                 {
@@ -168,9 +211,16 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                 }
             case STATES.DEAD:
                 {
+                    Destroy(gameObject);
                     break;
                 }
-        } 
+        }
+
+        if (currTime <= 0.0f)
+            state = STATES.WALKING;
+        if (numGeneration < 2 && Act_Parent == null)
+            ChangeHP(-Act_currHP);
+
 	}
 
     public override void CheckThresholds()
@@ -193,8 +243,9 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
 
                 if (Act_currHP <= (int)(Act_baseHP * 0.4f))
                 {
+                    Sov_NewHpTresh = 0;
                     ChangeAttacks = Random.Range(0, 3);
-                    ChangeAttackPatterns(ChangeAttacks);
+                    ChangeAttackPatterns(2);
                     Debug.Log("Less Then 40%");
                 }
                 else if (Act_currHP >= (int)(Act_baseHP * 0.4f) && Act_currHP <= (int)(Act_baseHP * 0.70f))
@@ -208,6 +259,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                     ChangeAttackPatterns(0);
                     Debug.Log("Less Then 100%");
                 }
+
             }
 
 
@@ -219,7 +271,8 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
             {
                 state = STATES.RUNNING;
                 float Dis = Vector3.Distance(transform.position, target.transform.position);
-                if (Dis <= 0.1f)
+                Distance = Dis;
+                if (Dis <= 1.0f)
                     Sov_WayPointLock = true;
             }
         }
@@ -232,6 +285,10 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
 
     void ChangeAttackPatterns(int _A)
     {
+        if (numGeneration < 2)
+            _A = 0;
+
+
         switch (_A)
         {
             case 0:
@@ -245,10 +302,13 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                 //Call Minions.
                 Sov_CallOnMinions = true;
                 Sov_CallOnClones = false;
+                Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_SpawnAllCritters = true;
+                ChangeCurrWeapond();
                 break;
             case 2:
                 Sov_CallOnMinions = false;
                 Sov_CallOnClones = true;
+                target = Sov_WayPoints[2];
                 //Divide into 2 clones.
                 break;  
         }
@@ -256,30 +316,38 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
 
     void ChangeCurrWeapond()
     {
-        for (;;)
+        if (numGeneration == 2)
         {
-            int NewAttack = Random.Range(0, 3);
-            if (projectile.name != Sov_Attacks[NewAttack].name)
+            for (; ; )
             {
-                projectile = Sov_Attacks[NewAttack];
-                break;
-            } 
-        }
-
-        if (!projectile.name.Contains("Melee"))
-        {
-            for (;;)
-            {
-                int RandWaypoint = Random.Range(0, Sov_WayPoints.Length);
-                if (Sov_WayPoints[RandWaypoint] != null)
+                int NewAttack = Random.Range(0, 3);
+                if (projectile.name != Sov_Attacks[NewAttack].name)
                 {
-                    target = Sov_WayPoints[RandWaypoint];
+                    projectile = Sov_Attacks[NewAttack];
                     break;
-                } 
+                }
             }
+
+            if (!projectile.name.Contains("Melee"))
+            {
+                for (; ; )
+                {
+                    int RandWaypoint = Random.Range(0, 2);
+                    if (Sov_WayPoints[RandWaypoint] != null)
+                    {
+                        target = Sov_WayPoints[RandWaypoint];
+                        break;
+                    }
+                }
+            }
+            else
+                target = GameObject.FindGameObjectWithTag("Player"); 
         }
         else
-            target = GameObject.FindGameObjectWithTag("Player");
+        {
+            projectile = Sov_Attacks[0];
+            target = GameObject.FindGameObjectWithTag("Player"); 
+        }
     }
 
     void OnCollisionEnter2D(Collision2D Col)

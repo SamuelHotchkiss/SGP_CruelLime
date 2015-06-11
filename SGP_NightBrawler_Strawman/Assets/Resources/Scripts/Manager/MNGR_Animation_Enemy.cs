@@ -27,7 +27,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     void Start()
     {
 
-        filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "spider" };
+        filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "Sar" };
         for (int i = 0; i < filepaths.Length; i++)
             filepaths[i] = "Sprites/Enemy/" + filepaths[i];
         currentCharacter = GetComponent<ACT_Enemy>();

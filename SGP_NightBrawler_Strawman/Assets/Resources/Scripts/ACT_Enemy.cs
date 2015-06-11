@@ -3,6 +3,8 @@ using UnityEngine;
 using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
+    public float DISTANCE;
+
 	public GUIStyle BlackBar;
 	public GUIStyle HealthBar;
 	public Camera cam;
@@ -42,6 +44,8 @@ public class ACT_Enemy : MonoBehaviour
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
+
+    public GameObject Act_Parent;
 
     public float damageMod;
 
@@ -303,6 +307,11 @@ public class ACT_Enemy : MonoBehaviour
 
 		if (kamikazeActivated)
 		{
+            float Dis = Vector3.Distance(transform.position, target.transform.position);
+            DISTANCE = Dis;
+            if (Dis <= 1.8)
+                kamikazeTimer = 0.0f;
+
 			if (kamikazeTimer > 0.0f)
 			{
 				kamikazeTimer -= Time.deltaTime;

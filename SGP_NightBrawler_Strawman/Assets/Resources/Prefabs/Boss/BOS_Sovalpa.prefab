@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11470412}
   - 50: {fileID: 5021850}
   - 61: {fileID: 6163408}
+  - 114: {fileID: 11431592}
   m_Layer: 9
   m_Name: BOS_Sovalpa
   m_TagString: Enemy
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.86999989, y: 0, z: 0}
+  m_LocalPosition: {x: 8.77999973, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,6 +60,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: .5}
+--- !u!114 &11431592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11470412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5dec6f89d2f9b499dae0459c45536c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DISTANCE: 0
   BlackBar:
     m_Name: 
     m_Normal:
@@ -195,7 +208,7 @@ MonoBehaviour:
   Act_baseHP: 1500
   Act_basePower: 35
   Act_baseSpeed: 2
-  Act_currHP: 1500
+  Act_currHP: 50
   Act_currPower: 35
   Act_currSpeed: 2
   Act_facingRight: 0
@@ -205,10 +218,11 @@ MonoBehaviour:
   Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
+  Act_Parent: {fileID: 0}
   damageMod: 1
   state: 0
   randomState: 0
-  curTime: 0
+  currTime: 0
   stateTime: []
   hpThresh: 0
   nightThresh: 0
@@ -219,19 +233,21 @@ MonoBehaviour:
   behaviorSize: 0
   behaviorID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   behaviors:
+  - {fileID: 11434964, guid: db087961c48fd844097f730c19cf0a03, type: 2}
+  - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
   - {fileID: 11478354, guid: 8545370dee5b0b9438cf69af29a52d05, type: 2}
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
   squad: []
   maxBuffRange: 0
   buffIndex: 0
-  Spw_Critter: {fileID: 0}
-  Spw_CritterThreshold: 0
+  Spw_Critter: {fileID: 187980, guid: 221730185d22d114f96f0a996d6d941a, type: 2}
+  Spw_CritterThreshold: 45
   Spw_CrittersCreated: 0
-  Spw_SpawnCoolDown: 0
-  Spw_BaseSpawnCoolDown: 0
-  Spw_SpawnPerSec: 0
-  Spw_baseSpawnPerSec: 0
+  Spw_SpawnCoolDown: 20
+  Spw_BaseSpawnCoolDown: 20
+  Spw_SpawnPerSec: .300000012
+  Spw_baseSpawnPerSec: .300000012
   Spw_SpawnPositionOffset: {x: 0, y: 0, z: 0}
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
@@ -240,8 +256,11 @@ MonoBehaviour:
   kamikazeTimer: 0
   explosion: {fileID: 0}
   dividerActivated: 0
-  numQuotient: 0
-  numGeneration: 0
+  numQuotient: 2
+  numGeneration: 2
+  visionTimer: 0
+  visionTimerBase: 0
+  look: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
@@ -259,8 +278,12 @@ MonoBehaviour:
   - {fileID: 11453502, guid: 99fbcfdf35f81884cbb94723eed2690e, type: 2}
   - {fileID: 11495398, guid: fd47e199d66002e4da5190937a67d4ec, type: 2}
   - {fileID: 11429356, guid: dd73d187cfc66cf4092338655ac7c34b, type: 2}
-  Sov_myBehaviours: []
+  Sov_myBehaviours:
+  - {fileID: 11434964, guid: db087961c48fd844097f730c19cf0a03, type: 2}
+  - {fileID: 11472836, guid: 4ea1a6c87d5039a49aaaf729d0c1c89e, type: 2}
+  - {fileID: 11478354, guid: 8545370dee5b0b9438cf69af29a52d05, type: 2}
   Sov_WayPoints:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   Sov_SpawnPoints:
