@@ -141,7 +141,7 @@ public class CHAR_ForceMage : ACT_CHAR_Base
             ChargeSpecial(true);
         }
         else if (!Input.GetButton("Special/Cancel")
-            || Input.GetTouch(0).phase != TouchPhase.Ended)
+            || (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended))
         {
             ChargeSpecial(false);
             chargeTimer = 2.0f;
