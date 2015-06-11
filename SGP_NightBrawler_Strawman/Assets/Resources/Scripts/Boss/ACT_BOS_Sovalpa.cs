@@ -251,7 +251,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                 else if (Act_currHP >= (int)(Act_baseHP * 0.4f) && Act_currHP <= (int)(Act_baseHP * 0.70f))
                 {
                     ChangeAttacks = Random.Range(0, 2);
-                    ChangeAttackPatterns(ChangeAttacks);
+                    ChangeAttackPatterns(1);
                     Debug.Log("Less Then 70%");
                 }
                 else if (Act_currHP >= (int)(Act_baseHP * 0.70f))
@@ -363,8 +363,8 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                     Knck_Direction = 1;
 
                 float Force = (float)(Act_currPower * Knck_Direction);
-                target.GetComponent<PlayerController>().ApplyKnockBack(Force);
-                target.GetComponent<PlayerController>().party[target.GetComponent<PlayerController>().currChar].ChangeHP(-Act_currPower / 5);
+                //target.GetComponent<PlayerController>().ApplyKnockBack(Force);
+                //target.GetComponent<PlayerController>().party[target.GetComponent<PlayerController>().currChar].ChangeHP(-Act_currPower / 5);
             }
 
                
