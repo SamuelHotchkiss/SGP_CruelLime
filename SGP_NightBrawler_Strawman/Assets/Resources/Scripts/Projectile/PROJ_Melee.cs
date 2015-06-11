@@ -21,11 +21,14 @@ public class PROJ_Melee : PROJ_Base
         else if (collision.gameObject.tag == "Player")
         {
             // Find the active character
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            int target = player.currChar;
+            if (collision.gameObject.GetComponent<PlayerController>() != null)
+            {
+                PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+                int target = player.currChar;
 
-            // Mess with the active character
-            player.party[target].ChangeHP(-power);
+                // Mess with the active character
+                player.party[target].ChangeHP(-power);
+            }
         }
     }
 
