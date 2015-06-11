@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &413866
 Transform:
   m_ObjectHideFlags: 1
@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.0699997, y: -3.50999999, z: 50}
+  m_LocalPosition: {x: 2.60143328, y: -6.20989943, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -61,7 +61,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.07123291}
+  m_Size: {x: 1, y: .400000006}
 --- !u!114 &11421630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011aba1281bcae48845684c882569dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DISTANCE: 0
   BlackBar:
     m_Name: 
     m_Normal:
@@ -231,10 +232,10 @@ MonoBehaviour:
   Act_ID: 3
   Act_baseHP: 15
   Act_basePower: 1
-  Act_baseSpeed: 1
+  Act_baseSpeed: 3
   Act_currHP: 15
   Act_currPower: 1
-  Act_currSpeed: 1
+  Act_currSpeed: 3
   Act_facingRight: 0
   Act_HasMod: 0
   Act_ModIsBuff: 0
@@ -242,10 +243,11 @@ MonoBehaviour:
   Act_SpawnProjOnDed: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
+  Act_Parent: {fileID: 0}
   damageMod: 0
   state: 0
   randomState: 0
-  curTime: 0
+  currTime: 0
   stateTime: []
   hpThresh: 0
   nightThresh: 0
@@ -255,8 +257,9 @@ MonoBehaviour:
   coolThresh: 0
   behaviorSize: 1
   behaviorID: 05000000
-  behaviors: []
-  currBehavior: {fileID: 0}
+  behaviors:
+  - {fileID: 11434622, guid: f672c8740bb85e3408c3ccd490431f6a, type: 2}
+  currBehavior: {fileID: 11434622, guid: f672c8740bb85e3408c3ccd490431f6a, type: 2}
   basicBehavior: {fileID: 11434622, guid: f672c8740bb85e3408c3ccd490431f6a, type: 2}
   squad: []
   maxBuffRange: 0
@@ -272,16 +275,19 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
-  kamikazeActivated: 0
-  kamikazeTimer: 3
+  kamikazeActivated: 1
+  kamikazeTimer: 5
   explosion: {fileID: 179554, guid: ad1a8d0bc22064f439c1c889b33506cc, type: 2}
   dividerActivated: 0
   numQuotient: 0
   numGeneration: 0
+  visionTimer: 0
+  visionTimerBase: 0
+  look: 0
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
-  projectile: {fileID: 11496520, guid: 1f0a5c4c4a5e1d14ba47c8d8efeb8f08, type: 2}
+  projectile: {fileID: 0}
   isMelee: 0
   paused: 0
 --- !u!114 &11463364
@@ -319,7 +325,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 024f967f048901a42b831a4bd8753d56, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2708da524f19d3947bd22b5c07da6eeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

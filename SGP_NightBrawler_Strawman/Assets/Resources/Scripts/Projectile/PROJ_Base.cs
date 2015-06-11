@@ -5,13 +5,14 @@ public class PROJ_Base : MonoBehaviour
 {
     public GameObject owner;  // who fired us?
 
-    Vector2 start;            // where are we from?
+    protected Vector2 start;            // where are we from?
     public Vector2 velocity;         // which way are we going?
     public int power;         // how much damage will we deal?
-    public float distance;    // how far have we gone?
+    public float m_distance;    // how far have we gone?
 
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
+    public float lifetime;
 	public bool right;
 
     public virtual void Initialize(bool _r = true, float _damMult = 1.0f)
@@ -72,14 +73,25 @@ public class PROJ_Base : MonoBehaviour
 
         transform.position += (new Vector3(velocity.x * speed, velocity.y * speed, 0) * Time.deltaTime);
 
-        distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));
-        if (distance >= range)
+        m_distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));
+        if (m_distance >= range)
             ProjectileExpired();
+
+        if (lifetime > 0)
+        {
+            lifetime -= Time.deltaTime;
+            if (lifetime < 0)
+                ProjectileExpired();
+        }
     }
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("HIT!");
+        if (gameObject.tag == "Player") // for projectiles that are tagged as players! (Defender's wall)
+        {
+            return;
+        }
         if (collision.gameObject.tag == "Enemy"
             || collision.gameObject.tag == "Obstacle")
         {
@@ -90,12 +102,20 @@ public class PROJ_Base : MonoBehaviour
         else if (collision.gameObject.tag == "Player")
         {
             // Find the active character
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            int target = player.currChar;
+            if (collision.gameObject.GetComponent<PlayerController>())
+            {
+                PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+                int target = player.currChar;
 
-            // Mess with the active character
-            player.party[target].ChangeHP(-power);
+                // Mess with the active character
+                player.party[target].ChangeHP(-power);
+            }
 
+            if (gameObject != null)
+                ProjectileExpired();
+        }
+        else if (gameObject.tag != "Player") // weird check for the defender's wall (has to stop enemy projectiles but not ours)
+        {
             if (gameObject != null)
                 ProjectileExpired();
         }

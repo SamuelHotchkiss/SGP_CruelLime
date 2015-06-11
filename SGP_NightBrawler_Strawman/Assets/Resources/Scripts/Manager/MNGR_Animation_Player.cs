@@ -127,6 +127,12 @@ public class MNGR_Animation_Player : MonoBehaviour
                 info = currentCharacter.ActivateAttack3(currentController.curTmr, currentController.maxTmr[(int)curState]);
                 SetSprite(info.spriteIndex);
 
+                if (info.velocity.magnitude != 0)
+                {
+                    currentController.horz = info.velocity.x;
+                    currentController.vert = info.velocity.y;
+                }
+
                 if (SpawnProj && info.spawnproj)
                     SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 1);
                 break;
