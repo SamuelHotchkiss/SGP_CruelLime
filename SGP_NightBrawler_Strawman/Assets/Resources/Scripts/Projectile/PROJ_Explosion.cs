@@ -13,7 +13,7 @@ public class PROJ_Explosion : PROJ_Base
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
         timer = timerMax;
-        speed = 0;
+        //speed = 0;  // why cant explosions move?
         if (sprites.Length > 0)
             GetComponent<SpriteRenderer>().sprite = sprites[0];
 
@@ -31,12 +31,12 @@ public class PROJ_Explosion : PROJ_Base
             {
                 power = (int)((float)power * 0.75f);
                 power = (int)(_damMult * (float)power);
-                if (!owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight)
+                /*if (!owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight)
                 {
                     Vector2 offset = GetComponent<CircleCollider2D>().offset;
                     offset.x = -offset.x;
                     GetComponent<CircleCollider2D>().offset = offset;
-                }
+                }*/
             }
         }
     }

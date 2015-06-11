@@ -134,12 +134,14 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         else if (_curTmr >= 0)
             ret.spriteIndex = specialSprites[3];
 
-        if(chargeTimer > 0 && Input.GetButton("Special/Cancel"))
+        if(chargeTimer > 0 && (Input.GetButton("Special/Cancel")
+            || Input.GetTouch(0).phase != TouchPhase.Ended))
         {
             chargeTimer -= Time.deltaTime;
             ChargeSpecial(true);
         }
-        else if (!Input.GetButton("Special/Cancel"))
+        else if (!Input.GetButton("Special/Cancel")
+            || Input.GetTouch(0).phase != TouchPhase.Ended)
         {
             ChargeSpecial(false);
             chargeTimer = 2.0f;
