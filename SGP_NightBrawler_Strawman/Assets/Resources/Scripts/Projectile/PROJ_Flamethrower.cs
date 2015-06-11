@@ -8,7 +8,7 @@ public class PROJ_Flamethrower : PROJ_Base
     // Use this for initialization
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
-        if(owner.tag == "Player")
+        if (owner.tag == "Player")
         {
             gameObject.layer = 10;
 
@@ -18,7 +18,7 @@ public class PROJ_Flamethrower : PROJ_Base
             power += player.party[target].Act_currPower;
             power = (int)(_damMult * (float)power);
 
-            if(!_r)
+            if (!_r)
             {
                 GetComponentInChildren<ParticleSystem>().startSpeed = -5.0f;
             }
@@ -34,6 +34,11 @@ public class PROJ_Flamethrower : PROJ_Base
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
 
             transform.SetParent(owner.transform);
+
+            if (!_r)
+            {
+                GetComponentInChildren<ParticleSystem>().startSpeed = -5.0f;
+            }
         }
     }
 
