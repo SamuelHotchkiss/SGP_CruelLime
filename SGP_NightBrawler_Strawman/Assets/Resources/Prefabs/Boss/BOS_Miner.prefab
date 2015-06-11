@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.5400009, y: 1.76999998, z: 0}
+  m_LocalPosition: {x: 20.8600006, y: 1.76999998, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,7 +42,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_FixedAngle: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -56,9 +56,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.90734863e-06, y: .0774671286}
   serializedVersion: 2
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 1.18034685, y: 1.15493524}
 --- !u!114 &11461460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,10 +192,10 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
-  Act_baseHP: 300
+  Act_baseHP: 100
   Act_basePower: 10
   Act_baseSpeed: 1
-  Act_currHP: 300
+  Act_currHP: 90
   Act_currPower: 10
   Act_currSpeed: 1
   Act_facingRight: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   Knck_baseCooldown: 0
   kamikazeActivated: 0
   kamikazeTimer: 0
-  explosion: {fileID: 0}
+  explosion: {fileID: 147452, guid: d9fb7c70def632f4da4b293a4190897e, type: 2}
   dividerActivated: 0
   numQuotient: 0
   numGeneration: 0
@@ -256,8 +256,8 @@ MonoBehaviour:
   attackTimer: 0
   attackTimerBases: []
   projectiles:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11401370, guid: 16e83b84989bac346b528aa38396d929, type: 2}
+  - {fileID: 11464194, guid: e3e4655ffea9a0547bdc28ff4e0c468f, type: 2}
   pickaxe: {fileID: 11472220, guid: 9e392b1ede196f94facaf24a9c0895c2, type: 2}
   waypoints: []
 --- !u!212 &21219326
