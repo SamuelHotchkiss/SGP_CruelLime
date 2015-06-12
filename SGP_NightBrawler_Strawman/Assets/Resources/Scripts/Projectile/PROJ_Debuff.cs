@@ -65,8 +65,8 @@ public class PROJ_Debuff : PROJ_Base
                 }
             }
 
-            ProjectileExpired();
         }
+        ProjectileExpired();
 
 
     }
