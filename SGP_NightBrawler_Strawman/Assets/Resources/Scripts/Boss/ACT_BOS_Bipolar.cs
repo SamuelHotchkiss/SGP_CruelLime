@@ -73,8 +73,10 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
         {
             Curr.GetComponent<CameraFollower>().Cam_CurrTarget = target;
             GetComponent<Rigidbody2D>().gravityScale = 1;
-            Bip_LeftArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_LeftArm.GetComponent<ENY_Arms>().Act_baseHP);
-            Bip_RightArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_RightArm.GetComponent<ENY_Arms>().Act_baseHP);
+            if(Bip_LeftArm != null)
+                Bip_LeftArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_LeftArm.GetComponent<ENY_Arms>().Act_baseHP);
+            if(Bip_RightArm != null)
+                Bip_RightArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_RightArm.GetComponent<ENY_Arms>().Act_baseHP);
         }
 
 
