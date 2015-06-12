@@ -349,7 +349,7 @@ public class PlayerController : MonoBehaviour
 
     public virtual void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
     {
-        ACT_CHAR_Base.STATES old = party[currChar].state;
+        //ACT_CHAR_Base.STATES old = party[currChar].state;
 
         // triggered on state change goes here.
         if (_next == ACT_CHAR_Base.STATES.IDLE
@@ -450,7 +450,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < num; i++)
         {*/
-        Object test = Projs[_index];
+        //Object test = Projs[_index];
         GameObject clone = (GameObject)Instantiate(Projs[_index], transform.position, new Quaternion(0, 0, 0, 0));
         clone.GetComponent<PROJ_Base>().owner = gameObject;
         clone.GetComponent<PROJ_Base>().Initialize(_right, _damMult);
