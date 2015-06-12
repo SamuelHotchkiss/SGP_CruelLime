@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
-    public float DISTANCE;
+    public float m_distance;
 
 	public GUIStyle BlackBar;
 	public GUIStyle HealthBar;
@@ -308,7 +308,7 @@ public class ACT_Enemy : MonoBehaviour
 		if (kamikazeActivated)
 		{
             float Dis = Vector3.Distance(transform.position, target.transform.position);
-            DISTANCE = Dis;
+            m_distance = Dis;
             if (Dis <= 1.8)
                 kamikazeTimer = 0.0f;
 

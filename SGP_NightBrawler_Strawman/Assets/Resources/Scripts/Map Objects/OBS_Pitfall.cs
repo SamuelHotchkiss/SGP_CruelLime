@@ -73,6 +73,7 @@ public class OBS_Pitfall : MonoBehaviour
                 }
                 Start();
                 _col.transform.position = dest.transform.position;
+                Camera.main.transform.position = new Vector3(dest.transform.position.x, dest.transform.position.y, -10.0f);
                 if (GameObject.Find("_Horde") != null)
                 {
                     Horde hordey = GameObject.Find("_Horde").GetComponent<Horde>();

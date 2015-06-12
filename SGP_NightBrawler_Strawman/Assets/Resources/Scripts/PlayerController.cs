@@ -56,12 +56,8 @@ public class PlayerController : MonoBehaviour
     protected virtual void Start()
     {
         isAlive = true;
-        MNGR_Game.Initialize();         // S: FOR DEBUGGING/TESTING ONLY
+        MNGR_Game.Initialize();
         party = new ACT_CHAR_Base[3];
-
-        //party[0] = new CHAR_Swordsman();
-        //party[1] = new CHAR_Archer();
-        //party[2] = new CHAR_Wizard();
 
         party = MNGR_Game.currentParty;
 
