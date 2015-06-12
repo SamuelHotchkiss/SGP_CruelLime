@@ -11,7 +11,7 @@ public class WarpSpot : MonoBehaviour
         if(other.tag == "Player")
         {
             other.transform.position = new Vector3(destination.transform.position.x, destination.transform.position.y, 0);
-            Camera.main.transform.position = new Vector3(destination.transform.position.x, destination.transform.position.y, -10.0f);
+			GameObject.Find("Main Camera").gameObject.transform.position = new Vector3(destination.transform.position.x, destination.transform.position.y, -10.0f);
         }
     }
 	
