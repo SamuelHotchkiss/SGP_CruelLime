@@ -57,10 +57,12 @@ MonoBehaviour:
   owner: {fileID: 0}
   velocity: {x: 0, y: 0}
   power: 0
-  distance: 0
+  m_distance: 0
   speed: 6
   range: 6
+  lifetime: 0
   right: 0
+  knockback: 0
   NumSpawnOnDeath: 1
   SpawnOnDeath: {fileID: 11482188, guid: abd80117f7032524ba4e4a7514768b1c, type: 2}
   sprites: []
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 757a3ca2ff6587e4ab17809255e22e60, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
