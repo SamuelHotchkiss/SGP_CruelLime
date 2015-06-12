@@ -43,9 +43,8 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
 
         Sov_StunCooldown = 0.0f;
 
-        Act_currPower = (int)(Act_basePower * 0.5f); //The Tree will be weeker at firts.
-        nightThresh = true;     //If its night this will activate.
-        distThresh = 5.0f;      //If the Player is 3 units away this will activate.
+        nightThresh = true;                     //If its night this will activate.
+        distThresh = 5.0f;                      //If the Player is 3 units away this will activate.
         hpThresh = (int)(Act_baseHP * 0.75f);   //If its HP is at 75% this will activate.
         target = null;
         state = STATES.WALKING;
@@ -287,7 +286,6 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
     {
         if (numGeneration < 2)
             _A = 0;
-
 
         switch (_A)
         {

@@ -19,7 +19,8 @@ public class PROJ_Debuff : PROJ_Base {
             || collision.gameObject.tag == "Obstacle")
 		{
 			ACT_Enemy enemy = collision.gameObject.GetComponent<ACT_Enemy>();
-			enemy.ChangeHP(-power);
+            enemy.ChangeHP(-power);
+
 
 			bool existing = false;
 			for (int i = 0; i < enemy.myBuffs.Count; i++)
@@ -44,6 +45,7 @@ public class PROJ_Debuff : PROJ_Base {
 
 			// Mess with the active character
 			player.party[target].ChangeHP(-power);
+
 
 			// Attach the Debuff
 			bool existing = false;
