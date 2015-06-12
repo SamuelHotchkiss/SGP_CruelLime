@@ -15,7 +15,7 @@ public class CHAR_Defender : ACT_CHAR_Base
 		Act_baseHP = 150;
         Act_currHP = Act_baseHP;
 
-		Act_basePower = 10;
+		Act_basePower = 13;
         Act_baseSpeed = 7;
         //Act_currSpeed = Act_baseSpeed;
         //Act_baseSpeed = 25;
@@ -29,7 +29,7 @@ public class CHAR_Defender : ACT_CHAR_Base
         ProjFilePaths = new string[3];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Lancer_Melee";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Defender_Melee";
-        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Whirlwind";
+        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_DefenderWall";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 2.0f, 1.00f, 0.1f, 1.0f, 0.9f, 1.0f, 1.0f, 0.1f, 1.0f, 1.0f, 1.2f };
@@ -129,14 +129,17 @@ public class CHAR_Defender : ACT_CHAR_Base
     {
         AttackInfo ret = new AttackInfo(0);
 
-        if (_curTmr > _maxTmr * 0.9f)
+        if (_curTmr > _maxTmr * 0.7f)
             ret.spriteIndex = specialSprites[0];
-        else if (_curTmr > _maxTmr * 0.8f)
+        else if (_curTmr > _maxTmr * 0.5f)
             ret.spriteIndex = specialSprites[1];
-        else if (_curTmr > _maxTmr * 0.7f)
+        else if (_curTmr > _maxTmr * 0.4f)
             ret.spriteIndex = specialSprites[2];
         else if (_curTmr >= 0)
             ret.spriteIndex = specialSprites[3];
+
+        if (_curTmr < _maxTmr * 0.2f)
+            ret.spawnproj = true;
 
         return ret;
     }

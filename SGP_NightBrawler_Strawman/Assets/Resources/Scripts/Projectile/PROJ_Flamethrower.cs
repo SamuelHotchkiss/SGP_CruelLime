@@ -8,7 +8,7 @@ public class PROJ_Flamethrower : PROJ_Base
     // Use this for initialization
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
-        if(owner.tag == "Player")
+        if (owner.tag == "Player")
         {
             gameObject.layer = 10;
 
@@ -18,7 +18,7 @@ public class PROJ_Flamethrower : PROJ_Base
             power += player.party[target].Act_currPower;
             power = (int)(_damMult * (float)power);
 
-            if(!_r)
+            if (!_r)
             {
                 GetComponentInChildren<ParticleSystem>().startSpeed = -5.0f;
             }
@@ -32,13 +32,34 @@ public class PROJ_Flamethrower : PROJ_Base
             bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
+			power = (int)(_damMult * (float)power);
 
             transform.SetParent(owner.transform);
+
+            if (!_r)
+            {
+                GetComponentInChildren<ParticleSystem>().startSpeed = -5.0f;
+            }
         }
     }
 
     public override void Update()
     {
+		if (owner.tag == "Player")
+		{
+			if (owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight == true)
+				GetComponentInChildren<ParticleSystem>().startSpeed = 5.0f;
+			else
+				GetComponentInChildren<ParticleSystem>().startSpeed = -5.0f;
+		}
+		else if (owner.tag == "Enemy")
+		{
+			if (owner.GetComponent<ACT_Enemy>().Act_facingRight == true)
+				GetComponentInChildren<ParticleSystem>().startSpeed = 10.0f;
+			else
+				GetComponentInChildren<ParticleSystem>().startSpeed = -10.0f;
+		}
+
         if (timer > 0)
             timer -= Time.deltaTime;
         else
@@ -59,5 +80,11 @@ public class PROJ_Flamethrower : PROJ_Base
 
             other.GetComponent<ACT_Enemy>().ChangeHP(-power);
         }
+		else if (other.tag == "Player")
+		{
+			Debug.Log("BURN!");
+
+			other.GetComponent<PlayerController>().party[other.GetComponent<PlayerController>().currChar].ChangeHP(-power);
+		}
     }
 }
