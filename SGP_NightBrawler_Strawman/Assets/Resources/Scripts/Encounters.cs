@@ -54,7 +54,7 @@ public class Encounters : MonoBehaviour {
         {
 
 
-            int RandLoc = Random.Range(1, 4);
+            int RandLoc = Random.Range(1, 5);
             int RandEnemy = Random.Range(0, Enc_SpawnEnemies.Length);
             switch (RandLoc)
             {

@@ -148,7 +148,7 @@ public class ACT_Enemy : MonoBehaviour
 	}
 
 	//Interface
-	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
+	public virtual void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
 	{                                   //Damage needs to be negative.
 		Act_currHP += (int)(Dmg * damageMod);
         if (Dmg < 0)
@@ -613,7 +613,6 @@ public class ACT_Enemy : MonoBehaviour
     {
 
         GetComponent<Rigidbody2D>().velocity = _Force;
-
         state = STATES.HURT;
         currTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
 
