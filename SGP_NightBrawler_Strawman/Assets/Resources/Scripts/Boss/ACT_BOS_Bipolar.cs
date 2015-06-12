@@ -69,15 +69,7 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
         float MaxLeft;
         float MaxRight;
 
-        if (Act_currHP <= 0)
-        {
-            Curr.GetComponent<CameraFollower>().Cam_CurrTarget = target;
-            GetComponent<Rigidbody2D>().gravityScale = 1;
-            if(Bip_LeftArm != null)
-                Bip_LeftArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_LeftArm.GetComponent<ENY_Arms>().Act_baseHP);
-            if(Bip_RightArm != null)
-                Bip_RightArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_RightArm.GetComponent<ENY_Arms>().Act_baseHP);
-        }
+        
 
 
         if (Curr != null)
@@ -90,6 +82,16 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
                 Bip_LeftArmDead = true;
             if (Bip_RightArm == null)
                 Bip_RightArmDead = true;
+
+            if (Act_currHP <= 0)
+            {
+                Curr.GetComponent<CameraFollower>().Cam_CurrTarget = target;
+                GetComponent<Rigidbody2D>().gravityScale = 1;
+                if (!Bip_LeftArmDead)
+                    Bip_LeftArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_LeftArm.GetComponent<ENY_Arms>().Act_baseHP);
+                if (!Bip_RightArmDead)
+                    Bip_RightArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_RightArm.GetComponent<ENY_Arms>().Act_baseHP);
+            }
 
             if (!Bip_LeftArmDead)
             {
