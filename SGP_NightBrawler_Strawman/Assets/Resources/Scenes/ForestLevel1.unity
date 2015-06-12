@@ -1544,12 +1544,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 120827081}
   m_Layer: 0
-  m_Name: _Enemies 1
+  m_Name: _Enemies_Area_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &120827081
 Transform:
   m_ObjectHideFlags: 0
@@ -3646,7 +3646,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 307616841}
   m_Layer: 0
-  m_Name: _Enemies
+  m_Name: _Enemies_Area_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7143,6 +7143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1630199408}
+  enemies: {fileID: 1915920987}
+  activateEnemies: 1
 --- !u!61 &644113911
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20159,12 +20161,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 1915920988}
   m_Layer: 0
-  m_Name: _Enemies 1
+  m_Name: _Enemies_Area_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1915920988
 Transform:
   m_ObjectHideFlags: 0
@@ -20609,6 +20611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1906391420}
+  enemies: {fileID: 120827080}
+  activateEnemies: 1
 --- !u!61 &1949639207
 BoxCollider2D:
   m_ObjectHideFlags: 0
