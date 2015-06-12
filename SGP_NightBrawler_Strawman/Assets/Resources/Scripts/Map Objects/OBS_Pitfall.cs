@@ -23,6 +23,7 @@ public class OBS_Pitfall : MonoBehaviour
     public virtual void OnTriggerStay2D(Collider2D _col)
     {
         int type = 0;
+        Camera cam = Camera.current;
 
         if (_col.gameObject.GetComponent<PlayerController>() != null)
         {
@@ -30,8 +31,10 @@ public class OBS_Pitfall : MonoBehaviour
             _col.gameObject.GetComponent<PlayerController>().ChangeState(ACT_CHAR_Base.STATES.HURT);
             _col.gameObject.GetComponent<PlayerController>().enabled = false;
             _col.gameObject.GetComponent<MNGR_Animation_Player>().enabled = false;
-			GameObject cam = GameObject.Find("Main Camera").gameObject;
-			cam.GetComponent<Camera>().transform.position = new Vector3(dest.transform.position.x, dest.transform.position.y, -10.0f);
+            if (cam != null && cam.GetComponent<CameraFollower>() != null)
+                cam.GetComponent<CameraFollower>().Cam_CurrTarget = gameObject;
+			//GameObject cam = GameObject.Find("Main Camera").gameObject;
+			//cam.GetComponent<Camera>().transform.position = new Vector3(dest.transform.position.x, dest.transform.position.y, -10.0f);
         }
         if (_col.gameObject.GetComponent<ACT_Enemy>() != null)
         {
@@ -65,6 +68,8 @@ public class OBS_Pitfall : MonoBehaviour
                 {
                     _col.gameObject.GetComponent<PlayerController>().enabled = true;
                     _col.gameObject.GetComponent<MNGR_Animation_Player>().enabled = true;
+                    if (cam != null && cam.GetComponent<CameraFollower>() != null)
+                        cam.GetComponent<CameraFollower>().Cam_CurrTarget = _col.gameObject;
                 }
                 else if (type < 0)
                 {

@@ -27,7 +27,7 @@ public class PROJ_Debuff : PROJ_Base
             {
                 if (enemy.myBuffs[i].Mod_ModIndexNum == debuff_ID)
                 {
-                    enemy.myBuffs[i].EndModifyActor();
+                    enemy.myBuffs[i].EndModifyEnemy();
                     MNGR_Item.AttachModifier(debuff_ID, collision.gameObject);
                     existing = true;
                 }
@@ -65,8 +65,8 @@ public class PROJ_Debuff : PROJ_Base
                 }
             }
 
-            ProjectileExpired();
         }
+        ProjectileExpired();
 
 
     }

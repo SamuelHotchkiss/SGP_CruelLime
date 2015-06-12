@@ -72,20 +72,23 @@ public class MOD_Base : MonoBehaviour
             player = GetComponent<PlayerController>();
             isPlayer = true;
 
-            if (player.buffState == MNGR_Item.BuffStates.NEUTRAL)
+            if (player != null)
             {
-                player.myBuffs.Add(this);
-                player.buffState = buffState;
-            }
-            else if (player.buffState == buffState)
-            {
-                player.myBuffs.Add(this);
-            }
-            else if (player.buffState != buffState)
-            {
-                player.KillBuffs();
-                player.buffState = MNGR_Item.BuffStates.NEUTRAL;
-                Destroy(this);
+                if (player.buffState == MNGR_Item.BuffStates.NEUTRAL)
+                {
+                    player.myBuffs.Add(this);
+                    player.buffState = buffState;
+                }
+                else if (player.buffState == buffState)
+                {
+                    player.myBuffs.Add(this);
+                }
+                else if (player.buffState != buffState)
+                {
+                    player.KillBuffs();
+                    player.buffState = MNGR_Item.BuffStates.NEUTRAL;
+                    Destroy(this);
+                }
             }
         }
         #endregion
@@ -99,14 +102,14 @@ public class MOD_Base : MonoBehaviour
     {
         if (!MNGR_Game.paused)
         {
-            if (isPlayer)
+            if (isPlayer && player != null)
             {
                 ModifyActor();
                 Mod_effectTimer -= Time.deltaTime;
                 if (Mod_effectTimer <= 0.0f)
                     EndModifyActor();
             }
-            else
+            else if (enemy != null)
             {
                 ModifyEnemy();
                 Mod_effectTimer -= Time.deltaTime;

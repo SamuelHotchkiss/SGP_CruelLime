@@ -15,7 +15,8 @@ public class MOD_DMGDecrease : MOD_Base
         Mod_effectTimer = 20.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;
         Mod_ModIndexNum = 6;
-        Mod_CurrCharacter = player.currChar;
+        if (player != null)
+            Mod_CurrCharacter = player.currChar;
     }
 
     // Update is called once per frame
