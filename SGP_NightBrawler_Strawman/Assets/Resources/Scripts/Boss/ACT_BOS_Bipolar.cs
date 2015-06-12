@@ -15,7 +15,6 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
     public GameObject Bip_RightArm;
     public BHR_Base[] Bip_myBehaviours;
 
-
     public Sprite Bip_DayBody;
     public Sprite Bip_NightBody;
 
@@ -25,6 +24,7 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
     private int Bip_NewHpTresh;
     private float Bip_HpTreshReducer;
     private float Bip_PatternTimer;
+    private float Bip_DeadTimer;
 
 
 	// Use this for initialization
@@ -37,12 +37,13 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
         nightThresh = true;                          //If its night this will activate.
         hpThresh = (int)(Act_baseHP * 0.75f);        //If its HP is at 75% this will activate.
         target = GameObject.FindGameObjectWithTag("Player");
+        state = STATES.IDLE;
 
         Bip_LeftInTarget = true;
         Bip_RightInTarget = true;
         Bip_LeftArmDead = false;
         Bip_RightArmDead = false;
-
+        Bip_DeadTimer = 5f;
         Bip_PatternId = 0;
         Bip_HpTreshReducer = 0.2f;
         Bip_NewHpTresh = Act_baseHP - (int)(Act_baseHP * Bip_HpTreshReducer);
@@ -69,9 +70,6 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
         float MaxLeft;
         float MaxRight;
 
-        
-
-
         if (Curr != null)
         {
             CheckThresholds();
@@ -87,6 +85,10 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
             {
                 Curr.GetComponent<CameraFollower>().Cam_CurrTarget = target;
                 GetComponent<Rigidbody2D>().gravityScale = 1;
+                Bip_DeadTimer -= Time.deltaTime;
+                if (Bip_DeadTimer <= 0f)
+                    Destroy(gameObject);
+                    
                 if (!Bip_LeftArmDead)
                     Bip_LeftArm.GetComponent<ENY_Arms>().ChangeHP(-Bip_LeftArm.GetComponent<ENY_Arms>().Act_baseHP);
                 if (!Bip_RightArmDead)
@@ -179,6 +181,37 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
             }
         }
 
+        switch (state)
+        {
+            case STATES.IDLE:
+                {
+                    break;
+                }
+            case STATES.WALKING:
+                {
+                    break;
+                }
+            case STATES.RUNNING:
+                {
+                    break;
+                }
+            case STATES.ATTACKING:
+                {
+                    break;
+                }
+            case STATES.SPECIAL:
+                {
+                    break;
+                }
+            case STATES.HURT:
+                {
+                    break;
+                }
+            case STATES.DEAD:
+                {
+                    break;
+                }
+        } 
 
 	}
 

@@ -110,15 +110,20 @@ public class PROJ_Base : MonoBehaviour
                 int target = player.currChar;
 
 
+                
 				if (knockback)
 				{
+                    player.party[target].ChangeHP(-power, false);
 					if (right)
 						player.ApplyKnockBack(power * 5);
 					else
 						player.ApplyKnockBack(-power * 5);
 				}
+                else
+                    player.party[target].ChangeHP(-power);
                 // Mess with the active character
-                player.party[target].ChangeHP(-power);
+                
+
             }
 
             if (gameObject != null)

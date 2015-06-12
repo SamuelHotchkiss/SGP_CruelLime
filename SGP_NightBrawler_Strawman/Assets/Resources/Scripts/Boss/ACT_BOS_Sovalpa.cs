@@ -44,9 +44,6 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
         Sov_StunCooldown = 0.0f;
 
         nightThresh = true;                     //If its night this will activate.
-        distThresh = 5.0f;                      //If the Player is 3 units away this will activate.
-        hpThresh = (int)(Act_baseHP * 0.75f);   //If its HP is at 75% this will activate.
-        target = null;
         state = STATES.WALKING;
 
         target = GameObject.FindGameObjectWithTag("Player");

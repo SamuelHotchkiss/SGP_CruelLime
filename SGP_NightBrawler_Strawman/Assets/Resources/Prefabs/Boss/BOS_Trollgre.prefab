@@ -8,11 +8,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 430936}
-  - 212: {fileID: 21267752}
   - 114: {fileID: 11452770}
-  m_Layer: 0
+  - 212: {fileID: 21203660}
+  - 50: {fileID: 5042432}
+  - 61: {fileID: 6170664}
+  m_Layer: 9
   m_Name: BOS_Trollgre
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,6 +31,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5042432
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100112}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+--- !u!61 &6170664
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100112}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 5.73999977, y: 1.5}
 --- !u!114 &11452770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,21 +193,21 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
-  Act_baseHP: 0
-  Act_basePower: 0
-  Act_baseSpeed: 0
-  Act_currHP: 0
-  Act_currPower: 0
-  Act_currSpeed: 0
+  Act_baseHP: 375
+  Act_basePower: 15
+  Act_baseSpeed: 2
+  Act_currHP: 375
+  Act_currPower: 25
+  Act_currSpeed: 7
   Act_facingRight: 0
   Act_HasMod: 0
   Act_ModIsBuff: 0
-  Act_IsIntelligent: 0
+  Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
-  Act_baseAttackSpeed: 0
-  Act_currAttackSpeed: 0
+  Act_baseAttackSpeed: .75
+  Act_currAttackSpeed: .75
   Act_Parent: {fileID: 0}
-  damageMod: 0
+  damageMod: 1
   state: 0
   randomState: 0
   currTime: 0
@@ -210,19 +240,28 @@ MonoBehaviour:
   kamikazeActivated: 0
   kamikazeTimer: 0
   explosion: {fileID: 0}
-  dividerActivated: 0
-  numQuotient: 0
-  numGeneration: 0
+  dividerActivated: 1
+  numQuotient: 2
+  numGeneration: 2
   visionTimer: 0
   visionTimerBase: 0
   look: 0
   target: {fileID: 0}
   distanceToTarget: 0
-  maxDistance: 0
+  maxDistance: 10
   projectile: {fileID: 0}
-  isMelee: 0
+  isMelee: 1
   paused: 0
---- !u!212 &21267752
+  Tro_NewHpTresh: 0
+  Tro_HpTreshReducer: 0
+  Tro_AllProjectiles:
+  - {fileID: 11469226, guid: 3fae76a13a5ade647bcd0937c841bb5e, type: 2}
+  - {fileID: 11472998, guid: 660faa70bab0d9844b4d0b58362677f7, type: 2}
+  - {fileID: 11495398, guid: fd47e199d66002e4da5190937a67d4ec, type: 2}
+  Tro_myBehaviours:
+  - {fileID: 11478354, guid: 8545370dee5b0b9438cf69af29a52d05, type: 2}
+  - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
+--- !u!212 &21203660
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
