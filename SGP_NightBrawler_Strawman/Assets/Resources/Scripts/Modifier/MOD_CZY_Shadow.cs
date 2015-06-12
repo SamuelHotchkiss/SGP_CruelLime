@@ -5,12 +5,14 @@ public class MOD_CZY_Shadow : MOD_Base
 {
 
 	// Use this for initialization
-	void Start () {
+	public override void Start()
+	{
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update()
+	{
 	
 	}
 }

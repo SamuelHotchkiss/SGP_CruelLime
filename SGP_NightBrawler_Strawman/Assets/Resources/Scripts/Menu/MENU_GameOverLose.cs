@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MENU_GameOverLose : MonoBehaviour 
 {
 	public float maxValue;
-	Image panel;
+	//Image panel;
 
 	public float speed;
 	public float time;

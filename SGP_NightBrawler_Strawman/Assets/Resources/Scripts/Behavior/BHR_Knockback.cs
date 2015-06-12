@@ -13,7 +13,7 @@ public class BHR_Knockback : BHR_Base
 		ID = 6;
 	}
 
-	void Update () 
+	public override void Update() 
     {
 		base.Update();
 

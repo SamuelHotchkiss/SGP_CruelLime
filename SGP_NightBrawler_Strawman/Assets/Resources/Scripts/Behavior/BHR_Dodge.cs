@@ -9,7 +9,7 @@ public class BHR_Dodge : BHR_Base
 		ID = 4;	
 	}
 
-	void Update()
+	public override void Update()
 	{
 		base.Update();
 	}

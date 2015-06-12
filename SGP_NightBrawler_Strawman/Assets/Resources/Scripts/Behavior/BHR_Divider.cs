@@ -10,7 +10,7 @@ public class BHR_Divider : BHR_Base
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public override void Update() 
 	{
 		base.Update();
 	}
