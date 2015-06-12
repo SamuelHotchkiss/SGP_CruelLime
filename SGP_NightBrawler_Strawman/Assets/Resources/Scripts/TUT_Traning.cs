@@ -7,13 +7,13 @@ public class TUT_Traning : MonoBehaviour {
     public Sprite Tut_HitTarget;
     public GameObject Tut_SmackDummy;
 
-    private Vector3 Tut_PermaLoc;
+    //private Vector3 Tut_PermaLoc;
     private float Tut_SmackTimer;
 
 	// Use this for initialization
 	void Start () 
     {
-        Tut_PermaLoc = transform.position;
+        //Tut_PermaLoc = transform.position;
         if (Tut_Flames != null)
             Tut_Flames.SetActive(false);
 

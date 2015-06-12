@@ -29,7 +29,7 @@ public class PROJ_Flamethrower : PROJ_Base
         {
             gameObject.layer = 11;
 
-            bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
+            //bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
 			power = (int)(_damMult * (float)power);

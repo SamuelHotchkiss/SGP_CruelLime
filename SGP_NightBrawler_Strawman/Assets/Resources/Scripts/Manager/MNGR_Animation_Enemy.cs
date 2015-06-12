@@ -14,7 +14,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     //PlayerController currentCharacter;
 
     // these contain the sprite IDs used for each animaiton
-    int[] enemySpritesTotal;
+    //int[] enemySpritesTotal;
     int[] idleSprites;
     int[] walkSprites;
     int[] attack1Sprites;

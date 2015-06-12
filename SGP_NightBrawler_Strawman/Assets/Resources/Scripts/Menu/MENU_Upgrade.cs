@@ -24,7 +24,7 @@ public class MENU_Upgrade : MonoBehaviour {
 
         int ButtNum = GetComponent<MENU_Controller>().Menu_UIButtons.Length;
 
-        for (int i = 0; i < GetComponent<MENU_Controller>().Menu_UIButtons.Length; i++)
+        for (int i = 0; i < ButtNum; i++)
         {
             if (i < 3)
                 Upg_Char1[i] = GetComponent<MENU_Controller>().Menu_UIButtons[i];

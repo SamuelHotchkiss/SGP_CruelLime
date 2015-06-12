@@ -4,7 +4,7 @@ using System.Collections;
 public class PROJ_Pickaxe : MonoBehaviour
 {
 	public GameObject owner;
-	Rigidbody2D rigidbody;
+	Rigidbody2D rigidbody_2D;
 	public float range;
 	public float elipseWidth;
 	public Vector3 dir;
@@ -32,7 +32,7 @@ public class PROJ_Pickaxe : MonoBehaviour
 
 	}
 	 */
-	
+
 	void Start()
 	{
 		if (owner.GetComponent<ACT_BOS_Miner>().Act_facingRight == true)
@@ -44,31 +44,31 @@ public class PROJ_Pickaxe : MonoBehaviour
 			dir = Vector3.left;
 		}
 		power = owner.GetComponent<ACT_BOS_Miner>().Act_currPower;
-		rigidbody = GetComponent<Rigidbody2D>();
+		rigidbody_2D = GetComponent<Rigidbody2D>();
 		StartCoroutine(Throw(range, elipseWidth, dir, seconds));
 	}
  
      IEnumerator Throw(float dist, float width, Vector3 direction, float time) 
 	 {
          Vector3 pos = transform.position;
-         float height = transform.position.y;
+         //float height = transform.position.y;
          Quaternion q = Quaternion.FromToRotation (Vector3.forward, direction);
          float timer = 0.0f;
-         rigidbody.AddTorque (400.0f);
+         rigidbody_2D.AddTorque (400.0f);
          while (timer < time) {
              float t = Mathf.PI * 2.0f * timer / time - Mathf.PI/2.0f;
              float x = width * Mathf.Cos(t);
              float z = dist * Mathf.Sin (t);
              Vector3 v = new Vector3(x,x,z+dist);
-             rigidbody.MovePosition(pos + (q * v));
+             rigidbody_2D.MovePosition(pos + (q * v));
              timer += Time.deltaTime;
              yield return null;
          }
  
-         rigidbody.angularVelocity = 0;
-         rigidbody.velocity = Vector3.zero;
-         rigidbody.rotation = 0;
-         rigidbody.MovePosition (pos);
+         rigidbody_2D.angularVelocity = 0;
+         rigidbody_2D.velocity = Vector3.zero;
+         rigidbody_2D.rotation = 0;
+         rigidbody_2D.MovePosition (pos);
 		 Destroy(gameObject);
      }
 
