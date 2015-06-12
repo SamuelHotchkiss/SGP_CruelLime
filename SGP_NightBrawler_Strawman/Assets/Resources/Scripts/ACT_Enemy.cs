@@ -227,6 +227,9 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+        if (GetComponent<MOD_Stunned>() != null)
+            return; //GTFO
+
 		if (look)
 		{
 			visionTimer -= Time.deltaTime;
