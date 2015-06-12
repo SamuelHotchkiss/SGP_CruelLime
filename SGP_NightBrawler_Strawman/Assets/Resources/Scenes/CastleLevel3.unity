@@ -113,7 +113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1001 &63058192
 Prefab:
   m_ObjectHideFlags: 0
@@ -717,6 +717,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 124837251e89f464688045fa2db3086b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1285999753 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 149432, guid: 124837251e89f464688045fa2db3086b, type: 2}
+  m_PrefabInternal: {fileID: 1285999752}
 --- !u!1 &1301369891 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 112036, guid: a33a68fa8f91f454491ee026af8190c9, type: 2}
@@ -788,6 +792,46 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 197632, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
   m_PrefabInternal: {fileID: 1070121881}
+--- !u!1 &1576327499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1576327501}
+  - 114: {fileID: 1576327500}
+  m_Layer: 0
+  m_Name: The_Grim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1576327500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1576327499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af34c7e98ddad3e498e27552190edc62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 1285999753}
+--- !u!4 &1576327501
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1576327499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.8735008, y: .442117929, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1 &1634886144
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +921,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!50 &1634886150
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -1259,4 +1303,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
