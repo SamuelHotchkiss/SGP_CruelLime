@@ -9,12 +9,12 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     string[] filepaths;
     Sprite[] sprites;
     ACT_Enemy currentCharacter;
-    ACT_Enemy.STATES lastState;
+    //ACT_Enemy.STATES lastState;
     ACT_Enemy.STATES curState;
     //PlayerController currentCharacter;
 
     // these contain the sprite IDs used for each animaiton
-    int[] enemySpritesTotal;
+    //int[] enemySpritesTotal;
     int[] idleSprites;
     int[] walkSprites;
     int[] attack1Sprites;
@@ -31,7 +31,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
         for (int i = 0; i < filepaths.Length; i++)
             filepaths[i] = "Sprites/Enemy/" + filepaths[i];
         currentCharacter = GetComponent<ACT_Enemy>();
-        lastState = currentCharacter.state;
+        //lastState = currentCharacter.state;
         curState = currentCharacter.state;
         sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.Act_ID]);
 
@@ -196,7 +196,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     void ChangeState(ACT_Enemy.STATES _newstate)
     {
         // this allows us to know exactly which transition we're in.  Very useful.
-        lastState = curState;
+        //lastState = curState;
 
         // laststate vs curstate magical space
 

@@ -7,7 +7,7 @@ public class MOD_DMGIncomingIncrease : MOD_Base
     public int Mod_CurrCharacter;
 
     // Use this for initialization
-    void Start()
+	public override void Start()
     {
         buffState = MNGR_Item.BuffStates.DEBUFFED;
         base.Start();

@@ -6,7 +6,8 @@ public class MOD_DMGProtection : MOD_Base
     public bool Mod_OnceOnly;
 
 	// Use this for initialization
-	void Start () {
+	public override void Start()
+	{
         myColor = Color.blue;
 
         buffState = MNGR_Item.BuffStates.BUFFED;

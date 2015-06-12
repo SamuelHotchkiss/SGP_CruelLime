@@ -634,7 +634,7 @@ public class ACT_Enemy : MonoBehaviour
 		{
 			Vector2 targetPos;
 			targetPos = cam.WorldToScreenPoint(transform.position);
-			SpriteRenderer spr = GetComponent<SpriteRenderer>();
+			//SpriteRenderer spr = GetComponent<SpriteRenderer>();
 			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 128, 100, 6), "", BlackBar);
 			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 128, 100 * ((float)Act_currHP / (float)Act_baseHP), 6), "", HealthBar);
 		}
