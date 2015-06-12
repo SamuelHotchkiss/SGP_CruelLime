@@ -15,6 +15,8 @@ public class PROJ_Base : MonoBehaviour
     public float lifetime;
 	public bool right;
 
+	public bool knockback;
+
     public virtual void Initialize(bool _r = true, float _damMult = 1.0f)
     {
 		if (owner == null)
@@ -107,6 +109,14 @@ public class PROJ_Base : MonoBehaviour
                 PlayerController player = collision.gameObject.GetComponent<PlayerController>();
                 int target = player.currChar;
 
+
+				if (knockback)
+				{
+					if (right)
+						player.ApplyKnockBack(power * 5);
+					else
+						player.ApplyKnockBack(-power * 5);
+				}
                 // Mess with the active character
                 player.party[target].ChangeHP(-power);
             }
