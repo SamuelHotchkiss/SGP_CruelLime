@@ -14,6 +14,8 @@ public class PROJ_Base : MonoBehaviour
     public float range;       // how far can we go?
 	public bool right;
 
+	public bool knockback;
+
     public virtual void Initialize(bool _r = true, float _damMult = 1.0f)
     {
 		if (owner == null)
@@ -94,7 +96,16 @@ public class PROJ_Base : MonoBehaviour
             int target = player.currChar;
 
             // Mess with the active character
+			if (knockback)
+			{
+				if (right)
+					player.ApplyKnockBack(power * 5);
+				else
+					player.ApplyKnockBack(-power * 5);
+			}
+
             player.party[target].ChangeHP(-power);
+
 
             if (gameObject != null)
                 ProjectileExpired();
