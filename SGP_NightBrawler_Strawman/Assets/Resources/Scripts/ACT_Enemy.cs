@@ -148,7 +148,7 @@ public class ACT_Enemy : MonoBehaviour
 	}
 
 	//Interface
-	public void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
+	public virtual void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
 	{                                   //Damage needs to be negative.
 		Act_currHP += (int)(Dmg * damageMod);
         if (Dmg < 0)
@@ -616,7 +616,6 @@ public class ACT_Enemy : MonoBehaviour
     {
 
         GetComponent<Rigidbody2D>().velocity = _Force;
-
         state = STATES.HURT;
         currTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
 
@@ -638,7 +637,7 @@ public class ACT_Enemy : MonoBehaviour
 		{
 			Vector2 targetPos;
 			targetPos = cam.WorldToScreenPoint(transform.position);
-			SpriteRenderer spr = GetComponent<SpriteRenderer>();
+			//SpriteRenderer spr = GetComponent<SpriteRenderer>();
 			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 128, 100, 6), "", BlackBar);
 			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 128, 100 * ((float)Act_currHP / (float)Act_baseHP), 6), "", HealthBar);
 		}

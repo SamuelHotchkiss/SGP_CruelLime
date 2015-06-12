@@ -30,6 +30,8 @@ public class OBS_Pitfall : MonoBehaviour
             _col.gameObject.GetComponent<PlayerController>().ChangeState(ACT_CHAR_Base.STATES.HURT);
             _col.gameObject.GetComponent<PlayerController>().enabled = false;
             _col.gameObject.GetComponent<MNGR_Animation_Player>().enabled = false;
+			GameObject cam = GameObject.Find("Main Camera").gameObject;
+			cam.GetComponent<Camera>().transform.position = new Vector3(dest.transform.position.x, dest.transform.position.y, -10.0f);
         }
         if (_col.gameObject.GetComponent<ACT_Enemy>() != null)
         {
@@ -73,7 +75,6 @@ public class OBS_Pitfall : MonoBehaviour
                 }
                 Start();
                 _col.transform.position = dest.transform.position;
-                Camera.main.transform.position = new Vector3(dest.transform.position.x, dest.transform.position.y, -10.0f);
                 if (GameObject.Find("_Horde") != null)
                 {
                     Horde hordey = GameObject.Find("_Horde").GetComponent<Horde>();

@@ -11,7 +11,7 @@ public class BHR_Debuffer : BHR_Base
 	}
 	
 	// Update is called once per frame
-	public override void Update () 
+	public override void Update() 
 	{
 		base.Update();
 	}

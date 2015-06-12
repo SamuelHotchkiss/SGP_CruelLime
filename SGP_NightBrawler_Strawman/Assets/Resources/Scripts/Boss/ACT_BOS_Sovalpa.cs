@@ -43,11 +43,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
 
         Sov_StunCooldown = 0.0f;
 
-        Act_currPower = (int)(Act_basePower * 0.5f); //The Tree will be weeker at firts.
-        nightThresh = true;     //If its night this will activate.
-        distThresh = 5.0f;      //If the Player is 3 units away this will activate.
-        hpThresh = (int)(Act_baseHP * 0.75f);   //If its HP is at 75% this will activate.
-        target = null;
+        nightThresh = true;                     //If its night this will activate.
         state = STATES.WALKING;
 
         target = GameObject.FindGameObjectWithTag("Player");
@@ -239,18 +235,18 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
             {
                 Sov_HpTreshReducer += 0.1f;
                 Sov_NewHpTresh = Act_baseHP - (int)(Act_baseHP * Sov_HpTreshReducer);
-                int ChangeAttacks;
+                //int ChangeAttacks;
 
                 if (Act_currHP <= (int)(Act_baseHP * 0.4f))
                 {
                     Sov_NewHpTresh = 0;
-                    ChangeAttacks = Random.Range(0, 3);
+                    //ChangeAttacks = Random.Range(0, 3);
                     ChangeAttackPatterns(2);
                     Debug.Log("Less Then 40%");
                 }
                 else if (Act_currHP >= (int)(Act_baseHP * 0.4f) && Act_currHP <= (int)(Act_baseHP * 0.70f))
                 {
-                    ChangeAttacks = Random.Range(0, 2);
+                    //ChangeAttacks = Random.Range(0, 2);
                     ChangeAttackPatterns(1);
                     Debug.Log("Less Then 70%");
                 }
@@ -287,7 +283,6 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
     {
         if (numGeneration < 2)
             _A = 0;
-
 
         switch (_A)
         {
@@ -356,13 +351,13 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
         {
             if (Col.gameObject.tag == "Player")
             {
-                int Knck_Direction;
-                if (Act_facingRight)
-                    Knck_Direction = -1;
-                else
-                    Knck_Direction = 1;
+				//int Knck_Direction;
+				//if (Act_facingRight)
+				//	Knck_Direction = -1;
+				//else
+				//	Knck_Direction = 1;
 
-                float Force = (float)(Act_currPower * Knck_Direction);
+                //float Force = (float)(Act_currPower * Knck_Direction);
                 //target.GetComponent<PlayerController>().ApplyKnockBack(Force);
                 //target.GetComponent<PlayerController>().party[target.GetComponent<PlayerController>().currChar].ChangeHP(-Act_currPower / 5);
             }

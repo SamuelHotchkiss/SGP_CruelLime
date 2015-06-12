@@ -27,7 +27,6 @@ GameObject:
   - 4: {fileID: 447324}
   - 198: {fileID: 19807560}
   - 199: {fileID: 19989430}
-  - 114: {fileID: 11491328}
   m_Layer: 0
   m_Name: zeFire
   m_TagString: Untagged
@@ -94,17 +93,7 @@ MonoBehaviour:
   distance: 0
   speed: 0
   range: 0
---- !u!114 &11491328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e517785bc00e51c459c29b280372b72b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  right: 0
 --- !u!198 &19807560
 ParticleSystem:
   m_ObjectHideFlags: 1
