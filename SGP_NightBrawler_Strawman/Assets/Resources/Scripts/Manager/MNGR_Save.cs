@@ -10,7 +10,7 @@ public static class MNGR_Save
     public static List<MNGR_GameData> saveFiles = new List<MNGR_GameData>();
     public static MNGR_OptionsData optionsFile = new MNGR_OptionsData();
 
-    public static int currSave;
+    public static int currSave = 0;
 
     // Sets up the three save files
     public static void InitializeProfiles()
