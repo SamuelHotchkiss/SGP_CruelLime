@@ -34,7 +34,7 @@ public class TUT_Traning : MonoBehaviour {
             Tut_Flames.SetActive(true);
         if (Col.name.Contains("Arrow") && Tut_HitTarget != null)
             GetComponent<SpriteRenderer>().sprite = Tut_HitTarget;
-        if (Col.name.Contains("Melee"))
+        if (Col.name.Contains("Melee") || Col.name.Contains("Arrow") || Col.name.Contains("Fire") )
         {
             Tut_SmackDummy.SetActive(true);
             Tut_SmackTimer = 0.5f;
