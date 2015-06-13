@@ -27,6 +27,7 @@ public class Trigger : MonoBehaviour {
 		if (col.tag == "Player")
 		{
             MNGR_Game.UpdateWorld();
+			MNGR_Game.NextLevel = "WorldMap";
             Application.LoadLevel("TransitionScene");
 		}
 	}
