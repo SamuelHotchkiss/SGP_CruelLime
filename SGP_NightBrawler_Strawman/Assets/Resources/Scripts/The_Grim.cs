@@ -54,6 +54,6 @@ public class The_Grim : MonoBehaviour
 		AudioSource.PlayClipAtPoint(victory, new Vector3(0, 0, 0), MNGR_Options.musicVol);
 		yield return new WaitForSeconds(5);
 		MNGR_Game.UpdateWorld();
-		Application.LoadLevel("WorldMap");
+		Application.LoadLevel("TransitionScene");
 	}
 }
