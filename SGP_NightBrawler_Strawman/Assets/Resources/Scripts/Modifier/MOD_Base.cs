@@ -93,8 +93,12 @@ public class MOD_Base : MonoBehaviour
         }
         #endregion
 
-        originalColor = GetComponent<SpriteRenderer>().color;
-        GetComponent<SpriteRenderer>().color = myColor;
+        if (GetComponent<SpriteRenderer>() != null)
+        {
+            originalColor = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = myColor;
+        }
+
     }
 
     // Update is called once per frame
@@ -170,13 +174,21 @@ public class MOD_Base : MonoBehaviour
             for (int i = 0; i < player.party.Length; i++)
                 player.party[i].Act_HasMod = false;
 
-        player.GetComponent<SpriteRenderer>().color = originalColor;
+        if (GetComponent<SpriteRenderer>() != null)
+        {
+            //player.GetComponent<SpriteRenderer>().color = originalColor;
+            player.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        }
         player.myBuffs.Remove(this);
     }
 
     public virtual void EndModifyEnemy()    //Reset the character's HasMod Veriables.
     {
-        enemy.GetComponent<SpriteRenderer>().color = originalColor;
+        if (GetComponent<SpriteRenderer>() != null)
+        {
+            //enemy.GetComponent<SpriteRenderer>().color = originalColor;
+            enemy.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        }
         enemy.myBuffs.Remove(this);
     }
     
