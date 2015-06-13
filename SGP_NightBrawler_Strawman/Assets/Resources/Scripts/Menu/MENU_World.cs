@@ -30,15 +30,12 @@ public class MENU_World : MonoBehaviour
         //MNGR_Game.playerPosition = testStart;
         MNGR_Game.Initialize();
 
-        if (MNGR_Game.playerPosition > 2)
-            MNGR_Game.playerPosition = 2;
-        if (MNGR_Game.hordePosition > 5)
-            MNGR_Game.hordePosition = 5;
+        //if (MNGR_Game.playerPosition > 2)
+            //MNGR_Game.playerPosition = 2;
+        //if (MNGR_Game.hordePosition > 5)
+           // MNGR_Game.hordePosition = 5;
 
-        if (MNGR_Game.hordePosition == 5 && MNGR_Game.playerPosition == 2)
-            MNGR_Game.dangerZone = true;
-        else
-            MNGR_Game.dangerZone = false;
+        MNGR_Game.dangerZone = false;
 
         Debug.Log(MNGR_Game.dangerZone);
 
