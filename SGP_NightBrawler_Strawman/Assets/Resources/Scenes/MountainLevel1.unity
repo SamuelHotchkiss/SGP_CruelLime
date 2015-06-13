@@ -8046,6 +8046,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1213522805}
+  enemies: {fileID: 0}
+  activateEnemies: 0
 --- !u!1 &188494106
 GameObject:
   m_ObjectHideFlags: 0
@@ -28883,6 +28885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 976118364}
+  enemies: {fileID: 0}
+  activateEnemies: 0
 --- !u!1 &630134612
 GameObject:
   m_ObjectHideFlags: 0
@@ -45312,6 +45316,10 @@ Prefab:
       propertyPath: levelName
       value: MountainLevel3
       objectReference: {fileID: 0}
+    - target: {fileID: 11482384, guid: 0c538cde072a5714ca36518241a1b7be, type: 2}
+      propertyPath: IsATrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c538cde072a5714ca36518241a1b7be, type: 2}
   m_IsPrefabParent: 0
@@ -56906,6 +56914,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1633612807}
+  enemies: {fileID: 0}
+  activateEnemies: 0
 --- !u!1 &1199445468
 GameObject:
   m_ObjectHideFlags: 0
@@ -63964,6 +63974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1695122773}
+  enemies: {fileID: 0}
+  activateEnemies: 0
 --- !u!1 &1334116360
 GameObject:
   m_ObjectHideFlags: 0

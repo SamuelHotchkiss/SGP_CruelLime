@@ -31,6 +31,7 @@ public static class MNGR_Game
         theMan = true;
 
         currentLevel = "NEW GAME";
+		NextLevel = "WorldMap";
 
         //isNight = true;
         //hordePosition = HordeDelay = playerPosition = wallet = 0;

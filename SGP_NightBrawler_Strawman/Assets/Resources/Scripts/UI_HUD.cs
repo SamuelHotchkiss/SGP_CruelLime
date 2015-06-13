@@ -36,6 +36,11 @@ public class UI_HUD : MonoBehaviour {
 	{
 		Cursor.visible = true;
 
+        if(MNGR_Options.colorblind)
+        {
+            fighterCooldown.sprite = mageCooldown.sprite = rangerCooldown.sprite = Resources.Load<Sprite>("Sprites/GUI/Cooldown_GUI_blind");
+        }
+
 		fighter = party.GetComponent<PlayerController>().party[0];
 		ranger = party.GetComponent<PlayerController>().party[1];
 		mage = party.GetComponent<PlayerController>().party[2];

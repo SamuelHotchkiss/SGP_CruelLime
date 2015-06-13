@@ -25,6 +25,14 @@ public class MNGR_Animation_Player : MonoBehaviour
             "Sprites/Player/Defender", "Sprites/Player/Archer", "Sprites/Player/Ninja",
             "Sprites/Player/Poisoner", "Sprites/Player/Wizard", "Sprites/Player/ForceMage",
             "Sprites/Player/Spellslinger"};
+        if(MNGR_Options.colorblind)
+        {
+            for (int i = 0; i < filepaths.Length; i++)
+            {
+                filepaths[i] += "_blind";
+            }
+        }
+
         if (GetComponent<PlayerController>() != null)
         {
             currentController = GetComponent<PlayerController>();
