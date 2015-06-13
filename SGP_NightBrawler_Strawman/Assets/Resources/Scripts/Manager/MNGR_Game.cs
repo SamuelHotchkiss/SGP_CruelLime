@@ -23,6 +23,7 @@ public static class MNGR_Game
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
     public static string NextLevel;     // used by CharacterSelection scene, determines which level to load when exiting that scene.
 
+    public static int arrowPos;         // super hacky, don't have time to fix right now
 	public static void Initialize()
 	{
         if (theMan)
@@ -36,6 +37,8 @@ public static class MNGR_Game
         //isNight = true;
         //hordePosition = HordeDelay = playerPosition = wallet = 0;
         //paused = dangerZone = false;
+
+        arrowPos = 0;
 
 		theCharacters[0] = new CHAR_Swordsman();
 		theCharacters[1] = new CHAR_Lancer();
@@ -65,12 +68,13 @@ public static class MNGR_Game
      public static void UpdatePlayer()
     {
         MNGR_Game.playerPosition++;
+        arrowPos += 2;
     }
 
     public static void UpdateHorde()
     {
         //Once we have all the villages set we need to change this. 
-        if (MNGR_Game.hordePosition != 3 || HordeDelay == 0)
+        if (HordeDelay == 0)
             MNGR_Game.hordePosition++;
         else
             MNGR_Game.HordeDelay--;
