@@ -69,7 +69,13 @@ public class MENU_Load : MonoBehaviour
             case 1:
                 //Application.LoadLevel("WorldMap");
                 MNGR_Game.NextLevel = "WorldMap";
-                Application.LoadLevel("CharacterSelect");
+                if (MNGR_Save.saveFiles[MNGR_Save.currSave].isNew)
+                {
+                    MNGR_Save.saveFiles[MNGR_Save.currSave].isNew = false;
+                    Application.LoadLevel("CharacterSelect");
+                }
+                else
+                    Application.LoadLevel("WorldMap");
                 break;
             case 2:
                 Application.LoadLevel(Application.loadedLevelName); // reloads the LoadMenu scene

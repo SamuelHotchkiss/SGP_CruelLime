@@ -87,7 +87,7 @@ public static class MNGR_Save
     public static void LoadCurrentSave()
     {
         saveFiles[currSave].AssignGameManager();
-        saveFiles[currSave].isNew = false;
+        //saveFiles[currSave].isNew = false;
     }
 
     // Resets a current save profile
