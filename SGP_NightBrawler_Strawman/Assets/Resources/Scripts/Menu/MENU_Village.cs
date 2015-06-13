@@ -90,8 +90,8 @@ public class MENU_Village : MonoBehaviour {
 		//Level Name most be the EXACT name of the scene.
 		AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
 		Menu_Levelname = levelname;
-		StartCoroutine(WaitForSound(0));
         MNGR_Game.UpdateWorld();
+		StartCoroutine(WaitForSound(0));
 	}
 
 	IEnumerator WaitForSound(int _selection)
@@ -100,7 +100,9 @@ public class MENU_Village : MonoBehaviour {
 		switch (_selection)
 		{
 			case 0:
-				Application.LoadLevel(Menu_Levelname);
+				MNGR_Game.NextLevel = "WorldMap";
+				Application.LoadLevel("TransitionScene");
+				//Application.LoadLevel(Menu_Levelname);
 				break;
 			case 1:
 				Application.Quit();

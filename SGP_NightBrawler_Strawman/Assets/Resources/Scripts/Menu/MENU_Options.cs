@@ -12,7 +12,7 @@ public class MENU_Options : MonoBehaviour
 
     public Slider sfxSlider;
     public Slider musicSlider;
-    public Toggle fullscreenToggle;
+    public Toggle fullscreenToggle, blindToggle;
 
     public Button sfxButton, musicButton, screenButton;
 
@@ -26,10 +26,12 @@ public class MENU_Options : MonoBehaviour
         sfxSlider.value = MNGR_Options.sfxVol;
         musicSlider.value = MNGR_Options.musicVol;
         fullscreenToggle.isOn = MNGR_Options.fullscreen;
+        blindToggle.isOn = MNGR_Options.colorblind;
 
         sfxSlider.onValueChanged.AddListener(delegate { ChangeSFXVolume(sfxSlider.value); });
         musicSlider.onValueChanged.AddListener(delegate { ChangeMusicVolume(musicSlider.value); });
         fullscreenToggle.onValueChanged.AddListener(delegate { ChangeFullscreen(fullscreenToggle.isOn); });
+        blindToggle.onValueChanged.AddListener(delegate { ChangeBlind(blindToggle.isOn); });
 
         if (MNGR_Game.AmIMobile())
         {
@@ -94,9 +96,19 @@ public class MENU_Options : MonoBehaviour
             Screen.SetResolution(1280, 720, screen);
     }
 
+    public void ChangeBlind(bool blind)
+    {
+        MNGR_Options.colorblind = blind;
+    }
+
     public void ChangeScreenToggle()
     {
         fullscreenToggle.isOn = !fullscreenToggle.isOn;
+    }
+
+    public void ChangeBlindToggle()
+    {
+        blindToggle.isOn = !blindToggle.isOn;
     }
 
     public void Return()

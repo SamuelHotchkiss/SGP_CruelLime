@@ -10,7 +10,7 @@ public static class MNGR_Save
     public static List<MNGR_GameData> saveFiles = new List<MNGR_GameData>();
     public static MNGR_OptionsData optionsFile = new MNGR_OptionsData();
 
-    public static int currSave;
+    public static int currSave = 0;
 
     // Sets up the three save files
     public static void InitializeProfiles()
@@ -27,7 +27,7 @@ public static class MNGR_Save
         BinaryFormatter bff = new BinaryFormatter();
 
         if (!Directory.Exists(Application.persistentDataPath + "GameSaves"))
-            Directory.CreateDirectory(Application.persistentDataPath +"GameSaves");
+            Directory.CreateDirectory(Application.persistentDataPath + "GameSaves");
 
         FileStream file = File.Create(Application.persistentDataPath + "GameSaves/savedGames.SAVES");
         bff.Serialize(file, saveFiles);
@@ -73,9 +73,9 @@ public static class MNGR_Save
             FileStream file = File.Open(Application.persistentDataPath + "Options/options.OPTIONS", FileMode.Open);
             optionsFile = (MNGR_OptionsData)bff.Deserialize(file);
             file.Close();
+            optionsFile.AssignOptions();
         }
 
-        optionsFile.AssignOptions();
     }
     // Only overwrites the data of one save profile
     public static void OverwriteCurrentSave()

@@ -23,7 +23,7 @@ public class ACT_BOS_Ent : ACT_Enemy
 	// Use this for initialization
 	void Start () 
     {
-
+		target = GameObject.FindGameObjectWithTag("Player");
 
         // IDLE, WALK, RUN, ATTK, SPEC, HURT, DED,  USE
         stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 0.6f, 0.3f, 1.0f, 1.0f };

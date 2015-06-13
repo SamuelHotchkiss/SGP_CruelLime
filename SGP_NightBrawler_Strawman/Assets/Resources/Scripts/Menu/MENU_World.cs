@@ -30,15 +30,12 @@ public class MENU_World : MonoBehaviour
         //MNGR_Game.playerPosition = testStart;
         MNGR_Game.Initialize();
 
-        if (MNGR_Game.playerPosition > 2)
-            MNGR_Game.playerPosition = 2;
-        if (MNGR_Game.hordePosition > 5)
-            MNGR_Game.hordePosition = 5;
+        //if (MNGR_Game.playerPosition > 2)
+            //MNGR_Game.playerPosition = 2;
+        //if (MNGR_Game.hordePosition > 5)
+           // MNGR_Game.hordePosition = 5;
 
-        if (MNGR_Game.hordePosition == 5 && MNGR_Game.playerPosition == 2)
-            MNGR_Game.dangerZone = true;
-        else
-            MNGR_Game.dangerZone = false;
+        MNGR_Game.dangerZone = false;
 
         Debug.Log(MNGR_Game.dangerZone);
 
@@ -103,12 +100,12 @@ public class MENU_World : MonoBehaviour
 
     public void StartLevel()
     {
-        string lvlName = levels[playIndex].name;
+        MNGR_Game.NextLevel = levels[playIndex].name;
         Input.simulateMouseWithTouches = false;
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);
 
-        StartCoroutine(WaitForSound(lvlName));
+        StartCoroutine(WaitForSound("TransitionScene"));
     }
 
     public void VisitMerchant()

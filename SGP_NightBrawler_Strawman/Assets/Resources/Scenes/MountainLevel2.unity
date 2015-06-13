@@ -1461,7 +1461,7 @@ RectTransform:
   - {fileID: 721335542}
   - {fileID: 756632961}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1827,6 +1827,46 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 678803477}
+--- !u!1 &683409890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 683409892}
+  - 114: {fileID: 683409891}
+  m_Layer: 0
+  m_Name: The_Grim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &683409891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 683409890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af34c7e98ddad3e498e27552190edc62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 600385365}
+--- !u!4 &683409892
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 683409890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.8735008, y: .442117929, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!4 &721335542 stripped
 Transform:
   m_PrefabParentObject: {fileID: 431278, guid: 4e6c75070c8709346bd0109fd3b25387, type: 2}
@@ -2107,7 +2147,7 @@ Transform:
   m_Children:
   - {fileID: 1632728824}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!50 &765596952
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -3804,7 +3844,7 @@ Transform:
   m_Children:
   - {fileID: 2079932258}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!114 &1469334310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3862,7 +3902,7 @@ Transform:
   - {fileID: 2119559182}
   - {fileID: 141395898}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &1491020993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,11 +4432,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 490570, guid: feb51dd8f3480304489bf94d99da59f8, type: 2}
       propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11490724, guid: feb51dd8f3480304489bf94d99da59f8, type: 2}
-      propertyPath: Act_currHP
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: feb51dd8f3480304489bf94d99da59f8, type: 2}
