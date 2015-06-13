@@ -63,6 +63,10 @@ public static class MNGR_Game
     {
         UpdatePlayer();
         UpdateHorde();
+		if (hordePosition == playerPosition)
+			dangerZone = true;
+		else
+			dangerZone = false;
     }
 
      public static void UpdatePlayer()
