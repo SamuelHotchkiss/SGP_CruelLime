@@ -12,7 +12,10 @@ public class WarpSpot : MonoBehaviour
 	void Start()
 	{
 		activateHorde = MNGR_Game.dangerZone;
-		horde.gameObject.SetActive(false);
+		if (horde != null)
+		{
+			horde.gameObject.SetActive(false);
+		}
 	}
 
     // S: hardcoded nonsense to get some basic level functionality
