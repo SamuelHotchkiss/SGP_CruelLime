@@ -21,13 +21,13 @@ public class SpiningFace : MonoBehaviour {
 	void Update () {
 
         Spn_Timer -= Time.deltaTime;
-        if (Spin > 15)
+        if (Spin > 25)
             Snp_Backwards = true;
 
         if (!Snp_Backwards)
-            Spin += Time.deltaTime * 25;
+            Spin += Time.deltaTime * 15;
         else
-            Spin -= Time.deltaTime * 20;
+            Spin -= Time.deltaTime * 10;
         
         transform.localScale = new Vector3(Spin, Spin, transform.localScale.z);
 
