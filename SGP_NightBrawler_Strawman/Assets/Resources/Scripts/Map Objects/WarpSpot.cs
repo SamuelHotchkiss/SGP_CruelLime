@@ -5,7 +5,15 @@ public class WarpSpot : MonoBehaviour
 {
     public GameObject destination;
 	public GameObject enemies;
+	public GameObject horde;
 	public bool activateEnemies;
+	public bool activateHorde;
+
+	void Start()
+	{
+		activateHorde = MNGR_Game.dangerZone;
+		horde.gameObject.SetActive(false);
+	}
 
     // S: hardcoded nonsense to get some basic level functionality
     void OnTriggerEnter2D(Collider2D other)
@@ -18,6 +26,10 @@ public class WarpSpot : MonoBehaviour
 		if (activateEnemies)
 		{
 			enemies.gameObject.SetActive(true);
+		}
+		if (activateHorde)
+		{
+			horde.gameObject.SetActive(true);
 		}
     }
 	
