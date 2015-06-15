@@ -139,7 +139,6 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
                         Bip_RandLeftSmashLoc = new Vector3(MaxLeft + 2, Random.Range(0.5f, 2.5f), 0);
                     else
                         Bip_RandLeftSmashLoc = new Vector3(MaxLeft + 2, Random.Range(-2.45f, 2.5f), 0);
-                    Bip_RandLeftSmashLoc = new Vector3(MaxLeft + 2, Random.Range(0.5f, 2.5f), 0);
                     Bip_LeftArm.GetComponent<ENY_Arms>().Arm_MoveLoc = Bip_RandLeftSmashLoc;
                     Bip_LeftInTarget = false;
                 }
