@@ -48,12 +48,6 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
         Bip_HpTreshReducer = 0.2f;
         Bip_NewHpTresh = Act_baseHP - (int)(Act_baseHP * Bip_HpTreshReducer);
 
-        if (!MNGR_Game.isNight)
-            GetComponent<SpriteRenderer>().sprite = Bip_DayBody;
-        else
-            GetComponent<SpriteRenderer>().sprite = Bip_NightBody;
-            
-
         target = GameObject.FindGameObjectWithTag("Player");
 
         for (int i = 0; i < Bip_myBehaviours.Length; i++)

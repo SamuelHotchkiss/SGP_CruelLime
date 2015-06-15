@@ -9,10 +9,13 @@ public class ENY_Arms : ACT_Enemy {
     public bool Arm_TargetFound;
     public GameObject Arm_ShadowObj;
 
-    public Sprite Bip_DayArms;
-    public Sprite Bip_NightArms;
-    public PROJ_Base Bip_DayProjectile;
-    public PROJ_Base Bip_NightProjectile;
+    public bool Arm_IsLeft;
+    public bool Arm_IsRight;
+    public Sprite Bip_LeftArm;
+    public Sprite Bip_RightArms;
+    public PROJ_Base Bip_LeftProjectile;
+    public PROJ_Base Bip_RightProjectile;
+    public PROJ_Base Bip_Smash;
 
     public float Arm_DownTimer;
     public float Arm_IgnoreCollision;
@@ -38,20 +41,18 @@ public class ENY_Arms : ACT_Enemy {
 
          if (!Arm_IsShadow)
          {
-             if (!MNGR_Game.isNight)
+             GetComponent<BoxCollider2D>().enabled = false;
+             if (Arm_IsLeft)
              {
-                 GetComponent<SpriteRenderer>().sprite = Bip_DayArms;
-                 projectile = Bip_DayProjectile;
+                 GetComponent<SpriteRenderer>().sprite = Bip_LeftArm;
+                 projectile = Bip_LeftProjectile;
              }
-             else
+             else if (Arm_IsRight)
              {
-                 GetComponent<SpriteRenderer>().sprite = Bip_NightArms;
-                 projectile = Bip_NightProjectile;
+                 GetComponent<SpriteRenderer>().sprite = Bip_RightArms;
+                 projectile = Bip_RightProjectile;
              }
-                 
          }
-
-
 	}
 	
 	// Update is called once per frame
@@ -62,7 +63,6 @@ public class ENY_Arms : ACT_Enemy {
             Destroy(Arm_ShadowObj);
             Destroy(gameObject);
         }
-
         if (Arm_IsShadow)
         {
             Arm_DownTimer -= Time.deltaTime;
@@ -81,8 +81,8 @@ public class ENY_Arms : ACT_Enemy {
             {
                 float Xpos;
                 float Ypos;
-                Ypos = Mathf.Lerp(transform.position.y, Arm_MoveLoc.y, 0.02f);
-                Xpos = Mathf.Lerp(transform.position.x, Arm_MoveLoc.x, 0.02f);
+                Ypos = Mathf.Lerp(transform.position.y, Arm_MoveLoc.y, (2f * Time.deltaTime));
+                Xpos = Mathf.Lerp(transform.position.x, Arm_MoveLoc.x, (2f * Time.deltaTime));
                 transform.position = new Vector3(Xpos, Ypos);  
             }
         }
@@ -96,20 +96,49 @@ public class ENY_Arms : ACT_Enemy {
             Arm_TargetFound = Arm_ShadowObj.GetComponent<ENY_Arms>().Arm_TargetFound;
             Arm_DownTimer = Arm_ShadowObj.GetComponent<ENY_Arms>().Arm_DownTimer;
 
+            //Shockwave
+            if (Mathf.Abs(transform.position.y - Arm_ShadowObj.transform.position.y) <= 0.5f && !GetComponent<BoxCollider2D>().enabled)
+            {
+                if (Arm_IsRight)
+                {
+                    PROJ_Base clone = (PROJ_Base)Instantiate(Bip_Smash, transform.position, new Quaternion(0, 0, 0, 0));
+                    clone.owner = gameObject;
+                    clone.Initialize();
+                    Act_currAttackSpeed = Act_baseAttackSpeed;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    GetComponent<BoxCollider2D>().enabled = true; 
+                }
+                else if (Arm_IsLeft)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Vector3 NPos = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), transform.position.y + Random.Range(15,25));
+                        PROJ_Base clone = (PROJ_Base)Instantiate(Bip_Smash, NPos, new Quaternion(0, 0, 0, 0));
+                        clone.owner = gameObject;
+                        clone.Initialize();
+                        Act_currAttackSpeed = Act_baseAttackSpeed;
+                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        GetComponent<BoxCollider2D>().enabled = true;  
+                    }
+
+                }
+            }
+
+            
+            //Go to the Ground.
             if (Arm_TargetFound || Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId == 1)
             {
                 if (Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId != 2)
-                    Ypos = Mathf.Lerp(transform.position.y, Arm_ShadowObj.transform.position.y, 0.15f);
+                    Ypos = Mathf.Lerp(transform.position.y, Arm_ShadowObj.transform.position.y, (5f * Time.deltaTime));
                 else
-                    Ypos = Mathf.Lerp(transform.position.y, Arm_ShadowObj.transform.position.y, 0.9f);
-                Ypos = Mathf.Lerp(transform.position.y, Arm_ShadowObj.transform.position.y, 0.15f);
-                Xpos = Arm_ShadowObj.transform.position.x;
+                    Ypos = Mathf.Lerp(transform.position.y, Arm_ShadowObj.transform.position.y, (9f * Time.deltaTime));
 
+                Xpos = Arm_ShadowObj.transform.position.x;
                 transform.position = new Vector3(Xpos, Ypos, transform.position.z);
+
                 if (Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId == 1)
                 {
                     Act_currAttackSpeed -= Time.deltaTime;
-
                     if (Act_currAttackSpeed <= 0.0f && projectile != null)
                     {
                         PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
@@ -128,25 +157,24 @@ public class ENY_Arms : ACT_Enemy {
                         Instantiate(Spw_Critter, transform.position, new Quaternion());
                         Spw_SpawnPerSec = Spw_baseSpawnPerSec;
                     }
-                        
                 }
             }
             else
             {
                 if (Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId != 2)
-                {
-                    Ypos = Mathf.Lerp(transform.position.y, 5.0f, 0.01f);
-                }
+                    Ypos = Mathf.Lerp(transform.position.y, 5.0f, (2f * Time.deltaTime));
                 else
-                {
-                    Ypos = Mathf.Lerp(transform.position.y, 5.0f, 0.4f);
-                }
-                
+                    Ypos = Mathf.Lerp(transform.position.y, 5.0f, (4f * Time.deltaTime));
+
+                if (Mathf.Abs(transform.position.y - Arm_ShadowObj.transform.position.y) >= 1.5f)
+                    GetComponent<BoxCollider2D>().enabled = false;
+
                 Xpos = Arm_ShadowObj.transform.position.x;
                 transform.position = new Vector3(Xpos, Ypos, transform.position.z); 
             }
         }
 	}
+
 
     public override void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
     {                                            //Damage needs to be negative.
@@ -160,8 +188,6 @@ public class ENY_Arms : ACT_Enemy {
             if (Act_currHP <= 0)
             {
                 Act_currHP = 0;
-                //state = STATES.DEAD;
-                //currTime = stateTime[(int)state];
                 Destroy(Arm_ShadowObj);
                 Destroy(gameObject);
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -171,11 +197,11 @@ public class ENY_Arms : ACT_Enemy {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player" && Arm_DownTimer <= 0.0f && Arm_IgnoreCollision <= 0.0f && Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId == 0)
-       {
-           Arm_TargetFound = true;
-           Arm_DownTimer = Arm_BaseDownTimer;
-           Arm_IgnoreCollision = Arm_BaseIgnoreCollision;
-       }
+      if (col.tag == "Player" && Arm_DownTimer <= 0.0f && Arm_IgnoreCollision <= 0.0f && Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId == 0)
+      {
+          Arm_TargetFound = true;
+          Arm_DownTimer = Arm_BaseDownTimer;
+          Arm_IgnoreCollision = Arm_BaseIgnoreCollision;
+      }
     }
 }
