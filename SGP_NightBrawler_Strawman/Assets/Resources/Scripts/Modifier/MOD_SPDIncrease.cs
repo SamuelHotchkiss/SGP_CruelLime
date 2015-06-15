@@ -31,7 +31,7 @@ public class MOD_SPDIncrease : MOD_Base {
             for (int i = 0; i < player.party.Length; i++)
             {
                 float TripleSpeed = player.party[i].Act_currSpeed * 1.5f;     //Increse Speed by x3
-                player.party[i].SetCurrSpeed((int)TripleSpeed);
+                player.party[i].SetCurrSpeed(TripleSpeed);
             }
 
             Mod_OnceOnly = true;
@@ -41,7 +41,7 @@ public class MOD_SPDIncrease : MOD_Base {
     public override void ModifyEnemy()
     {
         float TripleSpeed = enemy.Act_currSpeed * 3.0f;
-        enemy.SetCurrSpeed((int)TripleSpeed);
+        enemy.SetCurrSpeed(TripleSpeed);
     }
 
     public override void EndModifyActor()

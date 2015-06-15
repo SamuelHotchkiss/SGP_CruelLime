@@ -27,14 +27,14 @@ public class MOD_DMGIncrease : MOD_Base
         for (int i = 0; i < player.party.Length; i++)
         {
             float IncreaseDmgPercent = player.party[i].Act_basePower * 1.5f;     //Increse Damage by 50%
-            player.party[i].SetCurrPower((int)IncreaseDmgPercent);
+            player.party[i].SetCurrPower(IncreaseDmgPercent);
         }
     }
 
 	public override void ModifyEnemy()
 	{
 		float IncreaseDmgPercent = enemy.Act_basePower * 1.5f;
-			enemy.SetCurrPower((int)IncreaseDmgPercent);
+			enemy.SetCurrPower(IncreaseDmgPercent);
 	}
 
     public override void EndModifyActor()

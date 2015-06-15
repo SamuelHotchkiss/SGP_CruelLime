@@ -21,7 +21,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
     
     public List<GameObject> Sov_SpawnPoints;
 
-    private int Sov_NewHpTresh;
+    private float Sov_NewHpTresh;
     private float Sov_HpTreshReducer;
     
     ///Behaviors
@@ -50,7 +50,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
 
         Sov_WayPointLock = false;
         Sov_HpTreshReducer = 0.1f;
-        Sov_NewHpTresh = Act_baseHP - (int)(Act_baseHP * Sov_HpTreshReducer);
+        Sov_NewHpTresh = Act_baseHP - (Act_baseHP * Sov_HpTreshReducer);
         projectile = Sov_Attacks[0];
 
         for (int i = 0; i < Sov_myBehaviours.Length; i++)

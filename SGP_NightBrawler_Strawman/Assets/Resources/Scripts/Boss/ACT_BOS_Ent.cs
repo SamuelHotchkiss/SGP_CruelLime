@@ -66,7 +66,7 @@ public class ACT_BOS_Ent : ACT_Enemy
                 ChangeHP(2);
                 Ent_HealCooldown = 0.05f;
             }
-            if (Act_currHP > (int)(Act_baseHP * Ent_NewMaxRegen))
+            if (Act_currHP > (Act_baseHP * Ent_NewMaxRegen))
             {
                 Ent_HealHP = false;
 				Ent_WallUp = false;
@@ -147,7 +147,7 @@ public class ACT_BOS_Ent : ACT_Enemy
 
         if (hpThresh >= Act_currHP)
         {
-            if (Act_currHP <= (int)(Act_baseHP * 0.25f) && Ent_NewMaxRegen > 0.0f)
+            if (Act_currHP <= (Act_baseHP * 0.25f) && Ent_NewMaxRegen > 0.0f)
             {
                 Ent_HealHP = true;
                 if (distThresh + 5 >= Vector3.Distance(target.transform.position, transform.position))
@@ -164,12 +164,12 @@ public class ACT_BOS_Ent : ACT_Enemy
             {
                 Spw_BaseSpawnCoolDown = Spw_baseSpawnPerSec * 4.0f;
                 Act_currPower = Act_basePower;          //Full Power potential
-                hpThresh = (int)(Act_baseHP * 0.25f);   //If its HP is at 25% this will activate.
+                hpThresh = (Act_baseHP * 0.25f);   //If its HP is at 25% this will activate.
             }
             else if (Act_currHP <= Act_baseHP * 0.75f)
             {
-                Act_currPower = (int)(Act_basePower * 0.9f);    //Power Increse to 90% of its potential
-                hpThresh = (int)(Act_baseHP * 0.5f);            //If its HP is at 50% this will activate.
+                Act_currPower = (Act_basePower * 0.9f);    //Power Increse to 90% of its potential
+                hpThresh = (Act_baseHP * 0.5f);            //If its HP is at 50% this will activate.
             }
         }
     }

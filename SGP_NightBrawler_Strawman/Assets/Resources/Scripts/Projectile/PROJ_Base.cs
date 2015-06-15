@@ -7,7 +7,7 @@ public class PROJ_Base : MonoBehaviour
 
     protected Vector2 start;            // where are we from?
     public Vector2 velocity;         // which way are we going?
-    public int power;         // how much damage will we deal?
+    public float power;         // how much damage will we deal?
     public float m_distance;    // how far have we gone?
 
     public float speed;       // how fast are we moving?
@@ -32,7 +32,7 @@ public class PROJ_Base : MonoBehaviour
             int target = player.currChar;
 
             power += player.party[target].Act_currPower;
-            power = (int)(_damMult * (float)power);
+            power = (_damMult * (float)power);
 
             //bool right = player.party[target].Act_facingRight;
             right = _r;
