@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     float specTime = 0.75f;
     // S: to be removed later
     public GameObject theCanvas;
+    public GameObject theHorde;
 
     // Use this for initialization
     protected virtual void Start()
@@ -90,12 +91,12 @@ public class PlayerController : MonoBehaviour
         // for testing
         //MNGR_Game.dangerZone = true;
 
-        if (GameObject.Find("_Horde") != null)
+        if (theHorde != null)
         {
             if (MNGR_Game.dangerZone)
-                GameObject.Find("_Horde").SetActive(true);
+                theHorde.SetActive(true);
             else
-                GameObject.Find("_Horde").SetActive(false);
+                theHorde.SetActive(false);
         }
 
     }
@@ -893,9 +894,9 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log("UsePowerUP");
             }
         }
-        else if ((pauseTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
-        {
-            GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().PauseGame();
-        }
+        //else if ((pauseTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
+        //{
+        //    GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().PauseGame();
+        //}
     }
 }
