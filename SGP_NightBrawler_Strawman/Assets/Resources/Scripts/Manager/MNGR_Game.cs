@@ -7,7 +7,7 @@ public static class MNGR_Game
 {
     static bool theMan = false;
 
-    static bool isMobile = true;   // S: cannot be altered by outside sources, ONLY change if porting to Android
+    static bool isMobile = false;   // S: cannot be altered by outside sources, ONLY change if porting to Android
 
 	public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
 	public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];

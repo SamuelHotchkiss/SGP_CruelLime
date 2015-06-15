@@ -78,13 +78,13 @@ public class PROJ_Flamethrower : PROJ_Base
         {
             Debug.Log("BURN!");
 
-            other.GetComponent<ACT_Enemy>().ChangeHP(-power);
+            other.GetComponent<ACT_Enemy>().ChangeHP(-power * Time.deltaTime);
         }
 		else if (other.tag == "Player")
 		{
 			Debug.Log("BURN!");
 
-			other.GetComponent<PlayerController>().party[other.GetComponent<PlayerController>().currChar].ChangeHP(-power);
+			other.GetComponent<PlayerController>().party[other.GetComponent<PlayerController>().currChar].ChangeHP(-power * Time.deltaTime);
 		}
     }
 }
