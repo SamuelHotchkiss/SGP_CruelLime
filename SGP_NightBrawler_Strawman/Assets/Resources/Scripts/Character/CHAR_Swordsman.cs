@@ -25,10 +25,11 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
         Act_PowerLevel = 1;
         Act_SpeedLevel = 1;
 
-        ProjFilePaths = new string[3];
+        ProjFilePaths = new string[4];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Melee";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Melee";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Whirlwind";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_Whirlwind";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE, DANCE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f, 0.8f };
@@ -159,5 +160,36 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
         return ret;
     }
 
+	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+	{
+		AttackInfo ret = new AttackInfo(0);
 
+		if (_curTmr > _maxTmr * 0.95f)
+			ret.spriteIndex = specialSprites[0];
+		else if (_curTmr > _maxTmr * 0.7f)
+			ret.spriteIndex = specialSprites[1];
+		else if (_curTmr + Time.deltaTime * 2.0f > _maxTmr * 0.7f)
+		{
+			if (Act_facingRight)
+				ret.velocity = new Vector2(2.0f, 0.0f);
+			else
+				ret.velocity = new Vector2(-2.0f, 0.0f);
+			ret.spriteIndex = specialSprites[1];
+		}
+		else if (_curTmr >= 0)
+		{
+			if ((int)(_curTmr * 1000) % 27 > 9)
+				ret.spriteIndex = specialSprites[2];
+			else
+				ret.spriteIndex = specialSprites[3];
+		}
+		if (_curTmr < _maxTmr * 0.7f)
+			ret.spawnproj = true;
+
+		return ret;
+	}
+
+	public override void UpgradeSpecial()
+	{
+	}
 }

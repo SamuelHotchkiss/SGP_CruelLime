@@ -26,7 +26,7 @@ public class MOD_HPInstant : MOD_Base
     public override void ModifyActor()   //Just a virtual fuction for its children
     {
         float QuarterHeal = player.party[player.currChar].Act_baseHP * 0.25f;
-        player.party[player.currChar].ChangeHP((int)QuarterHeal);
+        player.party[player.currChar].ChangeHP(QuarterHeal);
     }
 
     public override void ModifyEnemy()

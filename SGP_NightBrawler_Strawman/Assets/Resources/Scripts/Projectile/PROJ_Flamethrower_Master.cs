@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PROJ_Flamethrower : PROJ_Base
+public class PROJ_Flamethrower_Master : PROJ_Base 
 {
-    float timer = 1.5f;
+	float timer = 3.5f;
+	float rotSpeed = 1.2f;
+	float dir = -1.0f;
 
     // Use this for initialization
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
@@ -32,7 +34,7 @@ public class PROJ_Flamethrower : PROJ_Base
             //bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
-			power = (_damMult * power);
+			power = (int)(_damMult * (float)power);
 
             transform.SetParent(owner.transform);
 
@@ -47,10 +49,11 @@ public class PROJ_Flamethrower : PROJ_Base
     {
 		if (owner.tag == "Player")
 		{
-			if (owner.GetComponent<PlayerController>().party[owner.GetComponent<PlayerController>().currChar].Act_facingRight == true)
-				GetComponentInChildren<ParticleSystem>().startSpeed = 5.0f;
-			else
-				GetComponentInChildren<ParticleSystem>().startSpeed = -5.0f;
+			GetComponentInChildren<ParticleSystem>().startSpeed = 5.0f;
+
+			Vector3 newAng = transform.localEulerAngles;
+			newAng.z += rotSpeed * dir;
+			transform.localEulerAngles = newAng;
 		}
 		else if (owner.tag == "Enemy")
 		{

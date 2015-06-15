@@ -39,7 +39,7 @@ public class MOD_DoT : MOD_Base
             float OnePercentDmg = player.party[Mod_CurrCharacter].Act_baseHP * 0.1f;     //Reduces 2% of the Character's Hp every second.
             if (OnePercentDmg < 1.0f)
                 OnePercentDmg = 1.0f;
-            player.party[Mod_CurrCharacter].ChangeHP(-(int)OnePercentDmg, false);
+            player.party[Mod_CurrCharacter].ChangeHP(-OnePercentDmg, false);
             Mod_Timer = 2.0f;
         }
     }
@@ -51,7 +51,7 @@ public class MOD_DoT : MOD_Base
             float OnePercentDmg = enemy.Act_baseHP * 0.1f;     //Reduces 2% of the enemy's Hp every second.
             if (OnePercentDmg < 1.0f)
                 OnePercentDmg = 1.0f;
-            enemy.ChangeHP(-(int)OnePercentDmg);
+            enemy.ChangeHP(-OnePercentDmg);
             Mod_Timer = 2.0f;
         }
     }

@@ -31,6 +31,13 @@ public class PROJ_Decoy : PROJ_Base
 		{
 			ProjectileExpired();
 		}
+
+		PlayerController player = owner.GetComponent<PlayerController>();
+
+		if (player.currentState == ACT_CHAR_Base.STATES.HURT && !player.party[player.currChar].hasSpecial)
+		{
+			ProjectileExpired();
+		}
 	}
 
 	protected override void ProjectileExpired()
@@ -38,13 +45,9 @@ public class PROJ_Decoy : PROJ_Base
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
 		for (int i = 0; i < enemies.Length; i++)
-		{
 			enemies[i].GetComponent<ACT_Enemy>().target = GameObject.FindGameObjectWithTag("Player");
-		}
 
 		owner.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-
-
 		Destroy(gameObject);
 	}
 

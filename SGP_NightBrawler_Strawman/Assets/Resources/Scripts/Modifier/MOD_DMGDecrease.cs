@@ -30,14 +30,14 @@ public class MOD_DMGDecrease : MOD_Base
     public override void ModifyActor()
     {
         float DecreseDmgPercent = player.party[Mod_CurrCharacter].Act_basePower * 0.75f;     //Decrese Damage by 25%
-        player.party[Mod_CurrCharacter].SetCurrPower((int)DecreseDmgPercent);
+        player.party[Mod_CurrCharacter].SetCurrPower(DecreseDmgPercent);
         
     }
 
     public override void ModifyEnemy()
     {
         float DecreseDmgPercent = enemy.Act_basePower * 1.5f;
-        enemy.SetCurrPower((int)DecreseDmgPercent);
+        enemy.SetCurrPower(DecreseDmgPercent);
     }
 
     public override void EndModifyActor()

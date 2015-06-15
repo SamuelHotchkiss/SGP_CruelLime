@@ -41,8 +41,7 @@ public class The_Grim : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
-		if ((script.Act_currHP <= 0.0f || script.state == ACT_Enemy.STATES.DEAD) && playMusic)
+		if (((script.Act_currHP <= 0.0f || script.state == ACT_Enemy.STATES.DEAD) || boss == null) && playMusic)
 		{
 			StartCoroutine("LoadLevel");
 			playMusic = false;

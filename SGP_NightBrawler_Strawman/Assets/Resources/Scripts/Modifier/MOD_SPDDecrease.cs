@@ -32,7 +32,7 @@ public class MOD_Slowed : MOD_Base
             for (int i = 0; i < player.party.Length; i++)
             {
                 float TripleSpeed = player.party[i].Act_currSpeed * 0.25f;     //Decrese Speed by 25%
-                player.party[i].SetCurrSpeed((int)TripleSpeed);
+                player.party[i].SetCurrSpeed(TripleSpeed);
             }
             Mod_OnceOnly = true;
         }
@@ -43,7 +43,7 @@ public class MOD_Slowed : MOD_Base
         if (!Mod_OnceOnly)
         {
             float TripleSpeed = enemy.Act_currSpeed * 0.25f;     //Decrese Speed by 25%
-            enemy.SetCurrSpeed((int)TripleSpeed);
+            enemy.SetCurrSpeed(TripleSpeed);
             Mod_OnceOnly = true;
         }
     }

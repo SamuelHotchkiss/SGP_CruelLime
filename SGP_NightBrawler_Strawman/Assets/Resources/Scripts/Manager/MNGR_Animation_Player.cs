@@ -145,7 +145,10 @@ public class MNGR_Animation_Player : MonoBehaviour
                     SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 1);
                 break;
             case ACT_CHAR_Base.STATES.SPECIAL:
-                info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
+				if (currentCharacter.hasSpecial)
+					info = currentCharacter.ActivateMasterSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
+				else
+					info = currentCharacter.ActivateSpecial(currentController.curTmr, currentController.maxTmr[(int)curState]);
                 SetSprite(info.spriteIndex);
 
                 if (info.velocity.magnitude != 0)
@@ -155,7 +158,7 @@ public class MNGR_Animation_Player : MonoBehaviour
                 }
 
                 if (SpawnProj && info.spawnproj)
-                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, 2, info.damMult);
+                    SpawnProj = currentController.SpawnProj(currentCharacter.Act_facingRight, info.projIndex, info.damMult);
 
                 if (gameObject.layer != info.physicsLayer)
                     gameObject.layer = info.physicsLayer;
