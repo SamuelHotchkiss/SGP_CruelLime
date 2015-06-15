@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
                     CheckMoveInput(currentState);
                 if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
-                    if (GameObject.FindGameObjectWithTag("Decoy"))
+                    if (GameObject.FindGameObjectWithTag("Decoy") && !party[currChar].hasSpecial)
                         GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
                     ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
                     horz = 0.0f;

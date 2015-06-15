@@ -58,6 +58,8 @@ public class ACT_CHAR_Base : ACT_Base
 
     public string name;
 
+	public bool hasSpecial;
+
 	// Use this for initialization
 	public virtual void Start () 
 	{
@@ -228,4 +230,11 @@ public class ACT_CHAR_Base : ACT_Base
     {
         
     }
+
+	public virtual AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+	{
+		AttackInfo ret = new AttackInfo(0);
+
+		return ret;
+	}
 }

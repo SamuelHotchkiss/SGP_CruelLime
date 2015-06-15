@@ -150,5 +150,23 @@ public class CHAR_Ninja : ACT_CHAR_Base
         return ret;
     }
 
+	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+	{
+		AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
+		if (_curTmr > _maxTmr * 0.9f)
+			ret.spriteIndex = specialSprites[0];
+		else if (_curTmr > _maxTmr * 0.8f)
+			ret.spriteIndex = specialSprites[1];
+		else if (_curTmr > _maxTmr * 0.7f)
+			ret.spriteIndex = specialSprites[2];
+		else if (_curTmr >= 0)
+			ret.spriteIndex = specialSprites[3];
+
+		//if (_curTmr < _maxTmr * 0.1f)
+		//ret.spawnproj = true;
+
+
+		return ret;
+	}
 }
