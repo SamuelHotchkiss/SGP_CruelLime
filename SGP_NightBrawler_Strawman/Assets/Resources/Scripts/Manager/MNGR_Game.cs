@@ -7,7 +7,7 @@ public static class MNGR_Game
 {
     static bool theMan = false;
 
-    static bool isMobile = false;   // S: cannot be altered by outside sources, ONLY change if porting to Android
+    static bool isMobile = true;   // S: cannot be altered by outside sources, ONLY change if porting to Android
 
 	public static ACT_CHAR_Base[] theCharacters = new ACT_CHAR_Base[9];
 	public static ACT_CHAR_Base[] currentParty = new ACT_CHAR_Base[3];
@@ -17,7 +17,7 @@ public static class MNGR_Game
 	public static int equippedItem;
 
 	public static MNGR_Inventory theInventory = new MNGR_Inventory();
-	public static bool isNight = true;
+	public static bool isNight = false;
 	public static int hordePosition, HordeDelay, playerPosition, wallet;
 	public static bool paused;
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
