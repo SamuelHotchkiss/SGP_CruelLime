@@ -13,8 +13,9 @@ public class ACT_CHAR_Base : ACT_Base
         public bool enableCollision;
         public int physicsLayer;
         public float damMult;
+		public int projIndex;
         public AttackInfo(int _sprdex, Vector2 _vel = default(Vector2), Vector3 _pos = default(Vector3),
-            bool _spawn = false, bool _enabCol = true, int _phylay = 8, float _damMult = 1.0f)
+            bool _spawn = false, bool _enabCol = true, int _phylay = 8, float _damMult = 1.0f, int _projIndex = 2)
         {
             spriteIndex = _sprdex;
             velocity = _vel;
@@ -23,6 +24,7 @@ public class ACT_CHAR_Base : ACT_Base
             enableCollision = _enabCol;
             physicsLayer = _phylay;
             damMult = _damMult;
+			projIndex = _projIndex;
         }
     }
                         //      0,      1,      2,
@@ -236,5 +238,10 @@ public class ACT_CHAR_Base : ACT_Base
 		AttackInfo ret = new AttackInfo(0);
 
 		return ret;
+	}
+
+	public virtual void UpgradeSpecial()
+	{
+		
 	}
 }

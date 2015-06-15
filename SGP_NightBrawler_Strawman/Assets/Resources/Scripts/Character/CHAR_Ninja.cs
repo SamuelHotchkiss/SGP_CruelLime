@@ -24,10 +24,11 @@ public class CHAR_Ninja : ACT_CHAR_Base
         Act_SpeedLevel = 1;
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
-        ProjFilePaths = new string[3];
+		ProjFilePaths = new string[4];
 		ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Kunai";
 		ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Shuriken";
 		ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Decoy";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_Decoy";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
 		StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.5f, 0.4f, 0.7f, 0.7f, 0.1f, 1.0f, 1.0f, 1.0f };
@@ -168,5 +169,9 @@ public class CHAR_Ninja : ACT_CHAR_Base
 
 
 		return ret;
+	}
+
+	public override void UpgradeSpecial()
+	{
 	}
 }
