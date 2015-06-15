@@ -18,7 +18,7 @@ public class PROJ_Flamethrower_Master : PROJ_Base
             int target = player.currChar;
 
             power += player.party[target].Act_currPower;
-            power = (int)(_damMult * (float)power);
+            power = (_damMult * power);
 
             if (!_r)
             {

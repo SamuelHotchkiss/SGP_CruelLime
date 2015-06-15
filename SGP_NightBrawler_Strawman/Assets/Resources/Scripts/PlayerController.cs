@@ -801,8 +801,8 @@ public class PlayerController : MonoBehaviour
                 }
 
                 Vector2 doubleTap = theTouch.position;
-                float top = dashPoint.y + 25.0f;
-                float bottom = dashPoint.y - 100.0f;
+                float top = dashPoint.y + 50.0f;
+                float bottom = dashPoint.y - 50.0f;
 
                 if (doubleTap.x > dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
                     horz = 30.0f;

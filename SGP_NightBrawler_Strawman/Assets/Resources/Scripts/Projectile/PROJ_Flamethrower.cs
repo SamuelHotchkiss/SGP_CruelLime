@@ -16,7 +16,7 @@ public class PROJ_Flamethrower : PROJ_Base
             int target = player.currChar;
 
             power += player.party[target].Act_currPower;
-            power = (int)(_damMult * (float)power);
+            power = (_damMult * power);
 
             if (!_r)
             {
@@ -32,7 +32,7 @@ public class PROJ_Flamethrower : PROJ_Base
             //bool right = owner.GetComponent<ACT_Enemy>().Act_facingRight;
 
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
-			power = (int)(_damMult * (float)power);
+			power = (_damMult * power);
 
             transform.SetParent(owner.transform);
 
