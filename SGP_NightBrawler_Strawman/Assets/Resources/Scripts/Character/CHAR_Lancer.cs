@@ -27,10 +27,11 @@ public class CHAR_Lancer : ACT_CHAR_Base
         Act_SpeedLevel = 1;
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
-        ProjFilePaths = new string[3];
+		ProjFilePaths = new string[4];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Lancer_Melee";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Lancer_Melee";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Lancer_Melee";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_Lancer_Melee";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 1.0f, 0.75f, 0.1f, 0.8f, 0.7f, 0.6f, 0.6f, 0.1f, 1.0f, 1.0f, 0.75f };
@@ -196,5 +197,64 @@ public class CHAR_Lancer : ACT_CHAR_Base
         return ret;
     }
 
+	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+	{
+		AttackInfo ret = new AttackInfo(0);
 
+		if (chargeTimer > 0 && (Input.GetButton("Special/Cancel")
+			|| (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)))
+		{
+			chargeTimer -= Time.deltaTime;
+
+			// really weird correction
+			if (chargeTimer == 0.0f)
+				chargeTimer -= Time.deltaTime;
+
+			if (chargeTimer > chargeTimerMax * 0.8f)
+				ret.spriteIndex = attack1Sprites[0];
+			else if (chargeTimer >= 0)
+				ret.spriteIndex = attack1Sprites[1];
+
+			if (_curTmr < 0.2f)
+				GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
+		}
+		else if (chargeTimer != 0.0f) // || !Input.GetButton("Special/Cancel") )
+		{
+			chargeDur = chargeTimerMax - chargeTimer;
+			chargeTimer = 0.0f;
+
+			GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
+		}
+		else if (chargeTimer == 0.0f)
+		{
+			if (_curTmr > _maxTmr * 0.8f)
+			{
+				if (Act_facingRight)
+					ret.velocity = new Vector2(8.0f * chargeDur, 0.0f);
+				else
+					ret.velocity = new Vector2(-8.0f * chargeDur, 0.0f);
+
+				ret.spriteIndex = specialSprites[0];
+			}
+			else if (_curTmr > _maxTmr * 0.6f)
+				ret.spriteIndex = specialSprites[1];
+			else if (_curTmr > _maxTmr * 0.5f)
+			{
+				ret.spriteIndex = specialSprites[2];
+				ret.damMult += chargeDur * 10.0f;
+				ret.spawnproj = true;
+			}
+			else if (_curTmr >= 0)
+				ret.spriteIndex = specialSprites[3];
+
+			ret.physicsLayer = 17;
+			//ret.enableCollision = false;
+		}
+
+		return ret;
+	}
+
+	public override void UpgradeSpecial()
+	{
+	}
 }

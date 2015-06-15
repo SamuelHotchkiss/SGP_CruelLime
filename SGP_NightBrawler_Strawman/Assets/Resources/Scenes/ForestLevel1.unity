@@ -5918,14 +5918,6 @@ Prefab:
       propertyPath: potionCount
       value: 
       objectReference: {fileID: 373132693}
-    - target: {fileID: 11435728, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
-      propertyPath: touchPanel
-      value: 
-      objectReference: {fileID: 1762182965}
-    - target: {fileID: 11435728, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
-      propertyPath: gold
-      value: 
-      objectReference: {fileID: 783242562}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
   m_IsPrefabParent: 0
@@ -7152,7 +7144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 1630199408}
   enemies: {fileID: 1915920987}
-  horde: {fileID: 41387758}
+  horde: {fileID: 0}
   activateEnemies: 1
   activateHorde: 0
 --- !u!61 &644113911
@@ -8403,12 +8395,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 499432, guid: 629bf4185740340489a044024c220b97, type: 2}
   m_PrefabInternal: {fileID: 779655037}
---- !u!114 &783242562 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11459808, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 976044461}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &786874160
 GameObject:
   m_ObjectHideFlags: 0
@@ -10483,40 +10469,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &976044462 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 176776, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
-  m_PrefabInternal: {fileID: 976044461}
---- !u!114 &976044463 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11499558, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 976044461}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!114 &976044464 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11412138, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 976044461}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!114 &976044465 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11471734, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 976044461}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!114 &976044466 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11483440, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 976044461}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!114 &976044467 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11418610, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 976044461}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &980079686
 Prefab:
   m_ObjectHideFlags: 0
@@ -18117,10 +18069,6 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 089c617bfba7d4144b9aae2aa3dee0eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!1 &1762182965 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 136426, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
-  m_PrefabInternal: {fileID: 976044461}
 --- !u!1001 &1763938026
 Prefab:
   m_ObjectHideFlags: 0
@@ -19868,34 +19816,6 @@ Prefab:
       propertyPath: mage_GUI
       value: 
       objectReference: {fileID: 281683235}
-    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
-      propertyPath: leftSwitch
-      value: 
-      objectReference: {fileID: 976044466}
-    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
-      propertyPath: rightSwitch
-      value: 
-      objectReference: {fileID: 976044465}
-    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
-      propertyPath: healTouch
-      value: 
-      objectReference: {fileID: 976044467}
-    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
-      propertyPath: powerTouch
-      value: 
-      objectReference: {fileID: 976044464}
-    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
-      propertyPath: pauseTouch
-      value: 
-      objectReference: {fileID: 976044463}
-    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
-      propertyPath: theCanvas
-      value: 
-      objectReference: {fileID: 976044462}
-    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
-      propertyPath: theHorde
-      value: 
-      objectReference: {fileID: 1729344713}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
   m_IsPrefabParent: 0
@@ -20700,7 +20620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 1906391420}
   enemies: {fileID: 120827080}
-  horde: {fileID: 1273370197}
+  horde: {fileID: 0}
   activateEnemies: 1
   activateHorde: 0
 --- !u!61 &1949639207

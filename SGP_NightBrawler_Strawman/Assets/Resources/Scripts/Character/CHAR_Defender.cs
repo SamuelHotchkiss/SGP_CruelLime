@@ -26,10 +26,11 @@ public class CHAR_Defender : ACT_CHAR_Base
         Act_SpeedLevel = 1;
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
-        ProjFilePaths = new string[3];
+		ProjFilePaths = new string[4];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Lancer_Melee";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Defender_Melee";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_DefenderWall";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_DefenderWall";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 2.0f, 1.00f, 0.1f, 1.0f, 0.9f, 1.0f, 1.0f, 0.1f, 1.0f, 1.0f, 1.2f };
@@ -155,5 +156,26 @@ public class CHAR_Defender : ACT_CHAR_Base
         return ret;
     }
 
+	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+	{
+		AttackInfo ret = new AttackInfo(0);
 
+		if (_curTmr > _maxTmr * 0.7f)
+			ret.spriteIndex = specialSprites[0];
+		else if (_curTmr > _maxTmr * 0.5f)
+			ret.spriteIndex = specialSprites[1];
+		else if (_curTmr > _maxTmr * 0.4f)
+			ret.spriteIndex = specialSprites[2];
+		else if (_curTmr >= 0)
+			ret.spriteIndex = specialSprites[3];
+
+		if (_curTmr < _maxTmr * 0.2f)
+			ret.spawnproj = true;
+
+		return ret;
+	}
+
+	public override void UpgradeSpecial()
+	{
+	}
 }

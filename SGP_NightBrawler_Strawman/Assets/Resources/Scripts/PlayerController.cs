@@ -66,10 +66,11 @@ public class PlayerController : MonoBehaviour
         rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
         leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
 
-        Projs = new GameObject[3];
+        Projs = new GameObject[4];
         Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
         Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
+		Projs[3] = Resources.Load(party[currChar].ProjFilePaths[3]);
 
 
         InitializeTimers();
@@ -164,7 +165,7 @@ public class PlayerController : MonoBehaviour
                     CheckMoveInput(currentState);
                 if (Input.GetButtonDown("Attack/Confirm") || Input.GetButtonDown("Pad_Attack/Confirm"))
                 {
-                    if (GameObject.FindGameObjectWithTag("Decoy"))
+                    if (GameObject.FindGameObjectWithTag("Decoy") && !party[currChar].hasSpecial)
                         GameObject.FindGameObjectWithTag("Decoy").GetComponent<PROJ_Decoy>().decoyTimer = 0.0f;
                     ChangeState(ACT_CHAR_Base.STATES.ATTACK_1);
                     horz = 0.0f;
@@ -272,6 +273,11 @@ public class PlayerController : MonoBehaviour
         {
             MNGR_Game.isNight = !MNGR_Game.isNight;
         }
+		else if (Input.GetKeyDown(KeyCode.U))
+		{
+			party[currChar].hasSpecial = true;
+			party[currChar].UpgradeSpecial();
+		}
         // modify velocity only if we aren't in special state (for custom special movement)
 
         // always calls unless current character is dead.
@@ -416,6 +422,7 @@ public class PlayerController : MonoBehaviour
         Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
         Projs[1] = Resources.Load(party[currChar].ProjFilePaths[1]);
         Projs[2] = Resources.Load(party[currChar].ProjFilePaths[2]);
+		Projs[3] = Resources.Load(party[currChar].ProjFilePaths[3]);
     }
 
     // J: This is for use with Enemy Knockback but can be use for anything 
@@ -597,6 +604,11 @@ public class PlayerController : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
                 party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
+
+				for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
+				{
+					maxTmr[i] = party[currChar].StateTmrs[i];
+				}
             }
         }
         else

@@ -26,10 +26,11 @@ public class CHAR_Archer : ACT_CHAR_Base
         Act_PowerLevel = 1;
         Act_SpeedLevel = 1;
 
-        ProjFilePaths = new string[3];
+        ProjFilePaths = new string[4];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Arrow";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_ArrowThree";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_ArrowPierce";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_ArrowPierce";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.5f, 0.4f, 0.7f, 0.7f, 0.1f, 1.0f, 1.0f, 0.8f };
@@ -148,5 +149,27 @@ public class CHAR_Archer : ACT_CHAR_Base
         return ret;
     }
 
+	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+	{
+		AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
 
+		if (_curTmr > _maxTmr * 0.9f)
+			ret.spriteIndex = specialSprites[0];
+		else if (_curTmr > _maxTmr * 0.8f)
+			ret.spriteIndex = specialSprites[1];
+		else if (_curTmr > _maxTmr * 0.7f)
+			ret.spriteIndex = specialSprites[2];
+		else if (_curTmr >= 0)
+			ret.spriteIndex = specialSprites[3];
+
+		//if (_curTmr < _maxTmr * 0.1f)
+		//ret.spawnproj = true;
+
+
+		return ret;
+	}
+
+	public override void UpgradeSpecial()
+	{
+	}
 }

@@ -27,10 +27,11 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         Act_SpeedLevel = 1;
 
         // Remove this comment when the below set of stuff has been modified to be different from the Swordsman's
-        ProjFilePaths = new string[3];
+		ProjFilePaths = new string[4];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Force_Redirect";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Force_Knockback";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Null";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_Null";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 3.0f, 0.1f, 1.0f, 1.0f, 1.0f };
@@ -181,5 +182,40 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         }
     }
 
-    
+	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+	{
+		AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+
+		if (_curTmr > _maxTmr * 0.9f)
+			ret.spriteIndex = specialSprites[0];
+		else if (_curTmr > _maxTmr * 0.5f)
+			ret.spriteIndex = specialSprites[1];
+		else if (_curTmr > _maxTmr * 0.4f)
+			ret.spriteIndex = specialSprites[2];
+		else if (_curTmr >= 0)
+			ret.spriteIndex = specialSprites[3];
+
+		if (chargeTimer > 0 && (Input.GetButton("Special/Cancel")
+			|| (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)))
+		{
+			chargeTimer -= Time.deltaTime;
+			ChargeSpecial(true);
+		}
+		else if (!Input.GetButton("Special/Cancel")
+			|| (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended))
+		{
+			ChargeSpecial(false);
+			chargeTimer = 2.0f;
+			GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.IDLE);
+		}
+
+		//if (_curTmr < _maxTmr * 0.1f)
+		//ret.spawnproj = true;
+
+		return ret;
+	}
+
+	public override void UpgradeSpecial()
+	{
+	}
 }
