@@ -13,7 +13,7 @@ public class MNGR_GameData
 
     public string currentLevel;
     public bool isNew, isNight;
-    public int hordePosition, playerPosition, wallet;
+    public int hordePosition, playerPosition, wallet, arrowPos;
 
     // Initializes GameData's value when new is called
     public MNGR_GameData()
@@ -24,7 +24,7 @@ public class MNGR_GameData
         isNew = true;
         isNight = false;
         hordePosition = playerPosition = wallet = 0;
-
+        arrowPos = 0;
 		// delete later
 		wallet = 1000;
 
@@ -58,6 +58,8 @@ public class MNGR_GameData
         wallet = MNGR_Game.wallet;
 		inventory = MNGR_Game.theInventory;
 
+        arrowPos = MNGR_Game.arrowPos;
+
         currentParty = MNGR_Game.currentParty;
     }
 
@@ -73,6 +75,8 @@ public class MNGR_GameData
 		MNGR_Game.theInventory = inventory;
 
         MNGR_Game.currentParty = currentParty;
+
+        MNGR_Game.arrowPos = arrowPos;
     }
 }
 
