@@ -10,6 +10,8 @@ public class MOD_Slowed : MOD_Base
     {
         buffState = MNGR_Item.BuffStates.DEBUFFED;
         base.Start();
+        Mod_EffectColor = Color.green;
+        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 30.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;

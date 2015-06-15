@@ -9,6 +9,8 @@ public class MOD_HPInstant : MOD_Base
     {
         buffState = MNGR_Item.BuffStates.BUFFED;
         base.Start();
+        Mod_EffectColor = Color.red;
+        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = false;      //This Effect wil affect the whole party
         Mod_effectTimer = 0.01f;
         Mod_BaseEffectTimer = Mod_effectTimer;

@@ -8,10 +8,12 @@ public class MOD_DoT : MOD_Base
     // Use this for initialization
     public override void Start()
     {
-        myColor = Color.green;
+        //myColor = Color.green;
 
         buffState = MNGR_Item.BuffStates.DEBUFFED;
         base.Start();
+        Mod_EffectColor = Color.green;
+        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = false;       //This Effect wil affect the whole party
         Mod_effectTimer = 15.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;

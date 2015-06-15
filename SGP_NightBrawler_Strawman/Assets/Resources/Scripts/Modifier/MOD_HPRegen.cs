@@ -7,10 +7,12 @@ public class MOD_HPRegen : MOD_Base
     // Use this for initialization
     public override void Start()
     {
-        myColor = Color.yellow;
+        //myColor = Color.yellow;
 
         buffState = MNGR_Item.BuffStates.BUFFED;
         base.Start();
+        Mod_EffectColor = new Color(255, 105, 0);
+        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 10.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;

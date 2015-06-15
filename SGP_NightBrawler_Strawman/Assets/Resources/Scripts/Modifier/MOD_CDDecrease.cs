@@ -9,6 +9,9 @@ public class MOD_CDDecrease : MOD_Base
 
         buffState = MNGR_Item.BuffStates.BUFFED;
         base.Start();
+        Mod_EffectColor = Color.yellow;
+        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
+        
         Mod_PartyWide = true;
         Mod_ModIndexNum = 0;            //The Number ID of the Effect 
         Mod_effectTimer = 30.0f;

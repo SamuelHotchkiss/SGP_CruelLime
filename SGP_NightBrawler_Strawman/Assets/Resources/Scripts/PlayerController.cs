@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     }
     /////////////////////////////////////////////////////////////////////
 
+
     //public bool keyboard = true;
 
     public ACT_CHAR_Base[] party;
