@@ -203,7 +203,7 @@ Transform:
   m_Children:
   - {fileID: 1967882500}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &65773517 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 102898, guid: b10e53f9dec93364090e66f3962c6607, type: 2}
@@ -525,6 +525,45 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1406243008}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!1 &190370106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 190370108}
+  - 114: {fileID: 190370107}
+  m_Layer: 0
+  m_Name: The_Grim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &190370107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 190370106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af34c7e98ddad3e498e27552190edc62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &190370108
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 190370106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.8735008, y: .442117929, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1 &219890054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1609,7 @@ Transform:
   m_Children:
   - {fileID: 1791376551}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!50 &820016992
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -2898,7 +2937,7 @@ Transform:
   - {fileID: 125802932}
   - {fileID: 1610988461}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &1576209301
 GameObject:
   m_ObjectHideFlags: 0

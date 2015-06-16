@@ -251,8 +251,10 @@ public class MNGR_Animation_Player : MonoBehaviour
                 SpawnProj = currentController.SpawnProj(lastRight, 0);
             else if (lastState == ACT_CHAR_Base.STATES.ATTACK_3)
                 SpawnProj = currentController.SpawnProj(lastRight, 1);
-            else if (lastState == ACT_CHAR_Base.STATES.SPECIAL)
-                SpawnProj = currentController.SpawnProj(lastRight, 2);
+			else if (lastState == ACT_CHAR_Base.STATES.SPECIAL && !currentCharacter.hasSpecial)
+				SpawnProj = currentController.SpawnProj(lastRight, 2);
+            else if (lastState == ACT_CHAR_Base.STATES.SPECIAL && currentCharacter.hasSpecial)
+                SpawnProj = currentController.SpawnProj(lastRight, 3);
         }
 
 
