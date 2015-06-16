@@ -29,7 +29,7 @@ public class CHAR_Archer : ACT_CHAR_Base
         ProjFilePaths = new string[4];
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Arrow";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_ArrowThree";
-        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_PiercingArrow";
+        ProjFilePaths[2] = "Prefabs/Projectile/PROJ_ArrowPierce";
 		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_HatTrick";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
