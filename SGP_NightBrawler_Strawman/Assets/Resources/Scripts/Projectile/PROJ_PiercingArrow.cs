@@ -5,7 +5,7 @@ public class PROJ_PiercingArrow : PROJ_Base
 {
     Vector2 ogVelocity;        // original velocity before collision
 
-    public int hits = 4;       // how many enemies can we pierce?
+    protected int hits = 4;       // how many enemies can we pierce?
 
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
