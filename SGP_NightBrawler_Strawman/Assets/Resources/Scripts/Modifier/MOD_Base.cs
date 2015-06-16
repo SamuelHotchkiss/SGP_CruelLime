@@ -15,11 +15,10 @@ public class MOD_Base : MonoBehaviour
 
     public PlayerController player;     //The Actor been afflicted with the Effect
     public ACT_Enemy enemy;
+    public Color Mod_EffectColor;       //Color of the particles.
+    public GameObject Mod_Particles;
 
     public bool isPlayer;
-    public Color myColor, originalColor;
-
-
 
 	/*--- Legend ---
 	 ===============
@@ -39,12 +38,14 @@ public class MOD_Base : MonoBehaviour
 	10 = MOD_Stunned
 	 ===============*/
 
-
-
 	// Use this for initialization
     public virtual void Start()
     {
         Mod_ModIndexNum = -1;           //Base class
+        if (buffState == MNGR_Item.BuffStates.BUFFED)
+            Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/BuffEffect") as GameObject, transform.position, Quaternion.identity) as GameObject;
+        else
+            Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/DebuffEffect") as GameObject, transform.position, Quaternion.identity) as GameObject;
         #region WhatAmIAttachedTo?
         if (gameObject.tag == "Enemy")
         {
@@ -92,13 +93,6 @@ public class MOD_Base : MonoBehaviour
             }
         }
         #endregion
-
-        if (GetComponent<SpriteRenderer>() != null)
-        {
-            originalColor = GetComponent<SpriteRenderer>().color;
-            GetComponent<SpriteRenderer>().color = myColor;
-        }
-
     }
 
     // Update is called once per frame
@@ -120,6 +114,9 @@ public class MOD_Base : MonoBehaviour
                 if (Mod_effectTimer <= 0.0f)
                     EndModifyEnemy();
             }
+
+            Mod_Particles.transform.position = transform.position;
+
         }
 
         #region OldnBusted
@@ -168,27 +165,19 @@ public class MOD_Base : MonoBehaviour
 
     public virtual void EndModifyActor()    //Reset the characte's HasMod Veriables.
     {
+        Destroy(Mod_Particles);
         if (!Mod_PartyWide)
             player.party[player.currChar].Act_HasMod = false;
         else if (Mod_PartyWide)
             for (int i = 0; i < player.party.Length; i++)
                 player.party[i].Act_HasMod = false;
-
-        if (GetComponent<SpriteRenderer>() != null)
-        {
-            //player.GetComponent<SpriteRenderer>().color = originalColor;
-            player.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        }
         player.myBuffs.Remove(this);
+
     }
 
     public virtual void EndModifyEnemy()    //Reset the character's HasMod Veriables.
     {
-        if (GetComponent<SpriteRenderer>() != null)
-        {
-            //enemy.GetComponent<SpriteRenderer>().color = originalColor;
-            enemy.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        }
+        Destroy(Mod_Particles);
         enemy.myBuffs.Remove(this);
     }
     

@@ -13,7 +13,7 @@ GameObject:
   - 212: {fileID: 21208222}
   m_Layer: 0
   m_Name: PROJ_Force_Knockback
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,6 +58,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   power: 0
   m_distance: 0
+  Prj_Sound: {fileID: 8300000, guid: 07425ebfc27c9154ba01dc9d712ae414, type: 3}
   speed: 3
   range: 6
   lifetime: 0

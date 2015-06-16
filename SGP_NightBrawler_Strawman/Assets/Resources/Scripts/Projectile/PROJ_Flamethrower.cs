@@ -8,6 +8,9 @@ public class PROJ_Flamethrower : PROJ_Base
     // Use this for initialization
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
     {
+
+        PlaySound();
+
         if (owner.tag == "Player")
         {
             gameObject.layer = 10;

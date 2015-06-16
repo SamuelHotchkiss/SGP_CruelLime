@@ -266,7 +266,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 126612}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -292,7 +292,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 195864}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -445,7 +445,7 @@ MonoBehaviour:
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
   Act_Parent: {fileID: 0}
-  damageMod: 1
+  damageMod: .769999981
   state: 0
   randomState: 0
   currTime: 0
@@ -495,11 +495,14 @@ MonoBehaviour:
   Arm_IsShadow: 0
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 148036}
-  Bip_DayArms: {fileID: 21300000, guid: 6bd8f78f8a961304b9fb11a538e9b7af, type: 3}
-  Bip_NightArms: {fileID: 21300000, guid: d41c3f72a332203438f113be40e28bbc, type: 3}
-  Bip_DayProjectile: {fileID: 11495398, guid: fd47e199d66002e4da5190937a67d4ec, type: 2}
-  Bip_NightProjectile: {fileID: 11439932, guid: ddbea7a530bf134479c3fd16352f5284,
-    type: 2}
+  Arm_Punch: {fileID: 8300000, guid: b708411001fa58d4198feface2e15805, type: 3}
+  Arm_IsLeft: 1
+  Arm_IsRight: 0
+  Bip_LeftArm: {fileID: 21300000, guid: d41c3f72a332203438f113be40e28bbc, type: 3}
+  Bip_RightArms: {fileID: 0}
+  Bip_LeftProjectile: {fileID: 11439932, guid: ddbea7a530bf134479c3fd16352f5284, type: 2}
+  Bip_RightProjectile: {fileID: 0}
+  Bip_Smash: {fileID: 11474784, guid: 780c25c5a6c7c5a4e9781fdb9d30f445, type: 2}
   Arm_DownTimer: 0
   Arm_IgnoreCollision: 0
 --- !u!114 &11451968
@@ -650,7 +653,7 @@ MonoBehaviour:
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
   Act_Parent: {fileID: 0}
-  damageMod: 1
+  damageMod: .75
   state: 0
   randomState: 0
   currTime: 0
@@ -700,11 +703,15 @@ MonoBehaviour:
   Arm_IsShadow: 0
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 192818}
-  Bip_DayArms: {fileID: 21300000, guid: 6bd8f78f8a961304b9fb11a538e9b7af, type: 3}
-  Bip_NightArms: {fileID: 21300000, guid: d41c3f72a332203438f113be40e28bbc, type: 3}
-  Bip_DayProjectile: {fileID: 11495398, guid: fd47e199d66002e4da5190937a67d4ec, type: 2}
-  Bip_NightProjectile: {fileID: 11439932, guid: ddbea7a530bf134479c3fd16352f5284,
+  Arm_Punch: {fileID: 8300000, guid: b708411001fa58d4198feface2e15805, type: 3}
+  Arm_IsLeft: 0
+  Arm_IsRight: 1
+  Bip_LeftArm: {fileID: 0}
+  Bip_RightArms: {fileID: 21300000, guid: 6bd8f78f8a961304b9fb11a538e9b7af, type: 3}
+  Bip_LeftProjectile: {fileID: 0}
+  Bip_RightProjectile: {fileID: 11495398, guid: fd47e199d66002e4da5190937a67d4ec,
     type: 2}
+  Bip_Smash: {fileID: 11445348, guid: ad1a8d0bc22064f439c1c889b33506cc, type: 2}
   Arm_DownTimer: 0
   Arm_IgnoreCollision: 0
 --- !u!114 &11455518
@@ -905,10 +912,14 @@ MonoBehaviour:
   Arm_IsShadow: 1
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 0}
-  Bip_DayArms: {fileID: 0}
-  Bip_NightArms: {fileID: 0}
-  Bip_DayProjectile: {fileID: 0}
-  Bip_NightProjectile: {fileID: 0}
+  Arm_Punch: {fileID: 0}
+  Arm_IsLeft: 0
+  Arm_IsRight: 0
+  Bip_LeftArm: {fileID: 0}
+  Bip_RightArms: {fileID: 0}
+  Bip_LeftProjectile: {fileID: 0}
+  Bip_RightProjectile: {fileID: 0}
+  Bip_Smash: {fileID: 0}
   Arm_DownTimer: 0
   Arm_IgnoreCollision: 0
 --- !u!114 &11473540
@@ -1109,10 +1120,14 @@ MonoBehaviour:
   Arm_IsShadow: 1
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 0}
-  Bip_DayArms: {fileID: 0}
-  Bip_NightArms: {fileID: 0}
-  Bip_DayProjectile: {fileID: 0}
-  Bip_NightProjectile: {fileID: 0}
+  Arm_Punch: {fileID: 0}
+  Arm_IsLeft: 0
+  Arm_IsRight: 0
+  Bip_LeftArm: {fileID: 0}
+  Bip_RightArms: {fileID: 0}
+  Bip_LeftProjectile: {fileID: 0}
+  Bip_RightProjectile: {fileID: 0}
+  Bip_Smash: {fileID: 0}
   Arm_DownTimer: 0
   Arm_IgnoreCollision: 0
 --- !u!114 &11490724
@@ -1263,7 +1278,7 @@ MonoBehaviour:
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   Act_Parent: {fileID: 0}
-  damageMod: .75
+  damageMod: 1
   state: 0
   randomState: 0
   currTime: 0
@@ -1352,7 +1367,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 757a3ca2ff6587e4ab17809255e22e60, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1378,7 +1393,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 757a3ca2ff6587e4ab17809255e22e60, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1392,7 +1407,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 6bd8f78f8a961304b9fb11a538e9b7af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ab70d505b43ddd4f88141e5363094e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21230172
 SpriteRenderer:
@@ -1456,7 +1471,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 757a3ca2ff6587e4ab17809255e22e60, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1470,7 +1485,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6bd8f78f8a961304b9fb11a538e9b7af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d41c3f72a332203438f113be40e28bbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

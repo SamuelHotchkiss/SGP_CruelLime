@@ -10,6 +10,8 @@ public class PROJ_Base : MonoBehaviour
     public float power;         // how much damage will we deal?
     public float m_distance;    // how far have we gone?
 
+    public AudioClip Prj_Sound;
+
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
     public float lifetime;
@@ -21,6 +23,10 @@ public class PROJ_Base : MonoBehaviour
     {
 		if (owner == null)
 			return;
+
+        if(Prj_Sound != null)
+            PlaySound();
+
         // Are you my mommy?
         if(owner.tag == "Player")
         {
@@ -110,25 +116,27 @@ public class PROJ_Base : MonoBehaviour
                 int target = player.currChar;
 
 
-                
-				if (knockback)
-				{
+
+                if (knockback)
+                {
                     player.party[target].ChangeHP(-power, false);
-					if (right)
-						player.ApplyKnockBack(power * 5);
-					else
-						player.ApplyKnockBack(-power * 5);
-				}
+                    if (right)
+                        player.ApplyKnockBack(power * 5);
+                    else
+                        player.ApplyKnockBack(-power * 5);
+                }
                 else
                     player.party[target].ChangeHP(-power);
                 // Mess with the active character
-                
+
 
             }
 
             if (gameObject != null)
                 ProjectileExpired();
         }
+        else if (collision.tag == "Projectile") // S: this should fix redirection
+            return;
         else if (gameObject.tag != "Player") // weird check for the defender's wall (has to stop enemy projectiles but not ours)
         {
             if (gameObject != null)
@@ -141,5 +149,8 @@ public class PROJ_Base : MonoBehaviour
         Destroy(gameObject);
     }
 
-
+    public void PlaySound()
+    {
+        AudioSource.PlayClipAtPoint(Prj_Sound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+    }
 }
