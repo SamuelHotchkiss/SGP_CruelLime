@@ -32,7 +32,7 @@ public class CHAR_Archer : ACT_CHAR_Base
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Arrow";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_ArrowThree";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_ArrowPierce";
-		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_ArrowPierce";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_HatTrick";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.5f, 0.4f, 0.7f, 0.7f, 0.1f, 1.0f, 1.0f, 0.8f };
@@ -154,6 +154,7 @@ public class CHAR_Archer : ACT_CHAR_Base
 	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
 	{
 		AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        ret.projIndex = 3;
 
 		if (_curTmr > _maxTmr * 0.9f)
 			ret.spriteIndex = specialSprites[0];

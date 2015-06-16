@@ -16,7 +16,7 @@ public class ACT_BOS_Dwagon : ACT_Enemy
 	// Use this for initialization
 	void Start()
 	{
-		// IDLE, WALK, RUN, ATTK, HURT, DED,  USE
+		                        // IDLE, WALK, RUN, ATTK, HURT, DED,  USE
 		stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 0.3f, 1.0f, 1.0f };
 
 
@@ -32,7 +32,12 @@ public class ACT_BOS_Dwagon : ACT_Enemy
 
 	// Update is called once per frame
 	void Update()
-	{
+    {
+        currTime -= Time.deltaTime;
+        if (currTime < 0)
+        {
+            currTime = stateTime[(int)state];
+        }
 		if (target != null)
 			distanceToTarget = Mathf.Abs(target.transform.position.x - transform.position.x);
 

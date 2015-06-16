@@ -127,6 +127,12 @@ public class PlayerController : MonoBehaviour
     // aka The Situation.
     protected virtual void Update()
     {
+		if (MNGR_Game.paused)
+		{
+			GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+			return;
+		}
+
         // S: Should prevent this from running if player is dead
         if (!isAlive)
             return;
@@ -797,7 +803,7 @@ public class PlayerController : MonoBehaviour
 
     void TouchMove(Touch theTouch)
     {
-        float deadZone = 3.0f;
+        float deadZone = 2.0f;
         Vector2 dashPoint = new Vector2((Screen.width / 8), (Screen.height / 2));
 
         //if (horz > 20.0f || vert > 20.0f || horz < -20.0f || vert < -20.0f)

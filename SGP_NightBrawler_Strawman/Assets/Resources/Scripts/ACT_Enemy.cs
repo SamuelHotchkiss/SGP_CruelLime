@@ -26,6 +26,7 @@ public class ACT_Enemy : MonoBehaviour
     // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
     // 4 = Ent, 5 = GloblinShaman, 6 = Trollgre, 7...
     public int Act_ID;
+    public string Act_Name;         // Used in loading sprites.  Make sure this matches the name of the sprite.  It doesn't include the filepath.
 
 	public float Act_baseHP;          //The base HP of the current Actor
 	public float Act_basePower;       //The base Power of the current Actor
@@ -40,6 +41,7 @@ public class ACT_Enemy : MonoBehaviour
 	public bool Act_ModIsBuff;
     public bool Act_IsIntelligent;  //Is this Enemy inanimate.
     public bool Act_SpawnProjOnDed;
+    public bool Act_IsBoss;            // Don't worry, you can trust me!
     public bool Act_AudioHasPlay;
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
@@ -231,10 +233,6 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        Vector2 velo = GetComponent<Rigidbody2D>().velocity;
-        velo *= 0.9f;
-        GetComponent<Rigidbody2D>().velocity = velo;
-
         if (GetComponent<MOD_Stunned>() != null)
             return; //GTFO
 
@@ -639,9 +637,11 @@ public class ACT_Enemy : MonoBehaviour
     // L: movin' this over here.
     public void ApplyKnockBack(Vector2 _Force)
     {
+
         GetComponent<Rigidbody2D>().velocity = _Force;
         state = STATES.HURT;
         currTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
+
     }
 
     public void ModifyDefense(float newDefense)
