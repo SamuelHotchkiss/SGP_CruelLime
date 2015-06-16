@@ -8,6 +8,5 @@ public class LevelMusicPlayer : MonoBehaviour
 	void Start () 
     {
         GetComponent<AudioSource>().volume = MNGR_Options.musicVol;
-	
 	}
 }
