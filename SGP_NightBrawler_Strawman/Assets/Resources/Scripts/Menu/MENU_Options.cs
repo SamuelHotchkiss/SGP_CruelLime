@@ -99,6 +99,8 @@ public class MENU_Options : MonoBehaviour
     public void ChangeBlind(bool blind)
     {
         MNGR_Options.colorblind = blind;
+		if (GameObject.FindGameObjectWithTag("Player"))
+			GameObject.FindGameObjectWithTag("Player").GetComponent<MNGR_Animation_Player>().Initialize();
     }
 
     public void ChangeScreenToggle()

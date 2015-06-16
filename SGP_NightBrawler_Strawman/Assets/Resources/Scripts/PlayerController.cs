@@ -122,6 +122,12 @@ public class PlayerController : MonoBehaviour
     // aka The Situation.
     protected virtual void Update()
     {
+		if (MNGR_Game.paused)
+		{
+			GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+			return;
+		}
+
         // S: Should prevent this from running if player is dead
         if (!isAlive)
             return;
