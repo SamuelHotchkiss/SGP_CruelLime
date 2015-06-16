@@ -133,27 +133,17 @@ public class UI_HUD : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-            PauseGame();
+            TogglePause();
 		}
 	}
 
-	public void ResumeGame()
-	{
-		MNGR_Game.paused = false;
-		party.SetActive(true);
-
-		theCanvas.transform.GetChild(3).gameObject.SetActive(false);
-		Cursor.visible = false;
-        Input.simulateMouseWithTouches = false;
-	}
-
-    public void PauseGame()
+    public void TogglePause()
     {
-        MNGR_Game.paused = true;
-        party.SetActive(false);
+		MNGR_Game.paused = !MNGR_Game.paused;
+		party.SetActive(!MNGR_Game.paused);
 
-        theCanvas.transform.GetChild(3).gameObject.SetActive(true);
-        Cursor.visible = true;
-        Input.simulateMouseWithTouches = true;
+		theCanvas.transform.GetChild(3).gameObject.SetActive(MNGR_Game.paused);
+		//Cursor.visible = !Cursor.visible;
+		Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
     }
 }
