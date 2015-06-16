@@ -25,7 +25,7 @@ GameObject:
   - 4: {fileID: 416286}
   - 212: {fileID: 21213790}
   - 61: {fileID: 6171610}
-  - 114: {fileID: 11418258}
+  - 114: {fileID: 11470564}
   m_Layer: 0
   m_Name: OBS_Pitfall
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.8899994, y: -1.67999995, z: 0}
+  m_LocalPosition: {x: 8.94999981, y: -3.06999993, z: 0}
   m_LocalScale: {x: 1, y: .5, z: 1}
   m_Children:
   - {fileID: 442786}
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.2799997, y: 6.44999981, z: 0}
+  m_LocalPosition: {x: -8.26000023, y: 4.69999981, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 416286}
@@ -71,7 +71,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 8, y: 6}
---- !u!114 &11418258
+--- !u!114 &11470564
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dest: {fileID: 143954}
+  Fall: {fileID: 8300000, guid: 98d855585c303634bbd7f32ac4bff9bf, type: 3}
 --- !u!212 &21213790
 SpriteRenderer:
   m_ObjectHideFlags: 1

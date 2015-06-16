@@ -5,7 +5,7 @@ public class OBS_Pitfall : MonoBehaviour
 {
 
     public GameObject dest;
-
+    public AudioClip Fall;
     float orgMag;
 
 	// Use this for initialization
@@ -19,12 +19,17 @@ public class OBS_Pitfall : MonoBehaviour
     {
 	
 	}
+    
+    void OnTriggerEnter2D(Collider2D _col)
+    {
+        AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+    }
 
     public virtual void OnTriggerStay2D(Collider2D _col)
     {
         int type = 0;
         Camera cam = Camera.current;
-
+        
         if (_col.gameObject.GetComponent<PlayerController>() != null)
         {
             type = 1;

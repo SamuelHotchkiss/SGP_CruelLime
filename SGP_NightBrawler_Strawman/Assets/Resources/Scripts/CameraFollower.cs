@@ -15,7 +15,6 @@ public class CameraFollower : MonoBehaviour
 	void Update () 
 	{
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
         float Ypos;
         float Xpos;
         Ypos = Mathf.Lerp(transform.position.y, Cam_CurrTarget.transform.position.y, (Cam_Speed * Time.deltaTime));
