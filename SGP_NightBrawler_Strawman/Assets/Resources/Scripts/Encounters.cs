@@ -25,8 +25,8 @@ public class Encounters : MonoBehaviour {
 
     private bool Enc_IsActive;
     private float Enc_BaseSpawnTimer;
+    private GameObject Enc_Victime;
 
-    
 	// Use this for initialization
 	void Start () {
 
@@ -48,12 +48,13 @@ public class Encounters : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Enc_Victime != null && Camera.current != null)
+            Camera.current.GetComponent<CameraFollower>().Cam_CurrTarget = gameObject;
+
         CheckEnemiesInArea();
         Enc_SpawnTimer -= Time.deltaTime;
         if (Enc_SpawnTimer <= 0.0f && Enc_SpawnNum > 0 && Enc_IsActive)
         {
-
-
             int RandLoc = Random.Range(1, 5);
             int RandEnemy = Random.Range(0, Enc_SpawnEnemies.Length);
             switch (RandLoc)
@@ -85,6 +86,7 @@ public class Encounters : MonoBehaviour {
         if ((Enc_DeadEnemies == Enc_EnemiesNum) && Enc_EnemiesNum > 0)
         {
             //Spawn SPRITE OF MOVING FOWARD.
+            Camera.current.GetComponent<CameraFollower>().Cam_CurrTarget = Enc_Victime;
             Destroy(gameObject);
         }
 	}
@@ -93,6 +95,7 @@ public class Encounters : MonoBehaviour {
     {
         if (col.tag == "Player" && !Enc_IsActive)
         {
+            Enc_Victime = col.gameObject;
             Enc_EncounterEvent.SetActive(true);
             GetComponent<BoxCollider2D>().size = new Vector2(Enc_AreaLenght, GetComponent<BoxCollider2D>().size.y);
             Enc_IsActive = true;

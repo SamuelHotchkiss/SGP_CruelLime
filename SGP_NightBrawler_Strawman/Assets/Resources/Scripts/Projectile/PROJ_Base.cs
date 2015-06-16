@@ -10,6 +10,8 @@ public class PROJ_Base : MonoBehaviour
     public float power;         // how much damage will we deal?
     public float m_distance;    // how far have we gone?
 
+    public AudioClip Prj_Sound;
+
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
     public float lifetime;
@@ -21,6 +23,8 @@ public class PROJ_Base : MonoBehaviour
     {
 		if (owner == null)
 			return;
+
+        PlaySound();
         // Are you my mommy?
         if(owner.tag == "Player")
         {
@@ -143,5 +147,8 @@ public class PROJ_Base : MonoBehaviour
         Destroy(gameObject);
     }
 
-
+    public void PlaySound()
+    {
+        AudioSource.PlayClipAtPoint(Prj_Sound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+    }
 }

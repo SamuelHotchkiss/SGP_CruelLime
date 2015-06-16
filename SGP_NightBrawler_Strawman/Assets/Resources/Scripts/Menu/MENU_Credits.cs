@@ -13,7 +13,7 @@ public class MENU_Credits : MonoBehaviour {
         if (Menu_CreditTimer <= 0.0f)
             StartCoroutine(WaitForSound());
 
-        float GoUp = Menu_Credits.transform.position.y + 0.03f;
+        float GoUp = Menu_Credits.transform.position.y + (2.5f * Time.deltaTime);
         Menu_Credits.transform.position = new Vector3(Menu_Credits.transform.position.x, GoUp);
 
     }

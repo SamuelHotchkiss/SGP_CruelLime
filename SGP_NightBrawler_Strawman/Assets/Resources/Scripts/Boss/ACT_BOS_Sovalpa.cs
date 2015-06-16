@@ -89,8 +89,8 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                 {
                     float Xpos;
                     float Ypos;
-                    Ypos = Mathf.Lerp(transform.position.y, target.transform.position.y, 0.005f * Act_currSpeed);
-                    Xpos = Mathf.Lerp(transform.position.x, target.transform.position.x, 0.005f * Act_currSpeed);
+                    Ypos = Mathf.Lerp(transform.position.y, target.transform.position.y, (0.5f * Act_currSpeed * Time.deltaTime));
+                    Xpos = Mathf.Lerp(transform.position.x, target.transform.position.x, (0.5f * Act_currSpeed * Time.deltaTime));
 
                     transform.position = new Vector3(Xpos, Ypos);
 

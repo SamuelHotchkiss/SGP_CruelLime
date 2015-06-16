@@ -227,6 +227,10 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+        Vector2 velo = GetComponent<Rigidbody2D>().velocity;
+        velo *= 0.9f;
+        GetComponent<Rigidbody2D>().velocity = velo;
+
         if (GetComponent<MOD_Stunned>() != null)
             return; //GTFO
 
@@ -614,11 +618,9 @@ public class ACT_Enemy : MonoBehaviour
     // L: movin' this over here.
     public void ApplyKnockBack(Vector2 _Force)
     {
-
         GetComponent<Rigidbody2D>().velocity = _Force;
         state = STATES.HURT;
         currTime = stateTime[(int)state] + (_Force.magnitude * 0.01f);
-
     }
 
     public void ModifyDefense(float newDefense)
