@@ -1033,10 +1033,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6787b9f089fa8864395471494951e337, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &623761124 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 156146, guid: 6787b9f089fa8864395471494951e337, type: 2}
-  m_PrefabInternal: {fileID: 623761123}
 --- !u!1001 &641178338
 Prefab:
   m_ObjectHideFlags: 0
@@ -2482,7 +2478,7 @@ GameObject:
   - 50: {fileID: 1556120574}
   m_Layer: 16
   m_Name: Main Camera
-  m_TagString: Camara
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3685,7 +3681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af34c7e98ddad3e498e27552190edc62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 623761124}
 --- !u!4 &1987985212
 Transform:
   m_ObjectHideFlags: 0
