@@ -24,7 +24,9 @@ public class PROJ_Base : MonoBehaviour
 		if (owner == null)
 			return;
 
-        PlaySound();
+        if(Prj_Sound != null)
+            PlaySound();
+
         // Are you my mommy?
         if(owner.tag == "Player")
         {
