@@ -29,7 +29,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Melee";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Melee";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Whirlwind";
-		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_Whirlwind";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_SwordStorm";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE, DANCE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f, 0.8f };
@@ -162,7 +162,7 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
 	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
 	{
-		AttackInfo ret = new AttackInfo(0);
+		AttackInfo ret = new AttackInfo(0, default(Vector2), default(Vector3), false, true, 8, 1.0f, 3);
 
 		if (_curTmr > _maxTmr * 0.95f)
 			ret.spriteIndex = specialSprites[0];
@@ -191,5 +191,6 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 
 	public override void UpgradeSpecial()
 	{
+		StateTmrs[6] = 3.0f;
 	}
 }

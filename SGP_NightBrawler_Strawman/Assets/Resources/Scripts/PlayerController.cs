@@ -606,10 +606,10 @@ public class PlayerController : MonoBehaviour
 
                 party[currChar].cooldownTmr = party[currChar].cooldownTmrBase;
 
+				maxTmr = new float[party[currChar].StateTmrs.Length];
 				for (int i = 0; i < party[currChar].StateTmrs.Length; i++)
-				{
 					maxTmr[i] = party[currChar].StateTmrs[i];
-				}
+				curTmr = party[currChar].StateTmrs[(int)party[currChar].state];
             }
         }
         else
