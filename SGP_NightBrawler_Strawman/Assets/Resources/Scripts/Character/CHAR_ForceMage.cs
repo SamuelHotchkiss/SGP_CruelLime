@@ -186,6 +186,10 @@ public class CHAR_ForceMage : ACT_CHAR_Base
 	{
         AttackInfo ret = ActivateSpecial(_curTmr, _maxTmr);
 
+        ret.projIndex = 3;
+        if(chargeTimer <= 0)
+            ret.spawnproj = true;
+
         return ret;
 	}
 

@@ -10,9 +10,10 @@ GameObject:
   - 4: {fileID: 450924}
   - 114: {fileID: 11499018}
   - 212: {fileID: 21277438}
+  - 58: {fileID: 5864654}
   m_Layer: 0
   m_Name: PROJ_MirrorShield
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,6 +30,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!58 &5864654
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176194}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.26499999
 --- !u!114 &11499018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -45,11 +59,11 @@ MonoBehaviour:
   power: 0
   m_distance: 0
   speed: 0
-  range: 0
-  lifetime: 3
+  range: 2000
+  lifetime: 0
   right: 0
   knockback: 0
-  timerMax: 0
+  timerMax: 3
   forcestr: 0
   forcedir: {x: 0, y: 0}
   sprites: []

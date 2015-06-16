@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11464438}
   m_Layer: 0
   m_Name: PROJ_Null
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,9 +42,12 @@ MonoBehaviour:
   owner: {fileID: 0}
   velocity: {x: 0, y: 0}
   power: 0
-  distance: 0
+  m_distance: 0
   speed: 0
   range: 0
+  lifetime: 0
+  right: 0
+  knockback: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

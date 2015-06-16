@@ -110,25 +110,27 @@ public class PROJ_Base : MonoBehaviour
                 int target = player.currChar;
 
 
-                
-				if (knockback)
-				{
+
+                if (knockback)
+                {
                     player.party[target].ChangeHP(-power, false);
-					if (right)
-						player.ApplyKnockBack(power * 5);
-					else
-						player.ApplyKnockBack(-power * 5);
-				}
+                    if (right)
+                        player.ApplyKnockBack(power * 5);
+                    else
+                        player.ApplyKnockBack(-power * 5);
+                }
                 else
                     player.party[target].ChangeHP(-power);
                 // Mess with the active character
-                
+
 
             }
 
             if (gameObject != null)
                 ProjectileExpired();
         }
+        else if (collision.tag == "Projectile") // S: this should fix redirection
+            return;
         else if (gameObject.tag != "Player") // weird check for the defender's wall (has to stop enemy projectiles but not ours)
         {
             if (gameObject != null)
