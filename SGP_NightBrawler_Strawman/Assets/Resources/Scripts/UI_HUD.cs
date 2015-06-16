@@ -24,8 +24,10 @@ public class UI_HUD : MonoBehaviour {
 
 	public Image heldItem;
 
-	public Text potionCount; 
+	public Text potionCount;
 
+
+	bool options = false;
 
 	string[] filePaths;
 
@@ -73,6 +75,9 @@ public class UI_HUD : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (MNGR_Game.paused)
+			if (GameObject.Find("LevelDJ"))
+				GameObject.Find("LevelDJ").GetComponent<AudioSource>().volume = MNGR_Options.musicVol;
 	
 		fighterHealth.fillAmount = ((float)fighter.Act_currHP / (float)fighter.Act_baseHP);
 		fighterCooldown.fillAmount = (float)((fighter.cooldownTmrBase - fighter.cooldownTmr) / fighter.cooldownTmrBase);
@@ -102,7 +107,7 @@ public class UI_HUD : MonoBehaviour {
 		ranger.Update();
 		mage.Update();
 
-		gold.text = "C o i n s : " + MNGR_Game.wallet;
+		//gold.text = "C o i n s : " + MNGR_Game.wallet;
 
 		potionCount.text = "x " + MNGR_Game.theInventory.containers[0].count;
 
@@ -140,10 +145,16 @@ public class UI_HUD : MonoBehaviour {
     public void TogglePause()
     {
 		MNGR_Game.paused = !MNGR_Game.paused;
-		party.SetActive(!MNGR_Game.paused);
+		//party.SetActive(!MNGR_Game.paused);
 
 		theCanvas.transform.GetChild(3).gameObject.SetActive(MNGR_Game.paused);
 		//Cursor.visible = !Cursor.visible;
 		Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
     }
+
+	public void ToggleOptions()
+	{
+		options = !options;
+		theCanvas.transform.GetChild(9).gameObject.SetActive(options);
+	}
 }
