@@ -9,6 +9,8 @@ public class ENY_Arms : ACT_Enemy {
     public bool Arm_TargetFound;
     public GameObject Arm_ShadowObj;
 
+    public AudioClip Arm_Punch;
+
     public bool Arm_IsLeft;
     public bool Arm_IsRight;
     public Sprite Bip_LeftArm;
@@ -99,6 +101,9 @@ public class ENY_Arms : ACT_Enemy {
             //Shockwave
             if (Mathf.Abs(transform.position.y - Arm_ShadowObj.transform.position.y) <= 0.5f && !GetComponent<BoxCollider2D>().enabled)
             {
+
+                AudioSource.PlayClipAtPoint(Arm_Punch, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+
                 if (Arm_IsRight)
                 {
                     PROJ_Base clone = (PROJ_Base)Instantiate(Bip_Smash, transform.position, new Quaternion(0, 0, 0, 0));
@@ -179,9 +184,9 @@ public class ENY_Arms : ACT_Enemy {
     {                                            //Damage needs to be negative.
         if (!Arm_IsShadow)
         {
-            Arm_HostBody.GetComponent<ACT_Enemy>().ChangeHP(Dmg);
-
-            Act_currHP += (Dmg * damageMod);
+            float RealDmg = (Dmg * damageMod);
+            Arm_HostBody.GetComponent<ACT_Enemy>().ChangeHP(RealDmg);
+            Act_currHP += RealDmg;
             if (Act_currHP > Act_baseHP)
                 Act_currHP = Act_baseHP;
             if (Act_currHP <= 0)

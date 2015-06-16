@@ -445,7 +445,7 @@ MonoBehaviour:
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
   Act_Parent: {fileID: 0}
-  damageMod: 1
+  damageMod: .769999981
   state: 0
   randomState: 0
   currTime: 0
@@ -495,6 +495,7 @@ MonoBehaviour:
   Arm_IsShadow: 0
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 148036}
+  Arm_Punch: {fileID: 8300000, guid: b708411001fa58d4198feface2e15805, type: 3}
   Arm_IsLeft: 1
   Arm_IsRight: 0
   Bip_LeftArm: {fileID: 21300000, guid: d41c3f72a332203438f113be40e28bbc, type: 3}
@@ -652,7 +653,7 @@ MonoBehaviour:
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
   Act_Parent: {fileID: 0}
-  damageMod: 1
+  damageMod: .75
   state: 0
   randomState: 0
   currTime: 0
@@ -702,6 +703,7 @@ MonoBehaviour:
   Arm_IsShadow: 0
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 192818}
+  Arm_Punch: {fileID: 8300000, guid: b708411001fa58d4198feface2e15805, type: 3}
   Arm_IsLeft: 0
   Arm_IsRight: 1
   Bip_LeftArm: {fileID: 0}
@@ -910,6 +912,7 @@ MonoBehaviour:
   Arm_IsShadow: 1
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 0}
+  Arm_Punch: {fileID: 0}
   Arm_IsLeft: 0
   Arm_IsRight: 0
   Bip_LeftArm: {fileID: 0}
@@ -1117,6 +1120,7 @@ MonoBehaviour:
   Arm_IsShadow: 1
   Arm_TargetFound: 0
   Arm_ShadowObj: {fileID: 0}
+  Arm_Punch: {fileID: 0}
   Arm_IsLeft: 0
   Arm_IsRight: 0
   Bip_LeftArm: {fileID: 0}
@@ -1274,7 +1278,7 @@ MonoBehaviour:
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
   Act_Parent: {fileID: 0}
-  damageMod: .75
+  damageMod: 1
   state: 0
   randomState: 0
   currTime: 0
