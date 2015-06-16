@@ -21,7 +21,7 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
     public Vector3 Bip_RandLeftSmashLoc;
     public Vector3 Bip_RandRightSmashLoc;
 
-    private int Bip_NewHpTresh;
+    private float Bip_NewHpTresh;
     private float Bip_HpTreshReducer;
     private float Bip_PatternTimer;
     private float Bip_DeadTimer;
@@ -46,7 +46,7 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
         Bip_DeadTimer = 5f;
         Bip_PatternId = 0;
         Bip_HpTreshReducer = 0.2f;
-        Bip_NewHpTresh = Act_baseHP - (int)(Act_baseHP * Bip_HpTreshReducer);
+        Bip_NewHpTresh = Act_baseHP - (Act_baseHP * Bip_HpTreshReducer);
 
         if (!MNGR_Game.isNight)
             GetComponent<SpriteRenderer>().sprite = Bip_DayBody;

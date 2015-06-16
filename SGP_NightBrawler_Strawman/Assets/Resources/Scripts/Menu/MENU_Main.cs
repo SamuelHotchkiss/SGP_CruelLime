@@ -15,6 +15,10 @@ public class MENU_Main : MonoBehaviour
         MNGR_Options.Initialize();          // just in case....
         MNGR_Save.LoadOptions();            // Load in the options file, if there is one
 
+        Input.simulateMouseWithTouches = true;
+        // DO NOT CALL
+        //MNGR_Save.NukeData();       // S: I am become Death, destroyer of worlds
+
         if (!MNGR_Game.AmIMobile())
         {
             if (MNGR_Options.fullscreen)

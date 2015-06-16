@@ -9,7 +9,7 @@ public class PROJ_Pickaxe : MonoBehaviour
 	public float elipseWidth;
 	public Vector3 dir;
 	public float seconds;
-	public int power;
+	public float power;
 
 	/*
 	public override void Initialize(bool _r = true, float _damMult = 1.0f)

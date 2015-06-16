@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     float specTime = 0.75f;
     // S: to be removed later
     public GameObject theCanvas;
+    public GameObject theHorde;
 
     // Use this for initialization
     protected virtual void Start()
@@ -91,12 +92,12 @@ public class PlayerController : MonoBehaviour
         // for testing
         //MNGR_Game.dangerZone = true;
 
-        if (GameObject.Find("_Horde") != null)
+        if (theHorde != null)
         {
             if (MNGR_Game.dangerZone)
-                GameObject.Find("_Horde").SetActive(true);
+                theHorde.SetActive(true);
             else
-                GameObject.Find("_Horde").SetActive(false);
+                theHorde.SetActive(false);
         }
 
     }
@@ -781,7 +782,7 @@ public class PlayerController : MonoBehaviour
 
     void TouchMove(Touch theTouch)
     {
-        float deadZone = 1.0f;
+        float deadZone = 3.0f;
         Vector2 dashPoint = new Vector2((Screen.width / 8), (Screen.height / 2));
 
         //if (horz > 20.0f || vert > 20.0f || horz < -20.0f || vert < -20.0f)
@@ -800,8 +801,8 @@ public class PlayerController : MonoBehaviour
                 }
 
                 Vector2 doubleTap = theTouch.position;
-                float top = dashPoint.y + 25.0f;
-                float bottom = dashPoint.y - 100.0f;
+                float top = dashPoint.y + 50.0f;
+                float bottom = dashPoint.y - 50.0f;
 
                 if (doubleTap.x > dashPoint.x && doubleTap.y > bottom && doubleTap.y < top)
                     horz = 30.0f;
@@ -905,9 +906,9 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log("UsePowerUP");
             }
         }
-        else if ((pauseTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
-        {
-            GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().PauseGame();
-        }
+        //else if ((pauseTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
+        //{
+        //    GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().PauseGame();
+        //}
     }
 }

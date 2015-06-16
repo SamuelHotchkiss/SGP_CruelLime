@@ -35,6 +35,8 @@ public class MENU_Village : MonoBehaviour {
 
         for (int i = 1; i < Vll_Shops.Length; i++)
             Vll_Shops[i].SetActive(false);
+
+        Input.simulateMouseWithTouches = true;
 	}
 	
 	// Update is called once per frame

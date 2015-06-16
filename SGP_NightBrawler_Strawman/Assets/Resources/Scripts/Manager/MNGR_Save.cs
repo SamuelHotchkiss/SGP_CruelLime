@@ -87,7 +87,7 @@ public static class MNGR_Save
     public static void LoadCurrentSave()
     {
         saveFiles[currSave].AssignGameManager();
-        saveFiles[currSave].isNew = false;
+        //saveFiles[currSave].isNew = false;
     }
 
     // Resets a current save profile
@@ -95,6 +95,19 @@ public static class MNGR_Save
     {
         saveFiles[saveIndex] = new MNGR_GameData();
         SaveProfiles();
+    }
+
+    // S: to clear out outdated data
+    public static void NukeData()
+    {
+        if (File.Exists(Application.persistentDataPath + "GameSaves/savedGames.SAVES"))
+        {
+            File.Delete(Application.persistentDataPath + "GameSaves/savedGames.SAVES");
+        }
+        if (File.Exists(Application.persistentDataPath + "Options/options.OPTIONS"))
+        {
+            File.Delete(Application.persistentDataPath + "Options/options.OPTIONS");
+        }
     }
 }
 

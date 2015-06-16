@@ -36,7 +36,7 @@ public class MOD_HPRegen : MOD_Base
                 float OnePercentHP = player.party[i].Act_baseHP * 0.01f;     //Regen 2% of the Character's Hp every second.
                 if (OnePercentHP < 1.0f)
                     OnePercentHP = 1.0f;
-                player.party[i].ChangeHP((int)OnePercentHP);
+                player.party[i].ChangeHP(OnePercentHP);
             }
             MHPR_Timer = 0.5f;
         }

@@ -148,13 +148,13 @@ public class ENY_Arms : ACT_Enemy {
         }
 	}
 
-    public override void ChangeHP(int Dmg)       //Applies current HP by set amount can be use to Heal as well
+    public override void ChangeHP(float Dmg)       //Applies current HP by set amount can be use to Heal as well
     {                                            //Damage needs to be negative.
         if (!Arm_IsShadow)
         {
             Arm_HostBody.GetComponent<ACT_Enemy>().ChangeHP(Dmg);
 
-            Act_currHP += (int)(Dmg * damageMod);
+            Act_currHP += (Dmg * damageMod);
             if (Act_currHP > Act_baseHP)
                 Act_currHP = Act_baseHP;
             if (Act_currHP <= 0)

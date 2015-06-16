@@ -5,14 +5,14 @@ using System.Collections;
 public class ACT_Base 
 {
 
-    public int Act_baseHP;          //The base HP of the current Actor
-    public int Act_basePower;       //The base Power of the current Actor
-    public int Act_baseSpeed;       //The base Speed of the current Actor
+    public float Act_baseHP;          //The base HP of the current Actor
+    public float Act_basePower;       //The base Power of the current Actor
+    public float Act_baseSpeed;       //The base Speed of the current Actor
     public float Act_baseAspeed;      //The base Attack Speed modifier of the current Actor
 
-    public int Act_currHP;          //The current HP of the Actor, can be modifie and change in play
-    public int Act_currPower;       //The current Power of the Actor, can be modifie and change in play
-    public int Act_currSpeed;       //The current Speed of the Actor, can be modifie and change in play
+    public float Act_currHP;          //The current HP of the Actor, can be modifie and change in play
+    public float Act_currPower;       //The current Power of the Actor, can be modifie and change in play
+    public float Act_currSpeed;       //The current Speed of the Actor, can be modifie and change in play
     public float Act_currAspeed;    //The current Attack Speed modifier of the Actor, can be modified and change in play dynamically woweee zowwy!
 
     public bool Act_facingRight = true;     //The direction the Actor is facing, use fro back attacks and shilds
@@ -25,36 +25,36 @@ public class ACT_Base
     public int Act_AverageLevel;            //Average Of all levels;
 
     //Mutators
-    public void SetCurrHP(int n_hp)
+    public void SetCurrHP(float n_hp)
     {
         Act_currHP = n_hp;
     }
-    public void SetCurrPower(int n_pwr)
+    public void SetCurrPower(float n_pwr)
     {
         Act_currPower = n_pwr;
     }
-    public void SetCurrSpeed(int n_spd)
+    public void SetCurrSpeed(float n_spd)
     {
         Act_currSpeed = n_spd;
     }
-    public void SetCurrAttackSpeed(int n_spd)
+    public void SetCurrAttackSpeed(float n_spd)
     {
         Act_currAspeed = n_spd;
     }
 
-    public void SetBaseHP(int n_hp)
+    public void SetBaseHP(float n_hp)
     {
         Act_baseHP = n_hp;
     }
-    public void SetBasePower(int n_pwr)
+    public void SetBasePower(float n_pwr)
     {
         Act_basePower = n_pwr;
     }
-    public void SetBaseSpeed(int n_spd)
+    public void SetBaseSpeed(float n_spd)
     {
         Act_baseSpeed = n_spd;
     }
-    public void SetBaseAttackSpeed(int n_spd)
+    public void SetBaseAttackSpeed(float n_spd)
     {
         Act_baseAspeed = n_spd;
     }
