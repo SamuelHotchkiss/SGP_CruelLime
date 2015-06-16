@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
     public float m_distance;
-
 	public GUIStyle BlackBar;
 	public GUIStyle HealthBar;
 	public Camera cam;
@@ -41,10 +40,14 @@ public class ACT_Enemy : MonoBehaviour
 	public bool Act_ModIsBuff;
     public bool Act_IsIntelligent;  //Is this Enemy inanimate.
     public bool Act_SpawnProjOnDed;
+    public bool Act_AudioHasPlay;
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
 
+    public AudioClip Act_HurtSound;
+    public AudioClip Act_DyingSound;
+    public AudioClip Act_SpecialSound;
     public GameObject Act_Parent;
 
     public float damageMod;
@@ -148,14 +151,15 @@ public class ACT_Enemy : MonoBehaviour
 	}
 
 	//Interface
-	public virtual void ChangeHP(float Dmg)       //Applies current HP by set amount can be use to Heal as well
+	public virtual void ChangeHP(float Dmg, bool Flinch = true)       //Applies current HP by set amount can be use to Heal as well
 	{                                   //Damage needs to be negative.
 		Act_currHP += (Dmg * damageMod);
-        if (Dmg < 0)
+        if (Dmg < 0 && Flinch)
         {
             state = STATES.HURT;
             currTime = stateTime[(int)state];
         }
+             
 		if (Act_currHP > Act_baseHP)
 			Act_currHP = Act_baseHP;
         if (Act_currHP <= 0)
@@ -189,7 +193,7 @@ public class ACT_Enemy : MonoBehaviour
 			cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         damageMod = 1.0f;
-
+        Act_AudioHasPlay = false;
         Act_currAttackSpeed = Act_baseAttackSpeed;
         Act_currHP = Act_baseHP;
         Act_currPower = Act_basePower;
@@ -278,7 +282,8 @@ public class ACT_Enemy : MonoBehaviour
 						GetComponent<ITM_DropLoot>().DropCoin(transform.position);
 					}
 				}
-				Destroy(transform.gameObject);
+                KillBuffs();
+				Destroy(gameObject);
 			}
 			else
 			{
@@ -532,6 +537,11 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.SPECIAL:
 				{
+                    if (!Act_AudioHasPlay && Act_SpecialSound != null)
+                    {
+                        AudioSource.PlayClipAtPoint(Act_SpecialSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+                        Act_AudioHasPlay = true;
+                    }
 					CheckThresholds();
 					if (dividerActivated)
 					{
@@ -554,6 +564,11 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.HURT:
 				{
+                    if (!Act_AudioHasPlay && Act_HurtSound != null)
+                    {
+                        AudioSource.PlayClipAtPoint(Act_HurtSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+                        Act_AudioHasPlay = true;
+                    }
                     if (Act_IsIntelligent)
                     {
                         Vector2 vel = GetComponent<Rigidbody2D>().velocity;
@@ -568,6 +583,11 @@ public class ACT_Enemy : MonoBehaviour
 				}
 			case STATES.DEAD:
 				{
+                    if (!Act_AudioHasPlay && Act_DyingSound != null)
+                    {
+                        AudioSource.PlayClipAtPoint(Act_DyingSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+                        Act_AudioHasPlay = true;
+                    }
 					break;
 				}
 		} 
@@ -595,6 +615,7 @@ public class ACT_Enemy : MonoBehaviour
 	{
         if (Act_IsIntelligent) // L: dummies dont change states.
         {
+            Act_AudioHasPlay = false;
             RestoreToBaseSpeed();
             if (kamikazeActivated)
             {

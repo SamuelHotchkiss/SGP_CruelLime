@@ -46,6 +46,8 @@ public class MOD_Base : MonoBehaviour
             Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/BuffEffect") as GameObject, transform.position, Quaternion.identity) as GameObject;
         else
             Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/DebuffEffect") as GameObject, transform.position, Quaternion.identity) as GameObject;
+
+        Mod_Particles.GetComponent<ParticleSystemRenderer>().sortingOrder = 0;
         #region WhatAmIAttachedTo?
         if (gameObject.tag == "Enemy")
         {
@@ -94,6 +96,7 @@ public class MOD_Base : MonoBehaviour
         }
         #endregion
     }
+
 
     // Update is called once per frame
     public virtual void Update()

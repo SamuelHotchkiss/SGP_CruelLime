@@ -52,7 +52,7 @@ public class MOD_DoT : MOD_Base
             float OnePercentDmg = enemy.Act_baseHP * (0.0001f * (MNGR_Game.currentParty[1].Act_currPower) * Time.deltaTime) ;     //Reduces 2% of the enemy's Hp every second.
             //if (OnePercentDmg < 1.0f)
             //    OnePercentDmg = 1.0f;
-            enemy.ChangeHP(-OnePercentDmg);
+            enemy.ChangeHP(-OnePercentDmg, false);
             //Mod_Timer = 2.0f;
         //}
     }
