@@ -83,6 +83,12 @@ public class PROJ_SwordStorm : PROJ_Base
 				spawnTimer = spawnTimerBase;
 			}
 
+
+			PlayerController player = owner.GetComponent<PlayerController>();
+			if (player.currentState != ACT_CHAR_Base.STATES.SPECIAL)
+			{
+				ProjectileExpired();
+			}
 		}
 		//else if (owner.tag == "Enemy")
 		//{
