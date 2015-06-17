@@ -168,4 +168,12 @@ public class UI_HUD : MonoBehaviour {
 		options = !options;
 		theCanvas.transform.GetChild(9).gameObject.SetActive(options);
 	}
+
+	public void ExitGame()
+	{
+		MNGR_Game.paused = false;
+		theCanvas.transform.GetChild(3).gameObject.SetActive(false);
+		//Input.simulateMouseWithTouches = false;
+		Application.LoadLevel("MainMenu");
+	}
 }
