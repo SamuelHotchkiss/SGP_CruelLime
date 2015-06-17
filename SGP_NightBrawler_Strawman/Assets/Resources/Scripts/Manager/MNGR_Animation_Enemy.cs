@@ -39,12 +39,12 @@ public class MNGR_Animation_Enemy : MonoBehaviour
 
             sprites = Resources.LoadAll<Sprite>(path);
 
-            idleSprites = new int[] { 0, 1, 2 };
+            /*idleSprites = new int[] { 0, 1, 2 };
             walkSprites = new int[] { 5, 6, 7, 8, 9 };
             attack1Sprites = new int[] { 10, 11, 12 };
             specialSprites = new int[] { 0 };
             hurtSprites = new int[] { 15 };
-            deadSprites = new int[] { 15, 16 };
+            deadSprites = new int[] { 15, 16 };*/
         }
         else // older method that's still supported for older enemies (if it aint broke...).
         {
@@ -53,9 +53,10 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 filepaths[i] = "Sprites/Enemy/" + filepaths[i];
             sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.Act_ID]);
 
-            // set up unique sprites for all dis stuff
-            InitializeSprites(currentCharacter.Act_ID);
         }
+        // set up unique sprites for all dis stuff
+        InitializeSprites(currentCharacter.Act_ID);
+
         //lastState = currentCharacter.state;
         curState = currentCharacter.state;
 
@@ -89,21 +90,21 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 deadSprites = new int[] { 15, 16 };
                 break;
             case 3: // Spiderling
+                idleSprites = new int[] { 0, 1, 2 };
+                walkSprites = new int[] { 5, 6, 7, 8, 9 };
+                attack1Sprites = new int[] { 10, 11, 12 };
+                specialSprites = new int[] { 5, 6, 7, 8, 9 };
+                hurtSprites = new int[] { 15 };
+                deadSprites = new int[] { 15, 16 };
+                break;
+            /*case 4: // Spider Mom
                 idleSprites = new int[] { 0, 0, 0 };
                 walkSprites = new int[] { 0, 0, 0, 0, 0 };
                 attack1Sprites = new int[] { 0, 0, 0 };
                 specialSprites = new int[] { 0 };
                 hurtSprites = new int[] { 0 };
                 deadSprites = new int[] { 0, 0 };
-                break;
-            case 4: // Spider Mom
-                idleSprites = new int[] { 0, 0, 0 };
-                walkSprites = new int[] { 0, 0, 0, 0, 0 };
-                attack1Sprites = new int[] { 0, 0, 0 };
-                specialSprites = new int[] { 0 };
-                hurtSprites = new int[] { 0 };
-                deadSprites = new int[] { 0, 0 };
-                break;
+                break;*/
             default:
                 idleSprites = new int[] { 0, 1, 2 };
                 walkSprites = new int[] { 5, 6, 7, 8, 9 };
@@ -132,11 +133,11 @@ public class MNGR_Animation_Enemy : MonoBehaviour
         {
             case ACT_Enemy.STATES.IDLE:
 
-                if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.6f)
+                if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.75f)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[0]];
                 else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.5f)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
-                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.1f)
+                else if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * 0.25f)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[2]];
                 else if (currentCharacter.currTime >= 0)
                     GetComponent<SpriteRenderer>().sprite = sprites[idleSprites[1]];
@@ -177,27 +178,19 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[2]];
                 break;
             case ACT_Enemy.STATES.SPECIAL:
-
-                /*
-                if (currentCharacter.curTime > currentCharacter.maxTmr[(int)currentCharacter.state] * 0.95f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[0]];
-                else if (currentCharacter.curTime > currentCharacter.maxTmr[(int)currentCharacter.state] * 0.7f)
-                    GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[1]];
-                else if (currentCharacter.curTime + Time.deltaTime * 2.0f > currentCharacter.maxTmr[(int)currentCharacter.state] * 0.7f)
+                // Beutiful.
+                float length = specialSprites.Length;
+                for (float i = length; i > 0; i-- ) // for all possible frames,
                 {
-                    if (currentCharacter.Act_facingRight)
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(2.0f, 0.0f);
-                    else
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(-2.0f, 0.0f);
+                    float mult = (1.0f / length) * (i - 1); // determines which frame to play.
+                    //float temp = currentCharacter.stateTime[(int)currentCharacter.state] * mult; // degubbin'
+                    if (currentCharacter.currTime > currentCharacter.stateTime[(int)currentCharacter.state] * mult)
+                    {
+                        int frame = (int)(length - i); // invert i to play animation in correct order
+                        GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[frame]];
+                        break; // break out of the loop pronto.
+                    }
                 }
-                else if (currentCharacter.curTime >= 0)
-                {
-                    if ((int)(currentCharacter.curTime * 1000) % 20 > 9)
-                        GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[0]];
-                    else
-                        GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[1]];
-                }*/
-                GetComponent<SpriteRenderer>().sprite = sprites[specialSprites[0]];
                 break;
             case ACT_Enemy.STATES.HURT:
                 GetComponent<SpriteRenderer>().sprite = sprites[hurtSprites[0]];

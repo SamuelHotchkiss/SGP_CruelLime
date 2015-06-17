@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.60143328, y: -6.20989943, z: 50}
+  m_LocalPosition: {x: -29.3999996, y: -1.10000002, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,9 +59,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -.100000001}
   serializedVersion: 2
-  m_Size: {x: 1, y: .400000006}
+  m_Size: {x: 1, y: .25}
 --- !u!114 &11421630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,6 +108,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_distance: 0
+  skull: {fileID: 0}
+  Outline:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
   BlackBar:
     m_Name: 
     m_Normal:
@@ -230,6 +290,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 3
+  Act_Name: Spiderling
   Act_baseHP: 15
   Act_basePower: 1
   Act_baseSpeed: 3
@@ -241,6 +302,7 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   Act_Parent: {fileID: 0}
@@ -275,7 +337,7 @@ MonoBehaviour:
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
   Knck_baseCooldown: 0
-  kamikazeActivated: 1
+  kamikazeActivated: 0
   kamikazeTimer: 5
   explosion: {fileID: 179554, guid: ad1a8d0bc22064f439c1c889b33506cc, type: 2}
   dividerActivated: 0
@@ -290,6 +352,7 @@ MonoBehaviour:
   projectile: {fileID: 0}
   isMelee: 0
   paused: 0
+  isBoss: 0
 --- !u!114 &11463364
 MonoBehaviour:
   m_ObjectHideFlags: 1

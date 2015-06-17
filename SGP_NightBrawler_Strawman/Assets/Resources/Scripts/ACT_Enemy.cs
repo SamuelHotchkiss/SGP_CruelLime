@@ -29,7 +29,7 @@ public class ACT_Enemy : MonoBehaviour
     // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
     // 4 = Ent, 5 = GloblinShaman, 6 = Trollgre, 7...
     public int Act_ID;
-    public string Act_Name;         // Used in loading sprites.  Make sure this matches the name of the sprite.  It doesn't include the filepath.
+    public string Act_Name;         // Used in loading sprites.  Make sure this matches the name of the sprite (CamelCase, no spaces).  It doesn't include the filepath.
 
 	public float Act_baseHP;          //The base HP of the current Actor
 	public float Act_basePower;       //The base Power of the current Actor
@@ -601,7 +601,7 @@ public class ACT_Enemy : MonoBehaviour
             if (kamikazeActivated)
             {
                 state = STATES.SPECIAL;
-                currTime = stateTime[(int)state];
+                //currTime = stateTime[(int)state];
                 return;
             }
             if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
@@ -612,9 +612,9 @@ public class ACT_Enemy : MonoBehaviour
 				randomState = Random.Range(0, 5);
 
                 state = (STATES)randomState;
-                currTime = stateTime[(int)state];
             }
         }
+                currTime = stateTime[(int)state];
 	}
 
     // L: movin' this over here.

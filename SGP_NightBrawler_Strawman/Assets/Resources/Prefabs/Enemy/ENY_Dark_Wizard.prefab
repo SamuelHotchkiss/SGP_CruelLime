@@ -13,6 +13,7 @@ GameObject:
   - 212: {fileID: 21254476}
   - 61: {fileID: 6192494}
   - 114: {fileID: 11420344}
+  - 114: {fileID: 11458042}
   m_Layer: 9
   m_Name: ENY_Dark_Wizard
   m_TagString: Enemy
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.23000002, y: -1.96000004, z: 50}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -30.1000004, y: -1.70000005, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,9 +58,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .10411334, y: .109047472}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.26870263, y: .499515176}
+  m_Size: {x: 1, y: .25}
 --- !u!114 &11420344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,6 +91,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_distance: 0
+  skull: {fileID: 0}
+  Outline:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
   BlackBar:
     m_Name: 
     m_Normal:
@@ -212,6 +273,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 4
+  Act_Name: DarkWizard
   Act_baseHP: 100
   Act_basePower: 50
   Act_baseSpeed: 1
@@ -223,6 +285,7 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   Act_Parent: {fileID: 0}
@@ -273,6 +336,18 @@ MonoBehaviour:
   projectile: {fileID: 11452890, guid: 0ea8ef51b2608cc43a6684c18f4fa325, type: 2}
   isMelee: 0
   paused: 0
+  isBoss: 0
+--- !u!114 &11458042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21254476
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -297,7 +372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 62d818ecba2e01640a5d21f7fcf178a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9018645f1dc99284480570c25dd30344, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
