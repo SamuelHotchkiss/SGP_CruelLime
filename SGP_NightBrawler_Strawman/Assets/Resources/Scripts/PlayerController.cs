@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public Object[] Projs;
 
     Vector3 currentChar_GUI, rightChar_GUI, leftChar_GUI;
+	Vector3 currentChar_Scale, otherChar_Scale;
 
     public int coins;
 
@@ -68,9 +69,15 @@ public class PlayerController : MonoBehaviour
 
         party = MNGR_Game.currentParty;
 
-        currentChar_GUI = new Vector3(150.0f, -100.0f, 0.0f);
-        rightChar_GUI = new Vector3(250.0f, -50.0f, 0.0f);
-        leftChar_GUI = new Vector3(50.0f, -50.0f, 0.0f);
+        currentChar_GUI = new Vector3(250.0f, -210.0f, 0.0f);
+        rightChar_GUI = new Vector3(420.0f, -120.0f, 0.0f);
+        leftChar_GUI = new Vector3(80.0f, -120.0f, 0.0f);
+
+		currentChar_Scale = new Vector3(1.0f, 1.0f, 1.0f);
+		otherChar_Scale = new Vector3(0.6f, 0.6f, 1.0f);
+
+		if (GameObject.Find("GUI_Manager"))
+			GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().Initialize();
 
         Projs = new GameObject[4];
         Projs[0] = Resources.Load(party[currChar].ProjFilePaths[0]);
@@ -310,31 +317,31 @@ public class PlayerController : MonoBehaviour
         switch (currChar)
         {
             case 0:
-                warrior_GUI.transform.GetComponent<RectTransform>().anchoredPosition = currentChar_GUI;
-                ranger_GUI.transform.GetComponent<RectTransform>().anchoredPosition = rightChar_GUI;
-                mage_GUI.transform.GetComponent<RectTransform>().anchoredPosition = leftChar_GUI;
+				warrior_GUI.transform.GetComponent<RectTransform>().anchoredPosition = currentChar_GUI;
+				ranger_GUI.transform.GetComponent<RectTransform>().anchoredPosition = rightChar_GUI;
+				mage_GUI.transform.GetComponent<RectTransform>().anchoredPosition = leftChar_GUI;
 
-                warrior_GUI.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
-                ranger_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
-                mage_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
+				warrior_GUI.transform.localScale = currentChar_Scale;
+				ranger_GUI.transform.localScale = otherChar_Scale;
+				mage_GUI.transform.localScale = otherChar_Scale;
                 break;
             case 1:
-                warrior_GUI.transform.GetComponent<RectTransform>().anchoredPosition = leftChar_GUI;
-                ranger_GUI.transform.GetComponent<RectTransform>().anchoredPosition = currentChar_GUI;
-                mage_GUI.transform.GetComponent<RectTransform>().anchoredPosition = rightChar_GUI;
+				warrior_GUI.transform.GetComponent<RectTransform>().anchoredPosition = leftChar_GUI;
+				ranger_GUI.transform.GetComponent<RectTransform>().anchoredPosition = currentChar_GUI;
+				mage_GUI.transform.GetComponent<RectTransform>().anchoredPosition = rightChar_GUI;
 
-                warrior_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
-                ranger_GUI.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
-                mage_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
+				warrior_GUI.transform.localScale = otherChar_Scale;
+				ranger_GUI.transform.localScale = currentChar_Scale;
+				mage_GUI.transform.localScale = otherChar_Scale;
                 break;
             case 2:
-                warrior_GUI.transform.GetComponent<RectTransform>().anchoredPosition = rightChar_GUI;
-                ranger_GUI.transform.GetComponent<RectTransform>().anchoredPosition = leftChar_GUI;
-                mage_GUI.transform.GetComponent<RectTransform>().anchoredPosition = currentChar_GUI;
+				warrior_GUI.transform.GetComponent<RectTransform>().anchoredPosition = rightChar_GUI;
+				ranger_GUI.transform.GetComponent<RectTransform>().anchoredPosition = leftChar_GUI;
+				mage_GUI.transform.GetComponent<RectTransform>().anchoredPosition = currentChar_GUI;
 
-                warrior_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
-                ranger_GUI.transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
-                mage_GUI.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                warrior_GUI.transform.localScale = otherChar_Scale;
+				ranger_GUI.transform.localScale = otherChar_Scale;
+				mage_GUI.transform.localScale = currentChar_Scale;
                 break;
         }
 
