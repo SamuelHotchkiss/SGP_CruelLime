@@ -180,6 +180,8 @@ public class UI_HUD : MonoBehaviour {
 	{
 		options = !options;
 		theCanvas.transform.GetChild(9).gameObject.SetActive(options);
+		MNGR_Save.optionsFile.CopyOptions();
+		MNGR_Save.SaveOptions();
 	}
 
 	public void ExitGame()
