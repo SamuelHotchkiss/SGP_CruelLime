@@ -115,7 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ab91f40e9c71c4c9f7361627927d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Menu_UIButtons: []
+  Menu_UIButtons:
+  - {fileID: 1157186151}
+  - {fileID: 1823859199}
+  - {fileID: 2093929006}
+  - {fileID: 571918727}
   Menu_CurrButton: 0
   Menu_JoyController: 0
   Menu_MoveSound: {fileID: 8300000, guid: b58060e62a1b59442be32bb1127ae340, type: 3}
@@ -821,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0667defcd2d2246962499a0237626f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DelayMax: 0
+  DelayMax: 61
 --- !u!1 &882352105
 GameObject:
   m_ObjectHideFlags: 0
