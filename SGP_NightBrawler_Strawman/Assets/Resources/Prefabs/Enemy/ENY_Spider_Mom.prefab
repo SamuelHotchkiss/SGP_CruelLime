@@ -13,6 +13,7 @@ GameObject:
   - 212: {fileID: 21279706}
   - 61: {fileID: 6154240}
   - 114: {fileID: 11498574}
+  - 114: {fileID: 11404568}
   m_Layer: 9
   m_Name: ENY_Spider_Mom
   m_TagString: Enemy
@@ -26,8 +27,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148008}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 39.3499985, y: -.200000003, z: 50}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.4277983, y: -1.42503095, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,6 +61,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1.07123291}
+--- !u!114 &11404568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11460504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,7 +266,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 4
-  Act_Name: 
+  Act_Name: SpiderMama
   Act_baseHP: 50
   Act_basePower: 1
   Act_baseSpeed: 1
@@ -365,7 +377,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8187330ce7f48834399bb159879624cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9efd7ff5f41037643831e1a8e4905d61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

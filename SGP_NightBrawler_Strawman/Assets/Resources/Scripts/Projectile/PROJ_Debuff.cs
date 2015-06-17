@@ -5,6 +5,7 @@ public class PROJ_Debuff : PROJ_Base
 {
 
     public int debuff_ID;
+    public PROJ_Base[] SpawnOnDeath; // last second add for poisoner.
 
     // Use this for initialization
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
@@ -68,6 +69,15 @@ public class PROJ_Debuff : PROJ_Base
         }
         ProjectileExpired();
 
+        if (SpawnOnDeath.Length > 0)
+        {
+            for (int i = 0; i < SpawnOnDeath.Length; i++)
+            {
+                PROJ_Explosion clone = (PROJ_Explosion)Instantiate(SpawnOnDeath[i], transform.position, new Quaternion(0, 0, 0, 0));
+                clone.owner = owner;
+                clone.Initialize();
+            }
+        }
 
     }
 }
