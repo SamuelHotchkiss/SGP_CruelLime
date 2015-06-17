@@ -11,6 +11,8 @@ public class CHAR_Wizard : ACT_CHAR_Base
 		cooldownTmr = 0;
         cooldownTmrBase = 3.0f;
 
+        Act_ActID = 6;
+
 		Act_baseHP = 50;
         Act_currHP = Act_baseHP;
 		Act_basePower = 5;

@@ -13,6 +13,8 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 
         cooldownTmrBase = 5.0f;
 
+        Act_ActID = 8;
+
 		Act_baseHP = 50;
 		Act_basePower = 5;
 		Act_baseSpeed = 10;

@@ -14,6 +14,8 @@ public class CHAR_Lancer : ACT_CHAR_Base
         chargeTimerMax = 1.0f;
         chargeTimer = chargeTimerMax;
 
+        Act_ActID = 1;
+
         Act_baseHP = 100;
         Act_currHP = Act_baseHP;
 

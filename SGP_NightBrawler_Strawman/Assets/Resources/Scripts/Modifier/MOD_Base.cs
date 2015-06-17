@@ -20,25 +20,25 @@ public class MOD_Base : MonoBehaviour
 
     public bool isPlayer;
 
-	/*--- Legend ---
-	 ===============
-	0 = MOD_CDDecrease
-	1 = MOD_DMGIncrease
-	2 = MOD_DMGProtection
-	3 = MOD_HPInstant
-	4 = MOD_HPRegen
-	5 = MOD_SPDIncrease
-	 * 
-	=== Debuffs IDs === 
-	 * 
-	6 = MOD_DMGDecrease
-	7 = MOD_DMGIncomingIncrease
-	8 = MOD_DoT
-	9 = MOD_Slowed
-	10 = MOD_Stunned
-	 ===============*/
+    /*--- Legend ---
+     ===============
+    0 = MOD_CDDecrease
+    1 = MOD_DMGIncrease
+    2 = MOD_DMGProtection
+    3 = MOD_HPInstant
+    4 = MOD_HPRegen
+    5 = MOD_SPDIncrease
+     * 
+    === Debuffs IDs === 
+     * 
+    6 = MOD_DMGDecrease
+    7 = MOD_DMGIncomingIncrease
+    8 = MOD_DoT
+    9 = MOD_Slowed
+    10 = MOD_Stunned
+     ===============*/
 
-	// Use this for initialization
+    // Use this for initialization
     public virtual void Start()
     {
         Mod_ModIndexNum = -1;           //Base class
@@ -46,6 +46,11 @@ public class MOD_Base : MonoBehaviour
             Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/BuffEffect") as GameObject, transform.position, Quaternion.identity) as GameObject;
         else
             Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/DebuffEffect") as GameObject, transform.position, Quaternion.identity) as GameObject;
+       
+        Mod_Particles.gameObject.transform.SetParent(gameObject.transform);
+
+        Mod_Particles.GetComponent<ParticleSystemRenderer>().sortingOrder = 0;
+
         #region WhatAmIAttachedTo?
         if (gameObject.tag == "Enemy")
         {
@@ -95,6 +100,7 @@ public class MOD_Base : MonoBehaviour
         #endregion
     }
 
+
     // Update is called once per frame
     public virtual void Update()
     {
@@ -114,9 +120,6 @@ public class MOD_Base : MonoBehaviour
                 if (Mod_effectTimer <= 0.0f)
                     EndModifyEnemy();
             }
-
-            Mod_Particles.transform.position = transform.position;
-
         }
 
         #region OldnBusted
@@ -180,7 +183,7 @@ public class MOD_Base : MonoBehaviour
         Destroy(Mod_Particles);
         enemy.myBuffs.Remove(this);
     }
-    
+
     public virtual void ResetEffecTimer()
     {
         Mod_effectTimer = Mod_BaseEffectTimer;

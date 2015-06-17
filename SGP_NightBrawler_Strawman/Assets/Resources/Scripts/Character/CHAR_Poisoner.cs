@@ -12,6 +12,8 @@ public class CHAR_Poisoner : ACT_CHAR_Base
         cooldownTmr = 0;
         cooldownTmrBase = 3.0f;
 
+        Act_ActID = 5;
+
         Act_baseHP = 75;
         Act_currHP = Act_baseHP;
 

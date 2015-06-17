@@ -12,6 +12,8 @@ public class CHAR_Swordsman : ACT_CHAR_Base {
 		cooldownTmr = 0;
         cooldownTmrBase = 3.0f;
 
+        Act_ActID = 0;
+
 		Act_baseHP = 100;
         Act_currHP = Act_baseHP;
 
