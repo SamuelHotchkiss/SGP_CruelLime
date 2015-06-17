@@ -931,9 +931,9 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log("UsePowerUP");
             }
         }
-        //else if ((pauseTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
-        //{
-        //    GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().PauseGame();
-        //}
+        else if ((pauseTouch.rectTransform.anchoredPosition - touchPos).magnitude <= 50.0f)
+        {
+            GameObject.Find("GUI_Manager").GetComponent<UI_HUD>().TogglePause();
+        }
     }
 }
