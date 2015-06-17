@@ -13,6 +13,7 @@ GameObject:
   - 212: {fileID: 21237256}
   - 61: {fileID: 6153704}
   - 114: {fileID: 11450586}
+  - 114: {fileID: 11404990}
   m_Layer: 9
   m_Name: ENY_Stone_Golem
   m_TagString: Enemy
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 646.903809, y: 110.36982, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -13.8167238, y: -2.51233077, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,9 +58,20 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .192995071}
+  m_Offset: {x: -.25, y: .660000026}
   serializedVersion: 2
-  m_Size: {x: 1, y: .614009857}
+  m_Size: {x: 2, y: .75}
+--- !u!114 &11404990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11407938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,17 +206,19 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 4
+  Act_Name: StoneGolem
   Act_baseHP: 500
   Act_basePower: 15
-  Act_baseSpeed: 20
+  Act_baseSpeed: 1
   Act_currHP: 500
   Act_currPower: 15
-  Act_currSpeed: 20
+  Act_currSpeed: 1
   Act_facingRight: 0
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   Act_Parent: {fileID: 0}
