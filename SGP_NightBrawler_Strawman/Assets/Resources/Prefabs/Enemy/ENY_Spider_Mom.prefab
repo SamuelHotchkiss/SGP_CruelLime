@@ -14,6 +14,7 @@ GameObject:
   - 61: {fileID: 6154240}
   - 114: {fileID: 11498574}
   - 114: {fileID: 11404568}
+  - 114: {fileID: 11475070}
   m_Layer: 9
   m_Name: ENY_Spider_Mom
   m_TagString: Enemy
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.4277983, y: -1.42503095, z: 50}
+  m_LocalPosition: {x: -1.0254693, y: -3.63804436, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,7 +61,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.07123291}
+  m_Size: {x: 2, y: .5}
 --- !u!114 &11404568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,6 +336,17 @@ MonoBehaviour:
   isMelee: 1
   paused: 0
   isBoss: 0
+--- !u!114 &11475070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11498574
 MonoBehaviour:
   m_ObjectHideFlags: 1

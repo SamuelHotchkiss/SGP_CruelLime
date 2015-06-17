@@ -9,9 +9,12 @@ public class CollisionDamage : MonoBehaviour {
     {
         if (Col.gameObject.tag == "Player")
         {
-            PlayerController ColPly = Col.gameObject.GetComponent<PlayerController>();
-            ACT_Enemy ColEmy  = GetComponent<ACT_Enemy>();
-            ColPly.party[ColPly.currChar].ChangeHP(-ColEmy.Act_currPower);
+            ACT_Enemy ColEmy = GetComponent<ACT_Enemy>();
+            if (Col.gameObject.GetComponent<PlayerController>() != null)
+            {
+                PlayerController ColPly = Col.gameObject.GetComponent<PlayerController>();
+                ColPly.party[ColPly.currChar].ChangeHP(-ColEmy.Act_currPower);
+            }
             if (ColEmy.TimeThresh >= 0.0f)
                 ColEmy.TimeThresh = 0.0f;
         }
@@ -21,9 +24,12 @@ public class CollisionDamage : MonoBehaviour {
     {
         if (Col.gameObject.tag == "Player")
         {
-            PlayerController ColPly = Col.gameObject.GetComponent<PlayerController>();
             ACT_Enemy ColEmy = GetComponent<ACT_Enemy>();
-            ColPly.party[ColPly.currChar].ChangeHP(-ColEmy.Act_currPower);
+            if (Col.gameObject.GetComponent<PlayerController>() != null)
+            {
+                PlayerController ColPly = Col.gameObject.GetComponent<PlayerController>();
+                ColPly.party[ColPly.currChar].ChangeHP(-ColEmy.Act_currPower);
+            }
             if (ColEmy.TimeThresh >= 0.0f)
                 ColEmy.TimeThresh = 0.0f;
         }

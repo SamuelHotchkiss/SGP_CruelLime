@@ -24,7 +24,7 @@ public class PROJ_Explosive : PROJ_Base
         {
             updateSprite = 0.075f;
             curSprite++;
-            if (curSprite > sprites.Length)
+            if (curSprite > sprites.Length - 1)
                 curSprite = 0;
             GetComponent<SpriteRenderer>().sprite = sprites[curSprite];
         }
