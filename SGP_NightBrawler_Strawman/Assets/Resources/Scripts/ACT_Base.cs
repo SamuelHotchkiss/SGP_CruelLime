@@ -24,6 +24,8 @@ public class ACT_Base
     public int Act_SpeedLevel;              //Current Speed level;
     public int Act_AverageLevel;            //Average Of all levels;
 
+    public int Act_ActID;
+
     //Mutators
     public void SetCurrHP(float n_hp)
     {

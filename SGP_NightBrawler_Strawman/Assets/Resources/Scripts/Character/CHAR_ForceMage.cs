@@ -14,6 +14,8 @@ public class CHAR_ForceMage : ACT_CHAR_Base
         chargeTimerMax = 3.0f;
         chargeTimer = chargeTimerMax;
 
+        Act_ActID = 7;
+
         Act_baseHP = 50;
         Act_currHP = Act_baseHP;
         Act_basePower = 5;

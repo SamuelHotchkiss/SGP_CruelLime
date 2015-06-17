@@ -180,7 +180,7 @@ public class ENY_Arms : ACT_Enemy {
         }
 	}
 
-    public override void ChangeHP(float Dmg)       //Applies current HP by set amount can be use to Heal as well
+    public override void ChangeHP(float Dmg, bool Flinsh = true)       //Applies current HP by set amount can be use to Heal as well
     {                                            //Damage needs to be negative.
         if (!Arm_IsShadow)
         {

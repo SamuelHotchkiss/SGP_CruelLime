@@ -12,6 +12,8 @@ public class CHAR_Defender : ACT_CHAR_Base
         cooldownTmr = 0;
         cooldownTmrBase = 7.0f;
 
+        Act_ActID = 2;
+
 		Act_baseHP = 150;
         Act_currHP = Act_baseHP;
 
