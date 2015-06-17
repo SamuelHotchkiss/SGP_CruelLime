@@ -310,16 +310,17 @@ public class ACT_Enemy : MonoBehaviour
         if (currTime <= 0.0f)
             NewState();
 
+        if (TimeThresh == 0.0f)
+            Destroy(gameObject);
+
         if (TimeThresh > 0.0f)
         {
             TimeThresh -= Time.deltaTime;
-
             if (TimeThresh < 0.0f)
                 TimeThresh = 0.0f;
-
-            if (TimeThresh == 0.0f)
-                Destroy(gameObject);
         }
+
+        
 
 		if (kamikazeActivated)
 		{
