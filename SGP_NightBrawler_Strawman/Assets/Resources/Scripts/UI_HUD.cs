@@ -52,20 +52,30 @@ public class UI_HUD : MonoBehaviour {
         if (MNGR_Game.AmIMobile())
             touchPanel.SetActive(true);
 
-		filePaths = new string[11];
+		filePaths = new string[17];
 
-		filePaths[0] = "Sprites/GUI/Warrior";
-		filePaths[1] = "Sprites/GUI/Archer";
-		filePaths[2] = "Sprites/GUI/Mage";
-		filePaths[3] = "Sprites/GUI/Dead";
-		filePaths[4] = "Sprites/GUI/Nothing";
+		filePaths[0] = "Sprites/GUI/Port_Sword";
+		filePaths[1] = "Sprites/GUI/Port_Lancer";
+		filePaths[2] = "Sprites/GUI/Port_Defender";
 
-		filePaths[5] = "Sprites/Item/Health_Potion";
-		filePaths[6] = "Sprites/Item/Regen_Potion";
-		filePaths[7] = "Sprites/Item/Stamina_Potion";
-		filePaths[8] = "Sprites/Item/Acceleration_Potion";
-		filePaths[9] = "Sprites/Item/Protection_Potion";
-		filePaths[10] = "Sprites/Item/Strength_Potion";
+		filePaths[3] = "Sprites/GUI/Port_Archer";
+		filePaths[4] = "Sprites/GUI/Port_Ninja";
+		filePaths[5] = "Sprites/GUI/Port_Poisoner";
+
+		filePaths[6] = "Sprites/GUI/Port_Wizard";
+		filePaths[7] = "Sprites/GUI/Port_ForceMage";
+		filePaths[8] = "Sprites/GUI/Port_Spellslinger";
+
+		filePaths[9] = "Sprites/GUI/Dead";
+		filePaths[10] = "Sprites/GUI/Nothing";
+
+		filePaths[11] = "Sprites/Item/Health_Potion";
+		filePaths[12] = "Sprites/Item/Regen_Potion";
+		filePaths[13] = "Sprites/Item/Stamina_Potion";
+		filePaths[14] = "Sprites/Item/Acceleration_Potion";
+		filePaths[15] = "Sprites/Item/Protection_Potion";
+		filePaths[16] = "Sprites/Item/Strength_Potion";
+
 
 		fighter.Start();
 		ranger.Start();
@@ -75,6 +85,7 @@ public class UI_HUD : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+
 		if (MNGR_Game.paused)
 			if (GameObject.Find("LevelDJ"))
 				GameObject.Find("LevelDJ").GetComponent<AudioSource>().volume = MNGR_Options.musicVol;
@@ -89,19 +100,19 @@ public class UI_HUD : MonoBehaviour {
 		mageCooldown.fillAmount = (float)((mage.cooldownTmrBase - mage.cooldownTmr) / mage.cooldownTmrBase);
 
 		if (fighter.Act_currHP > 0)
-			fighterPort.sprite = Resources.Load<Sprite>(filePaths[0]);
+			fighterPort.sprite = Resources.Load<Sprite>(filePaths[fighter.characterIndex]);
 		else
-			fighterPort.sprite = Resources.Load<Sprite>(filePaths[3]);
+			fighterPort.sprite = Resources.Load<Sprite>(filePaths[9]);
 
 		if (ranger.Act_currHP > 0)
-			rangerPort.sprite = Resources.Load<Sprite>(filePaths[1]);
+			rangerPort.sprite = Resources.Load<Sprite>(filePaths[ranger.characterIndex]);
 		else
-			rangerPort.sprite = Resources.Load<Sprite>(filePaths[3]);
+			rangerPort.sprite = Resources.Load<Sprite>(filePaths[9]);
 
 		if (mage.Act_currHP > 0)
-			magePort.sprite = Resources.Load<Sprite>(filePaths[2]);
+			magePort.sprite = Resources.Load<Sprite>(filePaths[mage.characterIndex]);
 		else
-			magePort.sprite = Resources.Load<Sprite>(filePaths[3]);
+			magePort.sprite = Resources.Load<Sprite>(filePaths[9]);
 
 		fighter.Update();
 		ranger.Update();
@@ -114,25 +125,25 @@ public class UI_HUD : MonoBehaviour {
 		switch (MNGR_Game.equippedItem)
 		{
 			case -1:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[4]);
+				heldItem.sprite = Resources.Load<Sprite>(filePaths[10]);
 				break;
 			case 0:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[5]);
+				heldItem.sprite = Resources.Load<Sprite>(filePaths[11]);
 				break;
 			case 1:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[6]);
+				heldItem.sprite = Resources.Load<Sprite>(filePaths[12]);
 				break;
 			case 2:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[7]);
+				heldItem.sprite = Resources.Load<Sprite>(filePaths[13]);
 				break;
 			case 3:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[8]);
+				heldItem.sprite = Resources.Load<Sprite>(filePaths[14]);
 				break;
 			case 4:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[9]);
+				heldItem.sprite = Resources.Load<Sprite>(filePaths[15]);
 				break;
 			case 5:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[10]);
+				heldItem.sprite = Resources.Load<Sprite>(filePaths[16]);
 				break;
 		}
 
