@@ -37,8 +37,7 @@ public class MOD_DoT : MOD_Base
         //if (Mod_Timer <= 0)
         //{
 
-        float OnePercentDmg = player.party[Mod_CurrCharacter].Act_baseHP * (Time.deltaTime / 2.5f);  
-
+        float OnePercentDmg = player.party[Mod_CurrCharacter].Act_baseHP * (Time.deltaTime / 2.3f);  
         //Reduces 2% of the Character's Hp every second.
             //if (OnePercentDmg < 1.0f)
             //    OnePercentDmg = 1.0f;
