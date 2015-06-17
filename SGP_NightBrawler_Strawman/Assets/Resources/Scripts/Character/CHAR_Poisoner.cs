@@ -33,7 +33,7 @@ public class CHAR_Poisoner : ACT_CHAR_Base
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_DartPoison";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_DartPoisonStrong";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_DartDebuff";
-		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_DartDebuff";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_DartDebuffMaster"; // Shia Debuff.
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f, 1.0f };
@@ -151,7 +151,8 @@ public class CHAR_Poisoner : ACT_CHAR_Base
 
 	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
 	{
-		AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        ret.projIndex = 3;
 
 		if (_curTmr > _maxTmr * 0.8f)
 			ret.spriteIndex = specialSprites[0];

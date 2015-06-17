@@ -5,6 +5,7 @@ public class SunScript : MonoBehaviour
 {
 
     Light myLight;
+    public bool PraiseIt = true;
 
 	// Use this for initialization
 	void Start () 

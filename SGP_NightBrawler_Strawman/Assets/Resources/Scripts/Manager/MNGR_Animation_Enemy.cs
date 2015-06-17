@@ -178,7 +178,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = sprites[attack1Sprites[2]];
                 break;
             case ACT_Enemy.STATES.SPECIAL:
-                // Beutiful.
+                // Beautiful.
                 float length = specialSprites.Length;
                 for (float i = length; i > 0; i-- ) // for all possible frames,
                 {
