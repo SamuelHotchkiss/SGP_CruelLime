@@ -63,7 +63,15 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
 	// Update is called once per frame
 	void Update () 
     {
-        
+
+        currTime -= Time.deltaTime;
+
+        if (currTime <= 0.0f)
+        {
+            NewState();
+            currTime = stateTime[(int)state];
+        }
+
         CheckThresholds();
         Act_currAttackSpeed -= Time.deltaTime;
 

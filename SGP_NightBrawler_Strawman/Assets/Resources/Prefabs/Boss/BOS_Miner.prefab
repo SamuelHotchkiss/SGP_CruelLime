@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5010218}
   - 61: {fileID: 6150950}
   - 114: {fileID: 11461460}
+  - 114: {fileID: 11408474}
   m_Layer: 9
   m_Name: BOS_Miner
   m_TagString: Enemy
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 156146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 26.3600006, y: .25999999, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,9 +57,20 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -1.90734863e-06, y: .0774671286}
+  m_Offset: {x: 0, y: .25}
   serializedVersion: 2
-  m_Size: {x: 1.18034685, y: 1.15493524}
+  m_Size: {x: 1, y: .5}
+--- !u!114 &11408474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11461460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,10 +265,11 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: TheMiner
   Act_baseHP: 100
   Act_basePower: 10
   Act_baseSpeed: 1
-  Act_currHP: 90
+  Act_currHP: 99
   Act_currPower: 10
   Act_currSpeed: 1
   Act_facingRight: 0
@@ -264,6 +277,7 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 1
   Act_baseAttackSpeed: .100000001
   Act_currAttackSpeed: .100000001
   Act_Parent: {fileID: 0}
@@ -347,7 +361,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d990b6c8ed73a51489546b665e9b95df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be4c1749bc3ca9d4facdde4a4ac827b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
