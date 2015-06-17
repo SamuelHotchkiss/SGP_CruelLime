@@ -1,27 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PROJ_Debuff : PROJ_Base
+public class PROJ_PoisonSplash : PROJ_Explosion
 {
 
-    public int debuff_ID;
-    public PROJ_Base[] SpawnOnDeath; // last second add for poisoner.
-
-    // Use this for initialization
-    public override void Initialize(bool _r = true, float _damMult = 1.0f)
-    {
-        base.Initialize(_r, _damMult);
-    }
-
-    // Update is called once per frame
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("HIT!");
+        base.OnTriggerEnter2D(collision);
+
+        AttachDebuff(collision, 8); // Attach poison and stun maybe.
+        AttachDebuff(collision, 10);
+
+    }
+
+    void AttachDebuff(Collider2D collision, int debuff_ID)
+    {
+
         if (collision.gameObject.tag == "Enemy"
             || collision.gameObject.tag == "Obstacle")
         {
             ACT_Enemy enemy = collision.gameObject.GetComponent<ACT_Enemy>();
-            enemy.ChangeHP(-power);
+            //enemy.ChangeHP(-power);
 
             bool existing = false;
             for (int i = 0; i < enemy.myBuffs.Count; i++)
@@ -47,7 +46,7 @@ public class PROJ_Debuff : PROJ_Base
                 int target = player.currChar;
 
                 // Mess with the active character
-                player.party[target].ChangeHP(-power);
+                //player.party[target].ChangeHP(-power);
 
                 // Attach the Debuff
                 bool existing = false;
@@ -65,19 +64,8 @@ public class PROJ_Debuff : PROJ_Base
                     MNGR_Item.AttachModifier(debuff_ID, collision.gameObject);
                 }
             }
-
-        }
-
-        if (SpawnOnDeath.Length > 0)
-        {
-            for (int i = 0; i < SpawnOnDeath.Length; i++)
-            {
-                PROJ_Explosion clone = (PROJ_Explosion)Instantiate(SpawnOnDeath[i], transform.position, new Quaternion(0, 0, 0, 0));
-                clone.owner = owner;
-                clone.Initialize();
-            }
-        }
-        ProjectileExpired();
-
+}
     }
+
+
 }

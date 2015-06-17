@@ -81,6 +81,8 @@ public class ACT_Enemy : MonoBehaviour
 	public BHR_Base currBehavior;
 	public BHR_Base basicBehavior;
 
+    public int NumDeadHits = 4;
+
 /// <Behavior Variables>
 	public List<GameObject> squad = new List<GameObject>();
 	public float maxBuffRange;
@@ -174,7 +176,11 @@ public class ACT_Enemy : MonoBehaviour
             Act_currHP = 0;
             KillBuffs();
             state = STATES.DEAD;
-            currTime = stateTime[(int)state];
+            if (NumDeadHits > 0)
+            {
+                NumDeadHits--;
+                currTime = stateTime[(int)state];
+            }
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
 	}
@@ -619,6 +625,7 @@ public class ACT_Enemy : MonoBehaviour
 	{
         if (Act_IsIntelligent) // L: dummies dont change states.
         {
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             Act_AudioHasPlay = false;
             RestoreToBaseSpeed();
             if (kamikazeActivated)
