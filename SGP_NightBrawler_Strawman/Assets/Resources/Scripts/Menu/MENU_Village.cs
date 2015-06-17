@@ -16,6 +16,7 @@ public class MENU_Village : MonoBehaviour {
 	private string Menu_Levelname;          //Name that will be use to change scenes
 
 
+
     public int Vll_CurrCanvas;
     /*
      * Canvas IDs
