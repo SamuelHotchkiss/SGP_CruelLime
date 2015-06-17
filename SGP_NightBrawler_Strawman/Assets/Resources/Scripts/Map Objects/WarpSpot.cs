@@ -8,6 +8,7 @@ public class WarpSpot : MonoBehaviour
 	public GameObject horde;
 	public bool activateEnemies;
 	public bool activateHorde;
+    public bool bossRoom;
 
 	void Start()
 	{
@@ -17,6 +18,7 @@ public class WarpSpot : MonoBehaviour
 			horde.gameObject.SetActive(false);
 		}
 	}
+
 
     // S: hardcoded nonsense to get some basic level functionality
     void OnTriggerEnter2D(Collider2D other)

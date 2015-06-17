@@ -48,7 +48,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
         }
         else // older method that's still supported for older enemies (if it aint broke...).
         {
-            filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "Sar" };
+            filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "Sar", "slime" };
             for (int i = 0; i < filepaths.Length; i++)
                 filepaths[i] = "Sprites/Enemy/" + filepaths[i];
             sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.Act_ID]);
@@ -122,11 +122,15 @@ public class MNGR_Animation_Enemy : MonoBehaviour
         if (curState != currentCharacter.state)
             ChangeState(currentCharacter.state);
 
+        float FacingLoc;
         // rotate based upon facing bool
         if (currentCharacter.Act_facingRight)
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            FacingLoc = Mathf.Abs(transform.localScale.x);
         else
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            FacingLoc = -Mathf.Abs(transform.localScale.x);
+
+        transform.localScale = new Vector3(FacingLoc, transform.localScale.y, transform.localScale.z);
+
 
         // animate based upon state.  mostly the same code, but has to be unique for each animation
         switch (curState)

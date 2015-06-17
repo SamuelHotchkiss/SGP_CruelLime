@@ -6,6 +6,7 @@ public class MENU_Credits : MonoBehaviour {
     public AudioClip Menu_SelectedSound;
     public GameObject Menu_Credits;
     public float Menu_CreditTimer;
+    public float Menu_CreditSpeed;
 
     void Update()
     {
@@ -13,7 +14,7 @@ public class MENU_Credits : MonoBehaviour {
         if (Menu_CreditTimer <= 0.0f)
             StartCoroutine(WaitForSound());
 
-        float GoUp = Menu_Credits.transform.position.y + (2.5f * Time.deltaTime);
+        float GoUp = Menu_Credits.transform.position.y + (Menu_CreditSpeed * Time.deltaTime);
         Menu_Credits.transform.position = new Vector3(Menu_Credits.transform.position.x, GoUp);
 
     }

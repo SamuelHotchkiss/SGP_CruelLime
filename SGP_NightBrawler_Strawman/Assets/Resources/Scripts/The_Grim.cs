@@ -23,6 +23,7 @@ public class The_Grim : MonoBehaviour
 
 	IEnumerator LoadLevel()
 	{
+        GameObject.Find("LevelDJ").GetComponent<AudioSource>().volume = 0;
 		AudioSource.PlayClipAtPoint(victory, new Vector3(0, 0, 0), MNGR_Options.musicVol);
 		yield return new WaitForSeconds(5);
 		MNGR_Game.UpdateWorld();

@@ -67,7 +67,6 @@ public class PROJ_Debuff : PROJ_Base
             }
 
         }
-        ProjectileExpired();
 
         if (SpawnOnDeath.Length > 0)
         {
@@ -78,6 +77,7 @@ public class PROJ_Debuff : PROJ_Base
                 clone.Initialize();
             }
         }
+        ProjectileExpired();
 
     }
 }

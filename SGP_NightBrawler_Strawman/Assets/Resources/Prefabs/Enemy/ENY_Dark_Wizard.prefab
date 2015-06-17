@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.1000004, y: -1.70000005, z: 50}
+  m_LocalPosition: {x: -3.62781143, y: -3.28185225, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +58,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1}
   serializedVersion: 2
   m_Size: {x: 1, y: .25}
 --- !u!114 &11420344
@@ -286,8 +286,12 @@ MonoBehaviour:
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
   Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 0
   state: 0
