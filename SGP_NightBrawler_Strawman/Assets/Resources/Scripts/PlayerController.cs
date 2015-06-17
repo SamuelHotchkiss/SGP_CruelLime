@@ -789,7 +789,7 @@ public class PlayerController : MonoBehaviour
 
     void TouchMove(Touch theTouch)
     {
-        float deadZone = 2.0f;
+        float deadZone = 1.5f;
         Vector2 dashPoint = new Vector2((Screen.width / 8), (Screen.height / 2));
 
         //if (horz > 20.0f || vert > 20.0f || horz < -20.0f || vert < -20.0f)
