@@ -22,7 +22,11 @@ public class OBS_Pitfall : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D _col)
     {
-        AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+        if (Fall != null)
+        {
+            AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+        }
+        
     }
 
     public virtual void OnTriggerStay2D(Collider2D _col)

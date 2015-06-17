@@ -13,6 +13,8 @@ public class CHAR_Archer : ACT_CHAR_Base
         cooldownTmr = 0;
         cooldownTmrBase = 3.0f;
 
+        Act_ActID = 3;
+
         Act_baseHP = 75;
         Act_currHP = Act_baseHP;
 

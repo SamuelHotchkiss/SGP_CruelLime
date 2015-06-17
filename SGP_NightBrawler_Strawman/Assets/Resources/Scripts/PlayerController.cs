@@ -20,10 +20,13 @@ public class PlayerController : MonoBehaviour
     /////////////////////////////////////////////////////////////////////
 
 
+
     //public bool keyboard = true;
 
     public ACT_CHAR_Base[] party;
     public int currChar = 0;
+    public AudioClip[] Ply_HurtSounds;
+    public AudioClip[] Ply_DyingSounds;
 
     public GameObject warrior_GUI, ranger_GUI, mage_GUI;
     public Object[] Projs;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public float[] maxTmr;
     public float curTmr;
     public bool loop;
+    public bool AudioHasPlay;
     public ACT_CHAR_Base.STATES currentState;
     public ACT_CHAR_Base.STATES nextState;
 
@@ -57,6 +61,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        AudioHasPlay = false;
         isAlive = true;
         MNGR_Game.Initialize();
         party = new ACT_CHAR_Base[3];
@@ -212,6 +217,12 @@ public class PlayerController : MonoBehaviour
                     CheckMoveInput(currentState);
                 break;
             case ACT_CHAR_Base.STATES.HURT:
+
+                if (!AudioHasPlay)
+                {
+                    AudioSource.PlayClipAtPoint(Ply_HurtSounds[party[currChar].Act_ActID], new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+                    AudioHasPlay = true;
+                }
                 if (Pc_HasKnockBack)
                 {
                     vert = 0.0f;
@@ -241,6 +252,11 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case ACT_CHAR_Base.STATES.DYING:
+                if (!AudioHasPlay)
+                {
+                    AudioSource.PlayClipAtPoint(Ply_DyingSounds[party[currChar].Act_ActID], new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+                    AudioHasPlay = true;
+                }
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 break;
             case ACT_CHAR_Base.STATES.USE:
@@ -357,14 +373,12 @@ public class PlayerController : MonoBehaviour
                     ChangeState(nextState);
             }
         }
-
-
     }
 
     public virtual void ChangeState(ACT_CHAR_Base.STATES _next, bool _immediately = true)
     {
         //ACT_CHAR_Base.STATES old = party[currChar].state;
-
+        AudioHasPlay = false;
         // triggered on state change goes here.
         if (_next == ACT_CHAR_Base.STATES.IDLE
             || _next == ACT_CHAR_Base.STATES.WALKING)

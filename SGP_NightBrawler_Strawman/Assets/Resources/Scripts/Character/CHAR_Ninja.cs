@@ -12,6 +12,8 @@ public class CHAR_Ninja : ACT_CHAR_Base
 		cooldownTmr = 0;
 		cooldownTmrBase = 15.0f;
 
+        Act_ActID = 4;
+
 		Act_baseHP = 75;
 		Act_currHP = Act_baseHP;
 		Act_basePower = 5;
