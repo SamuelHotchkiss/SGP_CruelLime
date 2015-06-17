@@ -8,11 +8,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485486}
-  - 114: {fileID: 11496474}
-  - 50: {fileID: 5083790}
   - 212: {fileID: 21219272}
   - 61: {fileID: 6198242}
+  - 114: {fileID: 11496474}
+  - 50: {fileID: 5083790}
   - 114: {fileID: 11467262}
+  - 114: {fileID: 11465384}
   m_Layer: 9
   m_Name: ENY_Shadow_Knight
   m_TagString: Enemy
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.9000001, y: -1.41999996, z: 50}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -28.8156376, y: -1.56752765, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,6 +61,17 @@ BoxCollider2D:
   m_Offset: {x: .198439121, y: .109047472}
   serializedVersion: 2
   m_Size: {x: 1.45735323, y: .499515176}
+--- !u!114 &11465384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11467262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,17 +224,19 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 4
+  Act_Name: ShadowKnight
   Act_baseHP: 300
   Act_basePower: 30
-  Act_baseSpeed: 10
+  Act_baseSpeed: 1
   Act_currHP: 300
   Act_currPower: 30
-  Act_currSpeed: 10
+  Act_currSpeed: 1
   Act_facingRight: 0
   Act_HasMod: 0
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   Act_Parent: {fileID: 0}
@@ -296,7 +310,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300004, guid: 692e13209381fbb4e99027e3c37f8d84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9411d6c50f388e4bbedf0d52441617e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

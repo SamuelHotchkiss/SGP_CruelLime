@@ -26,16 +26,39 @@ public class MNGR_Animation_Enemy : MonoBehaviour
 
     void Start()
     {
-        filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "Sar", "slime" }; 
-        for (int i = 0; i < filepaths.Length; i++)
-            filepaths[i] = "Sprites/Enemy/" + filepaths[i];
         currentCharacter = GetComponent<ACT_Enemy>();
+
+        // If we're using the newer and better method that each enemy has their own filename already,
+        if (currentCharacter.Act_Name != "")
+        {
+            string path;
+            if (currentCharacter.Act_IsBoss)
+                path = "Sprites/Boss/" + currentCharacter.Act_Name;
+            else
+                path = "Sprites/Enemy/" + currentCharacter.Act_Name;
+
+            sprites = Resources.LoadAll<Sprite>(path);
+
+            idleSprites = new int[] { 0, 1, 2 };
+            walkSprites = new int[] { 5, 6, 7, 8, 9 };
+            attack1Sprites = new int[] { 10, 11, 12 };
+            specialSprites = new int[] { 0 };
+            hurtSprites = new int[] { 15 };
+            deadSprites = new int[] { 15, 16 };
+        }
+        else // older method that's still supported for older enemies (if it aint broke...).
+        {
+            filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "Sar" };
+            for (int i = 0; i < filepaths.Length; i++)
+                filepaths[i] = "Sprites/Enemy/" + filepaths[i];
+            sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.Act_ID]);
+
+            // set up unique sprites for all dis stuff
+            InitializeSprites(currentCharacter.Act_ID);
+        }
         //lastState = currentCharacter.state;
         curState = currentCharacter.state;
-        sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.Act_ID]);
 
-        // set up unique sprites for all dis stuff
-        InitializeSprites(currentCharacter.Act_ID);
     }
     void InitializeSprites(int _ID)
     {
@@ -65,22 +88,22 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 hurtSprites = new int[] { 15 };
                 deadSprites = new int[] { 15, 16 };
                 break;
-			case 3: // Spiderling
-				idleSprites = new int[] { 0, 0, 0 };
+            case 3: // Spiderling
+                idleSprites = new int[] { 0, 0, 0 };
                 walkSprites = new int[] { 0, 0, 0, 0, 0 };
                 attack1Sprites = new int[] { 0, 0, 0 };
                 specialSprites = new int[] { 0 };
                 hurtSprites = new int[] { 0 };
                 deadSprites = new int[] { 0, 0 };
                 break;
-			case 4: // Spider Mom
-				idleSprites = new int[] { 0, 0, 0 };
-				walkSprites = new int[] { 0, 0, 0, 0, 0 };
-				attack1Sprites = new int[] { 0, 0, 0 };
-				specialSprites = new int[] { 0 };
-				hurtSprites = new int[] { 0 };
-				deadSprites = new int[] { 0, 0 };
-				break;
+            case 4: // Spider Mom
+                idleSprites = new int[] { 0, 0, 0 };
+                walkSprites = new int[] { 0, 0, 0, 0, 0 };
+                attack1Sprites = new int[] { 0, 0, 0 };
+                specialSprites = new int[] { 0 };
+                hurtSprites = new int[] { 0 };
+                deadSprites = new int[] { 0, 0 };
+                break;
             default:
                 idleSprites = new int[] { 0, 1, 2 };
                 walkSprites = new int[] { 5, 6, 7, 8, 9 };
@@ -93,7 +116,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     }
     void Update()
     {
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+        GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
         // change this script's state if the character changes his state, but don't waste the time otherwise.
         if (curState != currentCharacter.state)
             ChangeState(currentCharacter.state);
