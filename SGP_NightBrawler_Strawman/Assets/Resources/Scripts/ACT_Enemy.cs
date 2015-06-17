@@ -4,6 +4,9 @@ using System.Collections.Generic;
 public class ACT_Enemy : MonoBehaviour
 {
     public float m_distance;
+
+	public Texture2D skull;
+	public GUIStyle Outline;
 	public GUIStyle BlackBar;
 	public GUIStyle HealthBar;
 	public Camera cam;
@@ -125,6 +128,8 @@ public class ACT_Enemy : MonoBehaviour
 
 	public bool isMelee;
 	public bool paused = false;
+
+	public bool isBoss;
 
 	//Mutators
 	public void SetCurrHP(float n_hp)
@@ -657,7 +662,7 @@ public class ACT_Enemy : MonoBehaviour
 
 	public void OnGUI()
 	{
-		if (cam != null)
+		if (cam != null && !isBoss)
 		{
 			Vector2 targetPos;
 			targetPos = cam.WorldToScreenPoint(transform.position);
@@ -665,5 +670,14 @@ public class ACT_Enemy : MonoBehaviour
 			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 128, 100, 6), "", BlackBar);
 			GUI.Box(new Rect(targetPos.x - 50, Screen.height - targetPos.y - 128, 100 * ((float)Act_currHP / (float)Act_baseHP), 6), "", HealthBar);
 		}
+		else if (isBoss)
+		{
+			float barwidth = 600.0f;
+			GUI.Box(new Rect((Screen.width / 2) - (barwidth / 2) - 25, Screen.height - 55, barwidth + 30, 40), "", Outline);
+			GUI.Box(new Rect((Screen.width / 2) - (barwidth / 2), Screen.height - 50, barwidth, 30), "", BlackBar);
+			GUI.Box(new Rect((Screen.width / 2) - (barwidth / 2), Screen.height - 50, barwidth * ((float)Act_currHP / (float)Act_baseHP), 30), "", HealthBar);
+			GUI.DrawTexture(new Rect((Screen.width / 2) - (barwidth / 2) - 30, Screen.height - 70, 64, 64), skull);
+		}
+
 	}
 }
