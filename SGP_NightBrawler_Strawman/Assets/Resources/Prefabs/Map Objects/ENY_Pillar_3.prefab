@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 412498}
   - 212: {fileID: 21238142}
-  - 61: {fileID: 6168196}
   - 50: {fileID: 5045344}
   - 114: {fileID: 11451446}
+  - 61: {fileID: 6152430}
   m_Layer: 0
   m_Name: ENY_Pillar_3
   m_TagString: Obstacle
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.84910297, y: -.605071306, z: 2.45000005}
+  m_LocalPosition: {x: .170000002, y: -.129999995, z: 2.45000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,7 +46,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!61 &6168196
+--- !u!61 &6152430
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -56,9 +56,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .216810703}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: .933621407}
+  m_Size: {x: 1, y: 1}
 --- !u!114 &11451446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,6 +71,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_distance: 0
+  skull: {fileID: 0}
+  Outline:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
   BlackBar:
     m_Name: 
     m_Normal:
@@ -193,6 +253,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: 
   Act_baseHP: 50
   Act_basePower: 0
   Act_baseSpeed: 0
@@ -204,8 +265,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_SpawnProjOnDed: 1
+  Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 0
   state: 0
@@ -257,9 +323,10 @@ MonoBehaviour:
   target: {fileID: 0}
   distanceToTarget: 0
   maxDistance: 0
-  projectile: {fileID: 11477018, guid: 266493154a27a1442944512762f05e30, type: 2}
+  projectile: {fileID: 11420750, guid: fbd4de543531a9f48975ae1e5b6e16f0, type: 2}
   isMelee: 0
   paused: 0
+  isBoss: 0
 --- !u!212 &21238142
 SpriteRenderer:
   m_ObjectHideFlags: 1
