@@ -36,6 +36,9 @@ public class UI_HUD : MonoBehaviour {
 	// Use this for initialization
 	public void Initialize () 
 	{
+		MNGR_Game.Initialize();
+		MNGR_Options.Initialize();
+
 		Cursor.visible = true;
 
         if(MNGR_Options.colorblind)
@@ -47,7 +50,7 @@ public class UI_HUD : MonoBehaviour {
 		ranger = party.GetComponent<PlayerController>().party[1];
 		mage = party.GetComponent<PlayerController>().party[2];
 
-		gold = theCanvas.transform.GetChild(4).transform.GetChild(1).GetComponent<Text>();
+		gold = theCanvas.transform.GetChild(3).transform.GetChild(1).GetComponent<Text>();
 
         if (MNGR_Game.AmIMobile())
             touchPanel.SetActive(true);
@@ -118,7 +121,7 @@ public class UI_HUD : MonoBehaviour {
 		ranger.Update();
 		mage.Update();
 
-		//gold.text = "C o i n s : " + MNGR_Game.wallet;
+		gold.text = "C o i n s : " + MNGR_Game.wallet;
 
 		potionCount.text = "x " + MNGR_Game.theInventory.containers[0].count;
 
@@ -158,7 +161,7 @@ public class UI_HUD : MonoBehaviour {
 		MNGR_Game.paused = !MNGR_Game.paused;
 		//party.SetActive(!MNGR_Game.paused);
 
-		theCanvas.transform.GetChild(3).gameObject.SetActive(MNGR_Game.paused);
+		theCanvas.transform.GetChild(6).gameObject.SetActive(MNGR_Game.paused);
 		//Cursor.visible = !Cursor.visible;
 		Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
     }
@@ -172,7 +175,7 @@ public class UI_HUD : MonoBehaviour {
 	public void ExitGame()
 	{
 		MNGR_Game.paused = false;
-		theCanvas.transform.GetChild(3).gameObject.SetActive(false);
+		theCanvas.transform.GetChild(6).gameObject.SetActive(false);
 		//Input.simulateMouseWithTouches = false;
 		Application.LoadLevel("MainMenu");
 	}
