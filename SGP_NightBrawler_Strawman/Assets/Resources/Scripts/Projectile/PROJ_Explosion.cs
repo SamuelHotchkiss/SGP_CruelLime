@@ -49,7 +49,7 @@ public class PROJ_Explosion : PROJ_Base
             ProjectileExpired();
 
         // hacky as chit.
-        if (sprites.Length == 8)
+        /*if (sprites.Length == 8)
         {
             if (timer > timerMax * 0.875)
                 GetComponent<SpriteRenderer>().sprite = sprites[0];
@@ -67,6 +67,19 @@ public class PROJ_Explosion : PROJ_Base
                 GetComponent<SpriteRenderer>().sprite = sprites[6];
             else
                 GetComponent<SpriteRenderer>().sprite = sprites[7];
+        }*/
+        // Beautiful.
+        float length = sprites.Length;
+        for (float i = length; i > 0; i--) // for all possible frames,
+        {
+            float mult = (1.0f / length) * (i - 1); // determines which frame to play.
+            //float temp = currentCharacter.stateTime[(int)currentCharacter.state] * mult; // degubbin'
+            if (timer > timerMax * mult)
+            {
+                int frame = (int)(length - i); // invert i to play animation in correct order
+                GetComponent<SpriteRenderer>().sprite = sprites[frame];
+                break; // break out of the loop pronto.
+            }
         }
 
         base.Update();
