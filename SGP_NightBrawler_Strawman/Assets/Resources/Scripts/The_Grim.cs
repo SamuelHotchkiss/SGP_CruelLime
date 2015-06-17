@@ -8,7 +8,7 @@ public class The_Grim : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		victory = Resources.Load("Audio/Boss_Win") as AudioClip;
+		victory = Resources.Load("Audio/Music/Boss_Win") as AudioClip;
 	}
 	
 	// Update is called once per frame
