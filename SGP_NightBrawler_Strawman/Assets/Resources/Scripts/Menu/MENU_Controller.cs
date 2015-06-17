@@ -12,6 +12,7 @@ public class MENU_Controller : MonoBehaviour {
     public AudioClip Menu_MoveSound;        //Clip of Audio the willplay when a new button is highlighet but no selected.
 
     private float Menu_JoyTimer;            //Stops controller from jumping all over the menu
+    int OldCurrbutton;
 
     // Use this for initialization
     void Start()
@@ -36,7 +37,7 @@ public class MENU_Controller : MonoBehaviour {
         //    //}
         //}
 
-        int OldCurrbutton = Menu_CurrButton;
+        OldCurrbutton = Menu_CurrButton;
 
         if (Input.anyKeyDown)
         {
@@ -92,5 +93,12 @@ public class MENU_Controller : MonoBehaviour {
 
         Menu_JoyTimer -= Time.deltaTime;
         Menu_UIButtons[Menu_CurrButton].Select(); //Highlights the currently selected option
+    }
+
+    // S: mouse now overrides controller and vice versa
+    public void SelectButton(int id)
+    {
+        Menu_CurrButton = id;
+        AudioSource.PlayClipAtPoint(Menu_MoveSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
     }
 }

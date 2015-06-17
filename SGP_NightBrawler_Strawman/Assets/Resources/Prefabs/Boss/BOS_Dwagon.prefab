@@ -25,9 +25,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159134}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 31.6499996, y: -.430000007, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.6499996, y: .75999999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,9 +56,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.178453445, y: .601925969}
+  m_Offset: {x: 0, y: 1}
   serializedVersion: 2
-  m_Size: {x: 2.15259719, y: 1.09057653}
+  m_Size: {x: 6, y: 3}
 --- !u!114 &11472472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,6 +253,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: Dwagon
   Act_baseHP: 1500
   Act_basePower: 30
   Act_baseSpeed: 1
@@ -264,6 +265,7 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 1
   Act_baseAttackSpeed: .100000001
   Act_currAttackSpeed: .100000001
   Act_Parent: {fileID: 0}
@@ -346,7 +348,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c1e25476c9b39d84593381f165bf4dec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60d97f1f80267d74f8342d3c154ce902, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
