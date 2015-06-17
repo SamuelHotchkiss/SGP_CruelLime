@@ -48,7 +48,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
         }
         else // older method that's still supported for older enemies (if it aint broke...).
         {
-            filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "Sar" };
+            filepaths = new string[] { "GloblinFighter", "GloblinArcher", "GloblinWarchief", "Sar", "slime" };
             for (int i = 0; i < filepaths.Length; i++)
                 filepaths[i] = "Sprites/Enemy/" + filepaths[i];
             sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.Act_ID]);
