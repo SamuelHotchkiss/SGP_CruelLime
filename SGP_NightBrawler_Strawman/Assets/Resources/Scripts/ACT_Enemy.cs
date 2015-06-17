@@ -17,10 +17,10 @@ public class ACT_Enemy : MonoBehaviour
         for (int i = 0; i < myBuffs.Count; i++)
         {
             myBuffs[i].EndModifyEnemy();
-
         }
         myBuffs.Clear();
     }
+
     /////////////////////////////////////////////////////////////////////
 
     // 0 = GloblinFighter, 1 = GloblinArcher, 2 = GloblinWarchief, 3 = Maneater,
@@ -167,6 +167,7 @@ public class ACT_Enemy : MonoBehaviour
         if (Act_currHP <= 0)
         {
             Act_currHP = 0;
+            KillBuffs();
             state = STATES.DEAD;
             currTime = stateTime[(int)state];
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -280,7 +281,7 @@ public class ACT_Enemy : MonoBehaviour
 						GetComponent<ITM_DropLoot>().DropCoin(transform.position);
 					}
 				}
-                KillBuffs();
+                //KillBuffs();
 				Destroy(gameObject);
 			}
 			else
