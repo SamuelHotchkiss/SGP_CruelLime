@@ -163,12 +163,12 @@ public class UI_HUD : MonoBehaviour {
         if (!MNGR_Game.paused)
         {
             //Time.timeScale = 0;
-            Input.simulateMouseWithTouches = true;
+            Input.simulateMouseWithTouches = false;
         }
         else
         {
             //Time.timeScale = 1.0f;
-            Input.simulateMouseWithTouches = false;
+            Input.simulateMouseWithTouches = true;
         }
 
 		theCanvas.transform.GetChild(6).gameObject.SetActive(MNGR_Game.paused);
