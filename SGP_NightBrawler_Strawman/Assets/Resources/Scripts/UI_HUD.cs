@@ -79,6 +79,13 @@ public class UI_HUD : MonoBehaviour {
 		filePaths[15] = "Sprites/Item/Protection_Potion";
 		filePaths[16] = "Sprites/Item/Strength_Potion";
 
+        if (MNGR_Options.colorblind)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                filePaths[i] += "_blind";
+            }
+        }
 
 		fighter.Start();
 		ranger.Start();
@@ -102,10 +109,12 @@ public class UI_HUD : MonoBehaviour {
 		mageHealth.fillAmount = ((float)mage.Act_currHP / (float)mage.Act_baseHP);
 		mageCooldown.fillAmount = (float)((mage.cooldownTmrBase - mage.cooldownTmr) / mage.cooldownTmrBase);
 
-		if (fighter.Act_currHP > 0)
-			fighterPort.sprite = Resources.Load<Sprite>(filePaths[fighter.characterIndex]);
-		else
-			fighterPort.sprite = Resources.Load<Sprite>(filePaths[9]);
+        if (fighter.Act_currHP > 0)
+        {
+            fighterPort.sprite = Resources.Load<Sprite>(filePaths[fighter.characterIndex]);
+        }
+        else
+            fighterPort.sprite = Resources.Load<Sprite>(filePaths[9]);
 
 		if (ranger.Act_currHP > 0)
 			rangerPort.sprite = Resources.Load<Sprite>(filePaths[ranger.characterIndex]);
