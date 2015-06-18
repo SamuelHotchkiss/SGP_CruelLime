@@ -61,7 +61,7 @@ public class MENU_ButtonGraphic : PlayerController
                     if (party[currChar].characterIndex == 1)
                     {
                         newpos.x = -295;
-                        Vector3 tagpos = Nametag.transform.position;
+                        //Vector3 tagpos = Nametag.transform.position;
                         //tagpos.x = 205;
                         //Nametag.transform.position = tagpos;
                     }
