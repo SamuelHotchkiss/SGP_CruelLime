@@ -7,7 +7,7 @@ public class WarpSpot : MonoBehaviour
 	public GameObject enemies;
 	public GameObject horde;
 	public bool activateEnemies;
-	public bool activateHorde;
+	private bool activateHorde;
     public bool bossRoom;
 
 	void Start()
