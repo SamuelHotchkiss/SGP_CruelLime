@@ -8,6 +8,11 @@ public class MENU_Credits : MonoBehaviour {
     public float Menu_CreditTimer;
     public float Menu_CreditSpeed;
 
+    void Start()
+    {
+        Destroy(GameObject.Find("DJ"));
+    }
+
     void Update()
     {
         Menu_CreditTimer -= Time.deltaTime;
