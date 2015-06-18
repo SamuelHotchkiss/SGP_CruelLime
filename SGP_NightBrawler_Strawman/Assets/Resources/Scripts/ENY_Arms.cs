@@ -110,7 +110,7 @@ public class ENY_Arms : ACT_Enemy {
                     clone.owner = gameObject;
                     clone.Initialize();
                     Act_currAttackSpeed = Act_baseAttackSpeed;
-                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     GetComponent<BoxCollider2D>().enabled = true; 
                 }
                 else if (Arm_IsLeft)
@@ -122,7 +122,7 @@ public class ENY_Arms : ACT_Enemy {
                         clone.owner = gameObject;
                         clone.Initialize();
                         Act_currAttackSpeed = Act_baseAttackSpeed;
-                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                         GetComponent<BoxCollider2D>().enabled = true;  
                     }
 
@@ -151,13 +151,13 @@ public class ENY_Arms : ACT_Enemy {
                         clone.Initialize();
 
                         Act_currAttackSpeed = Act_baseAttackSpeed;
-                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     }
                 }
                 else if (Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId == 2)
                 {
                     float Dis = Mathf.Abs(transform.position.y - Arm_ShadowObj.transform.position.y);
-                    if (Dis <= 0.5f && Spw_SpawnPerSec <= 0.0f)
+                    if (Dis <= 0.5f && Spw_SpawnPerSec <= 0.0f && Arm_IsRight)
                     {
                         Instantiate(Spw_Critter, transform.position, new Quaternion());
                         Spw_SpawnPerSec = Spw_baseSpawnPerSec;
@@ -194,7 +194,7 @@ public class ENY_Arms : ACT_Enemy {
                 Act_currHP = 0;
                 Destroy(Arm_ShadowObj);
                 Destroy(gameObject);
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
     }

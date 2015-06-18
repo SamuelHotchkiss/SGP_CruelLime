@@ -245,6 +245,14 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
+        if (Act_IsIntelligent)
+        {
+            Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+            vel *= 0.9f;
+            GetComponent<Rigidbody2D>().velocity = vel;
+        }
+
         if (GetComponent<MOD_Stunned>() != null)
             return; //GTFO
 
