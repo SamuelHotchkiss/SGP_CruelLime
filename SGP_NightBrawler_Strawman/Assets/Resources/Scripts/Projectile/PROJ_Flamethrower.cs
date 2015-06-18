@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PROJ_Flamethrower : PROJ_Base
 {
-    float timer = 1.5f;
+    float timer = 4.0f;
 
     // Use this for initialization
     public override void Initialize(bool _r = true, float _damMult = 1.0f)

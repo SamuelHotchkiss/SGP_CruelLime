@@ -11,6 +11,7 @@ public class PROJ_Base : MonoBehaviour
     public float m_distance;    // how far have we gone?
 
     public AudioClip Prj_Sound;
+    GameObject ThisSound;
 
     public float speed;       // how fast are we moving?
     public float range;       // how far can we go?
@@ -129,7 +130,6 @@ public class PROJ_Base : MonoBehaviour
                 else
                     player.party[target].ChangeHP(-power);
                 // Mess with the active character
-
 
             }
 

@@ -34,7 +34,7 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_FlameThrower_Master";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
-        StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 2.0f, 0.1f, 1.0f, 1.0f, 1.0f };
+        StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 4.0f, 0.1f, 1.0f, 1.0f, 1.0f };
 
         attack1Sprites = new int[] { 10, 11, 12, 13 };
         attack2Sprites = new int[] { 15, 16, 17 };
