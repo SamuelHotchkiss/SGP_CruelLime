@@ -54,7 +54,7 @@ public class MNGR_Animation_Player : MonoBehaviour
     void Update()
     {
         if (GetComponent<SpriteRenderer>() != null && GameObject.Find("Reference_Point") != null)
-    		GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+    		GetComponent<SpriteRenderer>().sortingOrder = (int)((GameObject.Find("Reference_Point").transform.position.y - transform.position.y) * 100.0f);
 
 
         // change this script's character if the party changes its character, but don't waste the time otherwise.

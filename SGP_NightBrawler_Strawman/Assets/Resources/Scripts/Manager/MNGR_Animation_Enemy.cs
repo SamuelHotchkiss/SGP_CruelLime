@@ -117,7 +117,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     }
     void Update()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+        GetComponent<SpriteRenderer>().sortingOrder = (int)((GameObject.Find("Reference_Point").transform.position.y - transform.position.y) * 100.0f);
         // change this script's state if the character changes his state, but don't waste the time otherwise.
         if (curState != currentCharacter.state)
             ChangeState(currentCharacter.state);
