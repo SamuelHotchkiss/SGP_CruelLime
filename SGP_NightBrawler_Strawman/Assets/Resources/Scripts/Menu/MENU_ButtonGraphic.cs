@@ -54,26 +54,55 @@ public class MENU_ButtonGraphic : PlayerController
             Vector3 newpos = GetComponent<RectTransform>().anchoredPosition;
             if (selected)
             {
-                newpos.y = orgY - 64;
-                if (party[currChar].characterIndex == 1)
+                newpos.y = orgY - 100; //64
+                if (party[currChar].characterIndex < 3)
                 {
-                    newpos.x = orgX - 50;
-                    Vector3 tagpos = Nametag.transform.position;
-                    tagpos.x = 150;
-                    Nametag.transform.position = tagpos;
+                    newpos.x = -270;
+                    if (party[currChar].characterIndex == 1)
+                    {
+                        newpos.x = -295;
+                        Vector3 tagpos = Nametag.transform.position;
+                        //tagpos.x = 205;
+                        //Nametag.transform.position = tagpos;
+                    }
                 }
+                else if (party[currChar].characterIndex >= 3 && party[currChar].characterIndex < 6)
+                {
+                     newpos.x = 25;
+                }
+                else if (party[currChar].characterIndex >= 6)
+                {
+                     newpos.x = 310;
+                }
+
+
+                //if (party[currChar].characterIndex == 1)
+                //{
+                //    newpos.x = orgX - 50;
+                //    Vector3 tagpos = Nametag.transform.position;
+                //    tagpos.x = 150;
+                //    Nametag.transform.position = tagpos;
+                //}
                 Nametag.SetActive(true);
             }
             else
             {
+
                 newpos.y = orgY;
-                if (party[currChar].characterIndex == 1)
+                newpos.x = orgX;
+                if (party[currChar].characterIndex != 1)
                 {
-                    newpos.x = orgX;
+                    //newpos.x = orgX;
                     Vector3 tagpos = Nametag.transform.position;
-                    tagpos.x = orgX;
+                    //tagpos.x = orgX;
                     Nametag.transform.position = tagpos;
                 }
+                //else
+                //{
+                  //  newpos.x = orgX;
+
+                //}
+
                 Nametag.SetActive(false);
             }
             GetComponent<RectTransform>().anchoredPosition = newpos;

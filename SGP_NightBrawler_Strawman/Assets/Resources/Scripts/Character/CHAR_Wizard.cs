@@ -30,7 +30,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Fireball";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_FireballStrong";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_Fireball_ExplosionStrong";
-		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_Fireball_ExplosionStrong";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_MeteorStorm";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE, DANCE
         StateTmrs = new float[] { 2.0f, 0.75f, 0.1f, 0.6f, 0.5f, 0.8f, 1.0f, 0.1f, 1.0f, 1.0f, 0.8f };
@@ -157,7 +157,8 @@ public class CHAR_Wizard : ACT_CHAR_Base
 
 	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
 	{
-		AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        AttackInfo ret = new AttackInfo(0, Vector2.zero, Vector3.zero, false);
+        ret.projIndex = 3;
 
 		if (_curTmr > _maxTmr * 0.9f)
 			ret.spriteIndex = specialSprites[0];
@@ -169,7 +170,7 @@ public class CHAR_Wizard : ACT_CHAR_Base
 			ret.spriteIndex = specialSprites[3];
 
 		//if (_curTmr < _maxTmr * 0.1f)
-		//ret.spawnproj = true;
+		ret.spawnproj = true;
 
 		return ret;
 	}
