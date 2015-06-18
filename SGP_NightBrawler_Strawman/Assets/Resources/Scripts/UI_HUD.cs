@@ -7,6 +7,9 @@ public class UI_HUD : MonoBehaviour {
 	public GameObject party;
     public GameObject touchPanel;
 
+	public GameObject pausePanel;
+	public GameObject optionsPanel;
+
 	public Image fighterPort;
 	public Image rangerPort;
 	public Image magePort;
@@ -163,15 +166,15 @@ public class UI_HUD : MonoBehaviour {
         if (!MNGR_Game.paused)
         {
             //Time.timeScale = 0;
-            Input.simulateMouseWithTouches = true;
+            Input.simulateMouseWithTouches = false;
         }
         else
         {
             //Time.timeScale = 1.0f;
-            Input.simulateMouseWithTouches = false;
+            Input.simulateMouseWithTouches = true;
         }
 
-		theCanvas.transform.GetChild(6).gameObject.SetActive(MNGR_Game.paused);
+		pausePanel.gameObject.SetActive(MNGR_Game.paused);
 		//Cursor.visible = !Cursor.visible;
 		//Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
     }
@@ -179,7 +182,7 @@ public class UI_HUD : MonoBehaviour {
 	public void ToggleOptions()
 	{
 		options = !options;
-		theCanvas.transform.GetChild(9).gameObject.SetActive(options);
+		optionsPanel.gameObject.SetActive(options);
 		MNGR_Save.optionsFile.CopyOptions();
 		MNGR_Save.SaveOptions();
 	}
@@ -187,7 +190,7 @@ public class UI_HUD : MonoBehaviour {
 	public void ExitGame()
 	{
 		MNGR_Game.paused = false;
-		theCanvas.transform.GetChild(6).gameObject.SetActive(false);
+		pausePanel.gameObject.SetActive(false);
 		//Input.simulateMouseWithTouches = false;
         //Time.timeScale = 1;
 		Application.LoadLevel("MainMenu");
