@@ -203,7 +203,7 @@ public class UI_HUD : MonoBehaviour
         {
             for (int i = 0; i < 9; i++)
             {
-                filePaths[i] += "_blind";
+                filePaths[i] = orgFilePaths[i] + "_blind";
             }
         }
         else
