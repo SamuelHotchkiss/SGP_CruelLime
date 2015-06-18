@@ -515,6 +515,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 0
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -523,6 +525,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -535,6 +538,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 404258602}
   Nametag: {fileID: 1813153247}
@@ -615,6 +619,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 2
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -623,6 +629,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -635,6 +642,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 129236993}
   Nametag: {fileID: 1837300412}
@@ -1349,6 +1357,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 6
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -1357,6 +1367,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -1369,6 +1380,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 348920133}
   Nametag: {fileID: 1712120752}
@@ -1456,9 +1468,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 971a070f6da6e984cbc24017db515741, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1833,6 +1845,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 7
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -1841,6 +1855,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -1853,6 +1868,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 720517620}
   Nametag: {fileID: 1267014628}
@@ -2328,6 +2344,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 4
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -2336,6 +2354,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -2348,6 +2367,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 1761686818}
   Nametag: {fileID: 95781593}
@@ -2575,6 +2595,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 5
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -2583,6 +2605,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -2595,6 +2618,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 898290754}
   Nametag: {fileID: 1559748879}
@@ -2756,6 +2780,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 8
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -2764,6 +2790,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -2776,6 +2803,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 849863296}
   Nametag: {fileID: 1279437627}
@@ -2992,6 +3020,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 1
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -3000,6 +3030,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -3012,6 +3043,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 850336054}
   Nametag: {fileID: 664037850}
@@ -3290,6 +3322,8 @@ MonoBehaviour:
   myBuffs: []
   party: []
   currChar: 3
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
   warrior_GUI: {fileID: 0}
   ranger_GUI: {fileID: 0}
   mage_GUI: {fileID: 0}
@@ -3298,6 +3332,7 @@ MonoBehaviour:
   maxTmr: []
   curTmr: 0
   loop: 0
+  AudioHasPlay: 0
   currentState: 0
   nextState: 0
   horz: 0
@@ -3310,6 +3345,7 @@ MonoBehaviour:
   powerTouch: {fileID: 0}
   pauseTouch: {fileID: 0}
   theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
   chosenParty: []
   Button: {fileID: 1612879384}
   Nametag: {fileID: 1149766590}

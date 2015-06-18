@@ -82,6 +82,7 @@ public class PROJ_Base : MonoBehaviour
         transform.position += (new Vector3(velocity.x * speed, velocity.y * speed, 0) * Time.deltaTime);
 
         m_distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));
+        m_distance += Mathf.Sqrt((start.y - transform.position.y) * (start.y - transform.position.y));
         if (m_distance >= range)
             ProjectileExpired();
 
