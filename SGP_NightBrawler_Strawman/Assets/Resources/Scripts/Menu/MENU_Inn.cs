@@ -10,6 +10,7 @@ public class MENU_Inn : MonoBehaviour
     public int Inn_ButtonPress;
 
     public GameObject Inn_CharacterPanel;
+    GameObject Inn_Villiage;
     public Text Inn_CurrCoin;
 
     public Text Inn_RestButtonText;
@@ -24,11 +25,14 @@ public class MENU_Inn : MonoBehaviour
 	void Start () {
         Inn_CharacterPanel.SetActive(false);
         Inn_DeadCharacterIndex = new List<int>();
+        Inn_Villiage = GameObject.Find("Villiage Master");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Inn_CurrCoin.text = "X" + MNGR_Game.wallet.ToString();
+
+        Inn_Villiage.GetComponent<MENU_Village>().Update();
+        Inn_CurrCoin.text = "X " + MNGR_Game.wallet.ToString();
         Inn_RestCost = 5 * MNGR_Game.playerPosition;
 
         Inn_RestButtonText.text = "Rest For the Night\nCost:" + Inn_RestCost.ToString();

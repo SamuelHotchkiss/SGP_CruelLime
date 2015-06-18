@@ -20,15 +20,16 @@ public class MENU_LoadText : MonoBehaviour
         else
             lvlName.text = "NEW GAME";
 
-        cashAmount.text = "C o i n s : " + MNGR_Save.saveFiles[profileNum].wallet.ToString();
+        cashAmount.text = "Coins : " + MNGR_Save.saveFiles[profileNum].wallet.ToString();
 
         for (int i = 0; i < 3; i++)
         {
             portraits[i].sprite = Resources.Load<Sprite>("Sprites/GUI/" + loadMan.portraitNames[MNGR_Save.saveFiles[profileNum].currentParty[i].characterIndex]);
-            hpAmounts[i].text = "H P : " + MNGR_Save.saveFiles[profileNum].currentParty[i].Act_currHP.ToString();
+            hpAmounts[i].text = "HP : " + MNGR_Save.saveFiles[profileNum].currentParty[i].Act_currHP.ToString();
 
             MNGR_Save.saveFiles[profileNum].currentParty[i].Act_AverageLevel = MNGR_Save.saveFiles[profileNum].currentParty[i].CalcAverageLvl();
-            charLevels[i].text = "L e v e l : " + MNGR_Save.saveFiles[profileNum].currentParty[i].Act_AverageLevel.ToString();
+            charLevels[i].text = "LvL : " + MNGR_Save.saveFiles[profileNum].currentParty[i].Act_AverageLevel.ToString();
         }
+
     }
 }

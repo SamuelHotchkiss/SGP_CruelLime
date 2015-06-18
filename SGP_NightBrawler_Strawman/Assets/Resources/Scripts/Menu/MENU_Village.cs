@@ -41,14 +41,14 @@ public class MENU_Village : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 
         if (MNGR_Game.hordePosition == 3 && MNGR_Game.playerPosition == 1)
             ChangeSceneButton("WorldMap");
 
         MENU_Controller OpenShops = Vll_Shops[0].GetComponent<MENU_Controller>();
-        if (Vll_CurrCanvas == 0)
-        {
+        //if (Vll_CurrCanvas == 0)
+        //{
             if (MNGR_Game.isNight)
             {
                 //GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[1];
@@ -67,10 +67,11 @@ public class MENU_Village : MonoBehaviour {
                 for (int i = 0; i < Vll_NightShopID.Length; i++)
                     OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = false;
             }
-            if (Input.GetKeyDown(KeyCode.N))
-                MNGR_Game.isNight = !MNGR_Game.isNight; 
+           // if (Input.GetKeyDown(KeyCode.N))
+               // MNGR_Game.isNight = !MNGR_Game.isNight; 
 
-        }
+
+        //}
 	}
 
     public void OpenMenus(int _ShopID)
