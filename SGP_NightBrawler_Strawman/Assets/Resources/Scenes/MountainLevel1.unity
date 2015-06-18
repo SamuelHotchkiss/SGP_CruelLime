@@ -31523,7 +31523,7 @@ Transform:
   - {fileID: 1468289068}
   - {fileID: 291099826}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
 --- !u!1 &690439897
 GameObject:
   m_ObjectHideFlags: 0
@@ -94109,6 +94109,14 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 136426, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
   m_PrefabInternal: {fileID: 1951761895}
+--- !u!1 &1951761929 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 172920, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
+  m_PrefabInternal: {fileID: 1951761895}
+--- !u!1 &1951761930 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 162438, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
+  m_PrefabInternal: {fileID: 1951761895}
 --- !u!1 &1953519667
 GameObject:
   m_ObjectHideFlags: 0
@@ -95744,6 +95752,14 @@ Prefab:
       propertyPath: potionCount
       value: 
       objectReference: {fileID: 1951761896}
+    - target: {fileID: 11435728, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
+      propertyPath: pausePanel
+      value: 
+      objectReference: {fileID: 1951761929}
+    - target: {fileID: 11435728, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
+      propertyPath: optionsPanel
+      value: 
+      objectReference: {fileID: 1951761930}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
   m_IsPrefabParent: 0
