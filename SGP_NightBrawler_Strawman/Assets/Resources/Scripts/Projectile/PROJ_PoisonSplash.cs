@@ -43,10 +43,6 @@ public class PROJ_PoisonSplash : PROJ_Explosion
             if (collision.gameObject.GetComponent<PlayerController>() != null)
             {
                 PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-                int target = player.currChar;
-
-                // Mess with the active character
-                //player.party[target].ChangeHP(-power);
 
                 // Attach the Debuff
                 bool existing = false;
