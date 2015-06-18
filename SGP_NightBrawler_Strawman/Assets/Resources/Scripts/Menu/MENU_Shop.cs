@@ -34,6 +34,12 @@ public class MENU_Shop : MonoBehaviour
 				inventoryImages[i].gameObject.SetActive(true);
 		}
 
+		// Testing
+		//for (int i = 0; i < MNGR_Game.theInventory.containers.Length; i++)
+		//{
+		//	MNGR_Game.theInventory.containers[i].count++;
+		//}
+
 		for (int i = 0; i < shopCounts.Length; i++)
 			shopCounts[i].text = "x" + counts[i].ToString();
 

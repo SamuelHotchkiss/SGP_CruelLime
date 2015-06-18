@@ -160,16 +160,28 @@ public class UI_HUD : MonoBehaviour {
     {
 		MNGR_Game.paused = !MNGR_Game.paused;
 		//party.SetActive(!MNGR_Game.paused);
+        if (!MNGR_Game.paused)
+        {
+            //Time.timeScale = 0;
+            Input.simulateMouseWithTouches = true;
+        }
+        else
+        {
+            //Time.timeScale = 1.0f;
+            Input.simulateMouseWithTouches = false;
+        }
 
 		theCanvas.transform.GetChild(6).gameObject.SetActive(MNGR_Game.paused);
 		//Cursor.visible = !Cursor.visible;
-		Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
+		//Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
     }
 
 	public void ToggleOptions()
 	{
 		options = !options;
 		theCanvas.transform.GetChild(9).gameObject.SetActive(options);
+		MNGR_Save.optionsFile.CopyOptions();
+		MNGR_Save.SaveOptions();
 	}
 
 	public void ExitGame()
@@ -177,6 +189,7 @@ public class UI_HUD : MonoBehaviour {
 		MNGR_Game.paused = false;
 		theCanvas.transform.GetChild(6).gameObject.SetActive(false);
 		//Input.simulateMouseWithTouches = false;
+        //Time.timeScale = 1;
 		Application.LoadLevel("MainMenu");
 	}
 }
