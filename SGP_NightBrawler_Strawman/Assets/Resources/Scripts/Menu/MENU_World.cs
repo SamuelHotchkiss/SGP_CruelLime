@@ -88,6 +88,12 @@ public class MENU_World : MonoBehaviour
         playIndex = MNGR_Game.playerPosition;
         hordeIndex = MNGR_Game.hordePosition;
         playPos = MNGR_Game.playerPosition * 2;
+		MNGR_Game.arrowPos = playPos;
+
+		if (MNGR_Game.arrowPos == MNGR_Game.hordePosition)
+			MNGR_Game.dangerZone = true;
+		else
+			MNGR_Game.dangerZone = false;
 
         playerPos.text = "Player Position: " + levels[playIndex].GetComponentInChildren<Text>().text;
         hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();
