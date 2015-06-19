@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  start: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   power: 2
   m_distance: 0
@@ -67,7 +68,15 @@ MonoBehaviour:
   timerMax: .5
   forcestr: 5
   forcedir: {x: 0, y: 0}
-  sprites: []
+  sprites:
+  - {fileID: 21300000, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
+  - {fileID: 21300002, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
+  - {fileID: 21300004, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
+  - {fileID: 21300006, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
+  - {fileID: 21300008, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
+  - {fileID: 21300010, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
+  - {fileID: 21300012, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
+  - {fileID: 21300014, guid: 8332fb8754b49284bb87a866be79de25, type: 3}
 --- !u!212 &21267960
 SpriteRenderer:
   m_ObjectHideFlags: 1

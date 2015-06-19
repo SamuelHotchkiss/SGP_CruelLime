@@ -13,7 +13,7 @@ public class ACT_CHAR_Base : ACT_Base
         public bool enableCollision;
         public int physicsLayer;
         public float damMult;
-		public int projIndex;
+        public int projIndex;
         public AttackInfo(int _sprdex, Vector2 _vel = default(Vector2), Vector3 _pos = default(Vector3),
             bool _spawn = false, bool _enabCol = true, int _phylay = 8, float _damMult = 1.0f, int _projIndex = 2)
         {
@@ -24,21 +24,24 @@ public class ACT_CHAR_Base : ACT_Base
             enableCollision = _enabCol;
             physicsLayer = _phylay;
             damMult = _damMult;
-			projIndex = _projIndex;
+            projIndex = _projIndex;
         }
     }
-                        //      0,      1,      2,
-	public enum STATES { IDLE = 0, WALKING, DASHING, 
+    //      0,      1,      2,
+    public enum STATES
+    {
+        IDLE = 0, WALKING, DASHING,
         /*  3,          4,      5,      6,      7,      8,   9,   10*/
-		ATTACK_1, ATTACK_2, ATTACK_3, SPECIAL, HURT, DYING, USE, DANCE };
-	public STATES state;
+        ATTACK_1, ATTACK_2, ATTACK_3, SPECIAL, HURT, DYING, USE, DANCE
+    };
+    public STATES state;
 
     public float damageMod;             // S: lessens or increases damage taken
     public float chargeTimerMax;
     public float chargeTimer;
     public float chargeDur;         // chargeTimerMax - chargeTimer = chargeDur = the length we held down the button.
 
-	public float cooldownTmrBase;
+    public float cooldownTmrBase;
     public float cooldownTmr;
     public float invulMaxTmr;
     public float invulTmr;
@@ -56,19 +59,19 @@ public class ACT_CHAR_Base : ACT_Base
     public int[] attack3Sprites;
     public int[] specialSprites;
     public int[] hurtSprites;
-    public int[] deadSprites;       
+    public int[] deadSprites;
 
     public string name;
 
-	public bool hasSpecial;
+    public bool hasSpecial;
 
-	// Use this for initialization
-	public virtual void Start () 
-	{
+    // Use this for initialization
+    public virtual void Start()
+    {
         damageMod = 1.0f;
 
         cooldownTmr = 0.0f;
-		//cooldownTmrBase = 3.0f;
+        //cooldownTmrBase = 3.0f;
         invulMaxTmr = 2.0f;
         invulTmr = 0.0f;
 
@@ -76,16 +79,16 @@ public class ACT_CHAR_Base : ACT_Base
         Act_currSpeed = Act_baseSpeed;
         Act_currAspeed = Act_baseAspeed;
 
-	}
-	
-	// Update is called once per frame
-	public virtual void Update () 
-	{
-		cooldownTmr -= Time.deltaTime;
-		if (cooldownTmr < 0)
-		{
-			cooldownTmr = 0;
-		}
+    }
+
+    // Update is called once per frame
+    public virtual void Update()
+    {
+        cooldownTmr -= Time.deltaTime;
+        if (cooldownTmr < 0)
+        {
+            cooldownTmr = 0;
+        }
 
         // update  the invulnerability timer
         if (invulTmr > 0.0f)
@@ -97,7 +100,7 @@ public class ACT_CHAR_Base : ACT_Base
                 state = STATES.IDLE;
             }
         }
-	}
+    }
 
     // L: kind of an oxy-moron.
     public virtual AttackInfo ActivateIdle(float _curTmr, float _maxTmr)
@@ -164,7 +167,7 @@ public class ACT_CHAR_Base : ACT_Base
         AttackInfo ret = new AttackInfo(0);
 
         return ret;
-	}
+    }
     public virtual AttackInfo ActivateHurt(float _curTmr, float _maxTmr)
     {
         AttackInfo ret = new AttackInfo(0);
@@ -178,7 +181,7 @@ public class ACT_CHAR_Base : ACT_Base
         AttackInfo ret = new AttackInfo(0);
 
         if (_curTmr > _maxTmr * 0.5f)
-        ret.spriteIndex = deadSprites[0];
+            ret.spriteIndex = deadSprites[0];
         else if (_curTmr >= 0)
             ret.spriteIndex = deadSprites[1];
 
@@ -192,17 +195,17 @@ public class ACT_CHAR_Base : ACT_Base
     }
 
     public void ChangeHP(float Dmg, bool Flinch = true)                           //Applies current HP by set amount can be use to Heal as well
-	{                                                                           //Damage needs to be negative.
-		if (state != STATES.DYING && state != STATES.HURT && invulTmr == 0.0f)
-		{
+    {                                                                           //Damage needs to be negative.
+        if (state != STATES.DYING && state != STATES.HURT && invulTmr == 0.0f)
+        {
 
             if (Dmg < 0)
                 Act_currHP += (int)(Dmg * damageMod);
             else
                 Act_currHP += Dmg;
 
-			if (Act_currHP > Act_baseHP)
-				Act_currHP = Act_baseHP;
+            if (Act_currHP > Act_baseHP)
+                Act_currHP = Act_baseHP;
 
             if (Dmg < 0 && Flinch)
             {
@@ -210,13 +213,13 @@ public class ACT_CHAR_Base : ACT_Base
                 invulTmr = StateTmrs[(int)STATES.HURT] + invulMaxTmr;
             }
 
-			if (Act_currHP < 0)
-			{
-				state = STATES.DYING;
-				Act_currHP = 0;
-			}
-		}
-	}
+            if (Act_currHP < 0)
+            {
+                state = STATES.DYING;
+                Act_currHP = 0;
+            }
+        }
+    }
 
     public void ModifyDefense(float newDefense)
     {
@@ -230,18 +233,24 @@ public class ACT_CHAR_Base : ACT_Base
 
     virtual protected void ChargeSpecial(bool isCharging)
     {
-        
+
     }
 
-	public virtual AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
-	{
-		AttackInfo ret = new AttackInfo(0);
+    public virtual AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
+    {
+        AttackInfo ret = new AttackInfo(0);
 
-		return ret;
-	}
+        return ret;
+    }
 
-	public virtual void UpgradeSpecial()
-	{
-		
-	}
+    public virtual void UpgradeSpecial()
+    {
+
+    }
+
+    public void BecomeSpecial()
+    {
+        hasSpecial = true;
+        UpgradeSpecial();
+    }
 }
