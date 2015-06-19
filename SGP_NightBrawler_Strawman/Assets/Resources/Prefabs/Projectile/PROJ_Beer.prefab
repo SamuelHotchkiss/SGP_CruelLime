@@ -55,15 +55,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  start: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   power: 0
   m_distance: 0
+  Prj_Sound: {fileID: 0}
   speed: 20
   range: 20
   lifetime: 0
   right: 0
   knockback: 0
   debuff_ID: 6
+  SpawnOnDeath: []
 --- !u!212 &21278890
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -88,7 +91,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f682c3cc73838d940bbb7d12612ad885, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd3725ba7ce7ecb4a96ff87c1f92f28a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
