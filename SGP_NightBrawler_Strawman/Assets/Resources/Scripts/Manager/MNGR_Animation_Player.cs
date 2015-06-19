@@ -60,6 +60,7 @@ public class MNGR_Animation_Player : MonoBehaviour
         // change this script's character if the party changes its character, but don't waste the time otherwise.
         if (GetComponent<PlayerController>() != null)
         {
+            Debug.Log(GetComponent<PlayerController>().currChar);
             if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
             {
                 currentCharacter = GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar];

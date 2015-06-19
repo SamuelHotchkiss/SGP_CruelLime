@@ -556,6 +556,7 @@ public class PlayerController : MonoBehaviour
             party[currChar].Act_currHP = 0;
             currChar++;
         }
+        currChar = 0;
 
         MNGR_Save.DeleteCurrentSave(MNGR_Save.currSave);
 
