@@ -296,17 +296,17 @@ public class CHAR_Lancer : ACT_CHAR_Base
                     Ltargets.RemoveAt(0);
                     for (int i = Ltargets.Count; i > 0; i--)
                     {
-                        if (Ltargets[i-1].GetComponent<ACT_Enemy>().Act_currHP <= 0)
-                            Ltargets.RemoveAt(i-1);
+                        if (Ltargets[i - 1].GetComponent<ACT_Enemy>().Act_currHP <= 0)
+                            Ltargets.RemoveAt(i - 1);
                     }
-                        NumLeaps--;
+                    NumLeaps--;
 
                     if (Ltargets.Count > 0 && NumLeaps > 0)
                     {
                         player.GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
                         player.GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
                     }
-                    else if (Ltargets.Count <= 0 || NumLeaps <= 0)
+                    else
                     {
                         Ltargets = new List<GameObject>();
                         NumLeaps = 0;
