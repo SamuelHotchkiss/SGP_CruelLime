@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  start: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   power: 0
   m_distance: 0
@@ -83,7 +84,7 @@ MonoBehaviour:
   NumSpawnOnDeath: 1
   SpawnOnDeath: {fileID: 11492236, guid: 1728b5c01db0e8445b1ca9491e54bbc0, type: 2}
   sprites: []
-  spriteName: 
+  spriteName: Fireball
 --- !u!212 &21253650
 SpriteRenderer:
   m_ObjectHideFlags: 1

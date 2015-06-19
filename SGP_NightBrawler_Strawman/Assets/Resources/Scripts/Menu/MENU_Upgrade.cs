@@ -140,6 +140,9 @@ public class MENU_Upgrade : MonoBehaviour {
             MNGR_Game.currentParty[_CharIndex].Act_HPLevel++;
             MNGR_Game.wallet -= Upg_HPCost;
         }
+
+        if (MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() >= 5)
+            MNGR_Game.currentParty[_CharIndex].BecomeSpecial();
     }
 
     public void UpgradePower(int _CharIndex)
@@ -154,6 +157,9 @@ public class MENU_Upgrade : MonoBehaviour {
 
             MNGR_Game.wallet -= Upg_PowerCost;
         }
+
+        if (MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() >= 5)
+            MNGR_Game.currentParty[_CharIndex].BecomeSpecial();
     }
 
     public void UpgradeSpeed(int _CharIndex)
@@ -168,6 +174,9 @@ public class MENU_Upgrade : MonoBehaviour {
 
             MNGR_Game.wallet -= Upg_SpeedCost;
         }
+
+        if (MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() >= 5)
+            MNGR_Game.currentParty[_CharIndex].BecomeSpecial();
     }
 
     int CalculateUpgradeCost(int _CharIndex, UpgType _UpgType)
