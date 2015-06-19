@@ -36,8 +36,10 @@ public class Horde : MonoBehaviour
 		}
 		else
 		{
-			Vector3 spawn = new Vector3(transform.position.x, transform.position.y + (Random.value * offset), transform.position.z);
+			Vector3 spawn = new Vector3(transform.position.x, transform.position.y + (Random.Range(-1.0f, 1.1f) * offset), transform.position.z);
 			Instantiate(projectile, spawn, Quaternion.identity);
+			projectile.owner = gameObject;
+			projectile.Initialize();
 			projectile.velocity = new Vector2(arrowSpeed, 0.0f);
 			timer = fireRate;
 		}

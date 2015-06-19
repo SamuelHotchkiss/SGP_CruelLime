@@ -5,7 +5,7 @@ public class PROJ_Base : MonoBehaviour
 {
     public GameObject owner;  // who fired us?
 
-    protected Vector2 start;            // where are we from?
+    public Vector2 start;            // where are we from?
     public Vector2 velocity;         // which way are we going?
     public float power;         // how much damage will we deal?
     public float m_distance;    // how far have we gone?
@@ -72,7 +72,7 @@ public class PROJ_Base : MonoBehaviour
         }
 
         //GetComponent<Rigidbody2D>().velocity = velocity;
-        start = new Vector2(transform.position.x, transform.position.y);
+        start = new Vector2(owner.transform.position.x, owner.transform.position.y);
     }
 
     public virtual void Update()
@@ -82,8 +82,8 @@ public class PROJ_Base : MonoBehaviour
 
         transform.position += (new Vector3(velocity.x * speed, velocity.y * speed, 0) * Time.deltaTime);
 
-        m_distance = Mathf.Sqrt((start.x - transform.position.x) * (start.x - transform.position.x));
-        m_distance += Mathf.Sqrt((start.y - transform.position.y) * (start.y - transform.position.y));
+		m_distance = Mathf.Abs((start.x - transform.position.x));
+        //m_distance += Mathf.Sqrt((start.y - transform.position.y) * (start.y - transform.position.y));
         if (m_distance >= range)
             ProjectileExpired();
 

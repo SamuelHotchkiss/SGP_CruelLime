@@ -303,6 +303,7 @@ MonoBehaviour:
   - {fileID: 11434964, guid: db087961c48fd844097f730c19cf0a03, type: 2}
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 11434964, guid: db087961c48fd844097f730c19cf0a03, type: 2}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -315,8 +316,8 @@ MonoBehaviour:
   Spw_baseSpawnPerSec: 0
   Spw_SpawnPositionOffset: {x: 0, y: 0, z: 0}
   Spw_Force: {x: 0, y: 0}
-  Knck_Cooldown: 0
-  Knck_baseCooldown: 0
+  Knck_Cooldown: 10
+  Knck_baseCooldown: 10
   kamikazeActivated: 0
   kamikazeTimer: 3
   explosion: {fileID: 0}

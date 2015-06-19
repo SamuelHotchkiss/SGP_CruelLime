@@ -13,6 +13,7 @@ public class OBS_Pitfall : MonoBehaviour
 	void Start () 
     {
         orgMag = 0.0f;
+        GetComponent<SpriteRenderer>().sortingOrder = -10000;
 	}
 	
 	// Update is called once per frame

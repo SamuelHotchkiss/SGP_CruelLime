@@ -201,7 +201,7 @@ public class ACT_Enemy : MonoBehaviour
 	void Start () 
 	{
         if (GetComponent<SpriteRenderer>() != null && GameObject.Find("Reference_Point") != null)
-		    GetComponent<SpriteRenderer>().sortingOrder = (int)(GameObject.Find("Reference_Point").transform.position.y - transform.position.y);
+		    GetComponent<SpriteRenderer>().sortingOrder = (int)((GameObject.Find("Reference_Point").transform.position.y - transform.position.y) * 100.0f);
 
 		if (HealthBar.name == "Health")
 			cam = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -245,6 +245,14 @@ public class ACT_Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
+        if (Act_IsIntelligent)
+        {
+            Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+            vel *= 0.9f;
+            GetComponent<Rigidbody2D>().velocity = vel;
+        }
+
         if (GetComponent<MOD_Stunned>() != null)
             return; //GTFO
 
