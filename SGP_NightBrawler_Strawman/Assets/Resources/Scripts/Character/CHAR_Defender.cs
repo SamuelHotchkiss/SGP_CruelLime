@@ -32,7 +32,7 @@ public class CHAR_Defender : ACT_CHAR_Base
         ProjFilePaths[0] = "Prefabs/Projectile/PROJ_Lancer_Melee";
         ProjFilePaths[1] = "Prefabs/Projectile/PROJ_Defender_Melee";
         ProjFilePaths[2] = "Prefabs/Projectile/PROJ_DefenderWall";
-		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_DefenderWall";
+		ProjFilePaths[3] = "Prefabs/Projectile/PROJ_DefenderWallMaster";
 
         //-----Labels4dayz-----   IDLE, WALK, DODGE, ATT1, ATT2, ATT3, SPEC, HURT, DED,  USE,  DANCE
         StateTmrs = new float[] { 2.0f, 1.00f, 0.1f, 1.0f, 0.9f, 1.0f, 1.0f, 0.1f, 1.0f, 1.0f, 1.2f };
@@ -161,6 +161,7 @@ public class CHAR_Defender : ACT_CHAR_Base
 	public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
 	{
 		AttackInfo ret = new AttackInfo(0);
+        ret.projIndex = 3;
 
 		if (_curTmr > _maxTmr * 0.7f)
 			ret.spriteIndex = specialSprites[0];
