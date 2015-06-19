@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11424576}
   - 114: {fileID: 11498786}
   - 61: {fileID: 6168582}
-  - 50: {fileID: 5024242}
+  - 50: {fileID: 5008198}
   m_Layer: 11
   m_Name: Left Arm
   m_TagString: Enemy
@@ -102,7 +102,7 @@ GameObject:
   - 114: {fileID: 11451968}
   - 114: {fileID: 11496664}
   - 61: {fileID: 6174968}
-  - 50: {fileID: 5069788}
+  - 50: {fileID: 5071802}
   m_Layer: 11
   m_Name: Right Arm
   m_TagString: Enemy
@@ -187,13 +187,13 @@ Transform:
   - {fileID: 427416}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5024242
+--- !u!50 &5008198
 Rigidbody2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126612}
-  m_Mass: 9.99999975e-05
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
@@ -217,13 +217,13 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!50 &5069788
+--- !u!50 &5071802
 Rigidbody2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195864}
-  m_Mass: 9.99999975e-05
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
@@ -491,6 +491,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: 
   Act_baseHP: 0
   Act_basePower: 0
   Act_baseSpeed: 0
@@ -502,8 +503,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: .769999981
   state: 0
@@ -521,6 +527,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -760,6 +767,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: 
   Act_baseHP: 0
   Act_basePower: 0
   Act_baseSpeed: 0
@@ -771,8 +779,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: .75
   state: 0
@@ -790,6 +803,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -798,8 +812,8 @@ MonoBehaviour:
   Spw_CrittersCreated: 0
   Spw_SpawnCoolDown: 0
   Spw_BaseSpawnCoolDown: 0
-  Spw_SpawnPerSec: 1
-  Spw_baseSpawnPerSec: 1
+  Spw_SpawnPerSec: .5
+  Spw_baseSpawnPerSec: .5
   Spw_SpawnPositionOffset: {x: 0, y: 0, z: 0}
   Spw_Force: {x: 0, y: 0}
   Knck_Cooldown: 0
@@ -1030,6 +1044,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: 
   Act_baseHP: 0
   Act_basePower: 0
   Act_baseSpeed: 0
@@ -1041,8 +1056,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 0
   state: 0
@@ -1060,6 +1080,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -1299,6 +1320,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: 
   Act_baseHP: 0
   Act_basePower: 0
   Act_baseSpeed: 0
@@ -1310,8 +1332,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 0
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 0
   state: 0
@@ -1329,6 +1356,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -1568,6 +1596,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: 
   Act_baseHP: 1000
   Act_basePower: 20
   Act_baseSpeed: 0
@@ -1579,8 +1608,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: 0
   Act_currAttackSpeed: 0
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 1
   state: 0
@@ -1598,6 +1632,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0

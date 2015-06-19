@@ -73,6 +73,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_distance: 0
+  skull: {fileID: 0}
+  Outline:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
   BlackBar:
     m_Name: 
     m_Normal:
@@ -195,6 +255,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 1
+  Act_Name: CrxTnvA
   Act_baseHP: 30
   Act_basePower: 5
   Act_baseSpeed: 1
@@ -206,8 +267,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 0
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 0
   state: 0
@@ -226,6 +292,7 @@ MonoBehaviour:
   - {fileID: 11470342, guid: 163ef96a2bdf2b84d9f57025bec4e028, type: 2}
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 1
@@ -255,6 +322,7 @@ MonoBehaviour:
   projectile: {fileID: 11489018, guid: 5313f87aa69e50c4f8b9df4c2aa87885, type: 2}
   isMelee: 0
   paused: 0
+  isBoss: 0
 --- !u!114 &11475166
 MonoBehaviour:
   m_ObjectHideFlags: 1
