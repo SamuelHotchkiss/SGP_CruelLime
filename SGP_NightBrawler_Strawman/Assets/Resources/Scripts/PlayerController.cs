@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         notjoydash = false;
 
         // for testing
-        MNGR_Game.dangerZone = true;
+        //MNGR_Game.dangerZone = true;
 
         if (theHorde != null)
         {
