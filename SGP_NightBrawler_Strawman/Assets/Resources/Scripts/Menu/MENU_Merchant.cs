@@ -8,7 +8,10 @@ public class MENU_Merchant : MonoBehaviour {
     int Mer_RestCost;
     int Mer_ReviveCost;
     int Mer_ButtonPress;
+    int Mer_PotionLimit;
 
+    public Text Mer_PotionPrice;
+    public Text Mer_PotionCount;
     public Text Mer_CurrCoin;
     public Text Mer_RestButtonText;
     public Text[] Mer_ReviveText;
@@ -16,7 +19,7 @@ public class MENU_Merchant : MonoBehaviour {
     public List<int> Mer_DeadCharacterIndex;
 	// Use this for initialization
 	void Start () {
-	
+        Mer_PotionLimit = 3;
 	}
 	
 	// Update is called once per frame
@@ -26,6 +29,8 @@ public class MENU_Merchant : MonoBehaviour {
         Mer_RestCost = 15 * MNGR_Game.playerPosition;
 
         Mer_RestButtonText.text = "Rest For the Night\nCost:" + Mer_RestCost.ToString();
+        Mer_PotionPrice.text = (MNGR_Item.PotionCost(3) * 3).ToString();
+        Mer_PotionCount.text = "X " + Mer_PotionLimit.ToString();
 
         for (int i = 0; i < Mer_ReviveButtons.Length; i++)
         {
@@ -35,14 +40,16 @@ public class MENU_Merchant : MonoBehaviour {
         }
 	}
 
+
     public void Buy(int IDs)
     {
         if (MNGR_Game.theInventory.containers[0].count < 5)
         {
-            if (MNGR_Game.wallet >= (MNGR_Item.PotionCost(IDs) * 3))
+            if (MNGR_Game.wallet >= (MNGR_Item.PotionCost(IDs) * 3) && Mer_PotionLimit > 0)
             {
                 MNGR_Game.wallet -= (MNGR_Item.PotionCost(IDs) * 3);
                 MNGR_Game.theInventory.containers[0].count++;
+                Mer_PotionLimit--;
             }
         }
         else
