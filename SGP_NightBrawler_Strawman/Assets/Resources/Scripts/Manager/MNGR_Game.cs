@@ -63,7 +63,7 @@ public static class MNGR_Game
     {
         UpdatePlayer();
         UpdateHorde();
-		if (hordePosition == playerPosition)
+		if (hordePosition == arrowPos)
 			dangerZone = true;
 		else
 			dangerZone = false;
