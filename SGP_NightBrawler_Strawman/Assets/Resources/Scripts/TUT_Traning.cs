@@ -28,11 +28,11 @@ public class TUT_Traning : MonoBehaviour {
             Tut_SmackDummy.SetActive(false);
     }
 
-    void OnTriggerEnter2D(Collider2D Col)
+    void OnTriggerStay2D(Collider2D Col)
     {
-        if (Col.name.Contains("Fire") && Tut_Flames != null)
+        if ((Col.name.Contains("Fire") || Col.name.Contains("Sling") || Col.name.Contains("Force") || Col.name.Contains("Explosion") || Col.name.Contains("Flame")) && Tut_Flames != null)
             Tut_Flames.SetActive(true);
-        if (Col.name.Contains("Arrow") && Tut_HitTarget != null)
+        if ((Col.name.Contains("Arrow") || Col.name.Contains("Dart") || Col.name.Contains("Shuriken") || Col.name.Contains("Kunai")) && Tut_HitTarget != null)
             GetComponent<SpriteRenderer>().sprite = Tut_HitTarget;
         if (Col.name.Contains("Melee") || Col.name.Contains("Arrow") || Col.name.Contains("Fire") )
         {
