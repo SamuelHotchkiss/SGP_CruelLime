@@ -34,11 +34,11 @@ public class WarpSpot : MonoBehaviour
             else
                 Application.LoadLevel(BossLvl);
         }
-		if (activateEnemies)
+		if (activateEnemies && enemies != null)
 		{
 			enemies.gameObject.SetActive(true);
 		}
-		if (activateHorde)
+		if (activateHorde && horde != null)
 		{
 			horde.gameObject.SetActive(true);
 		}
