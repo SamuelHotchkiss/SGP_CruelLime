@@ -275,11 +275,10 @@ public class ACT_Enemy : MonoBehaviour
 			return;
 		}
 
-		if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
-			state = STATES.IDLE;
+        //if (!MNGR_Game.isNight && Act_currHP == Act_baseHP)
+        //    state = STATES.IDLE;
         
-        if ((MNGR_Game.isNight || Act_currHP != Act_baseHP) &&
-            target == null && Act_IsIntelligent)
+        if (target == null && Act_IsIntelligent) //(MNGR_Game.isNight || Act_currHP != Act_baseHP) &&
             target = GameObject.FindGameObjectWithTag("Player");
 
 		currTime -= Time.deltaTime;
@@ -643,7 +642,7 @@ public class ACT_Enemy : MonoBehaviour
                 //currTime = stateTime[(int)state];
                 return;
             }
-            if ((state != STATES.HURT || state != STATES.DEAD) && !(!MNGR_Game.isNight && Act_currHP == Act_baseHP))
+            if ((state != STATES.HURT || state != STATES.DEAD)) //&& !(!MNGR_Game.isNight && Act_currHP == Act_baseHP)
             {
                 randomState = Random.Range(0, 5);
 
