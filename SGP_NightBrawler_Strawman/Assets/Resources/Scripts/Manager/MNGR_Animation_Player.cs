@@ -202,7 +202,7 @@ public class MNGR_Animation_Player : MonoBehaviour
     }
 
     // handled in one easy-to-access function
-    protected void ChangeState(ACT_CHAR_Base.STATES _newstate)
+    public void ChangeState(ACT_CHAR_Base.STATES _newstate)
     {
         // this allows us to know exactly which transition we're in.  Very useful.
         lastState = curState;
