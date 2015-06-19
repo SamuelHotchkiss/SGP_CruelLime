@@ -10,7 +10,7 @@ public class MENU_Inn : MonoBehaviour
     public int Inn_ButtonPress;
 
     public GameObject Inn_CharacterPanel;
-    GameObject Inn_Villiage;
+    public GameObject Inn_Villiage;
     public Text Inn_CurrCoin;
 
     public Text Inn_RestButtonText;
@@ -19,6 +19,7 @@ public class MENU_Inn : MonoBehaviour
     public Text[] Inn_ReviveText;
 
     private List<int> Inn_DeadCharacterIndex;
+
 
     public 
 	// Use this for initialization

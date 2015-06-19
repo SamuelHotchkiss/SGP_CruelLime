@@ -184,13 +184,13 @@ public class MENU_Upgrade : MonoBehaviour {
         switch (_UpgType)
         {
             case UpgType.HpUpg:
-                Upg_HPCost = (MNGR_Game.currentParty[_CharIndex].Act_HPLevel * 10) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 2;
+                Upg_HPCost = (MNGR_Game.currentParty[_CharIndex].Act_HPLevel * 10) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 4;
                 return Upg_HPCost;
             case UpgType.PowerUpg:
-                Upg_PowerCost = (MNGR_Game.currentParty[_CharIndex].Act_PowerLevel * 20) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 2;
+                Upg_PowerCost = (MNGR_Game.currentParty[_CharIndex].Act_PowerLevel * 20) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 4;
                 return Upg_PowerCost;
             case UpgType.SpeedUpg:
-                Upg_SpeedCost = (MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel * 15) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 2;
+                Upg_SpeedCost = (MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel * 15) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 4;
                 return Upg_SpeedCost;
         }
 

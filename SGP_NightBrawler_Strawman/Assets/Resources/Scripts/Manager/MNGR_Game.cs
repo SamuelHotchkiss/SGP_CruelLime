@@ -34,11 +34,10 @@ public static class MNGR_Game
         currentLevel = "NEW GAME";
 		NextLevel = "WorldMap";
 
-        //isNight = true;
         //hordePosition = HordeDelay = playerPosition = wallet = 0;
         //paused = dangerZone = false;
-
-        arrowPos = 0;
+        //wallet = 100;
+        //arrowPos = 0;
 
 		theCharacters[0] = new CHAR_Swordsman();
 		theCharacters[1] = new CHAR_Lancer();
