@@ -183,6 +183,6 @@ public class MENU_World : MonoBehaviour
 				inventoryImages[i].gameObject.SetActive(true);
 		}
 
-		GameObject.Find("Held_Item").gameObject.GetComponent<Image>().sprite = inventoryImages[_index].sprite;
+		GameObject.Find("Held_Item_Image").gameObject.GetComponent<Image>().sprite = inventoryImages[_index].sprite;
 	}
 }

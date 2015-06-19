@@ -1,168 +1,189 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class UI_HUD : MonoBehaviour {
+public class UI_HUD : MonoBehaviour
+{
 
-	public Canvas theCanvas;
-	public GameObject party;
+    public Canvas theCanvas;
+    public GameObject party;
     public GameObject touchPanel;
 
-	public GameObject pausePanel;
-	public GameObject optionsPanel;
+    public GameObject pausePanel;
+    public GameObject optionsPanel;
 
-	public Image fighterPort;
-	public Image rangerPort;
-	public Image magePort;
+    public Image fighterPort;
+    public Image rangerPort;
+    public Image magePort;
 
-	public Image fighterHealth;
-	public Image fighterCooldown;
+    public Image fighterHealth;
+    public Image fighterCooldown;
 
-	public Image rangerHealth;
-	public Image rangerCooldown;
+    public Image rangerHealth;
+    public Image rangerCooldown;
 
-	public Image mageHealth;
-	public Image mageCooldown;
+    public Image mageHealth;
+    public Image mageCooldown;
 
-	public Text gold;
+    public Text gold;
 
-	public Image heldItem;
+    public Image heldItem;
 
-	public Text potionCount;
+    public Text potionCount;
 
 
-	bool options = false;
+    bool options = false;
 
-	string[] filePaths;
+    string[] filePaths;
+    string[] orgFilePaths;
 
-	ACT_CHAR_Base fighter, ranger, mage;
+    ACT_CHAR_Base fighter, ranger, mage;
 
-	// Use this for initialization
-	public void Initialize () 
-	{
-		MNGR_Game.Initialize();
-		MNGR_Options.Initialize();
+    // Use this for initialization
+    public void Initialize()
+    {
+        MNGR_Game.Initialize();
+        MNGR_Options.Initialize();
 
-		Cursor.visible = true;
+        Cursor.visible = true;
 
-        if(MNGR_Options.colorblind)
+        if (MNGR_Options.colorblind)
         {
             fighterCooldown.sprite = mageCooldown.sprite = rangerCooldown.sprite = Resources.Load<Sprite>("Sprites/GUI/Cooldown_GUI_blind");
         }
 
-		fighter = party.GetComponent<PlayerController>().party[0];
-		ranger = party.GetComponent<PlayerController>().party[1];
-		mage = party.GetComponent<PlayerController>().party[2];
+        fighter = party.GetComponent<PlayerController>().party[0];
+        ranger = party.GetComponent<PlayerController>().party[1];
+        mage = party.GetComponent<PlayerController>().party[2];
 
-		gold = theCanvas.transform.GetChild(3).transform.GetChild(1).GetComponent<Text>();
+        gold = theCanvas.transform.GetChild(3).transform.GetChild(1).GetComponent<Text>();
 
         if (MNGR_Game.AmIMobile())
             touchPanel.SetActive(true);
 
-		filePaths = new string[17];
+        filePaths = new string[17];
 
-		filePaths[0] = "Sprites/GUI/Port_Sword";
-		filePaths[1] = "Sprites/GUI/Port_Lancer";
-		filePaths[2] = "Sprites/GUI/Port_Defender";
+        filePaths[0] = "Sprites/GUI/Port_Sword";
+        filePaths[1] = "Sprites/GUI/Port_Lancer";
+        filePaths[2] = "Sprites/GUI/Port_Defender";
 
-		filePaths[3] = "Sprites/GUI/Port_Archer";
-		filePaths[4] = "Sprites/GUI/Port_Ninja";
-		filePaths[5] = "Sprites/GUI/Port_Poisoner";
+        filePaths[3] = "Sprites/GUI/Port_Archer";
+        filePaths[4] = "Sprites/GUI/Port_Ninja";
+        filePaths[5] = "Sprites/GUI/Port_Poisoner";
 
-		filePaths[6] = "Sprites/GUI/Port_Wizard";
-		filePaths[7] = "Sprites/GUI/Port_ForceMage";
-		filePaths[8] = "Sprites/GUI/Port_Spellslinger";
+        filePaths[6] = "Sprites/GUI/Port_Wizard";
+        filePaths[7] = "Sprites/GUI/Port_ForceMage";
+        filePaths[8] = "Sprites/GUI/Port_Spellslinger";
 
-		filePaths[9] = "Sprites/GUI/Dead";
-		filePaths[10] = "Sprites/GUI/Nothing";
+        filePaths[9] = "Sprites/GUI/Dead";
+        filePaths[10] = "Sprites/GUI/Nothing";
 
-		filePaths[11] = "Sprites/Item/Health_Potion";
-		filePaths[12] = "Sprites/Item/Regen_Potion";
-		filePaths[13] = "Sprites/Item/Stamina_Potion";
-		filePaths[14] = "Sprites/Item/Acceleration_Potion";
-		filePaths[15] = "Sprites/Item/Protection_Potion";
-		filePaths[16] = "Sprites/Item/Strength_Potion";
+        filePaths[11] = "Sprites/Item/Health_Potion";
+        filePaths[12] = "Sprites/Item/Regen_Potion";
+        filePaths[13] = "Sprites/Item/Stamina_Potion";
+        filePaths[14] = "Sprites/Item/Acceleration_Potion";
+        filePaths[15] = "Sprites/Item/Protection_Potion";
+        filePaths[16] = "Sprites/Item/Strength_Potion";
 
+        orgFilePaths = new string[9];
 
-		fighter.Start();
-		ranger.Start();
-		mage.Start();
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
+        for (int i = 0; i < 9; i++)
+        {
+            orgFilePaths[i] = filePaths[i];
+        }
 
-		if (MNGR_Game.paused)
-			if (GameObject.Find("LevelDJ"))
-				GameObject.Find("LevelDJ").GetComponent<AudioSource>().volume = MNGR_Options.musicVol;
-	
-		fighterHealth.fillAmount = ((float)fighter.Act_currHP / (float)fighter.Act_baseHP);
-		fighterCooldown.fillAmount = (float)((fighter.cooldownTmrBase - fighter.cooldownTmr) / fighter.cooldownTmrBase);
+        if (MNGR_Options.colorblind)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                filePaths[i] += "_blind";
+            }
+        }
 
-		rangerHealth.fillAmount = ((float)ranger.Act_currHP / (float)ranger.Act_baseHP);
-		rangerCooldown.fillAmount = (float)((ranger.cooldownTmrBase - ranger.cooldownTmr) / ranger.cooldownTmrBase);
+        fighter.Start();
+        ranger.Start();
+        mage.Start();
+    }
 
-		mageHealth.fillAmount = ((float)mage.Act_currHP / (float)mage.Act_baseHP);
-		mageCooldown.fillAmount = (float)((mage.cooldownTmrBase - mage.cooldownTmr) / mage.cooldownTmrBase);
+    // Update is called once per frame
+    void Update()
+    {
 
-		if (fighter.Act_currHP > 0)
-			fighterPort.sprite = Resources.Load<Sprite>(filePaths[fighter.characterIndex]);
-		else
-			fighterPort.sprite = Resources.Load<Sprite>(filePaths[9]);
+        if (MNGR_Game.paused)
+            if (GameObject.Find("LevelDJ"))
+                GameObject.Find("LevelDJ").GetComponent<AudioSource>().volume = MNGR_Options.musicVol;
 
-		if (ranger.Act_currHP > 0)
-			rangerPort.sprite = Resources.Load<Sprite>(filePaths[ranger.characterIndex]);
-		else
-			rangerPort.sprite = Resources.Load<Sprite>(filePaths[9]);
+        fighterHealth.fillAmount = ((float)fighter.Act_currHP / (float)fighter.Act_baseHP);
+        fighterCooldown.fillAmount = (float)((fighter.cooldownTmrBase - fighter.cooldownTmr) / fighter.cooldownTmrBase);
 
-		if (mage.Act_currHP > 0)
-			magePort.sprite = Resources.Load<Sprite>(filePaths[mage.characterIndex]);
-		else
-			magePort.sprite = Resources.Load<Sprite>(filePaths[9]);
+        rangerHealth.fillAmount = ((float)ranger.Act_currHP / (float)ranger.Act_baseHP);
+        rangerCooldown.fillAmount = (float)((ranger.cooldownTmrBase - ranger.cooldownTmr) / ranger.cooldownTmrBase);
 
-		fighter.Update();
-		ranger.Update();
-		mage.Update();
+        mageHealth.fillAmount = ((float)mage.Act_currHP / (float)mage.Act_baseHP);
+        mageCooldown.fillAmount = (float)((mage.cooldownTmrBase - mage.cooldownTmr) / mage.cooldownTmrBase);
 
-		gold.text = "C o i n s : " + MNGR_Game.wallet;
+        if (fighter.Act_currHP > 0)
+        {
+            fighterPort.sprite = Resources.Load<Sprite>(filePaths[fighter.characterIndex]);
+        }
+        else
+            fighterPort.sprite = Resources.Load<Sprite>(filePaths[9]);
 
-		potionCount.text = "x " + MNGR_Game.theInventory.containers[0].count;
+        if (ranger.Act_currHP > 0)
+            rangerPort.sprite = Resources.Load<Sprite>(filePaths[ranger.characterIndex]);
+        else
+            rangerPort.sprite = Resources.Load<Sprite>(filePaths[9]);
 
-		switch (MNGR_Game.equippedItem)
-		{
-			case -1:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[10]);
-				break;
-			case 0:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[11]);
-				break;
-			case 1:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[12]);
-				break;
-			case 2:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[13]);
-				break;
-			case 3:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[14]);
-				break;
-			case 4:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[15]);
-				break;
-			case 5:
-				heldItem.sprite = Resources.Load<Sprite>(filePaths[16]);
-				break;
-		}
+        if (mage.Act_currHP > 0)
+            magePort.sprite = Resources.Load<Sprite>(filePaths[mage.characterIndex]);
+        else
+            magePort.sprite = Resources.Load<Sprite>(filePaths[9]);
 
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
+        fighter.Update();
+        ranger.Update();
+        mage.Update();
+
+        gold.text = "C o i n s : " + MNGR_Game.wallet;
+
+        potionCount.text = "x " + MNGR_Game.theInventory.containers[0].count;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             TogglePause();
-		}
-	}
+        }
+
+        switch (MNGR_Game.equippedItem)
+        {
+            case -1:
+                heldItem.sprite = Resources.Load<Sprite>(filePaths[10]);
+                break;
+            case 0:
+                heldItem.sprite = Resources.Load<Sprite>(filePaths[11]);
+                break;
+            case 1:
+                heldItem.sprite = Resources.Load<Sprite>(filePaths[12]);
+                break;
+            case 2:
+                heldItem.sprite = Resources.Load<Sprite>(filePaths[13]);
+                break;
+            case 3:
+                heldItem.sprite = Resources.Load<Sprite>(filePaths[14]);
+                break;
+            case 4:
+                heldItem.sprite = Resources.Load<Sprite>(filePaths[15]);
+                break;
+            case 5:
+                heldItem.sprite = Resources.Load<Sprite>(filePaths[16]);
+                break;
+            default:
+                break;
+        }
+
+    }
 
     public void TogglePause()
     {
-		MNGR_Game.paused = !MNGR_Game.paused;
-		//party.SetActive(!MNGR_Game.paused);
+        MNGR_Game.paused = !MNGR_Game.paused;
+        //party.SetActive(!MNGR_Game.paused);
         if (!MNGR_Game.paused)
         {
             //Time.timeScale = 0;
@@ -174,25 +195,40 @@ public class UI_HUD : MonoBehaviour {
             Input.simulateMouseWithTouches = true;
         }
 
-		pausePanel.gameObject.SetActive(MNGR_Game.paused);
-		//Cursor.visible = !Cursor.visible;
-		//Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
+        pausePanel.gameObject.SetActive(MNGR_Game.paused);
+        //Cursor.visible = !Cursor.visible;
+        //Input.simulateMouseWithTouches = !Input.simulateMouseWithTouches;
+
+        if (MNGR_Options.colorblind)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                filePaths[i] = orgFilePaths[i] + "_blind";
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                filePaths[i] = orgFilePaths[i];
+            }
+        }
     }
 
-	public void ToggleOptions()
-	{
-		options = !options;
-		optionsPanel.gameObject.SetActive(options);
-		MNGR_Save.optionsFile.CopyOptions();
-		MNGR_Save.SaveOptions();
-	}
+    public void ToggleOptions()
+    {
+        options = !options;
+        optionsPanel.gameObject.SetActive(options);
+        MNGR_Save.optionsFile.CopyOptions();
+        MNGR_Save.SaveOptions();
+    }
 
-	public void ExitGame()
-	{
-		MNGR_Game.paused = false;
-		pausePanel.gameObject.SetActive(false);
-		//Input.simulateMouseWithTouches = false;
+    public void ExitGame()
+    {
+        MNGR_Game.paused = false;
+        pausePanel.gameObject.SetActive(false);
+        //Input.simulateMouseWithTouches = false;
         //Time.timeScale = 1;
-		Application.LoadLevel("MainMenu");
-	}
+        Application.LoadLevel("MainMenu");
+    }
 }

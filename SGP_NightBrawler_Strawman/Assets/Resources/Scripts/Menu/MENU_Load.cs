@@ -13,6 +13,14 @@ public class MENU_Load : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (MNGR_Options.colorblind)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                portraitNames[i] += "_blind";
+            }
+        }
+
         MNGR_Game.Initialize();
         MNGR_Save.LoadProfiles();
 
