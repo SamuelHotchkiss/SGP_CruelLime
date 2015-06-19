@@ -305,8 +305,7 @@ public class PlayerController : MonoBehaviour
         }
 		else if (Input.GetKeyDown(KeyCode.U))
 		{
-			party[currChar].hasSpecial = true;
-			party[currChar].UpgradeSpecial();
+            party[currChar].BecomeSpecial();
 		}
         // modify velocity only if we aren't in special state (for custom special movement)
 
