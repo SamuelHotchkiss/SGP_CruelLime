@@ -38,7 +38,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 176194}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  start: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   power: 0
   m_distance: 0
@@ -64,7 +65,7 @@ MonoBehaviour:
   lifetime: 3
   right: 0
   knockback: 0
-  timerMax: 3
+  timerMax: 20
   forcestr: 0
   forcedir: {x: 0, y: 0}
   sprites: []

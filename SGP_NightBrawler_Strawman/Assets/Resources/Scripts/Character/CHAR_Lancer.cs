@@ -207,6 +207,8 @@ public class CHAR_Lancer : ACT_CHAR_Base
     public override AttackInfo ActivateMasterSpecial(float _curTmr, float _maxTmr)
     {
         AttackInfo ret = new AttackInfo(0);
+        float maxdist = 10.0f;
+        float offset = 2.0f;
 
         if (chargeTimer > 0 && (Input.GetButton("Special/Cancel")
             || (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)))
@@ -220,12 +222,14 @@ public class CHAR_Lancer : ACT_CHAR_Base
             if (chargeTimer > chargeTimerMax * 0.8f)
             {
                 ret.spriteIndex = attack1Sprites[0];
-                NumLeaps = 1;
+                if (NumLeaps < 1)
+                    NumLeaps = 1;
             }
             else if (chargeTimer >= 0)
             {
                 ret.spriteIndex = attack1Sprites[1];
-                NumLeaps = 2;
+                if (NumLeaps < 2)
+                    NumLeaps = 2;
             }
 
             if (_curTmr < 0.2f)
@@ -233,14 +237,15 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
 
                 ret.spriteIndex = attack1Sprites[1];
-                NumLeaps = 3;
+                if (NumLeaps < 3)
+                    NumLeaps = 3;
             }
         }
         else if (chargeTimer != 0.0f)
         {
             chargeDur = chargeTimerMax - chargeTimer;
             chargeTimer = 0.0f;
-            if (NumLeaps == 0)
+            if (NumLeaps < 4)
                 NumLeaps = 4;
 
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
@@ -255,7 +260,6 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 Atargets = new GameObject[0];
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            float maxdist = 20.0f;
 
             for (int i = 0; i < Atargets.Length; i++) // loop through targets and remove all entries that are too far away.
             {
@@ -268,11 +272,16 @@ public class CHAR_Lancer : ACT_CHAR_Base
             if (Ltargets.Count > 0 && NumLeaps > 0) // this is where we jump to targets.
             {
                 Vector3 targpos = Ltargets[0].transform.position;
-                float offset = 2.0f;
                 if (targpos.x > player.transform.position.x)
+                {
                     targpos.x -= offset;
+                    Act_facingRight = true;
+                }
                 else
+                {
                     targpos.x += offset;
+                    Act_facingRight = false;
+                }
 
                 player.transform.position = Vector3.Lerp(player.transform.position, targpos, Time.deltaTime * 10);
 
@@ -296,22 +305,14 @@ public class CHAR_Lancer : ACT_CHAR_Base
                     Ltargets.RemoveAt(0);
                     for (int i = Ltargets.Count; i > 0; i--)
                     {
-                        if (Ltargets[i-1].GetComponent<ACT_Enemy>().Act_currHP <= 0)
-                            Ltargets.RemoveAt(i-1);
+                        if (Ltargets[i - 1].GetComponent<ACT_Enemy>().Act_currHP <= 0)
+                            Ltargets.RemoveAt(i - 1);
                     }
-                        NumLeaps--;
+                    NumLeaps--;
 
-                    if (Ltargets.Count > 0 && NumLeaps > 0)
-                    {
-                        player.GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
-                        player.GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
-                    }
-                    else if (Ltargets.Count <= 0 || NumLeaps <= 0)
-                    {
-                        Ltargets = new List<GameObject>();
-                        NumLeaps = 0;
-                        player.GetComponent<PlayerController>().ChangeState(STATES.IDLE);
-                    }
+                    if (Ltargets.Count <= 0 || NumLeaps <= 0)
+                        Atargets = new GameObject[0];
+                    FixTheVisualStudioBugsPlz(Ltargets.Count, NumLeaps, player); // because bugs.
                 }
 
             }
@@ -345,7 +346,21 @@ public class CHAR_Lancer : ACT_CHAR_Base
 
         return ret;
     }
+    void FixTheVisualStudioBugsPlz(int Count, int NumLeaps, GameObject player)
+    {
+        if (Ltargets.Count > 0 && NumLeaps > 0)
+        {
+            player.GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
+            player.GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
+        }
+        else
+        {
+            Ltargets = new List<GameObject>();
+            NumLeaps = 0;
+            player.GetComponent<PlayerController>().ChangeState(STATES.IDLE);
+        }
 
+    }
     public override void UpgradeSpecial()
     {
     }
