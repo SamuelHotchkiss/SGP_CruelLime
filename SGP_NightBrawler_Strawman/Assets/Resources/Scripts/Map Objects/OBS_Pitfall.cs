@@ -6,7 +6,8 @@ public class OBS_Pitfall : MonoBehaviour
 
     public GameObject dest;
     public AudioClip Fall;
-    float orgMag;
+    public int type = 0;
+    public float orgMag;
 
 	// Use this for initialization
 	void Start () 
@@ -32,9 +33,10 @@ public class OBS_Pitfall : MonoBehaviour
 
     public virtual void OnTriggerStay2D(Collider2D _col)
     {
-        int type = 0;
+        //int type = 0;
         Camera cam = Camera.current;
         
+
         if (_col.gameObject.GetComponent<PlayerController>() != null)
         {
             type = 1;
@@ -64,14 +66,14 @@ public class OBS_Pitfall : MonoBehaviour
             {
                 Vector3 dir = transform.position - _col.transform.position;
                 dir.Normalize();
-                _col.transform.position += dir;// *2.0f;
+                _col.transform.position += dir * 1.5f;
             }
 
             // apply these effects 
             _col.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
             _col.transform.localScale *= 0.95f;
 
-            if (_col.transform.localScale.magnitude < 0.2f)
+            if (_col.transform.localScale.magnitude < 0.4f)
             {
                 _col.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 if (type > 0)

@@ -10,3 +10,4 @@ public class LevelMusicPlayer : MonoBehaviour
 		GetComponent<AudioSource>().volume = MNGR_Options.musicVol;
 	}
 }
+

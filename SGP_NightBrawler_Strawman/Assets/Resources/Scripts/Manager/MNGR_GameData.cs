@@ -26,7 +26,7 @@ public class MNGR_GameData
         hordePosition = playerPosition = wallet = 0;
         arrowPos = 0;
 		// delete later
-		wallet = 1000;
+		wallet = 10000;
 
         theCharacters = new ACT_CHAR_Base[9];
         currentParty = new ACT_CHAR_Base[3];
