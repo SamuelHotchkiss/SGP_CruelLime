@@ -76,12 +76,14 @@ public static class MNGR_Game
     }
 
     public static void UpdateHorde()
-    {
-        //Once we have all the villages set we need to change this. 
-        if (HordeDelay == 0)
-            MNGR_Game.hordePosition++;
-        else
-            MNGR_Game.HordeDelay--;
+    { 
+        if (hordePosition == 2 || hordePosition == 8 || hordePosition == 14) 
+        {
+            if (HordeDelay == 0)
+                hordePosition++;
+            else
+                HordeDelay--; 
+        }
     }  
     
     public static bool AmIMobile()

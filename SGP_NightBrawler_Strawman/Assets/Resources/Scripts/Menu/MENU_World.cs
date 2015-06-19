@@ -16,6 +16,8 @@ public class MENU_World : MonoBehaviour
     public Button playerArrow, hordeArrow;
     public Image theSky;
     public GameObject merchantPanel;
+    public Image Sky;
+    public Image Sun;
 
     public AudioClip Menu_SelectedSound;    //Clip of sound that will play when a button is pressed.
 
@@ -27,6 +29,8 @@ public class MENU_World : MonoBehaviour
     {
         MNGR_Game.Initialize();
 
+        Sky.gameObject.SetActive(false);
+
         if (MNGR_Game.arrowPos == MNGR_Game.hordePosition)
             MNGR_Game.dangerZone = true;
         else
@@ -35,9 +39,9 @@ public class MENU_World : MonoBehaviour
         Debug.Log(MNGR_Game.dangerZone);
 
         if (MNGR_Game.isNight)
-            theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Moon");
+            theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Moon");
         else
-            theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/Decorative_Sun");
+            theSky.sprite = Resources.Load<Sprite>("Sprites/Menu/41570016");
 
         playIndex = MNGR_Game.playerPosition;
         hordeIndex = MNGR_Game.hordePosition;
@@ -108,16 +112,21 @@ public class MENU_World : MonoBehaviour
     public void VisitMerchant()
     {
         merchantPanel.SetActive(true);
+        Sky.gameObject.SetActive(true); 
+        Sun.gameObject.SetActive(false);
         //GameObject.Find("Canvas").GetComponent<MENU_Controller>().enabled = false;
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);
         StartCoroutine(WaitForSound());
     }
 
+
     // closes merchant menu
     public void LeaveMerchant()
     {
         merchantPanel.SetActive(false);
+        Sky.gameObject.SetActive(false);
+        Sun.gameObject.SetActive(true);
         //GameObject.Find("Canvas").GetComponent<MENU_Controller>().enabled = true;
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);

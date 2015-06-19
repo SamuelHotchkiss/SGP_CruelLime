@@ -199,7 +199,7 @@ public class ENY_Arms : ACT_Enemy {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
       if (col.tag == "Player" && Arm_DownTimer <= 0.0f && Arm_IgnoreCollision <= 0.0f && Arm_HostBody.GetComponent<ACT_BOS_Bipolar>().Bip_PatternId == 0)
       {
@@ -208,4 +208,5 @@ public class ENY_Arms : ACT_Enemy {
           Arm_IgnoreCollision = Arm_BaseIgnoreCollision;
       }
     }
+
 }

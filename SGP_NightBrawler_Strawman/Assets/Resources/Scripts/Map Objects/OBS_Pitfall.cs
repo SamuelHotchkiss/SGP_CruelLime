@@ -36,6 +36,7 @@ public class OBS_Pitfall : MonoBehaviour
         //int type = 0;
         Camera cam = Camera.current;
         
+
         if (_col.gameObject.GetComponent<PlayerController>() != null)
         {
             type = 1;
