@@ -11,12 +11,11 @@ GameObject:
   - 212: {fileID: 21243204}
   - 114: {fileID: 11424130}
   - 50: {fileID: 5000270}
-  - 114: {fileID: 11425408}
   - 61: {fileID: 6152106}
   - 95: {fileID: 9542648}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,17 +93,6 @@ MonoBehaviour:
   player: {fileID: 0}
   ParentObjectPos: {x: 0, y: 0, z: 0}
   Timer: 10
---- !u!114 &11425408
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 178380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &21243204
 SpriteRenderer:
   m_ObjectHideFlags: 1
