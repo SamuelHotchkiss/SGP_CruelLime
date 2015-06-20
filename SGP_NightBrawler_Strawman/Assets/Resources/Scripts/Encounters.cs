@@ -27,8 +27,12 @@ public class Encounters : MonoBehaviour {
     private float Enc_BaseSpawnTimer;
     private GameObject Enc_Victime;
 
+	public Camera cam;
+
 	// Use this for initialization
 	void Start () {
+
+		cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         Enc_BaseSpawnTimer = Enc_SpawnTimer;
         Enc_IsActive = false;
@@ -86,8 +90,11 @@ public class Encounters : MonoBehaviour {
         if ((Enc_DeadEnemies == Enc_EnemiesNum) && Enc_EnemiesNum > 0)
         {
             //Spawn SPRITE OF MOVING FOWARD.
-            Camera.current.GetComponent<CameraFollower>().Cam_CurrTarget = Enc_Victime;
-            Destroy(gameObject);
+			if (cam != null)
+			{
+				cam.GetComponent<CameraFollower>().Cam_CurrTarget = Enc_Victime;
+				Destroy(gameObject);
+			}
         }
 	}
 
