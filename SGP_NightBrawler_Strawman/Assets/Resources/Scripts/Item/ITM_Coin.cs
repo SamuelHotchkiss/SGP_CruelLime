@@ -37,6 +37,8 @@ public class ITM_Coin : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		if (GetComponent<SpriteRenderer>() != null && GameObject.Find("Reference_Point") != null)
+			GetComponent<SpriteRenderer>().sortingOrder = (int)((GameObject.Find("Reference_Point").transform.position.y - transform.position.y) * 100.0f);
 
         Timer -= Time.deltaTime;
 
