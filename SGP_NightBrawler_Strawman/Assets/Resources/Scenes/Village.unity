@@ -17090,6 +17090,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1490286528}
   - 114: {fileID: 1490286529}
+  - 114: {fileID: 1490286527}
   m_Layer: 0
   m_Name: Villiage Master
   m_TagString: Untagged
@@ -17097,6 +17098,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1490286527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490286526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ab91f40e9c71c4c9f7361627927d0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Menu_UIButtons:
+  - {fileID: 1444717346}
+  - {fileID: 972069585}
+  - {fileID: 764295972}
+  - {fileID: 770603057}
+  - {fileID: 47184524}
+  Menu_CurrButton: 0
+  Menu_JoyController: 0
+  Menu_MoveSound: {fileID: 8300000, guid: b58060e62a1b59442be32bb1127ae340, type: 3}
 --- !u!4 &1490286528
 Transform:
   m_ObjectHideFlags: 0

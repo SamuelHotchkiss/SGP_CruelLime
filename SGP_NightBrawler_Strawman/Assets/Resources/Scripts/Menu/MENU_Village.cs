@@ -59,15 +59,18 @@ public class MENU_Village : MonoBehaviour {
                 //GetComponent<SpriteRenderer>().sprite = Vll_TimeOfDay[1];
                 Vll_TimePanel.GetComponent<Image>().sprite = Vll_TimeOfDay[1];
                 Vll_SkyBox.GetComponent<Image>().sprite = Vll_SkyOfDay[1];
-                for (int i = 0; i < Vll_DayShopsID.Length; i++)
+                if (Vll_CurrCanvas == 0)
                 {
-                    OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = false;
-                    OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].GetComponentInChildren<Text>().text = "CLOSE \nFOR THE NIGHT";
-                }
-                for (int i = 0; i < Vll_NightShopID.Length; i++)
-                {
-                    OpenShops.Menu_UIButtons[Vll_NightShopID[i]].GetComponentInChildren<Text>().text = Vll_Titles[Vll_NightShopID[i]];
-                    OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = true;
+                    for (int i = 0; i < Vll_DayShopsID.Length; i++)
+                    {
+                        OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = false;
+                        OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].GetComponentInChildren<Text>().text = "CLOSE \nFOR THE NIGHT";
+                    }
+                    for (int i = 0; i < Vll_NightShopID.Length; i++)
+                    {
+                        OpenShops.Menu_UIButtons[Vll_NightShopID[i]].GetComponentInChildren<Text>().text = Vll_Titles[Vll_NightShopID[i]];
+                        OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = true;
+                    } 
                 }
                     
             }
@@ -75,19 +78,21 @@ public class MENU_Village : MonoBehaviour {
             {
                 Vll_TimePanel.GetComponent<Image>().sprite = Vll_TimeOfDay[0];
                 Vll_SkyBox.GetComponent<Image>().sprite = Vll_SkyOfDay[0];
-                for (int i = 0; i < Vll_DayShopsID.Length; i++)
+                if (Vll_CurrCanvas == 0)
                 {
-                    OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].GetComponentInChildren<Text>().text = Vll_Titles[Vll_DayShopsID[i]];
-                    OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = true;
-                }
-                    
-                for (int i = 0; i < Vll_NightShopID.Length; i++)
-                {
-                     OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = false;
-                     OpenShops.Menu_UIButtons[Vll_NightShopID[i]].GetComponentInChildren<Text>().text = "CLOSE \nFOR THE DAY";
-                }
-                   
+                    for (int i = 0; i < Vll_DayShopsID.Length; i++)
+                    {
+                        Text Test = OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].GetComponentInChildren<Text>();
+                        OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].GetComponentInChildren<Text>().text = Vll_Titles[Vll_DayShopsID[i]];
+                        OpenShops.Menu_UIButtons[Vll_DayShopsID[i]].interactable = true;
+                    }
 
+                    for (int i = 0; i < Vll_NightShopID.Length; i++)
+                    {
+                        OpenShops.Menu_UIButtons[Vll_NightShopID[i]].interactable = false;
+                        OpenShops.Menu_UIButtons[Vll_NightShopID[i]].GetComponentInChildren<Text>().text = "CLOSE \nFOR THE DAY";
+                    } 
+                }
             }
             if (Input.GetKeyDown(KeyCode.N))
                 MNGR_Game.isNight = !MNGR_Game.isNight; 
