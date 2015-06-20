@@ -13392,12 +13392,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1384410671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8a30f32612b05a4c8c055871c04fd57, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c7741d2e4ce8754da3dbfcbed948c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: ForestBossEnt
-  IsATrigger: 1
-  LodingTimer: 3
+  destination: {fileID: 0}
+  enemies: {fileID: 0}
+  horde: {fileID: 0}
+  BossLvl: ForestBossEnt
+  activateEnemies: 0
+  bossRoom: 1
 --- !u!61 &1384410674
 BoxCollider2D:
   m_ObjectHideFlags: 0

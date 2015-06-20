@@ -13,7 +13,8 @@ public class ITM_Item : MonoBehaviour
 	// Update is called once per frame
     public virtual void Update()
     {
-
+		if (GetComponent<SpriteRenderer>() != null && GameObject.Find("Reference_Point") != null)
+			GetComponent<SpriteRenderer>().sortingOrder = (int)((GameObject.Find("Reference_Point").transform.position.y - transform.position.y) * 100.0f);
 	}
 
     public virtual void OnTriggerEnter2D(Collider2D Col)
