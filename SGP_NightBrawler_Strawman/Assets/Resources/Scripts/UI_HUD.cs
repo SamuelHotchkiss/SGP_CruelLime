@@ -229,6 +229,10 @@ public class UI_HUD : MonoBehaviour
         pausePanel.gameObject.SetActive(false);
         //Input.simulateMouseWithTouches = false;
         //Time.timeScale = 1;
+
+        MNGR_Save.OverwriteCurrentSave();
+        MNGR_Save.SaveProfiles();
+
         Application.LoadLevel("MainMenu");
     }
 }
