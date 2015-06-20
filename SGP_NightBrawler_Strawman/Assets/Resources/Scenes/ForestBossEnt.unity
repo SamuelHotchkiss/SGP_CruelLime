@@ -336,7 +336,7 @@ Transform:
   - {fileID: 1005667910}
   - {fileID: 1023190843}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1 &187029876
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ Transform:
   m_Children:
   - {fileID: 260589304}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!61 &192056691
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!114 &240321825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,6 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af34c7e98ddad3e498e27552190edc62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finalLevel: 0
 --- !u!1 &260589302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,6 +1773,10 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 22477898, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
   m_IsPrefabParent: 0
@@ -1969,6 +1974,11 @@ GameObject:
 --- !u!1 &901329299 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 162438, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
+  m_PrefabInternal: {fileID: 901329264}
+--- !u!224 &901329300 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22479792, guid: 326d4ddd09f95b7409022328fa4d11e7,
+    type: 2}
   m_PrefabInternal: {fileID: 901329264}
 --- !u!1001 &912752674
 Prefab:
@@ -4040,11 +4050,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2105499735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.5100002, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -562.151123, y: -373.276886, z: -12.8494616}
+  m_LocalScale: {x: 1.2849462, y: 1.2849462, z: 1.2849462}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 901329300}
+  m_RootOrder: 0
 --- !u!1 &2128880660
 GameObject:
   m_ObjectHideFlags: 0
