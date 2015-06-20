@@ -345,13 +345,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e78af9ebfa847b44ad03142f7d4a67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinCoins: 1
-  MaxCoins: 3
+  MinCoins: 3
+  MaxCoins: 6
   xRange: 50
   yRange: 100
   Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
-  potionChance: 0
-  potions: []
+  potionChance: .100000001
+  potions:
+  - {fileID: 11420842, guid: 3c251abbfd417ca45bb3b6ad0d58075a, type: 2}
+  - {fileID: 11486726, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
+  - {fileID: 11417508, guid: e7746a755474aaa4c8a26596a35ea06c, type: 2}
+  - {fileID: 11414944, guid: 7d56183dea71bf94f921cc4225a1ec63, type: 2}
+  - {fileID: 11459908, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+  - {fileID: 11462466, guid: 0bae022e386ec06429c900f01aeeabda, type: 2}
 --- !u!212 &21237256
 SpriteRenderer:
   m_ObjectHideFlags: 1

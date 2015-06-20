@@ -83,13 +83,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e78af9ebfa847b44ad03142f7d4a67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinCoins: 1
-  MaxCoins: 3
+  MinCoins: 3
+  MaxCoins: 6
   xRange: 50
   yRange: 100
   Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
-  potionChance: 0
-  potions: []
+  potionChance: .100000001
+  potions:
+  - {fileID: 11420842, guid: 3c251abbfd417ca45bb3b6ad0d58075a, type: 2}
+  - {fileID: 11486726, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
+  - {fileID: 11417508, guid: e7746a755474aaa4c8a26596a35ea06c, type: 2}
+  - {fileID: 11414944, guid: 7d56183dea71bf94f921cc4225a1ec63, type: 2}
+  - {fileID: 11459908, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+  - {fileID: 11462466, guid: 0bae022e386ec06429c900f01aeeabda, type: 2}
 --- !u!114 &11496474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +108,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_distance: 0
+  skull: {fileID: 0}
+  Outline:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
   BlackBar:
     m_Name: 
     m_Normal:
@@ -261,6 +327,7 @@ MonoBehaviour:
   - {fileID: 11460826, guid: 486977f37d9a375499b85ac474a2e3b5, type: 2}
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 5
   buffIndex: 1
@@ -290,6 +357,7 @@ MonoBehaviour:
   projectile: {fileID: 11491308, guid: fac54effce4e8bd4a9291af4ab155c57, type: 2}
   isMelee: 1
   paused: 0
+  isBoss: 0
 --- !u!212 &21219272
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -34,10 +34,9 @@ public static class MNGR_Game
         currentLevel = "NEW GAME";
 		NextLevel = "WorldMap";
 
-        //isNight = true;
-        //hordePosition = HordeDelay = playerPosition = wallet = 0;
-        //paused = dangerZone = false;
-
+        hordePosition = HordeDelay = playerPosition = wallet = 0;
+        paused = dangerZone = false;
+        wallet = 100;
         arrowPos = 0;
 
 		theCharacters[0] = new CHAR_Swordsman();
@@ -63,7 +62,7 @@ public static class MNGR_Game
     {
         UpdatePlayer();
         UpdateHorde();
-		if (hordePosition == playerPosition)
+		if (hordePosition == arrowPos)
 			dangerZone = true;
 		else
 			dangerZone = false;
@@ -71,7 +70,7 @@ public static class MNGR_Game
 
      public static void UpdatePlayer()
     {
-        MNGR_Game.playerPosition++;
+        playerPosition++;
         arrowPos += 2;
     }
 
