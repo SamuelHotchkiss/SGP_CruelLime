@@ -168,5 +168,7 @@ public class MENU_CharacterSelection : MonoBehaviour
             MNGR_Game.NextLevel = "WorldMap";
 
         Application.LoadLevel(MNGR_Game.NextLevel);
+        //Application.LoadLevel("GameOverWin"); // Degubbin'
+        //Application.LoadLevel("GameOverLose");
     }
 }

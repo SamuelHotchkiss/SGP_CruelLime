@@ -182,6 +182,12 @@ public class UI_HUD : MonoBehaviour
 
     public void TogglePause()
     {
+		if (options)
+		{
+			ToggleOptions();
+			return;
+		}
+
         MNGR_Game.paused = !MNGR_Game.paused;
         //party.SetActive(!MNGR_Game.paused);
         if (!MNGR_Game.paused)

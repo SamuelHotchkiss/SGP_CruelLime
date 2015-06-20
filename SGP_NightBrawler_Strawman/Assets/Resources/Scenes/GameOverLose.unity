@@ -253,8 +253,10 @@ GameObject:
   - 224: {fileID: 166361753}
   - 222: {fileID: 166361755}
   - 114: {fileID: 166361754}
+  - 114: {fileID: 166361757}
+  - 114: {fileID: 166361756}
   m_Layer: 5
-  m_Name: Character_3
+  m_Name: Character_Ranged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,13 +270,13 @@ RectTransform:
   m_GameObject: {fileID: 166361752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -6.15970802, y: 6.15970802, z: 6.15970755}
+  m_LocalScale: {x: 6.15970802, y: 6.15970802, z: 6.15970755}
   m_Children: []
   m_Father: {fileID: 832785917}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -111, y: 97}
+  m_AnchoredPosition: {x: 200, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &166361754
@@ -304,6 +306,59 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 166361752}
+--- !u!114 &166361756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 166361752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bb6802e7aa7ed49b7a11872cd58ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnProj: 0
+--- !u!114 &166361757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 166361752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41efe09cb68eb4ca18b5130bcd0658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
+  party: []
+  currChar: 1
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
+  warrior_GUI: {fileID: 0}
+  ranger_GUI: {fileID: 0}
+  mage_GUI: {fileID: 0}
+  Projs: []
+  coins: 0
+  maxTmr: []
+  curTmr: 0
+  loop: 0
+  AudioHasPlay: 0
+  currentState: 0
+  nextState: 0
+  horz: 0
+  vert: 0
+  Pc_HasKnockBack: 0
+  isAlive: 0
+  leftSwitch: {fileID: 0}
+  rightSwitch: {fileID: 0}
+  healTouch: {fileID: 0}
+  powerTouch: {fileID: 0}
+  pauseTouch: {fileID: 0}
+  theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
+  DanceBitch: 0
+  DieBitch: 1
 --- !u!1 &209509383
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +392,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -250, y: 24}
+  m_AnchoredPosition: {x: -250, y: -200}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &209509385
@@ -824,8 +879,8 @@ RectTransform:
   - {fileID: 457278363}
   - {fileID: 113001903}
   - {fileID: 1322997071}
-  - {fileID: 2109325339}
   - {fileID: 166361753}
+  - {fileID: 2109325339}
   - {fileID: 222879208}
   - {fileID: 209509384}
   - {fileID: 1825193371}
@@ -888,8 +943,10 @@ GameObject:
   - 224: {fileID: 1322997071}
   - 222: {fileID: 1322997070}
   - 114: {fileID: 1322997069}
+  - 114: {fileID: 1322997073}
+  - 114: {fileID: 1322997072}
   m_Layer: 5
-  m_Name: Character_1
+  m_Name: Character_Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -936,9 +993,62 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -320, y: 97}
+  m_AnchoredPosition: {x: -200, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &1322997072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1322997068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bb6802e7aa7ed49b7a11872cd58ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnProj: 0
+--- !u!114 &1322997073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1322997068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41efe09cb68eb4ca18b5130bcd0658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
+  party: []
+  currChar: 0
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
+  warrior_GUI: {fileID: 0}
+  ranger_GUI: {fileID: 0}
+  mage_GUI: {fileID: 0}
+  Projs: []
+  coins: 0
+  maxTmr: []
+  curTmr: 0
+  loop: 0
+  AudioHasPlay: 0
+  currentState: 0
+  nextState: 0
+  horz: 0
+  vert: 0
+  Pc_HasKnockBack: 0
+  isAlive: 0
+  leftSwitch: {fileID: 0}
+  rightSwitch: {fileID: 0}
+  healTouch: {fileID: 0}
+  powerTouch: {fileID: 0}
+  pauseTouch: {fileID: 0}
+  theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
+  DanceBitch: 0
+  DieBitch: 1
 --- !u!1 &1634886144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,7 +1170,7 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 250, y: 24}
+  m_AnchoredPosition: {x: 250, y: -200}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1825193372
@@ -1153,8 +1263,10 @@ GameObject:
   - 224: {fileID: 2109325339}
   - 222: {fileID: 2109325341}
   - 114: {fileID: 2109325340}
+  - 114: {fileID: 2109325343}
+  - 114: {fileID: 2109325342}
   m_Layer: 5
-  m_Name: Character_2
+  m_Name: Character_Magic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1168,13 +1280,13 @@ RectTransform:
   m_GameObject: {fileID: 2109325338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -6.15970802, y: 6.15970802, z: 6.15970755}
+  m_LocalScale: {x: 6.15970802, y: 6.15970802, z: 6.15970755}
   m_Children: []
   m_Father: {fileID: 832785917}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 243, y: 97}
+  m_AnchoredPosition: {x: 500, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2109325340
@@ -1204,3 +1316,56 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2109325338}
+--- !u!114 &2109325342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2109325338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bb6802e7aa7ed49b7a11872cd58ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnProj: 0
+--- !u!114 &2109325343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2109325338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41efe09cb68eb4ca18b5130bcd0658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffState: 1
+  myBuffs: []
+  party: []
+  currChar: 2
+  Ply_HurtSounds: []
+  Ply_DyingSounds: []
+  warrior_GUI: {fileID: 0}
+  ranger_GUI: {fileID: 0}
+  mage_GUI: {fileID: 0}
+  Projs: []
+  coins: 0
+  maxTmr: []
+  curTmr: 0
+  loop: 0
+  AudioHasPlay: 0
+  currentState: 0
+  nextState: 0
+  horz: 0
+  vert: 0
+  Pc_HasKnockBack: 0
+  isAlive: 0
+  leftSwitch: {fileID: 0}
+  rightSwitch: {fileID: 0}
+  healTouch: {fileID: 0}
+  powerTouch: {fileID: 0}
+  pauseTouch: {fileID: 0}
+  theCanvas: {fileID: 0}
+  theHorde: {fileID: 0}
+  DanceBitch: 0
+  DieBitch: 1

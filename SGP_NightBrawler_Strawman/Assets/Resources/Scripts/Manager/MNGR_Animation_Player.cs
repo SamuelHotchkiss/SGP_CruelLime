@@ -60,21 +60,28 @@ public class MNGR_Animation_Player : MonoBehaviour
         // change this script's character if the party changes its character, but don't waste the time otherwise.
         if (GetComponent<PlayerController>() != null)
         {
-            Debug.Log(GetComponent<PlayerController>().currChar);
+            //Debug.Log(GetComponent<PlayerController>().currChar);
             if (currentCharacter != GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar])
             {
                 currentCharacter = GetComponent<PlayerController>().party[GetComponent<PlayerController>().currChar];
                 sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
             }
         }
-        else
+        else if (GetComponent<MENU_ButtonGraphic>() != null)
         {
             if (currentCharacter != GetComponent<MENU_ButtonGraphic>().party[GetComponent<MENU_ButtonGraphic>().currChar])
             {
                 currentCharacter = GetComponent<MENU_ButtonGraphic>().party[GetComponent<MENU_ButtonGraphic>().currChar];
                 sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
             }
-
+        }
+        else if (GetComponent<MENU_CharacterGraphic>() != null)
+        {
+            if (currentCharacter != GetComponent<MENU_CharacterGraphic>().party[GetComponent<MENU_CharacterGraphic>().currChar])
+            {
+                currentCharacter = GetComponent<MENU_CharacterGraphic>().party[GetComponent<MENU_CharacterGraphic>().currChar];
+                sprites = Resources.LoadAll<Sprite>(filepaths[currentCharacter.characterIndex]);
+            }
         }
 
         // S: Should prevent this from running if player is dead
@@ -86,10 +93,12 @@ public class MNGR_Animation_Player : MonoBehaviour
             ChangeState(currentCharacter.state);
 
         // rotate based upon facing bool
+        Vector3 newscale = transform.localScale;
         if (currentCharacter.Act_facingRight)
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            newscale.x = Mathf.Abs(newscale.x);
         else
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            newscale.x = -Mathf.Abs(newscale.x);
+        transform.localScale = newscale;
 
         // animate based upon state.  mostly the same code, but has to be unique for each animation
         switch (curState)

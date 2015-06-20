@@ -46,7 +46,7 @@ public class PROJ_DefenderWallMaster : PROJ_Base
     }
 	
 	// Update is called once per frame
-	void Update ()
+	public override void Update ()
     {
         //TmrTot -= Time.deltaTime;
         TmrSpawn -= Time.deltaTime;
