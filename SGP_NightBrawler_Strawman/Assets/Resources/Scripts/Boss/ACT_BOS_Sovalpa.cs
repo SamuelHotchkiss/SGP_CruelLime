@@ -165,7 +165,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
             {
                 if (target.transform.position == transform.position)
                 {
-                    Sov_myBehaviours[2].GetComponent<BHR_Divider>().ModDivide(4, 1, 1, 1, STATES.WALKING);
+                    Sov_myBehaviours[2].GetComponent<BHR_Divider>().ModDivide(4, 2, 2, 2, STATES.WALKING);
                     projectile = Sov_Attacks[0];
                     Sov_CallOnClones = false;
                     target = GameObject.FindGameObjectWithTag("Player");
@@ -321,30 +321,31 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
     {
         if (numGeneration == 2)
         {
-            for (; ; )
-            {
-                int NewAttack = Random.Range(0, 3);
-                if (projectile.name != Sov_Attacks[NewAttack].name)
-                {
-                    projectile = Sov_Attacks[NewAttack];
-                    break;
-                }
-            }
+           // for (; ; )
+           // {
+           //     int NewAttack = Random.Range(0, 3);
+           //     if (projectile.name != Sov_Attacks[NewAttack].name)
+           //     {
+           //         projectile = Sov_Attacks[NewAttack];
+           //         break;
+           //     }
+           // }
 
-            if (!projectile.name.Contains("Melee"))
-            {
-                for (; ; )
-                {
-                    int RandWaypoint = Random.Range(0, 2);
-                    if (Sov_WayPoints[RandWaypoint] != null)
-                    {
-                        target = Sov_WayPoints[RandWaypoint];
-                        break;
-                    }
-                }
-            }
-            else
-                target = GameObject.FindGameObjectWithTag("Player"); 
+           // if (!projectile.name.Contains("Melee"))
+           // {
+           //     for (; ; )
+           //     {
+           //         int RandWaypoint = Random.Range(0, 2);
+           //         if (Sov_WayPoints[RandWaypoint] != null)
+           //         {
+           //             target = Sov_WayPoints[RandWaypoint];
+           //             break;
+           //         }
+           //     }
+           // }
+           //// else
+            projectile = Sov_Attacks[0];
+            target = GameObject.FindGameObjectWithTag("Player"); 
         }
         else
         {
