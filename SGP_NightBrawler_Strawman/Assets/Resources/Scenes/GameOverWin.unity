@@ -190,6 +190,7 @@ MonoBehaviour:
   theCanvas: {fileID: 0}
   theHorde: {fileID: 0}
   DanceBitch: 1
+  DieBitch: 0
 --- !u!114 &17788000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,10 +266,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1200}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -839,6 +840,7 @@ MonoBehaviour:
   theCanvas: {fileID: 0}
   theHorde: {fileID: 0}
   DanceBitch: 1
+  DieBitch: 0
 --- !u!1 &1059221421
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,7 +866,7 @@ RectTransform:
   m_GameObject: {fileID: 1059221421}
   m_LocalRotation: {x: 0, y: 0, z: -.707106829, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -6.15970802, y: 28.4871998, z: 6.15970755}
+  m_LocalScale: {x: -12, y: 25, z: 6.15970755}
   m_Children: []
   m_Father: {fileID: 1169538805}
   m_RootOrder: 5
@@ -1227,6 +1229,7 @@ MonoBehaviour:
   theCanvas: {fileID: 0}
   theHorde: {fileID: 0}
   DanceBitch: 1
+  DieBitch: 0
 --- !u!1 &1726365345
 GameObject:
   m_ObjectHideFlags: 0
