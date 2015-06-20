@@ -8,10 +8,8 @@ public class MOD_CDDecrease : MOD_Base
 	public override void Start () {
 
         buffState = MNGR_Item.BuffStates.BUFFED;
+        Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/Cooldown") as GameObject, transform.position, Quaternion.identity) as GameObject;
         base.Start();
-        Mod_EffectColor = Color.yellow;
-        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
-        
         Mod_PartyWide = true;
         Mod_ModIndexNum = 0;            //The Number ID of the Effect 
         Mod_effectTimer = 30.0f;

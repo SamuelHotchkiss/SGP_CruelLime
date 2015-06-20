@@ -11,15 +11,15 @@ public class MOD_DMGProtection : MOD_Base
         //myColor = Color.blue;
 
         buffState = MNGR_Item.BuffStates.BUFFED;
+        Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/Defence") as GameObject, transform.position, Quaternion.identity) as GameObject;
         base.Start();
-        Mod_EffectColor = Color.blue;
-        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 30.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;
         Mod_ModIndexNum = 2;
         Mod_OnceOnly = false;
     }
+
 
     // Update is called once per frame
     public override void Update()

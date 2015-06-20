@@ -151,7 +151,7 @@ public class MENU_Upgrade : MonoBehaviour {
         CalculateUpgradeCost(_CharIndex, UpgType.PowerUpg);
         if (MNGR_Game.wallet >= Upg_PowerCost && MNGR_Game.currentParty[_CharIndex].Act_PowerLevel < Upg_MaxLevel)
         {
-            MNGR_Game.currentParty[_CharIndex].Act_basePower += 4 - _CharIndex; //Fighters increse faster
+            MNGR_Game.currentParty[_CharIndex].Act_basePower += 3; //Fighters increse faster
             MNGR_Game.currentParty[_CharIndex].RestoreToBasePower();
             MNGR_Game.currentParty[_CharIndex].Act_PowerLevel++;
 
@@ -184,13 +184,13 @@ public class MENU_Upgrade : MonoBehaviour {
         switch (_UpgType)
         {
             case UpgType.HpUpg:
-                Upg_HPCost = (MNGR_Game.currentParty[_CharIndex].Act_HPLevel * 10) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 4;
+                Upg_HPCost = (MNGR_Game.currentParty[_CharIndex].Act_HPLevel * 10) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 5;
                 return Upg_HPCost;
             case UpgType.PowerUpg:
-                Upg_PowerCost = (MNGR_Game.currentParty[_CharIndex].Act_PowerLevel * 20) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 4;
+                Upg_PowerCost = (MNGR_Game.currentParty[_CharIndex].Act_PowerLevel * 20) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 5;
                 return Upg_PowerCost;
             case UpgType.SpeedUpg:
-                Upg_SpeedCost = (MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel * 15) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 4;
+                Upg_SpeedCost = (MNGR_Game.currentParty[_CharIndex].Act_SpeedLevel * 15) * MNGR_Game.currentParty[_CharIndex].CalcAverageLvl() / 5;
                 return Upg_SpeedCost;
         }
 

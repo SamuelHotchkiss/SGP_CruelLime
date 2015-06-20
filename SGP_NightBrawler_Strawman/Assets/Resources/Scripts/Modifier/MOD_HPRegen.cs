@@ -10,9 +10,8 @@ public class MOD_HPRegen : MOD_Base
         //myColor = Color.yellow;
 
         buffState = MNGR_Item.BuffStates.BUFFED;
+        Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/Heal") as GameObject, transform.position, Quaternion.identity) as GameObject;
         base.Start();
-        Mod_EffectColor = new Color(255, 105, 0);
-        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 10.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;
@@ -31,18 +30,18 @@ public class MOD_HPRegen : MOD_Base
 
     public override void ModifyActor()
     {
-        if (MHPR_Timer <= 0)
-        {
+        //if (MHPR_Timer <= 0)
+        //{
             for (int i = 0; i < player.party.Length; i++)
             {
-                float OnePercentHP = player.party[i].Act_baseHP * 0.01f;     //Regen 2% of the Character's Hp every second.
-                if (OnePercentHP < 1.0f)
-                    OnePercentHP = 1.0f;
+                float OnePercentHP = player.party[i].Act_baseHP * (Time.deltaTime / 20f);     
+                //if (OnePercentHP < 1.0f)
+                //    OnePercentHP = 1.0f;
                 if(player.party[i].Act_currHP > 0)
                     player.party[i].ChangeHP(OnePercentHP);
             }
-            MHPR_Timer = 0.5f;
-        }
+            //MHPR_Timer = 0.5f;
+        //}
     }
 
     public override void EndModifyActor()

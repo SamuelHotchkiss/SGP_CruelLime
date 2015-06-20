@@ -9,9 +9,8 @@ public class MOD_DMGIncrease : MOD_Base
         //myColor = Color.red;
 
         buffState = MNGR_Item.BuffStates.BUFFED;
+        Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/DamageUp") as GameObject, transform.position, new Quaternion(270, 0, 0, 0)) as GameObject;
         base.Start();
-        Mod_EffectColor = Color.magenta;
-        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 20.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;

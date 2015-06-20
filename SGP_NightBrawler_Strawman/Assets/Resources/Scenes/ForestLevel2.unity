@@ -306,12 +306,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1204538984}
   m_RootOrder: 3
---- !u!114 &24901842 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11473834, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 2109663825, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &28281133
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,12 +614,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 412498, guid: 68854a62e90541745841094710715886, type: 2}
   m_PrefabInternal: {fileID: 49914054}
---- !u!114 &51160781 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11438318, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &52193223
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,9 +819,9 @@ MonoBehaviour:
   destination: {fileID: 0}
   enemies: {fileID: 0}
   horde: {fileID: 0}
-  BossLvl: ForestBossTrollgre
+  BossLvl: 
   activateEnemies: 0
-  bossRoom: 1
+  bossRoom: 0
 --- !u!61 &57296419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1055,12 +1043,6 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 089c617bfba7d4144b9aae2aa3dee0eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &69345949 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11413960, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 2109663825, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &96539325
 Prefab:
   m_ObjectHideFlags: 0
@@ -2046,12 +2028,6 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8304c57aa9264834ea1e83f0f945a0a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &189678747 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11443830, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &190064397
 Prefab:
   m_ObjectHideFlags: 0
@@ -2146,12 +2122,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 449874, guid: 57b2380a5ef82064c880b0e4ffe4cc83, type: 2}
   m_PrefabInternal: {fileID: 190064397}
---- !u!114 &193364284 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11406580, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &194716310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,7 +2515,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 486950, guid: 929a6718f848413428b601ea181af2ea, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 929a6718f848413428b601ea181af2ea, type: 2}
@@ -2878,12 +2848,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 449874, guid: 57b2380a5ef82064c880b0e4ffe4cc83, type: 2}
   m_PrefabInternal: {fileID: 250748708}
---- !u!114 &271088551 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11478652, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &273857933
 Prefab:
   m_ObjectHideFlags: 0
@@ -3441,9 +3405,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 24820786}
   enemies: {fileID: 0}
-  horde: {fileID: 1283546170}
+  horde: {fileID: 0}
   BossLvl: 
-  activateEnemies: 1
+  activateEnemies: 0
   bossRoom: 0
 --- !u!61 &376801949
 BoxCollider2D:
@@ -4521,12 +4485,6 @@ SpriteRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 138072, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
   m_PrefabInternal: {fileID: 847280437}
---- !u!114 &531027876 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11402682, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &532774580
 Prefab:
   m_ObjectHideFlags: 0
@@ -4793,7 +4751,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1001 &544068425
 Prefab:
   m_ObjectHideFlags: 0
@@ -5516,7 +5474,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 433000, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 11435728, guid: fd496ce7decac5c40a7b58da9f1365ce, type: 2}
       propertyPath: theCanvas
@@ -6200,7 +6158,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455106, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
       propertyPath: warrior_GUI
@@ -6475,7 +6433,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &697683297
 GameObject:
   m_ObjectHideFlags: 0
@@ -7936,7 +7894,7 @@ Transform:
   - {fileID: 1627302766}
   - {fileID: 1415990894}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &838242369
 GameObject:
   m_ObjectHideFlags: 0
@@ -8078,7 +8036,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22480278, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 22480278, guid: 326d4ddd09f95b7409022328fa4d11e7, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -11045,16 +11003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ab91f40e9c71c4c9f7361627927d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Menu_UIButtons:
-  - {fileID: 1908297804}
-  - {fileID: 1933409777}
-  - {fileID: 189678747}
-  - {fileID: 271088551}
-  - {fileID: 1676621510}
-  - {fileID: 531027876}
+  Menu_UIButtons: []
   Menu_CurrButton: 0
   Menu_JoyController: 0
-  Menu_MoveSound: {fileID: 8300000, guid: b58060e62a1b59442be32bb1127ae340, type: 3}
+  Menu_MoveSound: {fileID: 0}
 --- !u!114 &1157684938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11066,14 +11018,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a7364d61f5f4d48868a46388cca203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Menu_SelectedSound: {fileID: 8300000, guid: 42da1cc381d4eee4ba3bf1e8b4da2d8d, type: 3}
-  sfxSlider: {fileID: 193364284}
-  musicSlider: {fileID: 51160781}
-  fullscreenToggle: {fileID: 69345949}
-  blindToggle: {fileID: 24901842}
-  sfxButton: {fileID: 1908297804}
-  musicButton: {fileID: 189678747}
-  screenButton: {fileID: 1676621510}
+  Menu_SelectedSound: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
+  blindToggle: {fileID: 0}
+  sfxButton: {fileID: 0}
+  musicButton: {fileID: 0}
+  screenButton: {fileID: 0}
 --- !u!4 &1157684939
 Transform:
   m_ObjectHideFlags: 0
@@ -11600,7 +11552,7 @@ Transform:
   - {fileID: 24820787}
   - {fileID: 1961770744}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
 --- !u!1 &1205622911
 GameObject:
   m_ObjectHideFlags: 0
@@ -11813,6 +11765,48 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 089c617bfba7d4144b9aae2aa3dee0eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &1228708305
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4.37590599
+      objectReference: {fileID: 0}
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.38689148
+      objectReference: {fileID: 0}
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 471886, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1619fa185b2eb29468d703c303316561, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1229023737
 GameObject:
   m_ObjectHideFlags: 0
@@ -12084,12 +12078,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  projectile: {fileID: 11421210, guid: 9d49ccf7dfb4c8a489dce9c80414d24f, type: 2}
-  travelSpeed: 1
-  arrowSpeed: 3
-  fireRate: 3
+  projectile: {fileID: 0}
+  travelSpeed: 0
+  arrowSpeed: 0
+  fireRate: 0
   timer: 0
-  offset: 10
+  offset: 0
   distanceToPlayer: 0
   OGLoc: {x: 0, y: 0, z: 0}
 --- !u!1001 &1250372150
@@ -12513,12 +12507,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  projectile: {fileID: 11421210, guid: 9d49ccf7dfb4c8a489dce9c80414d24f, type: 2}
-  travelSpeed: 1
-  arrowSpeed: 3
-  fireRate: 3
+  projectile: {fileID: 0}
+  travelSpeed: 0
+  arrowSpeed: 0
+  fireRate: 0
   timer: 0
-  offset: 10
+  offset: 0
   distanceToPlayer: 0
   OGLoc: {x: 0, y: 0, z: 0}
 --- !u!1001 &1286528033
@@ -13083,9 +13077,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 594020405}
   enemies: {fileID: 0}
-  horde: {fileID: 1247187657}
+  horde: {fileID: 0}
   BossLvl: 
-  activateEnemies: 1
+  activateEnemies: 0
   bossRoom: 0
 --- !u!61 &1339841116
 BoxCollider2D:
@@ -13370,7 +13364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1371408003
 GameObject:
   m_ObjectHideFlags: 0
@@ -14901,7 +14895,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472304, guid: ad4107da2f2fadb429515161c1a4c323, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 103318, guid: ad4107da2f2fadb429515161c1a4c323, type: 2}
       propertyPath: m_TagString
@@ -15948,12 +15942,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  projectile: {fileID: 11421210, guid: 9d49ccf7dfb4c8a489dce9c80414d24f, type: 2}
-  travelSpeed: 1
-  arrowSpeed: 3
-  fireRate: 3
+  projectile: {fileID: 0}
+  travelSpeed: 0
+  arrowSpeed: 0
+  fireRate: 0
   timer: 0
-  offset: 10
+  offset: 0
   distanceToPlayer: 0
   OGLoc: {x: 0, y: 0, z: 0}
 --- !u!1 &1629007296
@@ -16612,7 +16606,7 @@ Transform:
   - {fileID: 594020406}
   - {fileID: 241461174}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!1001 &1663796029
 Prefab:
   m_ObjectHideFlags: 0
@@ -16681,12 +16675,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 847280437}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!114 &1676621510 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11433802, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1678756632
 Prefab:
   m_ObjectHideFlags: 0
@@ -19030,12 +19018,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 417230, guid: ff069fe4d6bee6a4da72d47a7be67fad, type: 2}
   m_PrefabInternal: {fileID: 1904439552}
---- !u!114 &1908297804 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11451552, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1913038739
 GameObject:
   m_ObjectHideFlags: 0
@@ -19562,12 +19544,6 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 089c617bfba7d4144b9aae2aa3dee0eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &1933409777 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11454130, guid: 326d4ddd09f95b7409022328fa4d11e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 847280437}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!114 &1935474101 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11499886, guid: 326d4ddd09f95b7409022328fa4d11e7,
@@ -21351,4 +21327,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1

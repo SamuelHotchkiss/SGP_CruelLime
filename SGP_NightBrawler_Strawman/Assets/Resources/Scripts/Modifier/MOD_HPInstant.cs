@@ -8,9 +8,8 @@ public class MOD_HPInstant : MOD_Base
     public override void Start()
     {
         buffState = MNGR_Item.BuffStates.BUFFED;
+        Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/Heal") as GameObject, transform.position, Quaternion.identity) as GameObject;
         base.Start();
-        Mod_EffectColor = Color.red;
-        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = false;      //This Effect wil affect the whole party
         Mod_effectTimer = 0.01f;
         Mod_BaseEffectTimer = Mod_effectTimer;

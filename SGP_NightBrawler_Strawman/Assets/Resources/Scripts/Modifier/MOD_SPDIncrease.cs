@@ -10,9 +10,8 @@ public class MOD_SPDIncrease : MOD_Base {
         //myColor = Color.cyan;
 
         buffState = MNGR_Item.BuffStates.BUFFED;
+        Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/SpeedUp") as GameObject, transform.position, Quaternion.identity) as GameObject;
         base.Start();
-        Mod_EffectColor = Color.cyan;
-        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = true;       //This Effect wil affect the whole party
         Mod_effectTimer = 30.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;

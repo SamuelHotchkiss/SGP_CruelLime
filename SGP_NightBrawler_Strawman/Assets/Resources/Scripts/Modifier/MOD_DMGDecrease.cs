@@ -10,9 +10,8 @@ public class MOD_DMGDecrease : MOD_Base
         //myColor = Color.magenta;
 
         buffState = MNGR_Item.BuffStates.DEBUFFED;
+        Mod_Particles = Instantiate(Resources.Load("Prefabs/Item/DamageDown") as GameObject, transform.position, Quaternion.identity) as GameObject;
         base.Start();
-        Mod_EffectColor = Color.green;
-        Mod_Particles.GetComponent<ParticleSystem>().startColor = Mod_EffectColor;
         Mod_PartyWide = false;       //This Effect wil affect the whole party
         Mod_effectTimer = 20.0f;
         Mod_BaseEffectTimer = Mod_effectTimer;
