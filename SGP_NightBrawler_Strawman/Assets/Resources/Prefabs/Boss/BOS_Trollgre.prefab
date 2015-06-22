@@ -12,6 +12,7 @@ GameObject:
   - 212: {fileID: 21203660}
   - 50: {fileID: 5042432}
   - 61: {fileID: 6170664}
+  - 114: {fileID: 11401830}
   m_Layer: 9
   m_Name: BOS_Trollgre
   m_TagString: Enemy
@@ -59,6 +60,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 5.73999977, y: 1.5}
+--- !u!114 &11401830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites: []
 --- !u!114 &11452770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,6 +266,7 @@ MonoBehaviour:
   buffState: 1
   myBuffs: []
   Act_ID: 0
+  Act_Name: TrollgreWarrior
   Act_baseHP: 375
   Act_basePower: 15
   Act_baseSpeed: 2
@@ -264,8 +278,13 @@ MonoBehaviour:
   Act_ModIsBuff: 0
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
+  Act_IsBoss: 1
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .75
   Act_currAttackSpeed: .75
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 1
   state: 0
@@ -283,6 +302,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -346,8 +366,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2169c581792d34e4a96c16e174b1962c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e3de52f2730d94b458706d54164e7e8d, type: 3}
+  m_Color: {r: .46274513, g: .46274513, b: .46274513, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

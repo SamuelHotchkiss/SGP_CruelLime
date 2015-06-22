@@ -9,7 +9,7 @@ public class ACT_BOS_Trollgre : ACT_Enemy {
 
     public BHR_Base[] Tro_myBehaviours;
     ///Behaviors
-    //[0] Diviver
+    //[0] Diviver // Holy Diviver!
     //[1] Dodger
     ///Behaviors
 
@@ -287,12 +287,14 @@ public class ACT_BOS_Trollgre : ACT_Enemy {
                 isMelee = false;
                 projectile = Tro_AllProjectiles[2];
                 Debug.Log("Less Then 33%");
+                GetComponent<MNGR_Animation_Enemy>().sprites = Resources.LoadAll<Sprite>("Sprites/Boss/TrollgreMage");
             }
             else if (Act_currHP >= (int)(Act_baseHP * 0.33f) && Act_currHP <= (int)(Act_baseHP * 0.66f))
             {
                 isMelee = false;
                 projectile = Tro_AllProjectiles[1];
                 Debug.Log("Less Then 66%");
+                GetComponent<MNGR_Animation_Enemy>().sprites = Resources.LoadAll<Sprite>("Sprites/Boss/TrollgreArcher");
             }
 
         }

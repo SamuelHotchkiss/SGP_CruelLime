@@ -7,7 +7,7 @@ public class MNGR_Animation_Enemy : MonoBehaviour
     // Mixin' up a big ol' batch of copy pasta
 
     string[] filepaths;
-    Sprite[] sprites;
+    public Sprite[] sprites;
     ACT_Enemy currentCharacter;
     //ACT_Enemy.STATES lastState;
     ACT_Enemy.STATES curState;
@@ -105,6 +105,14 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 hurtSprites = new int[] { 0 };
                 deadSprites = new int[] { 0, 0 };
                 break;*/
+            case 5: // Trollgre not animate good =(
+                idleSprites = new int[] { 0, 0, 0 };
+                walkSprites = new int[] { 0, 0, 1, 1, 0 };
+                attack1Sprites = new int[] { 3, 4, 5 };
+                specialSprites = new int[] { 5 };
+                hurtSprites = new int[] { 2 };
+                deadSprites = new int[] { 2, 2 };
+                break;
             default:
                 idleSprites = new int[] { 0, 1, 2 };
                 walkSprites = new int[] { 5, 6, 7, 8, 9 };
