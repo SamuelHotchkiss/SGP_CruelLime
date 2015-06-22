@@ -11,6 +11,7 @@ public class Encounters : MonoBehaviour {
     public float Enc_SpawnTimer;
     public float Enc_AreaLenght;
 
+
     public GameObject[] Enc_Bounds;
     public GameObject[] Enc_SpawnEnemies;
 
