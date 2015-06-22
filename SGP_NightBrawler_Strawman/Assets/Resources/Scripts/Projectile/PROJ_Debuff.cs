@@ -20,6 +20,10 @@ public class PROJ_Debuff : PROJ_Base
         if (collision.gameObject.tag == "Enemy") //|| collision.gameObject.tag == "Obstacle"
         {
             ACT_Enemy enemy = collision.gameObject.GetComponent<ACT_Enemy>();
+
+            if (enemy.Act_currHP <= 0)
+                return;
+
             enemy.ChangeHP(-power);
 
             bool existing = false;

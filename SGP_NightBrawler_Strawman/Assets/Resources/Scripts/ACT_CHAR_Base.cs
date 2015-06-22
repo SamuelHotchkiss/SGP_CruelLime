@@ -213,7 +213,7 @@ public class ACT_CHAR_Base : ACT_Base
                 invulTmr = StateTmrs[(int)STATES.HURT] + invulMaxTmr;
             }
 
-            if (Act_currHP < 0)
+            if (Act_currHP < 1)
             {
                 state = STATES.DYING;
                 Act_currHP = 0;

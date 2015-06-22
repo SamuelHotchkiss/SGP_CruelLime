@@ -171,7 +171,7 @@ public class ACT_Enemy : MonoBehaviour
              
 		if (Act_currHP > Act_baseHP)
 			Act_currHP = Act_baseHP;
-        if (Act_currHP <= 0)
+        if (Act_currHP < 1)
         {
             Act_currHP = 0;
             KillBuffs();
@@ -679,6 +679,10 @@ public class ACT_Enemy : MonoBehaviour
 
 	public void OnGUI()
 	{
+		if (MNGR_Game.paused)
+			return;
+
+
 		if (cam != null && !isBoss)
 		{
 			Vector2 targetPos;

@@ -16,6 +16,9 @@ public class PROJ_Kunai : PROJ_Base {
 		if (collision.gameObject.tag == "Enemy"
 			|| collision.gameObject.tag == "Obstacle")
 		{
+            if (collision.gameObject.GetComponent<ACT_Enemy>().Act_currHP <= 0)
+                return;
+
 			if (collision.gameObject.GetComponent<ACT_Enemy>().Act_facingRight == right || (GameObject.FindGameObjectWithTag("Decoy") && player.party[player.currChar].hasSpecial))
 			{
 				collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power * 4);

@@ -65,12 +65,16 @@ public class ITM_Coin : MonoBehaviour {
         }
     }
 
-	void OnTriggerStay2D(Collider2D col)
+	//void OnTriggerStay2D(Collider2D col)
+	void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.tag == "Player" && transform.position.y < ParentObjectPos.y)
+        if (col.gameObject.tag == "Player")// && transform.position.y < ParentObjectPos.y)
         {
 			AudioSource.PlayClipAtPoint(Coin_PickUp, new Vector3(0, 0, 0), 1.0f);
 			MNGR_Game.wallet += Coin_Amount;
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().gravityScale = 0.0f;
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * Random.Range(300, 400));
         }
     }
