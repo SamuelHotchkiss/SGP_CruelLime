@@ -24,7 +24,7 @@ public class OBS_Pitfall : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D _col)
     {
-        if (Fall != null)
+        if (Fall != null && _col.tag != "Obstacle")
         {
             AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         }

@@ -249,9 +249,11 @@ public class ACT_Enemy : MonoBehaviour
         if (Act_IsIntelligent)
         {
             Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-            vel *= 0.9f;
+            vel *= 0.5f;
             GetComponent<Rigidbody2D>().velocity = vel;
         }
+        else
+            KillBuffs();
 
         if (GetComponent<MOD_Stunned>() != null)
             return; //GTFO
