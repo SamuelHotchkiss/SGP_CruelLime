@@ -331,6 +331,10 @@ public class ACT_BOS_Miner : ACT_Enemy
 					explosion.GetComponent<PROJ_Explosion>().power = 200;
 
 					Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+					if (GetComponent<ITM_DropLoot>())
+					{
+						GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+					}
 					Destroy(gameObject);
 
 					break;
