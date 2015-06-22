@@ -192,12 +192,12 @@ public class UI_HUD : MonoBehaviour
         //party.SetActive(!MNGR_Game.paused);
         if (!MNGR_Game.paused)
         {
-            //Time.timeScale = 0;
+            Time.timeScale = 1.0f;
             Input.simulateMouseWithTouches = false;
         }
         else
         {
-            //Time.timeScale = 1.0f;
+            Time.timeScale = 0;
             Input.simulateMouseWithTouches = true;
         }
 

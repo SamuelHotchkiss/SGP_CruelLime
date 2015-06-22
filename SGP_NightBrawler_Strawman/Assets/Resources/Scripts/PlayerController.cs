@@ -303,10 +303,10 @@ public class PlayerController : MonoBehaviour
         //{
         //    MNGR_Game.isNight = !MNGR_Game.isNight;
         //}
-        //else if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    party[currChar].BecomeSpecial();
-        //}
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            party[currChar].BecomeSpecial();
+        }
         // modify velocity only if we aren't in special state (for custom special movement)
 
         // always calls unless current character is dead.
