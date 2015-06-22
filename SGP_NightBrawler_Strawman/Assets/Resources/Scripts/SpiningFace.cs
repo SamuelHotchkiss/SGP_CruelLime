@@ -28,9 +28,6 @@ public class SpiningFace : MonoBehaviour {
         Snp_Backwards = false;
         int NewFace = Random.Range(0, Spn_Faces.Length);
         GetComponent<SpriteRenderer>().sprite = Spn_Faces[NewFace];
-
-        MNGR_Save.OverwriteCurrentSave();
-        MNGR_Save.SaveProfiles();
 	}
 	
 	// Update is called once per frame

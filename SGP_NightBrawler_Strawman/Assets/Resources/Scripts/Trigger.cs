@@ -28,6 +28,9 @@ public class Trigger : MonoBehaviour {
 		{
             MNGR_Game.UpdateWorld();
 			MNGR_Game.NextLevel = "WorldMap";
+
+            MNGR_Save.OverwriteCurrentSave();
+
             Application.LoadLevel("TransitionScene");
 		}
 	}
