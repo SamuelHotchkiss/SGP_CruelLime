@@ -238,6 +238,6 @@ public class UI_HUD : MonoBehaviour
 
         MNGR_Save.saveFiles[MNGR_Save.currSave].AssignGameManager();
 
-        Application.LoadLevel("MainMenu");
+        Application.LoadLevel("WorldMap");
     }
 }
