@@ -114,6 +114,10 @@ public class ACT_BOS_Ent : ACT_Enemy
                 Knck_Cooldown = 0.0f;
                 break;
             case STATES.DEAD:
+				if (GetComponent<ITM_DropLoot>())
+				{
+					GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+				}
                 Destroy(gameObject);
                 break;
         }

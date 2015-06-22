@@ -169,7 +169,7 @@ public class MENU_World : MonoBehaviour
     public void Return()
     {
         MNGR_Save.OverwriteCurrentSave();
-        MNGR_Save.SaveProfiles();
+        //MNGR_Save.SaveProfiles();     // S: redundant as overwrite already calls this
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         StartCoroutine(WaitForSound("MainMenu"));

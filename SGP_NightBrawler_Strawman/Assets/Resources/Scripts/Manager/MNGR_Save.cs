@@ -81,6 +81,7 @@ public static class MNGR_Save
     public static void OverwriteCurrentSave()
     {
         saveFiles[currSave].CopyGameManager();
+        MNGR_Save.SaveProfiles();
     }
 
     // Only assigns the GameManager from currently loaded save

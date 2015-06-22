@@ -46,10 +46,10 @@ public class UI_HUD : MonoBehaviour
 
         Cursor.visible = true;
 
-        if (MNGR_Options.colorblind)
-        {
-            fighterCooldown.sprite = mageCooldown.sprite = rangerCooldown.sprite = Resources.Load<Sprite>("Sprites/GUI/Cooldown_GUI_blind");
-        }
+		//if (MNGR_Options.colorblind)
+		//{
+		//	fighterCooldown.sprite = mageCooldown.sprite = rangerCooldown.sprite = Resources.Load<Sprite>("Sprites/GUI/Cooldown_GUI_blind");
+		//}
 
         fighter = party.GetComponent<PlayerController>().party[0];
         ranger = party.GetComponent<PlayerController>().party[1];
@@ -236,9 +236,8 @@ public class UI_HUD : MonoBehaviour
         //Input.simulateMouseWithTouches = false;
         Time.timeScale = 1.0f;
 
-        MNGR_Save.OverwriteCurrentSave();
-        MNGR_Save.SaveProfiles();
+        MNGR_Save.saveFiles[MNGR_Save.currSave].AssignGameManager();
 
-        Application.LoadLevel("MainMenu");
+        Application.LoadLevel("WorldMap");
     }
 }

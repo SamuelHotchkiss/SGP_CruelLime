@@ -71,6 +71,10 @@ public class ACT_BOS_Dwagon : ACT_Enemy
 
 		if (Act_currHP <= 0.0f)
 		{
+			if (GetComponent<ITM_DropLoot>())
+			{
+				GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+			}
 			Destroy(GameObject.Find("Tower").gameObject);
 			Destroy(gameObject);
 		}

@@ -214,6 +214,10 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                 }
             case STATES.DEAD:
                 {
+					if (GetComponent<ITM_DropLoot>())
+					{
+						GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+					}
                     Destroy(gameObject);
                     break;
                 }
