@@ -3,9 +3,9 @@ using System.Collections;
 
 public class OBS_Pitfall : MonoBehaviour 
 {
-
     public GameObject dest;
     public AudioClip Fall;
+    public Camera Main_Camara;
     public int type = 0;
     public float orgMag;
 
