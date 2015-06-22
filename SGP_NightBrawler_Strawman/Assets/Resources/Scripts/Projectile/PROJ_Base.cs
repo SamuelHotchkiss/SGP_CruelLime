@@ -105,6 +105,9 @@ public class PROJ_Base : MonoBehaviour
         if (collision.gameObject.tag == "Enemy"
             || collision.gameObject.tag == "Obstacle")
         {
+            if (collision.gameObject.GetComponent<ACT_Enemy>().Act_currHP <= 0)
+                return;
+
             if (gameObject != null)
                 ProjectileExpired();
             collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);

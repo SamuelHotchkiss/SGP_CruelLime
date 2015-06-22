@@ -18,6 +18,9 @@ public class PROJ_PiercingArrow : PROJ_Base
         if (collision.gameObject.tag == "Enemy"
             || collision.gameObject.tag == "Obstacle")
         {
+            if (collision.gameObject.GetComponent<ACT_Enemy>().Act_currHP <= 0)
+                return;
+
             collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
 
             power += 5; // MOAR powah!
