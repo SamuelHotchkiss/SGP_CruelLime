@@ -3,9 +3,9 @@ using System.Collections;
 
 public class OBS_Pitfall : MonoBehaviour 
 {
-
     public GameObject dest;
     public AudioClip Fall;
+    public Camera Main_Camara;
     public int type = 0;
     public float orgMag;
 
@@ -24,7 +24,7 @@ public class OBS_Pitfall : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D _col)
     {
-        if (Fall != null)
+        if (Fall != null && _col.tag != "Obstacle")
         {
             AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         }
