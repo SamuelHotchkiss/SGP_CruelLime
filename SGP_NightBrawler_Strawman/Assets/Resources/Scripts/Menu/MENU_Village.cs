@@ -36,8 +36,8 @@ public class MENU_Village : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         Vll_CurrCanvas = 0;
-        MNGR_Game.HordeDelay++;
-
+        if (MNGR_Game.HordeDelay < 4)
+            MNGR_Game.HordeDelay++;
         for (int i = 1; i < Vll_Shops.Length; i++)
             Vll_Shops[i].SetActive(false);
 

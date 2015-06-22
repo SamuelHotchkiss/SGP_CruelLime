@@ -20,6 +20,7 @@ public class OBS_Pitfall : MonoBehaviour
 	void Update ()
     {
 	
+
 	}
     
     void OnTriggerEnter2D(Collider2D _col)

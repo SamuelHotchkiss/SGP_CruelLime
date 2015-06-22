@@ -8,14 +8,18 @@ public class MENU_Defense : MonoBehaviour {
 	// Use this for initialization
     public int Def_Cost;
     public int Def_UpgradesNum;
-
     public Text Def_ButtonText;
     public Text Def_CoinNum;
+
+    void Start()
+    {
+        Def_UpgradesNum = MNGR_Game.HordeDelay - 1;
+    }
 
     void Update()
     {
         Def_CoinNum.text = "X" + MNGR_Game.wallet.ToString();
-        Def_Cost = (50 * MNGR_Game.hordePosition) * (1 + (Def_UpgradesNum * MNGR_Game.hordePosition));
+        Def_Cost = (25 * MNGR_Game.hordePosition) * (1 + (Def_UpgradesNum * MNGR_Game.hordePosition));
         if (Def_UpgradesNum < 3)
             Def_ButtonText.text = "Days Delay: " + Def_UpgradesNum.ToString() + "\nCost: " + Def_Cost.ToString();
         else
