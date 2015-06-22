@@ -679,6 +679,10 @@ public class ACT_Enemy : MonoBehaviour
 
 	public void OnGUI()
 	{
+		if (MNGR_Game.paused)
+			return;
+
+
 		if (cam != null && !isBoss)
 		{
 			Vector2 targetPos;
