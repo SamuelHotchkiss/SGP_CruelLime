@@ -13,6 +13,7 @@ public class MENU_Controller : MonoBehaviour {
 
     private float Menu_JoyTimer;            //Stops controller from jumping all over the menu
     int OldCurrbutton;
+    Vector3 oldMouse;
 
     // Use this for initialization
     void Start()
@@ -24,7 +25,6 @@ public class MENU_Controller : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
         Menu_JoyController = Input.GetAxisRaw("Pad_Vertical");
 
         //OLD N BUSTED
