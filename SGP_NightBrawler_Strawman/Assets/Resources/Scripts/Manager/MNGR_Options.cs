@@ -16,6 +16,7 @@ public static class MNGR_Options
         if (theMan)             // lazy initialization for dayz
             return;
 
+        theMan = true;
         musicVol = sfxVol = 1.0f;
         fullscreen = false;
         colorblind = false;
