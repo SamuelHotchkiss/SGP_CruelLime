@@ -13,6 +13,7 @@ GameObject:
   - 61: {fileID: 6150950}
   - 114: {fileID: 11461460}
   - 114: {fileID: 11408474}
+  - 114: {fileID: 11473210}
   m_Layer: 9
   m_Name: BOS_Miner
   m_TagString: Enemy
@@ -278,8 +279,12 @@ MonoBehaviour:
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
   Act_IsBoss: 1
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .100000001
   Act_currAttackSpeed: .100000001
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 1
   state: 0
@@ -297,6 +302,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
@@ -337,6 +343,24 @@ MonoBehaviour:
   - {fileID: 11464194, guid: e3e4655ffea9a0547bdc28ff4e0c468f, type: 2}
   pickaxe: {fileID: 11472220, guid: 9e392b1ede196f94facaf24a9c0895c2, type: 2}
   waypoints: []
+--- !u!114 &11473210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e78af9ebfa847b44ad03142f7d4a67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinCoins: 100
+  MaxCoins: 250
+  xRange: 50
+  yRange: 100
+  Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
+  potionChance: 0
+  potions: []
 --- !u!212 &21219326
 SpriteRenderer:
   m_ObjectHideFlags: 1
