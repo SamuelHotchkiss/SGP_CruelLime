@@ -236,9 +236,8 @@ public class UI_HUD : MonoBehaviour
         //Input.simulateMouseWithTouches = false;
         Time.timeScale = 1.0f;
 
-        MNGR_Save.OverwriteCurrentSave();
-        MNGR_Save.SaveProfiles();
+        MNGR_Save.saveFiles[MNGR_Save.currSave].AssignGameManager();
 
-        Application.LoadLevel("MainMenu");
+        Application.LoadLevel("WorldMap");
     }
 }
