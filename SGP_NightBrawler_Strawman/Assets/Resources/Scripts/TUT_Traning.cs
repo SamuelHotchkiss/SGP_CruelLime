@@ -7,6 +7,8 @@ public class TUT_Traning : MonoBehaviour {
     public Sprite Tut_HitTarget;
     public GameObject Tut_SmackDummy;
 
+    public bool IsTorch;
+
     //private Vector3 Tut_PermaLoc;
     private float Tut_SmackTimer;
 
@@ -28,17 +30,37 @@ public class TUT_Traning : MonoBehaviour {
             Tut_SmackDummy.SetActive(false);
     }
 
+    void OnTriggerEnter2D(Collider2D Col)
+    {
+        ActivatePlayerFeedback(Col);
+    }
+
     void OnTriggerStay2D(Collider2D Col)
     {
+        ActivatePlayerFeedback(Col);
+    }
+
+    void ActivatePlayerFeedback(Collider2D Col)
+    {
         if ((Col.name.Contains("Fire") || Col.name.Contains("Sling") || Col.name.Contains("Force") || Col.name.Contains("Explosion") || Col.name.Contains("Flame")) && Tut_Flames != null)
-            Tut_Flames.SetActive(true);
-        if ((Col.name.Contains("Arrow") || Col.name.Contains("Dart") || Col.name.Contains("Shuriken") || Col.name.Contains("Kunai")) && Tut_HitTarget != null)
-            GetComponent<SpriteRenderer>().sprite = Tut_HitTarget;
-        if (Col.name.Contains("Melee") || Col.name.Contains("Arrow") || Col.name.Contains("Fire") )
         {
+            Tut_Flames.SetActive(true);
             Tut_SmackDummy.SetActive(true);
             Tut_SmackTimer = 0.5f;
         }
 
+        if ((Col.name.Contains("Arrow") || Col.name.Contains("Dart") || Col.name.Contains("Shuriken") || Col.name.Contains("Kunai")) && Tut_HitTarget != null && !IsTorch)
+        {
+            if (!IsTorch)
+                GetComponent<SpriteRenderer>().sprite = Tut_HitTarget; 
+            Tut_SmackDummy.SetActive(true);
+            Tut_SmackTimer = 0.5f;
+        }
+
+        if (Col.name.Contains("Melee"))
+        {
+            Tut_SmackDummy.SetActive(true);
+            Tut_SmackTimer = 0.5f;
+        }
     }
 }
