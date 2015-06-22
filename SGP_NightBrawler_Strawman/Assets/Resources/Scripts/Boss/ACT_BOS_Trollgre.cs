@@ -269,6 +269,10 @@ public class ACT_BOS_Trollgre : ACT_Enemy {
                             if (GetComponent<ITM_DropLoot>())
                                 GetComponent<ITM_DropLoot>().DropCoin(transform.position);
 
+						if (GetComponent<ITM_DropLoot>())
+						{
+							GetComponent<ITM_DropLoot>().DropCoin(transform.position);
+						}
                         Destroy(transform.gameObject);
                     }
                     break;
