@@ -16,6 +16,8 @@ public class PROJ_Melee : PROJ_Base
         if (collision.gameObject.tag == "Enemy"
             || collision.gameObject.tag == "Obstacle")
         {
+            if (collision.gameObject.GetComponent<ACT_Enemy>().Act_currHP <= 0)
+                return;
             collision.gameObject.GetComponent<ACT_Enemy>().ChangeHP(-power);
         }
         else if (collision.gameObject.tag == "Player")
