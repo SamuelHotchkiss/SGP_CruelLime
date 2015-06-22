@@ -225,7 +225,7 @@ public class UI_HUD : MonoBehaviour
     {
         options = !options;
         optionsPanel.gameObject.SetActive(options);
-        MNGR_Save.optionsFile.CopyOptions();
+        //MNGR_Save.optionsFile.CopyOptions(); // S: redundant SaveOptions() already does this
         MNGR_Save.SaveOptions();
     }
 
@@ -234,7 +234,7 @@ public class UI_HUD : MonoBehaviour
         MNGR_Game.paused = false;
         pausePanel.gameObject.SetActive(false);
         //Input.simulateMouseWithTouches = false;
-        //Time.timeScale = 1;
+        Time.timeScale = 1.0f;
 
         MNGR_Save.OverwriteCurrentSave();
         MNGR_Save.SaveProfiles();
