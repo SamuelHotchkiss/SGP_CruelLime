@@ -81,6 +81,18 @@ public class MENU_World : MonoBehaviour
         Input.simulateMouseWithTouches = true;
 	}
 
+	public void Update()
+	{
+		for (int i = 0; i < inventoryCounts.Length; i++)
+		{
+			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
+			if (MNGR_Game.theInventory.containers[i].count < 1)
+				inventoryImages[i].gameObject.SetActive(false);
+			else
+				inventoryImages[i].gameObject.SetActive(true);
+		}
+	}
+
     // S: for use in testing
     public void SetLevel(int i)
     {
