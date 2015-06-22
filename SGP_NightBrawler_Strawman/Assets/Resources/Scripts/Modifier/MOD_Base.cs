@@ -41,7 +41,6 @@ public class MOD_Base : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
-        Mod_Particles.transform.rotation = new Quaternion(-270, Mod_Particles.transform.rotation.y, Mod_Particles.transform.rotation.z, Mod_Particles.transform.rotation.w);
         Mod_ModIndexNum = -1;           //Base class
         Mod_Particles.gameObject.transform.SetParent(gameObject.transform);
         Mod_Particles.GetComponent<ParticleSystemRenderer>().sortingOrder = 0;

@@ -266,10 +266,10 @@ MonoBehaviour:
   myBuffs: []
   Act_ID: 0
   Act_Name: TheMiner
-  Act_baseHP: 100
+  Act_baseHP: 750
   Act_basePower: 10
   Act_baseSpeed: 1
-  Act_currHP: 99
+  Act_currHP: 750
   Act_currPower: 10
   Act_currSpeed: 1
   Act_facingRight: 0
@@ -278,8 +278,12 @@ MonoBehaviour:
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
   Act_IsBoss: 1
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .100000001
   Act_currAttackSpeed: .100000001
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: 1
   state: 0
@@ -297,6 +301,7 @@ MonoBehaviour:
   behaviors: []
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0
