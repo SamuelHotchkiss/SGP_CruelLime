@@ -39,8 +39,10 @@ public class OBS_Pitfall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D _col)
     {
-        if (Fall != null && _col.tag != "Obstacle" && _col.GetComponent<ACT_Enemy>() && _col.GetComponent<ACT_Enemy>().Act_CanFallDownPits)
+        if (Fall != null && _col.tag != "Obstacle" )
         {
+            if (_col.GetComponent<ACT_Enemy>() && !_col.GetComponent<ACT_Enemy>().Act_CanFallDownPits)
+                return;
             AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         }
 
@@ -81,7 +83,7 @@ public class OBS_Pitfall : MonoBehaviour
             if (orgMag < _col.transform.localScale.magnitude)
             {
                 orgMag = _col.transform.localScale.magnitude;
-                KillTmr = 5.0f;
+                KillTmr = 2.0f;
                 if (type > 0)
                     player = _col.gameObject;
                 else
