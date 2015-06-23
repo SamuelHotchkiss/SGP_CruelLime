@@ -264,6 +264,7 @@ public class PlayerController : MonoBehaviour
                     AudioSource.PlayClipAtPoint(Ply_DyingSounds[party[currChar].Act_ActID], new Vector3(0, 0, 0), MNGR_Options.sfxVol);
                     AudioHasPlay = true;
                 }
+                horz = vert = 0;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 break;
             case ACT_CHAR_Base.STATES.USE:

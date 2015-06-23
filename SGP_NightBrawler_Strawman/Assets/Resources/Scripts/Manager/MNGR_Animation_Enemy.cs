@@ -113,6 +113,14 @@ public class MNGR_Animation_Enemy : MonoBehaviour
                 hurtSprites = new int[] { 2 };
                 deadSprites = new int[] { 2, 2 };
                 break;
+            case 6: // Fire Elemental Fix (Damnit Javier!)
+                idleSprites = new int[] { 0, 0, 0 };
+                walkSprites = new int[] { 0, 0, 0, 0, 0 };
+                attack1Sprites = new int[] { 0, 0, 0 };
+                specialSprites = new int[] { 0 };
+                hurtSprites = new int[] { 0 };
+                deadSprites = new int[] { 0, 0 };
+                break;
             default:
                 idleSprites = new int[] { 0, 1, 2 };
                 walkSprites = new int[] { 5, 6, 7, 8, 9 };
