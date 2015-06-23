@@ -1,53 +1,66 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OBS_Pitfall : MonoBehaviour 
+public class OBS_Pitfall : MonoBehaviour
 {
     public GameObject dest;
     public AudioClip Fall;
-    public Camera Main_Camara;
+    public Camera cam;
     public int type = 0;
     public float orgMag;
+    public float KillTmr;
+    public GameObject player;
+    public GameObject enemy;
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
+        cam = Camera.current;
         orgMag = 0.0f;
         GetComponent<SpriteRenderer>().sortingOrder = -10000;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
+    }
 
-	}
-    
+    // Update is called once per frame
+    void Update()
+    {
+        if (KillTmr > 0)
+        {
+            KillTmr -= Time.deltaTime;
+            if (KillTmr < 0)
+            {
+                Camera cam = Camera.current;
+
+                KillTmr = 0;
+                CleanOutDahPit();
+            }
+        }
+
+    }
+
     void OnTriggerEnter2D(Collider2D _col)
     {
         if (Fall != null && _col.tag != "Obstacle")
         {
             AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         }
-        
+
     }
 
     public virtual void OnTriggerStay2D(Collider2D _col)
     {
         //int type = 0;
-        Camera cam = Camera.current;
-        
+
 
         if (_col.gameObject.GetComponent<PlayerController>() != null)
         {
             type = 1;
-            _col.gameObject.GetComponent<PlayerController>().ChangeState(ACT_CHAR_Base.STATES.HURT);
+            //_col.gameObject.GetComponent<PlayerController>().ChangeState(ACT_CHAR_Base.STATES.HURT);
             _col.gameObject.GetComponent<PlayerController>().enabled = false;
             _col.gameObject.GetComponent<MNGR_Animation_Player>().enabled = false;
             if (cam != null && cam.GetComponent<CameraFollower>() != null)
                 cam.GetComponent<CameraFollower>().Cam_CurrTarget = gameObject;
-			//GameObject cam = GameObject.Find("Main Camera").gameObject;
-			//cam.GetComponent<Camera>().transform.position = new Vector3(dest.transform.position.x, dest.transform.position.y, -10.0f);
+            //GameObject cam = GameObject.Find("Main Camera").gameObject;
+            //cam.GetComponent<Camera>().transform.position = new Vector3(dest.transform.position.x, dest.transform.position.y, -10.0f);
         }
         if (_col.gameObject.GetComponent<ACT_Enemy>() != null)
         {
@@ -60,14 +73,23 @@ public class OBS_Pitfall : MonoBehaviour
         {
             // set original magnitude
             if (orgMag < _col.transform.localScale.magnitude)
+            {
                 orgMag = _col.transform.localScale.magnitude;
+                KillTmr = 5.0f;
+                if (type > 0)
+                    player = _col.gameObject;
+                else
+                    enemy = _col.gameObject;
+            }
 
             // Suck the player in, but only the first time.
             if (orgMag == _col.transform.localScale.magnitude)
             {
                 Vector3 dir = transform.position - _col.transform.position;
                 dir.Normalize();
-                _col.transform.position += dir * 1.5f;
+                //_col.transform.position += dir * 1.5f;
+                _col.transform.position = transform.position;
+                //_col.GetComponent<Rigidbody2D>().velocity = dir.normalized * 10.0f;
             }
 
             // apply these effects 
@@ -76,31 +98,38 @@ public class OBS_Pitfall : MonoBehaviour
 
             if (_col.transform.localScale.magnitude < 0.4f)
             {
-                _col.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                if (type > 0)
-                {
-                    _col.gameObject.GetComponent<PlayerController>().enabled = true;
-                    _col.gameObject.GetComponent<MNGR_Animation_Player>().enabled = true;
-                    if (cam != null && cam.GetComponent<CameraFollower>() != null)
-                        cam.GetComponent<CameraFollower>().Cam_CurrTarget = _col.gameObject;
-                }
-                else if (type < 0)
-                {
-                    DestroyObject(_col.gameObject);
-                    //_col.gameObject.GetComponent<ACT_Enemy>().enabled = true;
-                    //_col.gameObject.GetComponent<ACT_Enemy>().TimeThresh = 0; // should kill an enemy dead in his tracks.
-                    //_col.gameObject.GetComponent<ACT_Enemy>().Act_currHP = 0;
-                }
+                CleanOutDahPit();
                 Start();
-                _col.transform.position = dest.transform.position;
                 if (GameObject.Find("_Horde") != null)
                 {
                     Horde hordey = GameObject.Find("_Horde").GetComponent<Horde>();
                     hordey.transform.position = hordey.OGLoc;
                 }
             }
-            
+
         }
+    }
+
+    void CleanOutDahPit()
+    {
+        if (player != null)
+        {
+            PlayerController pc = player.gameObject.GetComponent<PlayerController>();
+            player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            player.transform.position = dest.transform.position;
+            pc.enabled = true;
+            pc.party[pc.currChar].ChangeHP(-20.0f);
+            player.gameObject.GetComponent<MNGR_Animation_Player>().enabled = true;
+            if (cam != null && cam.GetComponent<CameraFollower>() != null)
+                cam.GetComponent<CameraFollower>().Cam_CurrTarget = player.gameObject;
+            player = null;
+        }
+        if (enemy != null)
+        {
+            DestroyObject(enemy.gameObject);
+            enemy = null;
+        }
+        KillTmr = 0.0f;
     }
 
 
