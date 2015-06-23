@@ -53,6 +53,9 @@ public class MNGR_Animation_Player : MonoBehaviour
 
     void Update()
     {
+        if (MNGR_Game.paused)
+            return;
+
         if (GetComponent<SpriteRenderer>() != null && GameObject.Find("Reference_Point") != null)
     		GetComponent<SpriteRenderer>().sortingOrder = (int)((GameObject.Find("Reference_Point").transform.position.y - transform.position.y) * 100.0f);
 

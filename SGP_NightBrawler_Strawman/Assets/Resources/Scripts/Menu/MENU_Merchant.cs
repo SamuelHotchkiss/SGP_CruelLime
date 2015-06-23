@@ -36,18 +36,17 @@ public class MENU_Merchant : MonoBehaviour {
         {
             if (Mer_ReviveButtons[i].IsActive())
                 Mer_ReviveText[i].text = "Revive " + MNGR_Game.currentParty[Mer_DeadCharacterIndex[i]].name + "\nCost: " 
-                    + (MNGR_Game.currentParty[Mer_DeadCharacterIndex[i]].CalcAverageLvl() * 12 * MNGR_Game.playerPosition).ToString();
+                    + (MNGR_Game.currentParty[Mer_DeadCharacterIndex[i]].CalcAverageLvl() * 24 * MNGR_Game.playerPosition).ToString();
         }
 	}
-
 
     public void Buy(int IDs)
     {
         if (MNGR_Game.theInventory.containers[0].count < 5)
         {
-            if (MNGR_Game.wallet >= (MNGR_Item.PotionCost(IDs) * 3) && Mer_PotionLimit > 0)
+            if (MNGR_Game.wallet >= (MNGR_Item.PotionCost(IDs) * 2) && Mer_PotionLimit > 0)
             {
-                MNGR_Game.wallet -= (MNGR_Item.PotionCost(IDs) * 3);
+                MNGR_Game.wallet -= (MNGR_Item.PotionCost(IDs) * 2);
                 MNGR_Game.theInventory.containers[0].count++;
                 Mer_PotionLimit--;
             }
@@ -58,7 +57,7 @@ public class MENU_Merchant : MonoBehaviour {
 
     public void RestTheParty()
     {
-        Mer_RestCost = 15 * MNGR_Game.playerPosition;
+        Mer_RestCost = 10 * MNGR_Game.playerPosition;
 
         if (MNGR_Game.wallet >= Mer_RestCost)
         {
@@ -107,7 +106,7 @@ public class MENU_Merchant : MonoBehaviour {
     public void RevivePartyMember()
     {
         int _ChrIndex = Mer_ButtonPress;
-        Mer_ReviveCost = MNGR_Game.currentParty[_ChrIndex].CalcAverageLvl() * 36 * MNGR_Game.playerPosition; //Current villige location may come into this later.
+        Mer_ReviveCost = MNGR_Game.currentParty[_ChrIndex].CalcAverageLvl() * 24 * MNGR_Game.playerPosition; //Current villige location may come into this later.
 
         if (MNGR_Game.wallet >= Mer_ReviveCost)
         {

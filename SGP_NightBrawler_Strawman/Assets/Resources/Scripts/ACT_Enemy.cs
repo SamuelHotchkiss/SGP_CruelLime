@@ -176,6 +176,7 @@ public class ACT_Enemy : MonoBehaviour
             Act_currHP = 0;
             KillBuffs();
             state = STATES.DEAD;
+			currTime = stateTime[(int)state];
             if (NumDeadHits > 0)
             {
                 NumDeadHits--;
@@ -239,8 +240,12 @@ public class ACT_Enemy : MonoBehaviour
             target = GameObject.FindGameObjectWithTag("Player");
         }
 
-        //squad = new List<GameObject>();
-    }
+		//squad = new List<GameObject>();
+	}
+	
+	// Update is called once per frame
+	public virtual void Update () 
+	{
 
     // Update is called once per frame
     void Update()
@@ -311,7 +316,7 @@ public class ACT_Enemy : MonoBehaviour
                     GetComponent<ITM_DropLoot>().DropCoin(transform.position);
                 }
 
-                Destroy(transform.gameObject);
+				Destroy(gameObject);
 
                 if (Act_SpawnProjOnDed)
                 {

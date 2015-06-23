@@ -4,7 +4,7 @@ using System.Collections;
 public class PROJ_Twee : PROJ_PiercingArrow 
 {
 
-    float rotSpeed = 0.1f;
+    float rotSpeed = 0.2f;
     float dir = -1.0f;
     float life_time = 0.0f;
     public override void Initialize(bool _r = true, float _damMult = 1.0f)
@@ -26,7 +26,7 @@ public class PROJ_Twee : PROJ_PiercingArrow
         {
             // awkward this type of manipulation is.
             Vector3 newAng = transform.localEulerAngles;
-            newAng.z += rotSpeed * dir;
+            newAng.z += rotSpeed * dir * Time.deltaTime;
             transform.localEulerAngles = newAng;
 
             rotSpeed += rotSpeed * 0.1f;

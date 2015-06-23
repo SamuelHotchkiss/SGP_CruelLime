@@ -192,6 +192,8 @@ public class ENY_Arms : ACT_Enemy {
             if (Act_currHP <= 0)
             {
                 Act_currHP = 0;
+				if (GetComponent<ITM_DropLoot>())
+					GetComponent<ITM_DropLoot>().DropCoin(transform.position);
                 Destroy(Arm_ShadowObj);
                 Destroy(gameObject);
                 //GetComponent<Rigidbody2D>().velocity = Vector2.zero;

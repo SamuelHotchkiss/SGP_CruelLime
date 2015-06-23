@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
 --- !u!1 &451145523
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,6 +3220,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6137418, guid: 64e3317b2e728284eb237441dd71f474, type: 2}
+      propertyPath: m_Offset.y
+      value: .948240697
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137418, guid: 64e3317b2e728284eb237441dd71f474, type: 2}
+      propertyPath: m_Size.y
+      value: 2.15706348
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64e3317b2e728284eb237441dd71f474, type: 2}
   m_IsPrefabParent: 0
@@ -3423,7 +3432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
 --- !u!1 &1961969999
 GameObject:
   m_ObjectHideFlags: 0
