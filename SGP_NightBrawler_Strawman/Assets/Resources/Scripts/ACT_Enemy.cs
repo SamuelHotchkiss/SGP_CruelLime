@@ -176,6 +176,7 @@ public class ACT_Enemy : MonoBehaviour
             Act_currHP = 0;
             KillBuffs();
             state = STATES.DEAD;
+			currTime = stateTime[(int)state];
             if (NumDeadHits > 0)
             {
                 NumDeadHits--;
@@ -311,7 +312,7 @@ public class ACT_Enemy : MonoBehaviour
 					GetComponent<ITM_DropLoot>().DropCoin(transform.position);
 				}
 
-				Destroy(transform.gameObject);
+				Destroy(gameObject);
 
 				if (Act_SpawnProjOnDed)
 				{
