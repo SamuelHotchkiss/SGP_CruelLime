@@ -133,8 +133,6 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                     //    vel = new Vector2(vel.x, -Act_currSpeed);
                     //    GetComponent<Rigidbody2D>().velocity = vel;
                     //}
-
-
                 }
             }
             else if (Sov_WayPointLock)
@@ -150,14 +148,20 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                 Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Update();
                 Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_SpawnAtLocation = true;
                 int RandPoint = Random.Range(0, Sov_SpawnPoints.Count);
-                Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_NewLocation = Sov_SpawnPoints[RandPoint].transform.position;
-                Sov_myBehaviours[1].GetComponent<BHR_Spawner>().PerformBehavior();
+
+                if (Sov_SpawnPoints[RandPoint] != null)
+                {
+                    Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_NewLocation = Sov_SpawnPoints[RandPoint].transform.position;
+                    Sov_myBehaviours[1].GetComponent<BHR_Spawner>().PerformBehavior();
+                }
+                else
+                    Spw_CrittersCreated++;
+
                 if (!Sov_myBehaviours[1].GetComponent<BHR_Spawner>().Spw_SpawnAllCritters)
                 {
                     Spw_CrittersCreated = 0;
                     Sov_CallOnMinions = false;
                 }
-
             }
 
             if (Sov_CallOnClones)
@@ -279,7 +283,7 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
                 state = STATES.RUNNING;
                 float Dis = Vector3.Distance(transform.position, target.transform.position);
                 Distance = Dis;
-                if (Dis <= 1.0f)
+                if (Dis <= 3.0f)
                     Sov_WayPointLock = true;
             }
         }
@@ -324,31 +328,31 @@ public class ACT_BOS_Sovalpa : ACT_Enemy {
     {
         if (numGeneration == 2)
         {
-           // for (; ; )
-           // {
-           //     int NewAttack = Random.Range(0, 3);
-           //     if (projectile.name != Sov_Attacks[NewAttack].name)
-           //     {
-           //         projectile = Sov_Attacks[NewAttack];
-           //         break;
-           //     }
-           // }
+            for (; ; )
+            {
+                int NewAttack = Random.Range(0, 2);
+                if (projectile.name != Sov_Attacks[NewAttack].name)
+                {
+                    projectile = Sov_Attacks[NewAttack];
+                    break;
+                }
+            }
 
-           // if (!projectile.name.Contains("Melee"))
-           // {
-           //     for (; ; )
-           //     {
-           //         int RandWaypoint = Random.Range(0, 2);
-           //         if (Sov_WayPoints[RandWaypoint] != null)
-           //         {
-           //             target = Sov_WayPoints[RandWaypoint];
-           //             break;
-           //         }
-           //     }
-           // }
-           //// else
-            projectile = Sov_Attacks[0];
-            target = GameObject.FindGameObjectWithTag("Player"); 
+            if (!projectile.name.Contains("Melee"))
+            {
+                for (;;)
+                {
+                    //int RandWaypoint = Random.Range(0, 2);
+                    if (Sov_WayPoints[2] != null)
+                    {
+                        target = Sov_WayPoints[2];
+                        break;
+                    }
+                }
+            }
+           else
+            //projectile = Sov_Attacks[0];
+            target = GameObject.FindGameObjectWithTag("Player");
         }
         else
         {
