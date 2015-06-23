@@ -263,13 +263,25 @@ public class CHAR_Lancer : ACT_CHAR_Base
 
             for (int i = 0; i < Atargets.Length; i++) // loop through targets and remove all entries that are too far away.
             {
+                if (i > NumLeaps - 1)
+                    break;
                 if (Vector3.Distance(player.transform.position, Atargets[i].transform.position) < maxdist)
                 {
                     Ltargets.Add(Atargets[i]);
                 }
             }
 
-            if (Ltargets.Count > 0 && NumLeaps > 0) // this is where we jump to targets.
+            // Update the list to only contain valid targets.
+            for (int i = Ltargets.Count; i > 0; i--)
+            {
+                if (Ltargets[i - 1] == null || Ltargets[i - 1].GetComponent<ACT_Enemy>().Act_currHP <= 0)
+                {
+                    Ltargets.RemoveAt(i - 1);
+                    //NumLeaps--;
+                }
+            }
+
+            if (Ltargets.Count > 0)// && NumLeaps > 0) // this is where we jump to targets.
             {
                 Vector3 targpos = Ltargets[0].transform.position;
                 if (targpos.x > player.transform.position.x)
@@ -303,20 +315,16 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 if (_curTmr < 0.2f) // current special is done, do another if we can.
                 {
                     Ltargets.RemoveAt(0);
-                    for (int i = Ltargets.Count; i > 0; i--)
-                    {
-                        if (Ltargets[i - 1].GetComponent<ACT_Enemy>().Act_currHP <= 0)
-                            Ltargets.RemoveAt(i - 1);
-                    }
-                    NumLeaps--;
+                    //NumLeaps--;
 
                     if (Ltargets.Count <= 0 || NumLeaps <= 0)
                         Atargets = new GameObject[0];
-                    FixTheVisualStudioBugsPlz(Ltargets.Count, NumLeaps, player); // because bugs.
+                    if (FixTheVisualStudioBugsPlz(Ltargets.Count, NumLeaps, player)) // because bugs.
+                        return ret;
                 }
 
             }
-            else // proceed with normal special attack if there are no targets.
+            if (Ltargets.Count <= 0) // proceed with normal special attack if there are no targets.
             {
                 if (_curTmr > _maxTmr * 0.8f)
                 {
@@ -339,25 +347,26 @@ public class CHAR_Lancer : ACT_CHAR_Base
                     ret.spriteIndex = specialSprites[3];
 
                 ret.physicsLayer = 17;
-                //ret.enableCollision = false;
             }
 
         }
 
         return ret;
     }
-    void FixTheVisualStudioBugsPlz(int Count, int NumLeaps, GameObject player)
+    bool FixTheVisualStudioBugsPlz(int Count, int NumLeaps, GameObject player)
     {
-        if (Ltargets.Count > 0 && NumLeaps > 0)
+        if (Ltargets.Count > 0)// && NumLeaps > 0)
         {
             player.GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
             player.GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
+            return false;
         }
         else
         {
             Ltargets = new List<GameObject>();
             NumLeaps = 0;
             player.GetComponent<PlayerController>().ChangeState(STATES.IDLE);
+            return true;
         }
 
     }
