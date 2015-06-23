@@ -14,6 +14,7 @@ GameObject:
   - 61: {fileID: 6163408}
   - 114: {fileID: 11431592}
   - 114: {fileID: 11462268}
+  - 114: {fileID: 11468642}
   m_Layer: 9
   m_Name: BOS_Sovalpa
   m_TagString: Enemy
@@ -83,6 +84,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
+--- !u!114 &11468642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e78af9ebfa847b44ad03142f7d4a67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinCoins: 50
+  MaxCoins: 100
+  xRange: 50
+  yRange: 100
+  Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
+  potionChance: 0
+  potions: []
 --- !u!114 &11470412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,8 +310,12 @@ MonoBehaviour:
   Act_IsIntelligent: 1
   Act_SpawnProjOnDed: 0
   Act_IsBoss: 1
+  Act_AudioHasPlay: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: .5
+  Act_HurtSound: {fileID: 0}
+  Act_DyingSound: {fileID: 0}
+  Act_SpecialSound: {fileID: 0}
   Act_Parent: {fileID: 0}
   damageMod: .75
   state: 0
@@ -312,6 +336,7 @@ MonoBehaviour:
   - {fileID: 11478354, guid: 8545370dee5b0b9438cf69af29a52d05, type: 2}
   currBehavior: {fileID: 0}
   basicBehavior: {fileID: 0}
+  NumDeadHits: 4
   squad: []
   maxBuffRange: 0
   buffIndex: 0

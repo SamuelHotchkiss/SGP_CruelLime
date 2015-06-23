@@ -17,8 +17,7 @@ public class PROJ_Debuff : PROJ_Base
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("HIT!");
-        if (collision.gameObject.tag == "Enemy"
-            || collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.tag == "Enemy") //|| collision.gameObject.tag == "Obstacle"
         {
             ACT_Enemy enemy = collision.gameObject.GetComponent<ACT_Enemy>();
 

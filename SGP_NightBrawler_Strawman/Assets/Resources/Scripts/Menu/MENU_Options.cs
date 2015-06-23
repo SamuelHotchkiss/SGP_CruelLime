@@ -68,7 +68,7 @@ public class MENU_Options : MonoBehaviour
 
     public void ChangeSFXSlider(float value)
     {
-        sfxSlider.value += (value / 100);
+        sfxSlider.value += value;
     }
 
     public void PreviewSFXVolume()
@@ -83,7 +83,7 @@ public class MENU_Options : MonoBehaviour
 
     public void ChangeMusicSlider(float value)
     {
-        musicSlider.value += (value / 100);
+        musicSlider.value += value;
     }
 
     public void ChangeFullscreen(bool screen)

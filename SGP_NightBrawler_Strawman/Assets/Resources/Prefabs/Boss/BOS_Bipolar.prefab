@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11498786}
   - 61: {fileID: 6168582}
   - 50: {fileID: 5008198}
+  - 114: {fileID: 11420410}
   m_Layer: 11
   m_Name: Left Arm
   m_TagString: Enemy
@@ -103,6 +104,7 @@ GameObject:
   - 114: {fileID: 11496664}
   - 61: {fileID: 6174968}
   - 50: {fileID: 5071802}
+  - 114: {fileID: 11484316}
   m_Layer: 11
   m_Name: Right Arm
   m_TagString: Enemy
@@ -297,6 +299,24 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2}
+--- !u!114 &11420410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e78af9ebfa847b44ad03142f7d4a67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinCoins: 25
+  MaxCoins: 50
+  xRange: 50
+  yRange: 100
+  Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
+  potionChance: 0
+  potions: []
 --- !u!114 &11424576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1402,6 +1422,24 @@ MonoBehaviour:
   Bip_Smash: {fileID: 0}
   Arm_DownTimer: 0
   Arm_IgnoreCollision: 0
+--- !u!114 &11484316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e78af9ebfa847b44ad03142f7d4a67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinCoins: 25
+  MaxCoins: 50
+  xRange: 50
+  yRange: 100
+  Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
+  potionChance: 0
+  potions: []
 --- !u!114 &11490724
 MonoBehaviour:
   m_ObjectHideFlags: 1
