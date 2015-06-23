@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PROJ_Flamethrower_Master : PROJ_Base 
 {
-	float timer = 3.5f;
-	float rotSpeed = 1.2f;
+	float timer = 6.0f;
+	float rotSpeed = 100.0f;
 	float dir = -1.0f;
 
     // Use this for initialization
@@ -53,7 +53,7 @@ public class PROJ_Flamethrower_Master : PROJ_Base
 			GetComponentInChildren<ParticleSystem>().startSpeed = 5.0f;
 
 			Vector3 newAng = transform.localEulerAngles;
-			newAng.z += rotSpeed * dir;
+			newAng.z += rotSpeed * dir * Time.deltaTime;
 			transform.localEulerAngles = newAng;
 		}
 		else if (owner.tag == "Enemy")
