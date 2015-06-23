@@ -17,9 +17,16 @@ public class MENU_CharacterSelection : MonoBehaviour
     int IndexMax = 9;
     bool InputBuffer;
 
+    public GameObject abortButton;
+
     // Use this for initialization
     void Start()
     {
+        if(MNGR_Save.saveFiles[MNGR_Save.currSave].isNew)
+        {
+            abortButton.SetActive(true);
+        }
+
         Index = 4; // Ninja
     }
 
@@ -166,9 +173,16 @@ public class MENU_CharacterSelection : MonoBehaviour
     {
         if (MNGR_Game.NextLevel == "" || MNGR_Game.NextLevel == null)
             MNGR_Game.NextLevel = "WorldMap";
+        if(MNGR_Save.saveFiles[MNGR_Save.currSave].isNew)
+            MNGR_Save.saveFiles[MNGR_Save.currSave].isNew = false;
 
         Application.LoadLevel(MNGR_Game.NextLevel);
         //Application.LoadLevel("GameOverWin"); // Degubbin'
         //Application.LoadLevel("GameOverLose");
+    }
+
+    public void Abort()
+    {
+        Application.LoadLevel("LoadMenu");
     }
 }
