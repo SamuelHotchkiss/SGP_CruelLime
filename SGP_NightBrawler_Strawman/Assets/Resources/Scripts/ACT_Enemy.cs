@@ -176,12 +176,12 @@ public class ACT_Enemy : MonoBehaviour
             Act_currHP = 0;
             KillBuffs();
             state = STATES.DEAD;
-			currTime = stateTime[(int)state];
-            if (NumDeadHits > 0)
-            {
-                NumDeadHits--;
-                currTime = stateTime[(int)state];
-            }
+            //currTime = stateTime[(int)state];
+            //if (NumDeadHits > 0)
+            //{
+            //    NumDeadHits--;
+            //    currTime = stateTime[(int)state];
+            //}
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
@@ -240,15 +240,11 @@ public class ACT_Enemy : MonoBehaviour
             target = GameObject.FindGameObjectWithTag("Player");
         }
 
-		//squad = new List<GameObject>();
-	}
-	
-	// Update is called once per frame
-	public virtual void Update () 
-	{
+        //squad = new List<GameObject>();
+    }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
 
         if (Act_IsIntelligent)
@@ -316,7 +312,7 @@ public class ACT_Enemy : MonoBehaviour
                     GetComponent<ITM_DropLoot>().DropCoin(transform.position);
                 }
 
-				Destroy(gameObject);
+                Destroy(gameObject);
 
                 if (Act_SpawnProjOnDed)
                 {
@@ -657,9 +653,9 @@ public class ACT_Enemy : MonoBehaviour
                     randomState = Random.Range(0, 5);
 
                 state = (STATES)randomState;
+                currTime = stateTime[(int)state];
             }
         }
-        currTime = stateTime[(int)state];
     }
 
     // L: movin' this over here.
