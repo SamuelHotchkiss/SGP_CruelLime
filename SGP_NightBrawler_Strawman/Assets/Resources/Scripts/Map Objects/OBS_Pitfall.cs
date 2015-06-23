@@ -39,7 +39,7 @@ public class OBS_Pitfall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D _col)
     {
-        if (Fall != null && _col.tag != "Obstacle")
+        if (Fall != null && _col.tag != "Obstacle" && _col.GetComponent<ACT_Enemy>() && _col.GetComponent<ACT_Enemy>().Act_CanFallDownPits)
         {
             AudioSource.PlayClipAtPoint(Fall, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
         }
@@ -64,6 +64,12 @@ public class OBS_Pitfall : MonoBehaviour
         }
         if (_col.gameObject.GetComponent<ACT_Enemy>() != null)
         {
+            if (!_col.gameObject.GetComponent<ACT_Enemy>().Act_CanFallDownPits) // if we can't fall down pits push us away then!
+            {
+                Vector3 pushback = _col.gameObject.transform.position - transform.position;
+                _col.gameObject.transform.position += pushback.normalized * 5.0f;
+                return;
+            }
             type = -1;
             _col.gameObject.GetComponent<ACT_Enemy>().enabled = false;
             if (_col.gameObject.GetComponent<MNGR_Animation_Enemy>() != null)
@@ -116,7 +122,9 @@ public class OBS_Pitfall : MonoBehaviour
         {
             PlayerController pc = player.gameObject.GetComponent<PlayerController>();
             player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            player.transform.position = dest.transform.position;
+            Vector3 newpos = dest.transform.position;
+            newpos.z = 0;
+            player.transform.position = newpos;
             pc.enabled = true;
             pc.party[pc.currChar].ChangeHP(-20.0f);
             player.gameObject.GetComponent<MNGR_Animation_Player>().enabled = true;
