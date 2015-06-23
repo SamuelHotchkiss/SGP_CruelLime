@@ -79,7 +79,7 @@ public class MENU_Load : MonoBehaviour
                 MNGR_Game.NextLevel = "WorldMap";
                 if (MNGR_Save.saveFiles[MNGR_Save.currSave].isNew)
                 {
-                    MNGR_Save.saveFiles[MNGR_Save.currSave].isNew = false;
+                    //MNGR_Save.saveFiles[MNGR_Save.currSave].isNew = false;
                     Application.LoadLevel("CharacterSelect");
                 }
                 else
