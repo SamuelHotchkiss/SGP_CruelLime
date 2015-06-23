@@ -13,7 +13,6 @@ public class BHR_Spawner : BHR_Base
 		Spw_SpawnAllCritters = true;
 	}
 
-
 	// Update is called once per frame
 	public override void Update () 
     {
