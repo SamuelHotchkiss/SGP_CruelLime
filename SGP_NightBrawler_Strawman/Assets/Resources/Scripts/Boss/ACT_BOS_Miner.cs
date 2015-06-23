@@ -33,8 +33,14 @@ public class ACT_BOS_Miner : ACT_Enemy
 	}
 	
 	// Update is called once per frame
-	void Update()
+	public override void Update()
 	{
+
+        Vector2 slowVel = GetComponent<Rigidbody2D>().velocity;
+        slowVel *= 0.5f;
+        GetComponent<Rigidbody2D>().velocity = slowVel;
+
+
 		if (hasAttack)
 		{
 			attackTimer -= Time.deltaTime;

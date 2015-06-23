@@ -243,7 +243,7 @@ public class ACT_Enemy : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public virtual void Update () 
 	{
 
         if (Act_IsIntelligent)
