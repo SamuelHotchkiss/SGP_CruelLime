@@ -21,7 +21,7 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 		Act_currHP = Act_baseHP;
 		Act_currPower = Act_basePower;
         Act_currSpeed = Act_baseSpeed;
-        Act_baseAspeed = 0.15f;
+        Act_baseAspeed = 0.015f;
 
         Act_HPLevel = 1;
         Act_PowerLevel = 1;
@@ -181,6 +181,7 @@ public class CHAR_Spellslinger : ACT_CHAR_Base
 
 	public override void UpgradeSpecial()
 	{
-		StateTmrs[6] = 4.0f;
+		StateTmrs[6] = 8.0f;
+		cooldownTmrBase = 10.0f;
 	}
 }
