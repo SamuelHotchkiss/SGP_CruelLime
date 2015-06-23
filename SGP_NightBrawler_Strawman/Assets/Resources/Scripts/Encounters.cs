@@ -53,8 +53,8 @@ public class Encounters : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Enc_Victime != null && Camera.current != null)
-            Camera.current.GetComponent<CameraFollower>().Cam_CurrTarget = gameObject;
+        if (Enc_Victime != null && cam != null)
+            cam.GetComponent<CameraFollower>().Cam_CurrTarget = gameObject;
 
         CheckEnemiesInArea();
         Enc_SpawnTimer -= Time.deltaTime;

@@ -125,6 +125,8 @@ public class MENU_World : MonoBehaviour
 
         AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0,0,0), MNGR_Options.sfxVol);
 
+        MNGR_Save.OverwriteCurrentSave();
+
         StartCoroutine(WaitForSound("TransitionScene"));
     }
 

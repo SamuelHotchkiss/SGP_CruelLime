@@ -18,6 +18,10 @@ public class Trigger : MonoBehaviour {
             if (LodingTimer <= 0f)
             {
                 levelName = MNGR_Game.NextLevel;
+
+                if(MNGR_Game.equippedItem > 0)
+                    MNGR_Game.theInventory.containers[MNGR_Game.equippedItem].count++;
+
                 Application.LoadLevel(levelName); 
             }
         }
