@@ -274,19 +274,19 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-		if (Input.GetKey(KeyCode.K))
-		{
-			party[currChar].Act_currHP -= 1;
-			if (party[currChar].Act_currHP <= 0)
-			{
-				party[currChar].Act_currHP = 0;
-				ChangeState(ACT_CHAR_Base.STATES.DYING);
-			}
-			else
-			{
-				ChangeState(ACT_CHAR_Base.STATES.HURT);
-			}
-		}
+        //if (Input.GetKey(KeyCode.K))
+        //{
+        //    party[currChar].Act_currHP -= 1;
+        //    if (party[currChar].Act_currHP <= 0)
+        //    {
+        //        party[currChar].Act_currHP = 0;
+        //        ChangeState(ACT_CHAR_Base.STATES.DYING);
+        //    }
+        //    else
+        //    {
+        //        ChangeState(ACT_CHAR_Base.STATES.HURT);
+        //    }
+        //}
         //else if (Input.GetKeyDown(KeyCode.L))
         //{
         //    MNGR_Game.wallet += 10;
@@ -307,10 +307,10 @@ public class PlayerController : MonoBehaviour
         //{
         //    MNGR_Game.isNight = !MNGR_Game.isNight;
         //}
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            party[currChar].BecomeSpecial();
-        }
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    party[currChar].BecomeSpecial();
+        //}
         // modify velocity only if we aren't in special state (for custom special movement)
 
         // always calls unless current character is dead.
