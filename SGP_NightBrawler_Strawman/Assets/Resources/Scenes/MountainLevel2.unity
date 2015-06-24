@@ -356,11 +356,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -39.9000015
+      value: -48.5
       objectReference: {fileID: 0}
     - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.70000005
+      value: 8.39999962
       objectReference: {fileID: 0}
     - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -386,9 +386,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 174384, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &49690512 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 174384, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
+  m_PrefabInternal: {fileID: 49690511}
 --- !u!1001 &53209242
 Prefab:
   m_ObjectHideFlags: 0
@@ -2391,7 +2399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 976118364}
   enemies: {fileID: 0}
-  horde: {fileID: 2145662143}
+  horde: {fileID: 0}
   BossLvl: 
   activateEnemies: 0
   bossRoom: 0
@@ -2739,7 +2747,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 673928946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250, y: 0, z: 72}
+  m_LocalPosition: {x: 221, y: 0, z: 72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1350866764}
@@ -3177,7 +3185,7 @@ RectTransform:
   m_LocalScale: {x: .622395813, y: .622395813, z: .622395813}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 14
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -11.71, y: -.819999993}
@@ -3734,56 +3742,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea570468e389803469c3e5af251be081, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &878594067
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 590.099976
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 111.599998
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -.899999976
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 174384, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_Name
-      value: _Horde 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &878594068 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 174384, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-  m_PrefabInternal: {fileID: 878594067}
 --- !u!1001 &891399168
 Prefab:
   m_ObjectHideFlags: 0
@@ -4969,7 +4927,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455106, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -43.5999985
+      value: -42.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 455106, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -5039,6 +4997,10 @@ Prefab:
       propertyPath: m_Name
       value: PLY_PlayerObject
       objectReference: {fileID: 0}
+    - target: {fileID: 11496764, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
+      propertyPath: theHorde
+      value: 
+      objectReference: {fileID: 49690512}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7cd1c8c9b533a14e9493378ba9cdea1, type: 2}
   m_IsPrefabParent: 0
@@ -6419,7 +6381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 1695122773}
   enemies: {fileID: 0}
-  horde: {fileID: 878594068}
+  horde: {fileID: 0}
   BossLvl: 
   activateEnemies: 0
   bossRoom: 0
@@ -8071,7 +8033,7 @@ RectTransform:
   m_LocalScale: {x: .622395813, y: .622395813, z: .622395813}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 16
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 199.979996, y: 211.919998}
@@ -9185,7 +9147,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1919839312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 0, z: 72}
+  m_LocalPosition: {x: 465.600006, y: 0, z: 72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 632524228}
@@ -10387,53 +10349,3 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 426070, guid: 0c538cde072a5714ca36518241a1b7be, type: 2}
   m_PrefabInternal: {fileID: 2019656259}
---- !u!1001 &2145662142
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 185.800003
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 214.699997
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -.899999976
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 425992, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 174384, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-      propertyPath: m_Name
-      value: _Horde 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &2145662143 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 174384, guid: 313f6c9249d5f544a90707156ff3be9c, type: 2}
-  m_PrefabInternal: {fileID: 2145662142}
