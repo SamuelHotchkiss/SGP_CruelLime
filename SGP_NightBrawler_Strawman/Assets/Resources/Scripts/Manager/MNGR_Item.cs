@@ -10,12 +10,12 @@ public static class MNGR_Item
 	public static void AttachModifier(int ID, GameObject victim)
     {
         ////Buffs IDs
-        //[0] = MOD_CDDecrease;
-        //[1] = MOD_DMGIncrease();
-        //[2] = MOD_DMGProtection();
-        //[3] = MOD_HPInstant();
-        //[4] = MOD_HPRegen();
-        //[5] = MOD_SPDIncrease();
+        //[0] = MOD_HPInstant();
+        //[1] = MOD_HPRegen();
+        //[2] = MOD_CDDecrease;
+        //[3] = MOD_SPDIncrease();
+        //[4] = MOD_DMGProtection();
+        //[5] = MOD_DMGIncrease();
         ////Debuffs IDs
         //[6] = new MOD_DMGDecrease() 
         //[7] = new MOD_DMGIncomingIncrease() 
@@ -26,22 +26,22 @@ public static class MNGR_Item
         switch(ID)
         {
             case 0:
-                victim.AddComponent<MOD_CDDecrease>();
-                break;
-            case 1:
-                victim.AddComponent<MOD_DMGIncrease>();
-                break;
-            case 2:
-                victim.AddComponent<MOD_DMGProtection>();
-                break;
-            case 3:
                 victim.AddComponent<MOD_HPInstant>();
                 break;
-            case 4:
+            case 1:
                 victim.AddComponent<MOD_HPRegen>();
                 break;
-            case 5:
+            case 2:
+                victim.AddComponent<MOD_CDDecrease>();
+                break;
+            case 3:
                 victim.AddComponent<MOD_SPDIncrease>();
+                break;
+            case 4:
+                victim.AddComponent<MOD_DMGProtection>();
+                break;
+            case 5:
+                victim.AddComponent<MOD_DMGIncrease>();
                 break;
             case 6:
                 victim.AddComponent<MOD_DMGDecrease>();
