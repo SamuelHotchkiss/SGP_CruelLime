@@ -13,13 +13,18 @@ public class MENU_Defense : MonoBehaviour {
 
     void Start()
     {
-        Def_UpgradesNum = MNGR_Game.HordeDelay - 1;
+        if (MNGR_Game.arrowPos == 2)
+            Def_UpgradesNum = MNGR_Game.HordeDelayVllOne - 1;
+        else if (MNGR_Game.arrowPos == 8)
+            Def_UpgradesNum = MNGR_Game.HordeDelayVllTwo - 1;
+        else if (MNGR_Game.arrowPos == 14)
+            Def_UpgradesNum = MNGR_Game.HordeDelayVllThree - 1;
     }
 
     void Update()
     {
         Def_CoinNum.text = "X" + MNGR_Game.wallet.ToString();
-        Def_Cost = (25 * MNGR_Game.hordePosition) * (1 + (Def_UpgradesNum * MNGR_Game.hordePosition));
+        Def_Cost = (5 * MNGR_Game.hordePosition) * (1 + Def_UpgradesNum);
         if (Def_UpgradesNum < 3)
             Def_ButtonText.text = "Days Delay: " + Def_UpgradesNum.ToString() + "\nCost: " + Def_Cost.ToString();
         else
@@ -32,7 +37,12 @@ public class MENU_Defense : MonoBehaviour {
         {
             MNGR_Game.wallet -= Def_Cost;
             Def_UpgradesNum++;
-            MNGR_Game.HordeDelay++;
+            if (MNGR_Game.arrowPos == 2) 
+                MNGR_Game.HordeDelayVllOne++;
+            else if (MNGR_Game.arrowPos == 8)
+                MNGR_Game.HordeDelayVllTwo++;
+            else if (MNGR_Game.arrowPos == 14)
+                MNGR_Game.HordeDelayVllThree++;
         }
     }
 }

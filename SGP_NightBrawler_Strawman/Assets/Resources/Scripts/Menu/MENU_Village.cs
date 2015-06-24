@@ -36,8 +36,27 @@ public class MENU_Village : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         Vll_CurrCanvas = 0;
-        if (MNGR_Game.HordeDelay < 4)
-            MNGR_Game.HordeDelay++;
+
+        if (MNGR_Game.arrowPos == 2)
+        {
+            if (MNGR_Game.HordeDelayVllOne < 4)
+                MNGR_Game.HordeDelayVllOne++;
+        }
+           // Def_UpgradesNum = MNGR_Game.HordeDelayVllOne - 1;
+        else if (MNGR_Game.arrowPos == 8)
+        {
+            if (MNGR_Game.HordeDelayVllTwo < 4)
+                MNGR_Game.HordeDelayVllTwo++;
+        }
+           // Def_UpgradesNum = MNGR_Game.HordeDelayVllTwo - 1;
+        else if (MNGR_Game.arrowPos == 14)
+        {
+            if (MNGR_Game.HordeDelayVllThree < 4)
+                MNGR_Game.HordeDelayVllThree++;
+        }
+           // Def_UpgradesNum = MNGR_Game.HordeDelayVllThree - 1;
+
+        
         for (int i = 1; i < Vll_Shops.Length; i++)
             Vll_Shops[i].SetActive(false);
 
@@ -51,7 +70,9 @@ public class MENU_Village : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 
-        if (MNGR_Game.hordePosition == 3 && MNGR_Game.playerPosition == 1)
+        if ((MNGR_Game.hordePosition == 2 && MNGR_Game.arrowPos == 2 && MNGR_Game.HordeDelayVllOne == 0) 
+            || (MNGR_Game.hordePosition == 8 && MNGR_Game.arrowPos == 8 && MNGR_Game.HordeDelayVllTwo == 0) 
+            || (MNGR_Game.hordePosition == 14 && MNGR_Game.arrowPos == 14 && MNGR_Game.HordeDelayVllThree == 0)) 
             ChangeSceneButton("WorldMap");
         
             if (MNGR_Game.isNight)

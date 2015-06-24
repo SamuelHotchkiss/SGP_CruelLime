@@ -70,12 +70,11 @@ public class MENU_Upgrade : MonoBehaviour {
                     for (int j = 0; j < Upg_Char3.Length; j++)
                         Upg_Char3[j].interactable = false;
             }
-
         }
 
         Upg_CurrCoins.text = MNGR_Game.wallet.ToString();
 
-        Upg_Char1[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[0].Act_HPLevel.ToString();
+        Upg_Char1[0].GetComponentInChildren<Text>().text = "HP Lvl: " + ((int)MNGR_Game.currentParty[0].Act_HPLevel).ToString();
         if (Upg_MaxLevel > MNGR_Game.currentParty[0].Act_HPLevel)
             Upg_Char1[0].GetComponentInChildren<Text>().text += "\nCost: " + CalculateUpgradeCost(0, UpgType.HpUpg).ToString() + " Gold";
         else
@@ -93,7 +92,7 @@ public class MENU_Upgrade : MonoBehaviour {
         else
             Upg_Char1[2].GetComponentInChildren<Text>().text += "\nMax Level";
 
-        Upg_Char2[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[1].Act_HPLevel.ToString();
+        Upg_Char2[0].GetComponentInChildren<Text>().text = "HP Lvl: " + ((int)MNGR_Game.currentParty[1].Act_HPLevel).ToString();
         if (Upg_MaxLevel > MNGR_Game.currentParty[1].Act_HPLevel)
             Upg_Char2[0].GetComponentInChildren<Text>().text += "\nCost: " + CalculateUpgradeCost(1, UpgType.HpUpg).ToString() + " Gold";
         else
@@ -110,7 +109,7 @@ public class MENU_Upgrade : MonoBehaviour {
         else
             Upg_Char2[2].GetComponentInChildren<Text>().text += "\nMax Level";
 
-        Upg_Char3[0].GetComponentInChildren<Text>().text = "HP Lvl: " + MNGR_Game.currentParty[2].Act_HPLevel.ToString(); 
+        Upg_Char3[0].GetComponentInChildren<Text>().text = "HP Lvl: " + ((int)MNGR_Game.currentParty[2].Act_HPLevel).ToString(); 
         if (Upg_MaxLevel > MNGR_Game.currentParty[2].Act_HPLevel)
             Upg_Char3[0].GetComponentInChildren<Text>().text += "\nCost: " + CalculateUpgradeCost(2, UpgType.HpUpg).ToString() + " Gold";
         else
@@ -151,7 +150,7 @@ public class MENU_Upgrade : MonoBehaviour {
         CalculateUpgradeCost(_CharIndex, UpgType.PowerUpg);
         if (MNGR_Game.wallet >= Upg_PowerCost && MNGR_Game.currentParty[_CharIndex].Act_PowerLevel < Upg_MaxLevel)
         {
-            MNGR_Game.currentParty[_CharIndex].Act_basePower += 3; //Fighters increse faster
+            MNGR_Game.currentParty[_CharIndex].Act_basePower += 4 - _CharIndex; //Fighters increse faster
             MNGR_Game.currentParty[_CharIndex].RestoreToBasePower();
             MNGR_Game.currentParty[_CharIndex].Act_PowerLevel++;
 
