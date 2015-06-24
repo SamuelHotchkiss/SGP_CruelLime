@@ -69,7 +69,9 @@ public class OBS_Pitfall : MonoBehaviour
             if (!_col.gameObject.GetComponent<ACT_Enemy>().Act_CanFallDownPits) // if we can't fall down pits push us away then!
             {
                 Vector3 pushback = _col.gameObject.transform.position - transform.position;
-                _col.gameObject.transform.position += pushback.normalized * 5.0f;
+                _col.gameObject.transform.position += (pushback / pushback.magnitude);// * 5.0f; // supposedly better, but has same effect (works differently on castle level 2).
+                //_col.gameObject.transform.position += pushback.normalized;// *5.0f; // doesn't quite work
+                //_col.gameObject.GetComponent<Rigidbody2D>().velocity += pushback.normalized *5.0f; // Enemy AI overrides velocity so they look floaty over the pit.
                 return;
             }
             type = -1;

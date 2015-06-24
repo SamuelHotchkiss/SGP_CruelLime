@@ -26,6 +26,8 @@ public static class MNGR_Game
     public static int arrowPos;         // super hacky, don't have time to fix right now
 	public static void Initialize()
 	{
+        Application.runInBackground = false;
+
         if (theMan)
             return;
 
