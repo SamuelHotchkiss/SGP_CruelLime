@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11450448}
   - 61: {fileID: 6113688}
   - 212: {fileID: 21231332}
+  - 114: {fileID: 11496040}
   m_Layer: 10
   m_Name: PROJ_Twee
   m_TagString: Projectile
@@ -55,6 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  start: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   power: 40
   m_distance: 0
@@ -64,7 +66,17 @@ MonoBehaviour:
   lifetime: 0
   right: 0
   knockback: 0
-  hits: 4
+--- !u!114 &11496040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21231332
 SpriteRenderer:
   m_ObjectHideFlags: 1

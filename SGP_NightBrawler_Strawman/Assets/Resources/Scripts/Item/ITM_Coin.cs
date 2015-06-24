@@ -63,6 +63,11 @@ public class ITM_Coin : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             GetComponent<Rigidbody2D>().gravityScale = 0f;
         }
+
+        if (GetComponent<BoxCollider2D>().isTrigger)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 6.0f); // Move.  Up.  Now.
+        }
     }
 
 	//void OnTriggerStay2D(Collider2D col)
