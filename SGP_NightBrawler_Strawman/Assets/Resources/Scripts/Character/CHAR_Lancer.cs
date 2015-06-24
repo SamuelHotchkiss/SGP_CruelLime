@@ -175,7 +175,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
             else if (_curTmr > _maxTmr * 0.5f)
             {
                 ret.spriteIndex = specialSprites[2];
-                ret.damMult += chargeDur * 10.0f;
+                ret.damMult = Mathf.Max(1.0f, chargeDur * 5.0f);
                 ret.spawnproj = true;
             }
             else if (_curTmr >= 0)
@@ -265,7 +265,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
             {
                 if (i > NumLeaps - 1)
                     break;
-                if (Vector3.Distance(player.transform.position, Atargets[i].transform.position) < maxdist)
+                if (Vector2.Distance(player.transform.position, Atargets[i].transform.position) < maxdist)
                 {
                     Ltargets.Add(Atargets[i]);
                 }
@@ -295,7 +295,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
                     Act_facingRight = false;
                 }
 
-                player.transform.position = Vector3.Lerp(player.transform.position, targpos, Time.deltaTime * 10);
+                player.transform.position = Vector2.Lerp(player.transform.position, targpos, Time.deltaTime * 10);
 
                 if (_curTmr > _maxTmr * 0.8f)
                     ret.spriteIndex = specialSprites[0];
@@ -304,7 +304,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 else if (_curTmr > _maxTmr * 0.5f)
                 {
                     ret.spriteIndex = specialSprites[2];
-                    ret.damMult += chargeDur * 10.0f;
+                    ret.damMult = Mathf.Max(1.0f, chargeDur * 5.0f);
                     ret.spawnproj = true;
                 }
                 else if (_curTmr >= 0)
@@ -315,7 +315,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 if (_curTmr < 0.2f) // current special is done, do another if we can.
                 {
                     Ltargets.RemoveAt(0);
-                    //NumLeaps--;
+                    NumLeaps--;
 
                     if (Ltargets.Count <= 0 || NumLeaps <= 0)
                         Atargets = new GameObject[0];

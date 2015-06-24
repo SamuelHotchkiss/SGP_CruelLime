@@ -46,6 +46,7 @@ public class ACT_Enemy : MonoBehaviour
     public bool Act_SpawnProjOnDed;
     public bool Act_IsBoss;            // Don't worry, you can trust me!
     public bool Act_AudioHasPlay;
+    public bool Act_CanFallDownPits; // if false, pits will reject him.
 
     public float Act_baseAttackSpeed;   //How fast the enemy can shoot a projectile, For Enemies ONLY
     public float Act_currAttackSpeed;   //Checks to see if I can actually shoot a projectile, For Enemies ONLY
@@ -209,6 +210,7 @@ public class ACT_Enemy : MonoBehaviour
 
         damageMod = 1.0f;
         Act_AudioHasPlay = false;
+        Act_CanFallDownPits = false;
         Act_currAttackSpeed = Act_baseAttackSpeed;
         Act_currHP = Act_baseHP;
         Act_currPower = Act_basePower;
@@ -360,10 +362,12 @@ public class ACT_Enemy : MonoBehaviour
         if (target != null)
             distanceToTarget = Mathf.Abs(target.transform.position.x - transform.position.x);
 
-        switch (state)
-        {
-            case STATES.IDLE:
-                {
+        Act_CanFallDownPits = false;
+
+		switch (state)
+		{
+			case STATES.IDLE:
+				{
                     if (Act_IsIntelligent)
                         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     break;
@@ -546,7 +550,7 @@ public class ACT_Enemy : MonoBehaviour
                 }
             case STATES.ATTACKING:
                 {
-                    if (Act_currAttackSpeed <= 0.0f && projectile != null)
+                    if (Act_currAttackSpeed <= 0.0f && projectile != null && Act_currHP >= 1)
                     {
                         PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
                         clone.owner = gameObject;
@@ -600,19 +604,21 @@ public class ACT_Enemy : MonoBehaviour
                     {
                         state = STATES.IDLE;
                     }
-                    break;
-                }
-            case STATES.DEAD:
-                {
+                    Act_CanFallDownPits = true;
+					break;
+				}
+			case STATES.DEAD:
+				{
                     if (!Act_AudioHasPlay && Act_DyingSound != null)
                     {
                         AudioSource.PlayClipAtPoint(Act_DyingSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
                         Act_AudioHasPlay = true;
                     }
-                    break;
-                }
-        }
-    }
+                    Act_CanFallDownPits = true;
+					break;
+				}
+		} 
+	}
 
     public virtual void CheckThresholds()
     {

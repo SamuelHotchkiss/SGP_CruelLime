@@ -58,7 +58,7 @@ public class ACT_BOS_Bipolar : ACT_Enemy {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
 
         Camera Curr = Camera.current;
         float MaxLeft;
