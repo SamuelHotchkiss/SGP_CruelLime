@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 428280}
   - 212: {fileID: 21261448}
   - 60: {fileID: 6070264}
+  - 114: {fileID: 11454630}
   m_Layer: 0
   m_Name: RockWall
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.17000008, y: 5, z: 0}
+  m_LocalPosition: {x: 5, y: 5.19999981, z: 6.50187683}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,6 +91,17 @@ PolygonCollider2D:
       - {x: 4, y: -.875}
       - {x: 4, y: -.25}
       - {x: 3.625, y: .28125}
+--- !u!114 &11454630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21261448
 SpriteRenderer:
   m_ObjectHideFlags: 1
