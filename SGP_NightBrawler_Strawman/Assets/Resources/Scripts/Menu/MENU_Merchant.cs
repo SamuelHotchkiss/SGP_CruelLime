@@ -36,7 +36,7 @@ public class MENU_Merchant : MonoBehaviour {
         {
             if (Mer_ReviveButtons[i].IsActive())
                 Mer_ReviveText[i].text = "Revive " + MNGR_Game.currentParty[Mer_DeadCharacterIndex[i]].name + "\nCost: " 
-                    + (MNGR_Game.currentParty[Mer_DeadCharacterIndex[i]].CalcAverageLvl() * 24 * MNGR_Game.playerPosition).ToString();
+                    + (MNGR_Game.currentParty[Mer_DeadCharacterIndex[i]].CalcAverageLvl() * (6 + MNGR_Game.playerPosition)).ToString();
         }
 	}
 
@@ -106,7 +106,7 @@ public class MENU_Merchant : MonoBehaviour {
     public void RevivePartyMember()
     {
         int _ChrIndex = Mer_ButtonPress;
-        Mer_ReviveCost = MNGR_Game.currentParty[_ChrIndex].CalcAverageLvl() * 24 * MNGR_Game.playerPosition; //Current villige location may come into this later.
+        Mer_ReviveCost = MNGR_Game.currentParty[_ChrIndex].CalcAverageLvl() * (6 + MNGR_Game.playerPosition); //Current villige location may come into this later.
 
         if (MNGR_Game.wallet >= Mer_ReviveCost)
         {

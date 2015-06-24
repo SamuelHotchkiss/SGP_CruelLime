@@ -43,7 +43,7 @@ public class MENU_Inn : MonoBehaviour
             if (Inn_ReviveButtons[i].IsActive())
             {
                 Text ButtonTex = Inn_ReviveText[i];
-                ButtonTex.text = "Revive " + MNGR_Game.currentParty[Inn_DeadCharacterIndex[i]].name + "\nCost: " + (MNGR_Game.currentParty[Inn_DeadCharacterIndex[i]].CalcAverageLvl() * 12 * MNGR_Game.playerPosition).ToString();
+                ButtonTex.text = "Revive " + MNGR_Game.currentParty[Inn_DeadCharacterIndex[i]].name + "\nCost: " + (MNGR_Game.currentParty[Inn_DeadCharacterIndex[i]].CalcAverageLvl() * (3 + MNGR_Game.playerPosition)).ToString();
                 Inn_ReviveText[i].text = ButtonTex.text;
             }
         }
@@ -98,7 +98,7 @@ public class MENU_Inn : MonoBehaviour
     public void RevivePartyMember()
     {
         int _ChrIndex = Inn_ButtonPress;
-        Inn_ReviveCost = MNGR_Game.currentParty[_ChrIndex].CalcAverageLvl() * 12 * MNGR_Game.playerPosition; //Current villige location may come into this later.
+        Inn_ReviveCost = MNGR_Game.currentParty[_ChrIndex].CalcAverageLvl() * (3 + MNGR_Game.playerPosition); //Current villige location may come into this later.
 
         if (MNGR_Game.wallet >= Inn_ReviveCost)
         {
