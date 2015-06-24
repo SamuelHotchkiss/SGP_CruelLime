@@ -70,7 +70,9 @@ public class MENU_Village : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 
-        if (MNGR_Game.hordePosition == 3 && MNGR_Game.playerPosition == 1)
+        if ((MNGR_Game.hordePosition == 2 && MNGR_Game.arrowPos == 2 && MNGR_Game.HordeDelayVllOne == 0) 
+            || (MNGR_Game.hordePosition == 8 && MNGR_Game.arrowPos == 8 && MNGR_Game.HordeDelayVllTwo == 0) 
+            || (MNGR_Game.hordePosition == 14 && MNGR_Game.arrowPos == 14 && MNGR_Game.HordeDelayVllThree == 0)) 
             ChangeSceneButton("WorldMap");
         
             if (MNGR_Game.isNight)
