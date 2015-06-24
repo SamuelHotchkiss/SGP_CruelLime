@@ -276,7 +276,8 @@ public class ACT_Enemy : MonoBehaviour
 
         if (MNGR_Game.paused)
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			if (GetComponent<Rigidbody2D>())
+				GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             return;
         }
 
