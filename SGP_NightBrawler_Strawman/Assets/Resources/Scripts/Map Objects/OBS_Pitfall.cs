@@ -110,7 +110,7 @@ public class OBS_Pitfall : MonoBehaviour
             {
                 CleanOutDahPit();
                 Start();
-                if (GameObject.Find("_Horde") != null)
+                if (GameObject.Find("_Horde").gameObject.activeSelf == true)
                 {
                     Horde hordey = GameObject.Find("_Horde").GetComponent<Horde>();
                     hordey.transform.position = hordey.OGLoc;
