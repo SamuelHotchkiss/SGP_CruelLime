@@ -26,7 +26,7 @@ public class PROJ_Flamethrower : PROJ_Base
                 GetComponentInChildren<ParticleSystem>().startSpeed = -5.0f;
             }
 
-            transform.SetParent(owner.transform);
+            //transform.SetParent(owner.transform);
         }
         else if (owner.tag == "Enemy")
         {
@@ -37,7 +37,7 @@ public class PROJ_Flamethrower : PROJ_Base
             power += owner.GetComponent<ACT_Enemy>().Act_currPower;
 			power = (_damMult * power);
 
-            transform.SetParent(owner.transform);
+            //transform.SetParent(owner.transform);
 
             if (!_r)
             {
@@ -67,6 +67,8 @@ public class PROJ_Flamethrower : PROJ_Base
             timer -= Time.deltaTime;
         else
             ProjectileExpired();
+
+        gameObject.transform.position = owner.transform.position;
     }
 
     public override void OnTriggerEnter2D(Collider2D collision)
