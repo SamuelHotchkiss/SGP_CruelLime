@@ -48,7 +48,7 @@ public class PROJ_Base : MonoBehaviour
                 velocity = new Vector2(1, 0);// * speed;
             else
             {
-                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 velocity = new Vector2(-1, 0);// * speed;
             }
         }
