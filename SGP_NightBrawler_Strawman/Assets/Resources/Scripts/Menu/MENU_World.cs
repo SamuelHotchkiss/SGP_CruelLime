@@ -75,9 +75,9 @@ public class MENU_World : MonoBehaviour
 		{
 			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
 			if (MNGR_Game.theInventory.containers[i].count < 1)
-				inventoryImages[i].gameObject.SetActive(false);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 			else
-				inventoryImages[i].gameObject.SetActive(true);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
 		}
 
         Input.simulateMouseWithTouches = true;
@@ -89,9 +89,9 @@ public class MENU_World : MonoBehaviour
 		{
 			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
 			if (MNGR_Game.theInventory.containers[i].count < 1)
-				inventoryImages[i].gameObject.SetActive(false);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 			else
-				inventoryImages[i].gameObject.SetActive(true);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
 		}
 	}
 
@@ -197,6 +197,10 @@ public class MENU_World : MonoBehaviour
 
 	public void UsePotion(int _index)
 	{
+		if (MNGR_Game.theInventory.containers[_index].count <= 0)
+			return;
+
+
 		if (MNGR_Game.equippedItem != -1)
 			MNGR_Game.theInventory.containers[MNGR_Game.equippedItem].count++;
 
@@ -204,15 +208,15 @@ public class MENU_World : MonoBehaviour
 		MNGR_Game.equippedItem = _index;
 
 		if (MNGR_Game.theInventory.containers[_index].count <= 0)
-			inventoryImages[_index].gameObject.SetActive(false);
+			inventoryImages[_index].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 
 		for (int i = 0; i < inventoryCounts.Length; i++)
 		{
 			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
 			if (MNGR_Game.theInventory.containers[i].count < 1)
-				inventoryImages[i].gameObject.SetActive(false);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 			else
-				inventoryImages[i].gameObject.SetActive(true);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
 		}
 
 		GameObject.Find("Held_Item_Image").gameObject.GetComponent<Image>().sprite = inventoryImages[_index].sprite;
