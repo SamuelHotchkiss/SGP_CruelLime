@@ -15,8 +15,8 @@ public class MENU_Credits : MonoBehaviour {
 
     void Update()
     {
-        Menu_CreditTimer -= Time.deltaTime;
-        if (Menu_CreditTimer <= 0.0f)
+        //Menu_CreditTimer -= Time.deltaTime;
+        if (Menu_Credits.transform.position.y > 1750)
             StartCoroutine(WaitForSound());
 
         float GoUp = Menu_Credits.transform.position.y + (Menu_CreditSpeed * Time.deltaTime);
