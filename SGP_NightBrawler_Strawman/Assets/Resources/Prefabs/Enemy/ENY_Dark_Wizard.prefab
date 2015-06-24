@@ -77,7 +77,7 @@ MonoBehaviour:
   xRange: 50
   yRange: 100
   Coin: {fileID: 11424130, guid: 043da4a37e68e6f498848557d1a31c4c, type: 2}
-  potionChance: .100000001
+  potionChance: .200000003
   potions:
   - {fileID: 11420842, guid: 3c251abbfd417ca45bb3b6ad0d58075a, type: 2}
   - {fileID: 11486726, guid: 7a87a73b8d2c7e046ba29b26fded9485, type: 2}
@@ -293,6 +293,7 @@ MonoBehaviour:
   Act_SpawnProjOnDed: 0
   Act_IsBoss: 0
   Act_AudioHasPlay: 0
+  Act_CanFallDownPits: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   Act_HurtSound: {fileID: 0}
@@ -359,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
 --- !u!212 &21254476
 SpriteRenderer:
   m_ObjectHideFlags: 1
