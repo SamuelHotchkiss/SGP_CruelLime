@@ -336,7 +336,7 @@ public class ACT_BOS_Miner : ACT_Enemy
 
 					explosion.GetComponent<PROJ_Explosion>().power = 200;
 
-					PROJ_Base clone = (PROJ_Explosion)Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+					PROJ_Explosion clone = Instantiate(explosion, gameObject.transform.position, Quaternion.identity) as PROJ_Explosion;
 					if (GetComponent<ITM_DropLoot>())
 					{
 						GetComponent<ITM_DropLoot>().DropCoin(transform.position);

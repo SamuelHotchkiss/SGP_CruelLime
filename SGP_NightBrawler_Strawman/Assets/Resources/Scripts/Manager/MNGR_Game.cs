@@ -18,7 +18,7 @@ public static class MNGR_Game
 
 	public static MNGR_Inventory theInventory = new MNGR_Inventory();
 	public static bool isNight = false;
-	public static int hordePosition, HordeDelay, playerPosition, wallet;
+    public static int hordePosition, HordeDelayVllOne, HordeDelayVllTwo, HordeDelayVllThree, playerPosition, wallet;
 	public static bool paused;
 	public static bool dangerZone;      // don't they know you live in the DANGAH ZOWN?! // determines if the horde is on the same level as the player
     public static string NextLevel;     // used by CharacterSelection scene, determines which level to load when exiting that scene.
@@ -36,7 +36,7 @@ public static class MNGR_Game
         currentLevel = "NEW GAME";
 		NextLevel = "WorldMap";
 
-        hordePosition = HordeDelay = playerPosition = wallet = 0;
+        hordePosition = HordeDelayVllOne = HordeDelayVllTwo = HordeDelayVllThree = playerPosition = wallet = 0;
         paused = dangerZone = false;
         wallet = 100;
         arrowPos = 0;
@@ -78,15 +78,29 @@ public static class MNGR_Game
 
     public static void UpdateHorde()
     {
-		if (hordePosition == 2 || hordePosition == 8 || hordePosition == 14)
-		{
-			if (HordeDelay == 0)
-				hordePosition++;
-			else
-				HordeDelay--;
-		}
-		else
-			hordePosition++;
+        if (hordePosition == 2)
+        {
+            if (HordeDelayVllOne == 0)
+                hordePosition++;
+            else
+                HordeDelayVllOne--;
+        }
+        else if (hordePosition == 8) 
+        {
+            if (HordeDelayVllTwo == 0)
+                hordePosition++;
+            else
+                HordeDelayVllTwo--;
+        }
+        else if (hordePosition == 14)
+        {
+             if (HordeDelayVllThree == 0)
+                hordePosition++;
+            else
+                HordeDelayVllThree--;
+        }
+        else
+            hordePosition++;
     }  
     
     public static bool AmIMobile()
