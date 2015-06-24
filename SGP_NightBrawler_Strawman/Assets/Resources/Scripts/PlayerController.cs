@@ -171,6 +171,8 @@ public class PlayerController : MonoBehaviour
                 horz = vert = 0;
         }
 
+        // S: for fixing the stupid hurt sound effect bug
+        ACT_CHAR_Base.STATES oldState = currentState;
 
         // The meat of The Situation.
         switch (currentState)
@@ -227,7 +229,8 @@ public class PlayerController : MonoBehaviour
 
                 if (!AudioHasPlay)
                 {
-                    AudioSource.PlayClipAtPoint(Ply_HurtSounds[party[currChar].Act_ActID], new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+                    if(oldState != ACT_CHAR_Base.STATES.HURT)
+                        AudioSource.PlayClipAtPoint(Ply_HurtSounds[party[currChar].Act_ActID], new Vector3(0, 0, 0), MNGR_Options.sfxVol);
                     AudioHasPlay = true;
                 }
                 if (Pc_HasKnockBack)
