@@ -151,29 +151,32 @@ public class ACT_BOS_Ent : ACT_Enemy
 
         if (hpThresh >= Act_currHP)
         {
-            if (Act_currHP <= (Act_baseHP * 0.25f) && Ent_NewMaxRegen > 0.0f)
+            if (target != null)
             {
-                Ent_HealHP = true;
-                if (distThresh + 5 >= Vector3.Distance(target.transform.position, transform.position))
+                if (Act_currHP <= (Act_baseHP * 0.25f) && Ent_NewMaxRegen > 0.0f)
                 {
-                    currBehavior = behaviors[1]; //Pushback
-                    Knck_Cooldown = 0.0f;
-                    currBehavior.PerformBehavior();
-                    Debug.Log("PUCH BACK U FOOLS");
+                    Ent_HealHP = true;
+                    if (distThresh + 5 >= Vector3.Distance(target.transform.position, transform.position))
+                    {
+                        currBehavior = behaviors[1]; //Pushback
+                        Knck_Cooldown = 0.0f;
+                        currBehavior.PerformBehavior();
+                        Debug.Log("PUCH BACK U FOOLS");
+                    }
+                    state = STATES.SPECIAL;
+                    Spw_BaseSpawnCoolDown = Spw_baseSpawnPerSec * 5.0f;
                 }
-                state = STATES.SPECIAL;
-                Spw_BaseSpawnCoolDown = Spw_baseSpawnPerSec * 5.0f;
-            }
-            else if (Act_currHP <= Act_baseHP * 0.5f)
-            {
-                Spw_BaseSpawnCoolDown = Spw_baseSpawnPerSec * 4.0f;
-                Act_currPower = Act_basePower;          //Full Power potential
-                hpThresh = (Act_baseHP * 0.25f);   //If its HP is at 25% this will activate.
-            }
-            else if (Act_currHP <= Act_baseHP * 0.75f)
-            {
-                Act_currPower = (Act_basePower * 0.9f);    //Power Increse to 90% of its potential
-                hpThresh = (Act_baseHP * 0.5f);            //If its HP is at 50% this will activate.
+                else if (Act_currHP <= Act_baseHP * 0.5f)
+                {
+                    Spw_BaseSpawnCoolDown = Spw_baseSpawnPerSec * 4.0f;
+                    Act_currPower = Act_basePower;          //Full Power potential
+                    hpThresh = (Act_baseHP * 0.25f);   //If its HP is at 25% this will activate.
+                }
+                else if (Act_currHP <= Act_baseHP * 0.75f)
+                {
+                    Act_currPower = (Act_basePower * 0.9f);    //Power Increse to 90% of its potential
+                    hpThresh = (Act_baseHP * 0.5f);            //If its HP is at 50% this will activate.
+                } 
             }
         }
     }
