@@ -9,6 +9,12 @@ public class PROJ_MirrorShield : PROJ_Explosion_Redirect
     {
         base.Initialize(_r, _damMult);
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, 0);
-        transform.SetParent(owner.transform);
+        //transform.SetParent(owner.transform);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        transform.position = new Vector3(owner.transform.position.x, owner.transform.position.y + 0.75f, 0);
     }
 }
