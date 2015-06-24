@@ -77,14 +77,16 @@ public static class MNGR_Game
     }
 
     public static void UpdateHorde()
-    { 
-        if (hordePosition == 2 || hordePosition == 8 || hordePosition == 14) 
-        {
-            if (HordeDelay == 0)
-                hordePosition++;
-            else
-                HordeDelay--; 
-        }
+    {
+		if (hordePosition == 2 || hordePosition == 8 || hordePosition == 14)
+		{
+			if (HordeDelay == 0)
+				hordePosition++;
+			else
+				HordeDelay--;
+		}
+		else
+			hordePosition++;
     }  
     
     public static bool AmIMobile()

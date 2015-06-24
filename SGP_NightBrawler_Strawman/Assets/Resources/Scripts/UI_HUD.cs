@@ -177,7 +177,6 @@ public class UI_HUD : MonoBehaviour
             default:
                 break;
         }
-
     }
 
     public void TogglePause()
