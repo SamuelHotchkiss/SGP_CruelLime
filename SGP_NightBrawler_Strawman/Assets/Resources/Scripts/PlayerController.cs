@@ -274,19 +274,19 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        //if (Input.GetKey(KeyCode.K))
-        //{
-        //    party[currChar].Act_currHP -= 1;
-        //    if (party[currChar].Act_currHP <= 0)
-        //    {
-        //        party[currChar].Act_currHP = 0;
-        //        ChangeState(ACT_CHAR_Base.STATES.DYING);
-        //    }
-        //    else
-        //    {
-        //        ChangeState(ACT_CHAR_Base.STATES.HURT);
-        //    }
-        //}
+		if (Input.GetKey(KeyCode.K))
+		{
+			party[currChar].Act_currHP -= 1;
+			if (party[currChar].Act_currHP <= 0)
+			{
+				party[currChar].Act_currHP = 0;
+				ChangeState(ACT_CHAR_Base.STATES.DYING);
+			}
+			else
+			{
+				ChangeState(ACT_CHAR_Base.STATES.HURT);
+			}
+		}
         //else if (Input.GetKeyDown(KeyCode.L))
         //{
         //    MNGR_Game.wallet += 10;
@@ -535,6 +535,11 @@ public class PlayerController : MonoBehaviour
     // S: til this do us part
     public void Death()
     {
+		if (MNGR_Game.dangerZone)
+		{
+			MurderEveryone();
+			return;
+		}
         isAlive = false;
 
         for (int i = 0; i < party.Length; i++)
