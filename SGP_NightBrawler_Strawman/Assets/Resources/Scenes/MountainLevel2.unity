@@ -8033,7 +8033,7 @@ RectTransform:
   m_LocalScale: {x: .622395813, y: .622395813, z: .622395813}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 199.979996, y: 211.919998}
@@ -9353,6 +9353,14 @@ Prefab:
     - target: {fileID: 494694, guid: 5164955c311310648972b309046c7023, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478874, guid: 5164955c311310648972b309046c7023, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1126303766}
+    - target: {fileID: 11478874, guid: 5164955c311310648972b309046c7023, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PreviewSFXVolume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5164955c311310648972b309046c7023, type: 2}
