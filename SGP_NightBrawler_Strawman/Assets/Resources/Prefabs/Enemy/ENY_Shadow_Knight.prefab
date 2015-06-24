@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911c4397d91de014695c80feda702f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites: []
 --- !u!114 &11467262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,6 +305,7 @@ MonoBehaviour:
   Act_SpawnProjOnDed: 0
   Act_IsBoss: 0
   Act_AudioHasPlay: 0
+  Act_CanFallDownPits: 0
   Act_baseAttackSpeed: .5
   Act_currAttackSpeed: 0
   Act_HurtSound: {fileID: 0}
@@ -330,7 +332,7 @@ MonoBehaviour:
   NumDeadHits: 4
   squad: []
   maxBuffRange: 5
-  buffIndex: 1
+  buffIndex: 5
   Spw_Critter: {fileID: 0}
   Spw_CritterThreshold: 0
   Spw_CrittersCreated: 0
