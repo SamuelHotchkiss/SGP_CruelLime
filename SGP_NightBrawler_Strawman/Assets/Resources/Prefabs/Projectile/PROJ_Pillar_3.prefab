@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11420750}
   - 61: {fileID: 6109832}
   - 212: {fileID: 21218566}
+  - 114: {fileID: 11411578}
   m_Layer: 10
   m_Name: PROJ_Pillar_3
   m_TagString: Projectile
@@ -43,6 +44,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2}
   serializedVersion: 2
   m_Size: {x: 1, y: 5}
+--- !u!114 &11411578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfb62b00beb1443aa1cf68c4ce34b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11420750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  start: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   power: 40
   m_distance: 0
