@@ -325,8 +325,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 }
 
             }
-
-            if (Ltargets.Count <= 0) // proceed with normal special attack if there are no targets.
+            else if (Ltargets.Count <= 0) // proceed with normal special attack if there are no targets.
             {
                 if (_curTmr > _maxTmr * 0.8f)
                 {
