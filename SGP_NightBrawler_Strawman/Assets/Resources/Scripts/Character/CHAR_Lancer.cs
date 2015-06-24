@@ -8,6 +8,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
 {
     public int NumLeaps;
     List<GameObject> Ltargets;
+
     public CHAR_Lancer()
     {
         name = "Lancer"; // not to be confused with Lancelot, or his lesser known cousin, Lancealitte
@@ -253,7 +254,6 @@ public class CHAR_Lancer : ACT_CHAR_Base
         else if (chargeTimer == 0.0f) // this is where the fun begins.
         {
             GameObject[] Atargets;
-
             if (Ltargets.Count <= 0)
                 Atargets = GameObject.FindGameObjectsWithTag("Enemy");
             else
@@ -265,6 +265,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
             {
                 if (i > NumLeaps - 1)
                     break;
+
                 if (Vector2.Distance(player.transform.position, Atargets[i].transform.position) < maxdist)
                 {
                     Ltargets.Add(Atargets[i]);
@@ -324,6 +325,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 }
 
             }
+
             if (Ltargets.Count <= 0) // proceed with normal special attack if there are no targets.
             {
                 if (_curTmr > _maxTmr * 0.8f)
@@ -370,6 +372,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
         }
 
     }
+
     public override void UpgradeSpecial()
     {
     }
