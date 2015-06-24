@@ -28,7 +28,7 @@ public class MENU_Defense : MonoBehaviour {
         if (Def_UpgradesNum < 3)
             Def_ButtonText.text = "Days Delay: " + Def_UpgradesNum.ToString() + "\nCost: " + Def_Cost.ToString();
         else
-            Def_ButtonText.text = "Days Delay: " + Def_UpgradesNum.ToString() + "\nMax Days Reach";
+            Def_ButtonText.text = "Days Delay: " + Def_UpgradesNum.ToString() + "\nMax Days Reached";
     }
 
     public void DealayHoard()
