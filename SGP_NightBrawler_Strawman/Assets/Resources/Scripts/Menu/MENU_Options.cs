@@ -73,7 +73,16 @@ public class MENU_Options : MonoBehaviour
 
     public void PreviewSFXVolume()
     {
-        AudioSource.PlayClipAtPoint(Menu_SelectedSound, new Vector3(0, 0, 0), MNGR_Options.sfxVol);
+        float oldTimey = Time.timeScale;
+
+        if(oldTimey == 0)
+            Time.timeScale = 1.0f;
+
+        AudioSource.PlayClipAtPoint(Menu_SelectedSound, Camera.main.transform.position, MNGR_Options.sfxVol);
+
+        if (oldTimey == 0)
+            Time.timeScale = 0;
+
     }
 
     public void ChangeMusicVolume(float value)
