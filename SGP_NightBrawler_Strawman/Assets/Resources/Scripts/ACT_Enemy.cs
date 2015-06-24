@@ -550,7 +550,7 @@ public class ACT_Enemy : MonoBehaviour
                 }
             case STATES.ATTACKING:
                 {
-                    if (Act_currAttackSpeed <= 0.0f && projectile != null)
+                    if (Act_currAttackSpeed <= 0.0f && projectile != null && Act_currHP >= 1)
                     {
                         PROJ_Base clone = (PROJ_Base)Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
                         clone.owner = gameObject;

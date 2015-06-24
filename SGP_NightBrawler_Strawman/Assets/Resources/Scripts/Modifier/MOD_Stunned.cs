@@ -25,7 +25,10 @@ public class MOD_Stunned : MOD_Base
     public override void ModifyActor()   //Just a virtual fuction for its children
     {
         for (int i = 0; i < player.party.Length; i++)
-            player.party[i].state = ACT_CHAR_Base.STATES.HURT;
+        {
+            if(player.party[i].Act_currHP > 0)
+                player.party[i].state = ACT_CHAR_Base.STATES.HURT;
+        }
     }
 
     public override void ModifyEnemy()

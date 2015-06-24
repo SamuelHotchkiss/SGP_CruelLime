@@ -31,6 +31,8 @@ public class MENU_World : MonoBehaviour
 
         Sky.gameObject.SetActive(false);
 
+        MNGR_Game.usedItem = false;
+
         if (MNGR_Game.arrowPos == MNGR_Game.hordePosition)
             MNGR_Game.dangerZone = true;
         else
