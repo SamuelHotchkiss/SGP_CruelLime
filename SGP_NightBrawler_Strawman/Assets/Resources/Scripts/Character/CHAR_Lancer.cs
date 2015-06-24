@@ -175,7 +175,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
             else if (_curTmr > _maxTmr * 0.5f)
             {
                 ret.spriteIndex = specialSprites[2];
-                ret.damMult += chargeDur * 10.0f;
+                ret.damMult = Mathf.Max(1.0f, chargeDur * 5.0f);
                 ret.spawnproj = true;
             }
             else if (_curTmr >= 0)
@@ -304,7 +304,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 else if (_curTmr > _maxTmr * 0.5f)
                 {
                     ret.spriteIndex = specialSprites[2];
-                    ret.damMult += chargeDur * 10.0f;
+                    ret.damMult = Mathf.Max(1.0f, chargeDur * 5.0f);
                     ret.spawnproj = true;
                 }
                 else if (_curTmr >= 0)
