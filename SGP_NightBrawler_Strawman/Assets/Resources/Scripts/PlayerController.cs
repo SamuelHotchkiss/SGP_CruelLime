@@ -271,6 +271,7 @@ public class PlayerController : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 break;
             case ACT_CHAR_Base.STATES.USE:
+                horz = vert = 0;
                 break;
         }
 
