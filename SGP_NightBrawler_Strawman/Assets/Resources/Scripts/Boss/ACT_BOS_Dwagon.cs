@@ -31,7 +31,7 @@ public class ACT_BOS_Dwagon : ACT_Enemy
 	}
 
 	// Update is called once per frame
-	void Update()
+	public override void Update()
     {
         currTime -= Time.deltaTime;
         if (currTime < 0)
