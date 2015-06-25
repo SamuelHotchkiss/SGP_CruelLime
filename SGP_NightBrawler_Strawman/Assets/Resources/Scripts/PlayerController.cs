@@ -708,7 +708,7 @@ public class PlayerController : MonoBehaviour
         {
             if (MNGR_Game.theInventory.containers[0].count > 0)
             {
-                MNGR_Item.AttachModifier(3, gameObject);
+                MNGR_Item.AttachModifier(0, gameObject);
                 MNGR_Game.theInventory.containers[0].count--;
             }
 
