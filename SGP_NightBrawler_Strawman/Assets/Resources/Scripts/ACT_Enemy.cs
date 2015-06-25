@@ -355,7 +355,8 @@ public class ACT_Enemy : MonoBehaviour
 
             if (kamikazeTimer <= 0.0f)
             {
-                Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+                GameObject clone = (GameObject)Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+                clone.GetComponent<PROJ_Explosion>().Initialize();
                 Destroy(gameObject);
             }
         }
@@ -379,27 +380,27 @@ public class ACT_Enemy : MonoBehaviour
                     {
                         if (isMelee)
                         {
-                            if (target.transform.position.x > transform.position.x)
+                            if (target.transform.position.x > transform.position.x + 0.3f)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
                                 vel = new Vector2(Act_currSpeed, vel.y);
                                 GetComponent<Rigidbody2D>().velocity = vel;
                                 Act_facingRight = true;
                             }
-                            else
+							else if (target.transform.position.x < transform.position.x + 0.3f)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
                                 vel = new Vector2(-Act_currSpeed, vel.y);
                                 GetComponent<Rigidbody2D>().velocity = vel;
                                 Act_facingRight = false;
                             }
-                            if (target.transform.position.y > transform.position.y)
+                            if (target.transform.position.y > transform.position.y + 0.3f)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
                                 vel = new Vector2(vel.x, Act_currSpeed);
                                 GetComponent<Rigidbody2D>().velocity = vel;
                             }
-                            else
+							else if (target.transform.position.y < transform.position.y + 0.3f)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
                                 vel = new Vector2(vel.x, -Act_currSpeed);
@@ -409,7 +410,7 @@ public class ACT_Enemy : MonoBehaviour
                         }
                         else
                         {
-                            if (target.transform.position.x > transform.position.x)
+                            if (target.transform.position.x > transform.position.x + 0.3f)
                             {
                                 if (distanceToTarget < maxDistance)
                                 {
@@ -426,7 +427,7 @@ public class ACT_Enemy : MonoBehaviour
                                     Act_facingRight = true;
                                 }
                             }
-                            else if (target.transform.position.x < transform.position.x)
+                            else if (target.transform.position.x < transform.position.x + 0.3f)
                             {
                                 if (distanceToTarget < maxDistance)
                                 {
@@ -443,13 +444,13 @@ public class ACT_Enemy : MonoBehaviour
                                     Act_facingRight = false;
                                 }
                             }
-                            if (target.transform.position.y > transform.position.y)
+							if (target.transform.position.y > transform.position.y + 0.3f)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
                                 vel = new Vector2(vel.x, Act_currSpeed);
                                 GetComponent<Rigidbody2D>().velocity = vel;
                             }
-                            else
+							else if (target.transform.position.y < transform.position.y + 0.3f)
                             {
                                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
                                 vel = new Vector2(vel.x, -Act_currSpeed);
@@ -464,88 +465,88 @@ public class ACT_Enemy : MonoBehaviour
                 {
                     if (target != null)
                     {
-                        if (isMelee)
-                        {
-                            SetCurrSpeed(Act_baseSpeed + 1);
-                            if (target.transform.position.x > transform.position.x)
-                            {
-                                Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                vel = new Vector2(Act_currSpeed, vel.y);
-                                GetComponent<Rigidbody2D>().velocity = vel;
-                                Act_facingRight = true;
-                            }
-                            else
-                            {
-                                Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                vel = new Vector2(-Act_currSpeed, vel.y);
-                                GetComponent<Rigidbody2D>().velocity = vel;
-                                Act_facingRight = false;
-                            }
-                            if (target.transform.position.y > transform.position.y)
-                            {
-                                Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                vel = new Vector2(vel.x, Act_currSpeed);
-                                GetComponent<Rigidbody2D>().velocity = vel;
-                            }
-                            else
-                            {
-                                Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                vel = new Vector2(vel.x, -Act_currSpeed);
-                                GetComponent<Rigidbody2D>().velocity = vel;
-                            }
-                            break;
-                        }
-                        else
-                        {
-                            SetCurrSpeed(Act_baseSpeed + 1);
-                            if (target.transform.position.x > transform.position.x)
-                            {
-                                if (distanceToTarget < maxDistance)
-                                {
-                                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                    vel = new Vector2(-Act_currSpeed, vel.y);
-                                    GetComponent<Rigidbody2D>().velocity = vel;
-                                    Act_facingRight = true;
-                                }
-                                else
-                                {
-                                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                    vel = new Vector2(Act_currSpeed, vel.y);
-                                    GetComponent<Rigidbody2D>().velocity = vel;
-                                    Act_facingRight = true;
-                                }
-                            }
-                            else if (target.transform.position.x < transform.position.x)
-                            {
-                                if (distanceToTarget < maxDistance)
-                                {
-                                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                    vel = new Vector2(Act_currSpeed, vel.y);
-                                    GetComponent<Rigidbody2D>().velocity = vel;
-                                    Act_facingRight = false;
-                                }
-                                else
-                                {
-                                    Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                    vel = new Vector2(-Act_currSpeed, vel.y);
-                                    GetComponent<Rigidbody2D>().velocity = vel;
-                                    Act_facingRight = false;
-                                }
-                            }
-                            if (target.transform.position.y > transform.position.y)
-                            {
-                                Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                vel = new Vector2(vel.x, Act_currSpeed);
-                                GetComponent<Rigidbody2D>().velocity = vel;
-                            }
-                            else
-                            {
-                                Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-                                vel = new Vector2(vel.x, -Act_currSpeed);
-                                GetComponent<Rigidbody2D>().velocity = vel;
-                            }
-                            break;
-                        }
+						if (isMelee)
+						{
+							SetCurrSpeed(Act_baseSpeed + 1);
+							if (target.transform.position.x > transform.position.x + 0.3f)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = true;
+							}
+							else if (target.transform.position.x < transform.position.x + 0.3f)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(-Act_currSpeed, vel.y);
+								GetComponent<Rigidbody2D>().velocity = vel;
+								Act_facingRight = false;
+							}
+							if (target.transform.position.y > transform.position.y + 0.3f)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(vel.x, Act_currSpeed);
+								GetComponent<Rigidbody2D>().velocity = vel;
+							}
+							else if (target.transform.position.y < transform.position.y + 0.3f)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(vel.x, -Act_currSpeed);
+								GetComponent<Rigidbody2D>().velocity = vel;
+							}
+							break;
+						}
+						else
+						{
+							SetCurrSpeed(Act_baseSpeed + 1);
+							if (target.transform.position.x > transform.position.x + 0.3f)
+							{
+								if (distanceToTarget < maxDistance)
+								{
+									Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+									vel = new Vector2(-Act_currSpeed, vel.y);
+									GetComponent<Rigidbody2D>().velocity = vel;
+									Act_facingRight = true;
+								}
+								else
+								{
+									Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+									vel = new Vector2(Act_currSpeed, vel.y);
+									GetComponent<Rigidbody2D>().velocity = vel;
+									Act_facingRight = true;
+								}
+							}
+							else if (target.transform.position.x < transform.position.x + 0.3f)
+							{
+								if (distanceToTarget < maxDistance)
+								{
+									Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+									vel = new Vector2(Act_currSpeed, vel.y);
+									GetComponent<Rigidbody2D>().velocity = vel;
+									Act_facingRight = false;
+								}
+								else
+								{
+									Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+									vel = new Vector2(-Act_currSpeed, vel.y);
+									GetComponent<Rigidbody2D>().velocity = vel;
+									Act_facingRight = false;
+								}
+							}
+							if (target.transform.position.y > transform.position.y + 0.3f)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(vel.x, Act_currSpeed);
+								GetComponent<Rigidbody2D>().velocity = vel;
+							}
+							else if (target.transform.position.y < transform.position.y + 0.3f)
+							{
+								Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+								vel = new Vector2(vel.x, -Act_currSpeed);
+								GetComponent<Rigidbody2D>().velocity = vel;
+							}
+							break;
+						}
                     }
                     break;
                 }
