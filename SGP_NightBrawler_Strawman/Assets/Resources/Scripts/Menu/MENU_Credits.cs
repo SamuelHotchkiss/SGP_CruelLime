@@ -4,7 +4,7 @@ using System.Collections;
 public class MENU_Credits : MonoBehaviour {
 
     public AudioClip Menu_SelectedSound;
-    public GameObject Menu_Credits;
+    public GameObject Menu_Credits, Ref_Point;
     public float Menu_CreditTimer;
     public float Menu_CreditSpeed;
 
@@ -16,7 +16,7 @@ public class MENU_Credits : MonoBehaviour {
     void Update()
     {
         //Menu_CreditTimer -= Time.deltaTime;
-        if (Menu_Credits.transform.position.y > 1750)
+        if (Menu_Credits.transform.position.y > Ref_Point.transform.position.y)
             StartCoroutine(WaitForSound());
 
         float GoUp = Menu_Credits.transform.position.y + (Menu_CreditSpeed * Time.deltaTime);

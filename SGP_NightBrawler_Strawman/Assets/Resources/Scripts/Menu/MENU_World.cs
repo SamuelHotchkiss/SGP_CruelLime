@@ -98,26 +98,26 @@ public class MENU_World : MonoBehaviour
     // S: for use in testing
     public void SetLevel(int i)
     {
-        MNGR_Game.playerPosition = i;
+        //MNGR_Game.playerPosition = i;
 
-        playIndex = MNGR_Game.playerPosition;
-        hordeIndex = MNGR_Game.hordePosition;
-        playPos = MNGR_Game.playerPosition * 2;
-		MNGR_Game.arrowPos = playPos;
+        //playIndex = MNGR_Game.playerPosition;
+        //hordeIndex = MNGR_Game.hordePosition;
+        //playPos = MNGR_Game.playerPosition * 2;
+        //MNGR_Game.arrowPos = playPos;
 
-		if (MNGR_Game.arrowPos == MNGR_Game.hordePosition)
-			MNGR_Game.dangerZone = true;
-		else
-			MNGR_Game.dangerZone = false;
+        //if (MNGR_Game.arrowPos == MNGR_Game.hordePosition)
+        //    MNGR_Game.dangerZone = true;
+        //else
+        //    MNGR_Game.dangerZone = false;
 
-        playerPos.text = "Player Position: " + levels[playIndex].GetComponentInChildren<Text>().text;
-        hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();
+        //playerPos.text = "Player Position: " + levels[playIndex].GetComponentInChildren<Text>().text;
+        //hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();
 
-        Vector3 playMarker = new Vector3(hordeSteps[playPos].transform.position.x, hordeSteps[playPos].transform.position.y + 73.0f, 0);
-        Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 73.0f, 0);
+        //Vector3 playMarker = new Vector3(hordeSteps[playPos].transform.position.x, hordeSteps[playPos].transform.position.y + 73.0f, 0);
+        //Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 73.0f, 0);
 
-        playerArrow.transform.position = playMarker;
-        hordeArrow.transform.position = hordeMarker;
+        //playerArrow.transform.position = playMarker;
+        //hordeArrow.transform.position = hordeMarker;
     }
 
     public void StartLevel()
