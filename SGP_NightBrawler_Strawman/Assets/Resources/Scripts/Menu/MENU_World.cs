@@ -54,8 +54,8 @@ public class MENU_World : MonoBehaviour
 
         MNGR_Game.currentLevel = levels[playIndex].GetComponentInChildren<Text>().text;
 
-        Vector3 playMarker = new Vector3(hordeSteps[playPos].transform.position.x, hordeSteps[playPos].transform.position.y + 73.0f, 0);
-        Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 73.0f, 0);
+        Vector3 playMarker = new Vector3(hordeSteps[playPos].transform.position.x, hordeSteps[playPos].transform.position.y + 110.0f, 0);
+        Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 60.0f, 0);
 
         playerArrow.transform.position = playMarker;
         hordeArrow.transform.position = hordeMarker;
