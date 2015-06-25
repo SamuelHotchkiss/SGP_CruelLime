@@ -192,6 +192,7 @@ public class MNGR_Animation_Player : MonoBehaviour
                 break;
             case ACT_CHAR_Base.STATES.USE:
                 // Special FX because Logan didn't actually animate these
+                SetSprite(0);
                 break;
 
             case ACT_CHAR_Base.STATES.DANCE:
