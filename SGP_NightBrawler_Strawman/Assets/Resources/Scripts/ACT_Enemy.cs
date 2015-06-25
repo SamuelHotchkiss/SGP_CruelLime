@@ -355,7 +355,8 @@ public class ACT_Enemy : MonoBehaviour
 
             if (kamikazeTimer <= 0.0f)
             {
-                Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+                GameObject clone = (GameObject)Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+                clone.GetComponent<PROJ_Explosion>().Initialize();
                 Destroy(gameObject);
             }
         }
