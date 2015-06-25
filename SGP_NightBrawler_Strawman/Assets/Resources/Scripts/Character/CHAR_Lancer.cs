@@ -151,13 +151,17 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 ret.spriteIndex = attack1Sprites[1];
 
             if (_curTmr < 0.2f)
+            {
+                //GameObject.FindGameObjectWithTag("Player").GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
+            }
         }
         else if (chargeTimer != 0.0f) // || !Input.GetButton("Special/Cancel") )
         {
             chargeDur = chargeTimerMax - chargeTimer;
             chargeTimer = 0.0f;
 
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
         }
         else if (chargeTimer == 0.0f)
@@ -214,13 +218,16 @@ public class CHAR_Lancer : ACT_CHAR_Base
         if (chargeTimer > 0 && (Input.GetButton("Special/Cancel")
             || (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)))
         {
+            if (chargeTimer == chargeTimerMax)
+                NumLeaps = 0;
+
             chargeTimer -= Time.deltaTime;
 
             // really weird correction
             if (chargeTimer == 0.0f)
                 chargeTimer -= Time.deltaTime;
 
-            if (chargeTimer > chargeTimerMax * 0.8f)
+            if (chargeTimer > chargeTimerMax * 0.5f)
             {
                 ret.spriteIndex = attack1Sprites[0];
                 if (NumLeaps < 1)
@@ -233,31 +240,33 @@ public class CHAR_Lancer : ACT_CHAR_Base
                     NumLeaps = 2;
             }
 
-            if (_curTmr < 0.2f)
+            if (_curTmr < _maxTmr * 0.1f)
             {
+                //GameObject.FindGameObjectWithTag("Player").GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
 
                 ret.spriteIndex = attack1Sprites[1];
-                if (NumLeaps < 3)
-                    NumLeaps = 3;
+                if (NumLeaps < 4)
+                    NumLeaps = 4;
             }
         }
         else if (chargeTimer != 0.0f)
         {
             chargeDur = chargeTimerMax - chargeTimer;
             chargeTimer = 0.0f;
-            if (NumLeaps < 4)
-                NumLeaps = 4;
+            if (NumLeaps < 1)
+                NumLeaps = 1;
 
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<MNGR_Animation_Player>().ChangeState(STATES.SPECIAL);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ChangeState(STATES.SPECIAL);
         }
         else if (chargeTimer == 0.0f) // this is where the fun begins.
         {
             GameObject[] Atargets;
-            if (Ltargets.Count <= 0)
+            //if (Ltargets.Count <= 0)
                 Atargets = GameObject.FindGameObjectsWithTag("Enemy");
-            else
-                Atargets = new GameObject[0];
+            //else
+                //Atargets = new GameObject[0];
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
 
@@ -266,7 +275,8 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 if (i > NumLeaps - 1)
                     break;
 
-                if (Vector2.Distance(player.transform.position, Atargets[i].transform.position) < maxdist)
+                if (Vector2.Distance(player.transform.position, Atargets[i].transform.position) < maxdist
+                    && !Ltargets.Contains(Atargets[i]))
                 {
                     Ltargets.Add(Atargets[i]);
                 }
@@ -295,8 +305,9 @@ public class CHAR_Lancer : ACT_CHAR_Base
                     targpos.x += offset;
                     Act_facingRight = false;
                 }
-
-                player.transform.position = Vector2.Lerp(player.transform.position, targpos, Time.deltaTime * 10);
+                
+                if (_curTmr > _maxTmr * 0.5f)
+                    player.transform.position = Vector2.Lerp(player.transform.position, targpos, Time.deltaTime * 10);
 
                 if (_curTmr > _maxTmr * 0.8f)
                     ret.spriteIndex = specialSprites[0];
@@ -311,18 +322,18 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 else if (_curTmr >= 0)
                     ret.spriteIndex = specialSprites[3];
 
-                ret.physicsLayer = 17;
 
-                if (_curTmr < 0.2f) // current special is done, do another if we can.
+                if (_curTmr < _maxTmr * 0.1f) // current special is done, do another if we can.
                 {
                     Ltargets.RemoveAt(0);
                     NumLeaps--;
 
-                    if (Ltargets.Count <= 0 || NumLeaps <= 0)
+                    if (Ltargets.Count <= 0)// || NumLeaps <= 0)
                         Atargets = new GameObject[0];
                     if (FixTheVisualStudioBugsPlz(Ltargets.Count, NumLeaps, player)) // because bugs.
                         return ret;
                 }
+                //ret.physicsLayer = 17;
 
             }
             else if (Ltargets.Count <= 0) // proceed with normal special attack if there are no targets.
@@ -347,9 +358,9 @@ public class CHAR_Lancer : ACT_CHAR_Base
                 else if (_curTmr >= 0)
                     ret.spriteIndex = specialSprites[3];
 
-                ret.physicsLayer = 17;
             }
 
+            ret.physicsLayer = 17;
         }
 
         return ret;
@@ -366,6 +377,7 @@ public class CHAR_Lancer : ACT_CHAR_Base
         {
             Ltargets = new List<GameObject>();
             NumLeaps = 0;
+            chargeTimer = chargeTimerMax;
             player.GetComponent<PlayerController>().ChangeState(STATES.IDLE);
             return true;
         }

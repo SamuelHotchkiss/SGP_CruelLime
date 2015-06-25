@@ -53,7 +53,7 @@ public class ACT_BOS_Ent : ACT_Enemy
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public override void Update () 
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().isKinematic = true;
