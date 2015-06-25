@@ -15,6 +15,10 @@ public class ACT_BOS_Trollgre : ACT_Enemy {
 
 	// Use this for initialization
 	void Start () {
+
+		if (HealthBar.name == "Health")
+			cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+
         stateTime = new float[] { 2.0f, 0.75f, 0.5f, 0.5f, 0.6f, 0.3f, 1.0f, 1.0f };
 
         behaviors = new BHR_Base[behaviorSize];
@@ -260,6 +264,9 @@ public class ACT_BOS_Trollgre : ACT_Enemy {
                 {
                     if (dividerActivated)
                     {
+						if (isBoss)
+							isBoss = false;
+
                         if ( Tro_myBehaviours[0].owner == null)
                             Tro_myBehaviours[0].owner = GetComponent<ACT_BOS_Trollgre>();
 
