@@ -8417,7 +8417,7 @@ GameObject:
   - 222: {fileID: 1357517361}
   - 114: {fileID: 1357517360}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10058,14 +10058,14 @@ RectTransform:
   m_GameObject: {fileID: 1643470110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .25, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 2058329766}
   m_RootOrder: 11
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -546, y: -32.5}
-  m_SizeDelta: {x: 160, y: 29}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1643470112
 MonoBehaviour:
@@ -10120,8 +10120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .977941155, g: .107861146, b: .107861146, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 49396f8b31162b84cb72f3781f50ba04, type: 3}
+  m_Color: {r: 1, g: .196078435, b: .196078435, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 370512e802bc2b34992c434874d3b4ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
