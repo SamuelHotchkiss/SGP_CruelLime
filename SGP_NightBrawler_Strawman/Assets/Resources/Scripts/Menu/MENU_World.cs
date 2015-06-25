@@ -75,9 +75,9 @@ public class MENU_World : MonoBehaviour
 		{
 			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
 			if (MNGR_Game.theInventory.containers[i].count < 1)
-				inventoryImages[i].gameObject.SetActive(false);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 			else
-				inventoryImages[i].gameObject.SetActive(true);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
 		}
 
         Input.simulateMouseWithTouches = true;
@@ -89,35 +89,35 @@ public class MENU_World : MonoBehaviour
 		{
 			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
 			if (MNGR_Game.theInventory.containers[i].count < 1)
-				inventoryImages[i].gameObject.SetActive(false);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 			else
-				inventoryImages[i].gameObject.SetActive(true);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
 		}
 	}
 
     // S: for use in testing
     public void SetLevel(int i)
     {
-        MNGR_Game.playerPosition = i;
+        //MNGR_Game.playerPosition = i;
 
-        playIndex = MNGR_Game.playerPosition;
-        hordeIndex = MNGR_Game.hordePosition;
-        playPos = MNGR_Game.playerPosition * 2;
-		MNGR_Game.arrowPos = playPos;
+        //playIndex = MNGR_Game.playerPosition;
+        //hordeIndex = MNGR_Game.hordePosition;
+        //playPos = MNGR_Game.playerPosition * 2;
+        //MNGR_Game.arrowPos = playPos;
 
-		if (MNGR_Game.arrowPos == MNGR_Game.hordePosition)
-			MNGR_Game.dangerZone = true;
-		else
-			MNGR_Game.dangerZone = false;
+        //if (MNGR_Game.arrowPos == MNGR_Game.hordePosition)
+        //    MNGR_Game.dangerZone = true;
+        //else
+        //    MNGR_Game.dangerZone = false;
 
-        playerPos.text = "Player Position: " + levels[playIndex].GetComponentInChildren<Text>().text;
-        hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();
+        //playerPos.text = "Player Position: " + levels[playIndex].GetComponentInChildren<Text>().text;
+        //hordePos.text = "Horde Position: " + MNGR_Game.hordePosition.ToString();
 
-        Vector3 playMarker = new Vector3(hordeSteps[playPos].transform.position.x, hordeSteps[playPos].transform.position.y + 73.0f, 0);
-        Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 73.0f, 0);
+        //Vector3 playMarker = new Vector3(hordeSteps[playPos].transform.position.x, hordeSteps[playPos].transform.position.y + 73.0f, 0);
+        //Vector3 hordeMarker = new Vector3(hordeSteps[hordeIndex].transform.position.x, hordeSteps[hordeIndex].transform.position.y - 73.0f, 0);
 
-        playerArrow.transform.position = playMarker;
-        hordeArrow.transform.position = hordeMarker;
+        //playerArrow.transform.position = playMarker;
+        //hordeArrow.transform.position = hordeMarker;
     }
 
     public void StartLevel()
@@ -197,6 +197,10 @@ public class MENU_World : MonoBehaviour
 
 	public void UsePotion(int _index)
 	{
+		if (MNGR_Game.theInventory.containers[_index].count <= 0)
+			return;
+
+
 		if (MNGR_Game.equippedItem != -1)
 			MNGR_Game.theInventory.containers[MNGR_Game.equippedItem].count++;
 
@@ -204,15 +208,15 @@ public class MENU_World : MonoBehaviour
 		MNGR_Game.equippedItem = _index;
 
 		if (MNGR_Game.theInventory.containers[_index].count <= 0)
-			inventoryImages[_index].gameObject.SetActive(false);
+			inventoryImages[_index].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 
 		for (int i = 0; i < inventoryCounts.Length; i++)
 		{
 			inventoryCounts[i].text = MNGR_Game.theInventory.containers[i].count.ToString();
 			if (MNGR_Game.theInventory.containers[i].count < 1)
-				inventoryImages[i].gameObject.SetActive(false);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 0.25f);
 			else
-				inventoryImages[i].gameObject.SetActive(true);
+				inventoryImages[i].gameObject.GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
 		}
 
 		GameObject.Find("Held_Item_Image").gameObject.GetComponent<Image>().sprite = inventoryImages[_index].sprite;
